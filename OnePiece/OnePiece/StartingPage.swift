@@ -19,14 +19,14 @@ class StartingPage: UIViewController {
     }
     let loginButton = UIButton(type: .system).then {
         $0.setTitle("로그인", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
         $0.setTitleColor(UIColor.black, for: .normal)
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 8
     }
     let signupButton = UIButton(type: .system).then {
         $0.setTitle("회원가입", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = UIColor(named: "darkGreen")
         $0.layer.cornerRadius = 8
@@ -80,10 +80,17 @@ class StartingPage: UIViewController {
     
     @objc func moveloginView() {
         self.navigationController?.pushViewController(LoginPage(), animated: true)
+        let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = loginBackbutton
+        self.navigationItem.backBarButtonItem?.tintColor = .black
     }
     
     @objc func moveSignupView() {
         self.navigationController?.pushViewController(SignupPage(), animated: true)
+        let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: "Orbit-Regular", size: 16)], for: .normal)
+        self.navigationItem.backBarButtonItem = signupBackbutton
+        self.navigationItem.backBarButtonItem?.tintColor = .black
     }
 }
 
