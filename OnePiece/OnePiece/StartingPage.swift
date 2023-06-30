@@ -2,11 +2,11 @@ import UIKit
 import SnapKit
 import Then
 
-class ViewController: UIViewController {
+class StartingPage: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "baseColor")
     }
 }
 
