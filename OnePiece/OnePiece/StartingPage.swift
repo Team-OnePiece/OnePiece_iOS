@@ -14,6 +14,9 @@ class StartingPage: UIViewController {
         $0.font = UIFont(name: "Orbit-Regular", size: 36)
         $0.textColor = .black
     }
+    let mainIcon = UIImageView().then {
+        $0.image = UIImage(named: "mainIcon")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "baseColor")
@@ -27,18 +30,23 @@ class StartingPage: UIViewController {
         [
             sloganLabel,
             titleLabel,
+            mainIcon,
         ].forEach({view.addSubview($0)})
     }
     func makeConstraints() {
+    //MARK: 디자인 수정되면 다시 레이아웃 잡기
         sloganLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(198)
-            //디자인 수정되면 다시 수정하기
             $0.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(sloganLabel.snp.bottom).offset(10)
-            //디자인 수정되면 다시 수정하기
             $0.centerX.equalToSuperview()
+        }
+        mainIcon.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(326)
+            $0.bottom.equalToSuperview().inset(363.7)
+            $0.left.right.equalToSuperview().inset(115)
         }
     }
 }
