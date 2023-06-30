@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		21A2C3DFA2ACB9E5B9D24B6D /* Pods_OnePiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638D3C46E2943A0EBB5CEBE8 /* Pods_OnePiece.framework */; };
+		880A42A92A4E70D40073DDDC /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 880A42A72A4E70D40073DDDC /* OFL.txt */; };
+		880A42AA2A4E70D40073DDDC /* Orbit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 880A42A82A4E70D40073DDDC /* Orbit-Regular.ttf */; };
 		885160E62A3C54860029A414 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E52A3C54860029A414 /* AppDelegate.swift */; };
 		885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E72A3C54860029A414 /* SceneDelegate.swift */; };
 		885160EA2A3C54860029A414 /* StartingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E92A3C54860029A414 /* StartingPage.swift */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		638D3C46E2943A0EBB5CEBE8 /* Pods_OnePiece.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePiece.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		880A42A72A4E70D40073DDDC /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		880A42A82A4E70D40073DDDC /* Orbit-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Orbit-Regular.ttf"; sourceTree = "<group>"; };
 		885160E22A3C54860029A414 /* OnePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885160E52A3C54860029A414 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		885160E72A3C54860029A414 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		880A42A62A4E70D40073DDDC /* Orbit */ = {
+			isa = PBXGroup;
+			children = (
+				880A42A72A4E70D40073DDDC /* OFL.txt */,
+				880A42A82A4E70D40073DDDC /* Orbit-Regular.ttf */,
+			);
+			path = Orbit;
+			sourceTree = "<group>";
+		};
 		885160D92A3C54860029A414 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +101,7 @@
 		885160F92A3C55890029A414 /* SupportFile */ = {
 			isa = PBXGroup;
 			children = (
+				880A42A62A4E70D40073DDDC /* Orbit */,
 				885160E52A3C54860029A414 /* AppDelegate.swift */,
 				885160E72A3C54860029A414 /* SceneDelegate.swift */,
 				885160EE2A3C54870029A414 /* Assets.xcassets */,
@@ -156,6 +170,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				880A42AA2A4E70D40073DDDC /* Orbit-Regular.ttf in Resources */,
+				880A42A92A4E70D40073DDDC /* OFL.txt in Resources */,
 				885160F22A3C54870029A414 /* LaunchScreen.storyboard in Resources */,
 				885160EF2A3C54870029A414 /* Assets.xcassets in Resources */,
 			);
