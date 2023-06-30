@@ -12,7 +12,10 @@ import Then
 class SignupPage: UIViewController {
 
     let idTextField = UITextField().then {
-        $0.placeholder = "아이디"
+        $0.attributedPlaceholder = NSAttributedString(string: "아이디", attributes: [
+                    .foregroundColor: UIColor(named: "charcoal"),
+                    .font: UIFont.systemFont(ofSize: 16)
+                ])
         $0.autocapitalizationType = .none
         $0.font = UIFont(name: "Orbit-Regular", size: 16)
         $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 17.0, height: 0.0))
@@ -24,8 +27,17 @@ class SignupPage: UIViewController {
         $0.layer.borderColor = UIColor(named: "darkGreen")?.cgColor
         $0.layer.cornerRadius = 10
     }
+    let idCheckButton = UIButton(type: .system).then {
+        $0.setTitle("중복확인", for: .normal)
+        $0.setTitleColor(UIColor(named: "charcoal"), for: .normal)
+        $0.backgroundColor = UIColor(named: "pink")
+        $0.layer.cornerRadius = 8
+    }
     let passwordTextField = UITextField().then {
-        $0.placeholder = "아이디"
+        $0.attributedPlaceholder = NSAttributedString(string: "비밀번호", attributes: [
+                    .foregroundColor: UIColor(named: "charcoal"),
+                    .font: UIFont.systemFont(ofSize: 16)
+                ])
         $0.autocapitalizationType = .none
         $0.font = UIFont(name: "Orbit-Regular", size: 16)
         $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 17.0, height: 0.0))
@@ -48,6 +60,7 @@ class SignupPage: UIViewController {
     func addSubViews() {
         [
             idTextField,
+            idCheckButton,
             passwordTextField,
         ].forEach({view.addSubview($0)})
     }
@@ -56,6 +69,17 @@ class SignupPage: UIViewController {
             $0.top.equalToSuperview().inset(125)
             $0.left.equalToSuperview().inset(25)
             $0.right.equalToSuperview().inset(105)
+            $0.height.equalTo(48)
+        }
+        idCheckButton.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(125)
+            $0.left.equalTo(idTextField.snp.right).offset(8)
+            $0.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
+        }
+        passwordTextField.snp.makeConstraints {
+            $0.top.equalTo(idTextField.snp.bottom).offset(10)
+            $0.left.right.equalToSuperview().inset(25)
             $0.height.equalTo(48)
         }
     }
