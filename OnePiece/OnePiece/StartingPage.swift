@@ -34,6 +34,8 @@ class StartingPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "baseColor")
+        loginButton.addTarget(self, action: #selector(moveloginView), for: .touchUpInside)
+        signupButton.addTarget(self, action: #selector(moveSignupView), for: .touchUpInside)
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -50,7 +52,7 @@ class StartingPage: UIViewController {
         ].forEach({view.addSubview($0)})
     }
     func makeConstraints() {
-    //MARK: 디자인 수정되면 다시 레이아웃 잡기
+    //MARK: -디자인 수정되면 다시 레이아웃 잡기
         slogan.snp.makeConstraints {
             $0.top.equalToSuperview().inset(198)
             $0.centerX.equalToSuperview()
@@ -74,6 +76,14 @@ class StartingPage: UIViewController {
             $0.left.right.equalToSuperview().inset(51)
             $0.height.equalTo(48)
         }
+    }
+    
+    @objc func moveloginView() {
+        self.navigationController?.pushViewController(LoginPage(), animated: true)
+    }
+    
+    @objc func moveSignupView() {
+        self.navigationController?.pushViewController(SignupPage(), animated: true)
     }
 }
 
