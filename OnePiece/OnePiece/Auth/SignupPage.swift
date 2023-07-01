@@ -52,6 +52,7 @@ class SignupPage: UIViewController {
     let nextPageButton = UIButton(type: .system).then {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
         $0.backgroundColor = UIColor(named: "darkGreen")
         $0.layer.cornerRadius = 8
     }
