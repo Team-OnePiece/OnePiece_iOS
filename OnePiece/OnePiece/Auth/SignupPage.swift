@@ -49,6 +49,12 @@ class SignupPage: UIViewController {
         $0.layer.borderColor = UIColor(named: "darkGreen")?.cgColor
         $0.layer.cornerRadius = 10
     }
+    let nextPageButton = UIButton(type: .system).then {
+        $0.setTitle("다음", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.backgroundColor = UIColor(named: "darkGreen")
+        $0.layer.cornerRadius = 8
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "baseColor")
@@ -62,6 +68,7 @@ class SignupPage: UIViewController {
             idTextField,
             idCheckButton,
             passwordTextField,
+            nextPageButton,
         ].forEach({view.addSubview($0)})
     }
     func makeConstraints() {
@@ -79,6 +86,11 @@ class SignupPage: UIViewController {
         }
         passwordTextField.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom).offset(10)
+            $0.left.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
+        }
+        nextPageButton.snp.makeConstraints {
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(19)
             $0.left.right.equalToSuperview().inset(25)
             $0.height.equalTo(48)
         }
