@@ -99,6 +99,9 @@ class SignupPage: UIViewController {
     
     @objc func nextSignupPage() {
         navigationController?.pushViewController(DetailSignupPage(), animated: true)
-    }
+            let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+            self.navigationItem.backBarButtonItem = signupBackbutton
+            self.navigationItem.backBarButtonItem?.tintColor = .black
+        }
 }
 
