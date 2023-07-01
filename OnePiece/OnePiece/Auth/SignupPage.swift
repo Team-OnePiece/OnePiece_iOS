@@ -58,6 +58,7 @@ class SignupPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "baseColor")
+        nextPageButton.addTarget(self, action: #selector(nextSignupPage), for: .touchUpInside)
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -94,6 +95,10 @@ class SignupPage: UIViewController {
             $0.left.right.equalToSuperview().inset(25)
             $0.height.equalTo(48)
         }
+    }
+    
+    @objc func nextSignupPage() {
+        navigationController?.pushViewController(DetailSignupPage(), animated: true)
     }
 }
 
