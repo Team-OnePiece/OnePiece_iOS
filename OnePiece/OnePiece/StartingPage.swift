@@ -77,7 +77,7 @@ class StartingPage: UIViewController {
             $0.height.equalTo(48)
         }
     }
-    
+    //MARK: -디자인 바뀌면 네비게이션 바 커스텀하기
     @objc func moveloginView() {
         self.navigationController?.pushViewController(LoginPage(), animated: true)
         let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
@@ -88,7 +88,6 @@ class StartingPage: UIViewController {
     @objc func moveSignupView() {
         self.navigationController?.pushViewController(SignupPage(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: "Orbit-Regular", size: 16)], for: .normal)
         self.navigationItem.backBarButtonItem = signupBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = .black
     }
