@@ -11,7 +11,7 @@ class DetailSignupPage: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = UIColor(named: "baseColor")
         // Do any additional setup after loading the view.
     }
     
