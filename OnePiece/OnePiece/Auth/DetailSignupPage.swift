@@ -53,6 +53,7 @@ class DetailSignupPage: UIViewController {
     }
     let nickNameCheck = UIButton(type: .system).then {
         $0.setTitle("중복확인", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         $0.setTitleColor(UIColor(named: "charcoal"), for: .normal)
         $0.backgroundColor = UIColor(named: "pink")
         $0.layer.cornerRadius = 8
