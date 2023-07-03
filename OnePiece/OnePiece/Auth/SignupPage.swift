@@ -38,7 +38,7 @@ class SignupPage: UIViewController {
     let passwordTextField = UITextField().then {
         $0.attributedPlaceholder = NSAttributedString(string: "비밀번호", attributes: [
             .foregroundColor: UIColor(named: "charcoal"),
-            .font: UIFont(name: "Orbit-Regular", size: 16)
+            .font: UIFont.systemFont(ofSize: 16)
                 ])
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
@@ -63,6 +63,7 @@ class SignupPage: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "baseColor")
         nextPageButton.addTarget(self, action: #selector(nextSignupPage), for: .touchUpInside)
+        idCheckButton.addTarget(self, action: #selector(idCheck), for: .touchUpInside)
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -99,6 +100,12 @@ class SignupPage: UIViewController {
             $0.left.right.equalToSuperview().inset(25)
             $0.height.equalTo(48)
         }
+    }
+    
+    @objc func idCheck() {
+        let idAlert  = IdCheckAlert()
+        idAlert.alertMessage(title: "사용 가능한 아이디입니다.")
+        present(idAlert, animated: true, completion: nil)
     }
     
     @objc func nextSignupPage() {
