@@ -17,7 +17,7 @@ class SignupPage: UIViewController {
                     .font: UIFont.systemFont(ofSize: 16)
                 ])
         $0.autocapitalizationType = .none
-        $0.font = UIFont(name: "Orbit-Regular", size: 16)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 17.0, height: 0.0))
         $0.leftViewMode = .always
         $0.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: -17.0, height: 0.0))
@@ -39,7 +39,7 @@ class SignupPage: UIViewController {
                     .font: UIFont.systemFont(ofSize: 16)
                 ])
         $0.autocapitalizationType = .none
-        $0.font = UIFont(name: "Orbit-Regular", size: 16)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 17.0, height: 0.0))
         $0.leftViewMode = .always
         $0.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: -17.0, height: 0.0))
