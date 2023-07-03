@@ -17,6 +17,7 @@ class SignupPage: UIViewController {
                     .font: UIFont.systemFont(ofSize: 16)
                 ])
         $0.autocapitalizationType = .none
+        $0.autocorrectionType = .no
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 17.0, height: 0.0))
         $0.leftViewMode = .always
@@ -36,10 +37,11 @@ class SignupPage: UIViewController {
     }
     let passwordTextField = UITextField().then {
         $0.attributedPlaceholder = NSAttributedString(string: "비밀번호", attributes: [
-                    .foregroundColor: UIColor(named: "charcoal"),
-                    .font: UIFont.systemFont(ofSize: 16)
+            .foregroundColor: UIColor(named: "charcoal"),
+            .font: UIFont(name: "Orbit-Regular", size: 16)
                 ])
         $0.autocapitalizationType = .none
+        $0.autocorrectionType = .no
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 17.0, height: 0.0))
         $0.leftViewMode = .always
