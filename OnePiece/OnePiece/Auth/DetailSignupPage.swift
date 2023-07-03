@@ -71,6 +71,7 @@ class DetailSignupPage: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "baseColor")
         signup.addTarget(self, action: #selector(signupFinish), for: .touchUpInside)
+        nickNameCheck.addTarget(self, action: #selector(nameCheck), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -121,6 +122,12 @@ class DetailSignupPage: UIViewController {
             $0.right.equalToSuperview().inset(25)
             $0.height.equalTo(48)
         }
+    }
+    
+    @objc func nameCheck() {
+        let idAlert  = IdCheckAlert()
+        idAlert.alertMessage(title: "사용 가능한 별명입니다.")
+        present(idAlert, animated: true, completion: nil)
     }
     
     @objc func signupFinish() {
