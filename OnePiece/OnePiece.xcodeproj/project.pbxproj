@@ -15,6 +15,7 @@
 		880A42B12A50748F0073DDDC /* DetailSignupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B02A50748F0073DDDC /* DetailSignupPage.swift */; };
 		880A42B42A5167E30073DDDC /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B32A5167E30073DDDC /* MainPage.swift */; };
 		880A42B92A52D1360073DDDC /* IdCheckAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B82A52D1360073DDDC /* IdCheckAlert.swift */; };
+		880A42C22A5476CF0073DDDC /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42C12A5476CF0073DDDC /* DefaultTextField.swift */; };
 		885160E62A3C54860029A414 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E52A3C54860029A414 /* AppDelegate.swift */; };
 		885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E72A3C54860029A414 /* SceneDelegate.swift */; };
 		885160EA2A3C54860029A414 /* StartingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E92A3C54860029A414 /* StartingPage.swift */; };
@@ -31,6 +32,7 @@
 		880A42B02A50748F0073DDDC /* DetailSignupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSignupPage.swift; sourceTree = "<group>"; };
 		880A42B32A5167E30073DDDC /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		880A42B82A52D1360073DDDC /* IdCheckAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdCheckAlert.swift; sourceTree = "<group>"; };
+		880A42C12A5476CF0073DDDC /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
 		885160E22A3C54860029A414 /* OnePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885160E52A3C54860029A414 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		885160E72A3C54860029A414 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,14 @@
 			path = Custom;
 			sourceTree = "<group>";
 		};
+		880A42C02A5476A30073DDDC /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				880A42C12A5476CF0073DDDC /* DefaultTextField.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		885160D92A3C54860029A414 = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				885160E92A3C54860029A414 /* StartingPage.swift */,
+				880A42C02A5476A30073DDDC /* Component */,
 				880A42AB2A4E81190073DDDC /* Auth */,
 				880A42B22A5167CE0073DDDC /* Main */,
 				880A42B72A52D1030073DDDC /* Custom */,
@@ -269,6 +280,7 @@
 				880A42AD2A4E81390073DDDC /* LoginPage.swift in Sources */,
 				885160EA2A3C54860029A414 /* StartingPage.swift in Sources */,
 				885160E62A3C54860029A414 /* AppDelegate.swift in Sources */,
+				880A42C22A5476CF0073DDDC /* DefaultTextField.swift in Sources */,
 				880A42B12A50748F0073DDDC /* DetailSignupPage.swift in Sources */,
 				885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */,
 				880A42B42A5167E30073DDDC /* MainPage.swift in Sources */,
