@@ -11,40 +11,8 @@ import Then
 
 class LoginPage: UIViewController {
 
-    let idTextField = UITextField().then {
-        $0.attributedPlaceholder = NSAttributedString(string: "아이디", attributes: [
-                    .foregroundColor: UIColor(named: "charcoal"),
-                    .font: UIFont.systemFont(ofSize: 16)
-                ])
-        $0.autocapitalizationType = .none
-        $0.autocorrectionType = .no
-        $0.font = UIFont.systemFont(ofSize: 16)
-        $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 17.0, height: 0.0))
-        $0.leftViewMode = .always
-        $0.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: -17.0, height: 0.0))
-        $0.rightViewMode = .always
-        $0.backgroundColor = .white
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor(named: "darkGreen")?.cgColor
-        $0.layer.cornerRadius = 10
-    }
-    let passwordTextField = UITextField().then {
-        $0.attributedPlaceholder = NSAttributedString(string: "비밀번호", attributes: [
-            .foregroundColor: UIColor(named: "charcoal"),
-            .font: UIFont.systemFont(ofSize: 16)
-                ])
-        $0.autocapitalizationType = .none
-        $0.autocorrectionType = .no
-        $0.font = UIFont.systemFont(ofSize: 16)
-        $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 17.0, height: 0.0))
-        $0.leftViewMode = .always
-        $0.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: -17.0, height: 0.0))
-        $0.rightViewMode = .always
-        $0.backgroundColor = .white
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor(named: "darkGreen")?.cgColor
-        $0.layer.cornerRadius = 10
-    }
+    let idTextField = DefaultTextField(placeholder: "아이디")
+    let passwordTextField = DefaultTextField(placeholder: "비밀번호")
     let nextPageButton = UIButton(type: .system).then {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
