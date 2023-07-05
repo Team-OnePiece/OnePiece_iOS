@@ -3,13 +3,11 @@ import UIKit
 import SnapKit
 import Then
 
-class IdCheckAlert: UIViewController {
+class DefaultAlert: UIViewController {
     
     let alertView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 8
-        $0.layer.borderWidth = 1.0
-        $0.layer.borderColor = UIColor(named: "darkGreen")?.cgColor
     }
     let lineView = UIView().then {
         $0.backgroundColor = .gray
@@ -60,9 +58,10 @@ class IdCheckAlert: UIViewController {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
     @objc func closeButtonTapped() {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     func alertMessage(title: String) {
         titleLabel.text = title
+        self.modalPresentationStyle = .overFullScreen
     }
 }

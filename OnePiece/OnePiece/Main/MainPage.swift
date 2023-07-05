@@ -11,7 +11,8 @@ class MainPage: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "baseColor")
+        view.backgroundColor = UIColor(named: "mainColor-3")
+        navigationItem.hidesBackButton = true
     }
 
 }

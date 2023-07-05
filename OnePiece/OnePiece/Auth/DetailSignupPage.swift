@@ -24,20 +24,20 @@ class DetailSignupPage: UIViewController {
     let nickNameCheck = UIButton(type: .system).then {
         $0.setTitle("중복확인", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        $0.setTitleColor(UIColor(named: "charcoal"), for: .normal)
-        $0.backgroundColor = UIColor(named: "pink")
+        $0.setTitleColor(UIColor(named: "gray-700"), for: .normal)
+        $0.backgroundColor = UIColor(named: "mainColor-2")
         $0.layer.cornerRadius = 8
     }
     let signup = UIButton(type: .system).then {
         $0.setTitle("회원가입", for: .normal)
-        $0.setTitleColor(UIColor(named: "charcoal"), for: .normal)
+        $0.setTitleColor(UIColor(named: "gray-700"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
-        $0.backgroundColor = UIColor(named: "pink")
+        $0.backgroundColor = UIColor(named: "mainColor-2")
         $0.layer.cornerRadius = 8
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "baseColor")
+        view.backgroundColor = UIColor(named: "mainColor-3")
         signup.addTarget(self, action: #selector(signupFinish), for: .touchUpInside)
         nickNameCheck.addTarget(self, action: #selector(nameCheck), for: .touchUpInside)
     }
@@ -89,7 +89,7 @@ class DetailSignupPage: UIViewController {
             $0.height.equalTo(48)
         }
         signup.snp.makeConstraints {
-            $0.top.equalTo(nickName.snp.bottom).offset(13)
+            $0.top.equalTo(nickName.snp.bottom).offset(73)
             $0.left.equalToSuperview().inset(25)
             $0.right.equalToSuperview().inset(25)
             $0.height.equalTo(48)
@@ -97,7 +97,7 @@ class DetailSignupPage: UIViewController {
     }
     
     @objc func nameCheck() {
-        let idAlert  = IdCheckAlert()
+        let idAlert  = DefaultAlert()
         idAlert.alertMessage(title: "사용 가능한 별명입니다.")
         present(idAlert, animated: true, completion: nil)
     }

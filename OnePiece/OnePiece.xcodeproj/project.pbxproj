@@ -10,11 +10,10 @@
 		21A2C3DFA2ACB9E5B9D24B6D /* Pods_OnePiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638D3C46E2943A0EBB5CEBE8 /* Pods_OnePiece.framework */; };
 		880A42A92A4E70D40073DDDC /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 880A42A72A4E70D40073DDDC /* OFL.txt */; };
 		880A42AA2A4E70D40073DDDC /* Orbit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 880A42A82A4E70D40073DDDC /* Orbit-Regular.ttf */; };
-		880A42AD2A4E81390073DDDC /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42AC2A4E81390073DDDC /* LoginPage.swift */; };
 		880A42AF2A4E81450073DDDC /* SignupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42AE2A4E81450073DDDC /* SignupPage.swift */; };
 		880A42B12A50748F0073DDDC /* DetailSignupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B02A50748F0073DDDC /* DetailSignupPage.swift */; };
 		880A42B42A5167E30073DDDC /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B32A5167E30073DDDC /* MainPage.swift */; };
-		880A42B92A52D1360073DDDC /* IdCheckAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B82A52D1360073DDDC /* IdCheckAlert.swift */; };
+		880A42B92A52D1360073DDDC /* DefaultAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B82A52D1360073DDDC /* DefaultAlert.swift */; };
 		880A42C22A5476CF0073DDDC /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42C12A5476CF0073DDDC /* DefaultTextField.swift */; };
 		885160E62A3C54860029A414 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E52A3C54860029A414 /* AppDelegate.swift */; };
 		885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E72A3C54860029A414 /* SceneDelegate.swift */; };
@@ -27,11 +26,10 @@
 		638D3C46E2943A0EBB5CEBE8 /* Pods_OnePiece.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePiece.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		880A42A72A4E70D40073DDDC /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		880A42A82A4E70D40073DDDC /* Orbit-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Orbit-Regular.ttf"; sourceTree = "<group>"; };
-		880A42AC2A4E81390073DDDC /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		880A42AE2A4E81450073DDDC /* SignupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPage.swift; sourceTree = "<group>"; };
 		880A42B02A50748F0073DDDC /* DetailSignupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSignupPage.swift; sourceTree = "<group>"; };
 		880A42B32A5167E30073DDDC /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
-		880A42B82A52D1360073DDDC /* IdCheckAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdCheckAlert.swift; sourceTree = "<group>"; };
+		880A42B82A52D1360073DDDC /* DefaultAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlert.swift; sourceTree = "<group>"; };
 		880A42C12A5476CF0073DDDC /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
 		885160E22A3C54860029A414 /* OnePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885160E52A3C54860029A414 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,7 +83,6 @@
 		880A42AB2A4E81190073DDDC /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				880A42AC2A4E81390073DDDC /* LoginPage.swift */,
 				880A42AE2A4E81450073DDDC /* SignupPage.swift */,
 				880A42B02A50748F0073DDDC /* DetailSignupPage.swift */,
 			);
@@ -104,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				880A42C12A5476CF0073DDDC /* DefaultTextField.swift */,
-				880A42B82A52D1360073DDDC /* IdCheckAlert.swift */,
+				880A42B82A52D1360073DDDC /* DefaultAlert.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -268,8 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				880A42B92A52D1360073DDDC /* IdCheckAlert.swift in Sources */,
-				880A42AD2A4E81390073DDDC /* LoginPage.swift in Sources */,
+				880A42B92A52D1360073DDDC /* DefaultAlert.swift in Sources */,
 				885160EA2A3C54860029A414 /* StartingPage.swift in Sources */,
 				885160E62A3C54860029A414 /* AppDelegate.swift in Sources */,
 				880A42C22A5476CF0073DDDC /* DefaultTextField.swift in Sources */,

@@ -15,21 +15,21 @@ class SignupPage: UIViewController {
     let idCheckButton = UIButton(type: .system).then {
         $0.setTitle("중복확인", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        $0.setTitleColor(UIColor.white, for: .normal)
-        $0.backgroundColor = UIColor(named: "darkGreen")
+        $0.setTitleColor(UIColor(named: "gray-000"), for: .normal)
+        $0.backgroundColor = UIColor(named: "mainColor-1")
         $0.layer.cornerRadius = 8
     }
-    let passwordTextField = DefaultTextField(placeholder: "비밀번호")
+    let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
     let nextPageButton = UIButton(type: .system).then {
         $0.setTitle("다음", for: .normal)
-        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.setTitleColor(UIColor(named: "gray-000"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
-        $0.backgroundColor = UIColor(named: "darkGreen")
+        $0.backgroundColor = UIColor(named: "mainColor-1")
         $0.layer.cornerRadius = 8
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "baseColor")
+        view.backgroundColor = UIColor(named: "mainColor-3")
         nextPageButton.addTarget(self, action: #selector(nextSignupPage), for: .touchUpInside)
         idCheckButton.addTarget(self, action: #selector(idCheck), for: .touchUpInside)
     }
@@ -64,14 +64,14 @@ class SignupPage: UIViewController {
             $0.height.equalTo(48)
         }
         nextPageButton.snp.makeConstraints {
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(19)
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(73)
             $0.left.right.equalToSuperview().inset(25)
             $0.height.equalTo(48)
         }
     }
     
     @objc func idCheck() {
-        let idAlert  = IdCheckAlert()
+        let idAlert  = DefaultAlert()
         idAlert.alertMessage(title: "사용 가능한 아이디입니다.")
         present(idAlert, animated: true, completion: nil)
     }
