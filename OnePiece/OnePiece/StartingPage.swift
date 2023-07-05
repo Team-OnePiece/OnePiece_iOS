@@ -3,7 +3,7 @@ import SnapKit
 import Then
 
 class StartingPage: UIViewController {
-
+    
     let mainLogo = UIImageView().then {
         $0.image = UIImage(named: "mainLogo")
     }
@@ -14,6 +14,7 @@ class StartingPage: UIViewController {
     }
     let idTextField = DefaultTextField(placeholder: "아이디")
     let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
+    var eyeButton = UIButton(type: .custom)
     let loginButton = UIButton(type: .system).then {
         $0.setTitle("로그인", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
@@ -33,6 +34,7 @@ class StartingPage: UIViewController {
         view.backgroundColor = UIColor(named: "mainColor-3")
         loginButton.addTarget(self, action: #selector(moveloginView), for: .touchUpInside)
         signupButton.addTarget(self, action: #selector(moveSignupView), for: .touchUpInside)
+        showPasswordButton()
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -50,7 +52,7 @@ class StartingPage: UIViewController {
         ].forEach({view.addSubview($0)})
     }
     func makeConstraints() {
-    //MARK: -디자인 수정되면 다시 레이아웃 잡기
+        //MARK: -디자인 수정되면 다시 레이아웃 잡기
         mainLogo.snp.makeConstraints {
             $0.top.equalToSuperview().inset(169)
             $0.left.equalToSuperview().inset(25)
@@ -78,6 +80,23 @@ class StartingPage: UIViewController {
             $0.left.right.equalToSuperview().inset(25)
             $0.height.equalTo(48)
         }
+    }
+}
+//암호를 봤다가 다시 감췄을 때 입력하면 암호가 모두 삭제되는 버그 수정하기
+extension StartingPage {
+    private func showPasswordButton() {
+        eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
+            passwordTextField.isSecureTextEntry.toggle()
+            self.eyeButton.isSelected.toggle ()
+        }))
+        var buttonConfiguration = UIButton.Configuration.plain()
+        buttonConfiguration.imagePadding = 10
+        buttonConfiguration.baseBackgroundColor = .clear
+        eyeButton.setImage (UIImage (named: "closeEye"), for: .normal)
+        self.eyeButton.setImage(UIImage (named: "openEye"), for: .selected)
+        self.eyeButton.configuration = buttonConfiguration
+        self.passwordTextField.rightView = eyeButton
+        self.passwordTextField.rightViewMode = .always
     }
     //MARK: -디자인 바뀌면 네비게이션 바 커스텀하기
     @objc func moveloginView() {
