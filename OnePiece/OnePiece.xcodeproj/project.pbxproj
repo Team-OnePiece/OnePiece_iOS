@@ -106,6 +106,15 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		880A42C72A5662610073DDDC /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				880A42AB2A4E81190073DDDC /* Auth */,
+				880A42B22A5167CE0073DDDC /* Main */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		885160D92A3C54860029A414 = {
 			isa = PBXGroup;
 			children = (
@@ -129,8 +138,7 @@
 			children = (
 				885160E92A3C54860029A414 /* StartingPage.swift */,
 				880A42C02A5476A30073DDDC /* Component */,
-				880A42AB2A4E81190073DDDC /* Auth */,
-				880A42B22A5167CE0073DDDC /* Main */,
+				880A42C72A5662610073DDDC /* Scene */,
 				885160F32A3C54870029A414 /* Info.plist */,
 				885160F92A3C55890029A414 /* SupportFile */,
 			);
