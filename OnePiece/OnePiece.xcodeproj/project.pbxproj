@@ -15,6 +15,8 @@
 		880A42B42A5167E30073DDDC /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B32A5167E30073DDDC /* MainPage.swift */; };
 		880A42B92A52D1360073DDDC /* DefaultAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B82A52D1360073DDDC /* DefaultAlert.swift */; };
 		880A42C22A5476CF0073DDDC /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42C12A5476CF0073DDDC /* DefaultTextField.swift */; };
+		880A42CA2A56DC970073DDDC /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42C92A56DC970073DDDC /* CustomCell.swift */; };
+		880A42CD2A56E2110073DDDC /* FeedContentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42CC2A56E2110073DDDC /* FeedContentPage.swift */; };
 		885160E62A3C54860029A414 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E52A3C54860029A414 /* AppDelegate.swift */; };
 		885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E72A3C54860029A414 /* SceneDelegate.swift */; };
 		885160EA2A3C54860029A414 /* StartingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E92A3C54860029A414 /* StartingPage.swift */; };
@@ -31,6 +33,8 @@
 		880A42B32A5167E30073DDDC /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		880A42B82A52D1360073DDDC /* DefaultAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlert.swift; sourceTree = "<group>"; };
 		880A42C12A5476CF0073DDDC /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
+		880A42C92A56DC970073DDDC /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		880A42CC2A56E2110073DDDC /* FeedContentPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContentPage.swift; sourceTree = "<group>"; };
 		885160E22A3C54860029A414 /* OnePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885160E52A3C54860029A414 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		885160E72A3C54860029A414 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			children = (
 				880A42AE2A4E81450073DDDC /* SignupPage.swift */,
 				880A42B02A50748F0073DDDC /* DetailSignupPage.swift */,
+				880A42B32A5167E30073DDDC /* MainPage.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -92,7 +97,7 @@
 		880A42B22A5167CE0073DDDC /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				880A42B32A5167E30073DDDC /* MainPage.swift */,
+				885160E92A3C54860029A414 /* StartingPage.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -109,10 +114,28 @@
 		880A42C72A5662610073DDDC /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				880A42CB2A56E1EB0073DDDC /* FeedView */,
+				880A42C82A56DC710073DDDC /* Custom */,
 				880A42AB2A4E81190073DDDC /* Auth */,
 				880A42B22A5167CE0073DDDC /* Main */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		880A42C82A56DC710073DDDC /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				880A42C92A56DC970073DDDC /* CustomCell.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		880A42CB2A56E1EB0073DDDC /* FeedView */ = {
+			isa = PBXGroup;
+			children = (
+				880A42CC2A56E2110073DDDC /* FeedContentPage.swift */,
+			);
+			path = FeedView;
 			sourceTree = "<group>";
 		};
 		885160D92A3C54860029A414 = {
@@ -136,7 +159,6 @@
 		885160E42A3C54860029A414 /* OnePiece */ = {
 			isa = PBXGroup;
 			children = (
-				885160E92A3C54860029A414 /* StartingPage.swift */,
 				880A42C02A5476A30073DDDC /* Component */,
 				880A42C72A5662610073DDDC /* Scene */,
 				885160F32A3C54870029A414 /* Info.plist */,
@@ -277,7 +299,9 @@
 				885160EA2A3C54860029A414 /* StartingPage.swift in Sources */,
 				885160E62A3C54860029A414 /* AppDelegate.swift in Sources */,
 				880A42C22A5476CF0073DDDC /* DefaultTextField.swift in Sources */,
+				880A42CA2A56DC970073DDDC /* CustomCell.swift in Sources */,
 				880A42B12A50748F0073DDDC /* DetailSignupPage.swift in Sources */,
+				880A42CD2A56E2110073DDDC /* FeedContentPage.swift in Sources */,
 				885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */,
 				880A42B42A5167E30073DDDC /* MainPage.swift in Sources */,
 				880A42AF2A4E81450073DDDC /* SignupPage.swift in Sources */,

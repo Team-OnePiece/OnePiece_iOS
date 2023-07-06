@@ -24,14 +24,14 @@ class MainPage: UIViewController {
         $0.backgroundColor = UIColor(named: "mainColor-3")
     }
     let feedPlusButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "feedPlusIcon"), for: .normal)
         $0.backgroundColor = UIColor(named: "mainColor-1")
-        $0.layer.borderWidth = 3
-        $0.layer.backgroundColor = UIColor.white.cgColor
+        $0.tintColor = .white
         $0.layer.cornerRadius = 40
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "mainColor-3")
+        view.backgroundColor = .white
         navigationItem.hidesBackButton = true
         feedPlusButton.addTarget(self, action: #selector(clickFeedPlus), for: .touchUpInside)
     }
