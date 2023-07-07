@@ -38,8 +38,8 @@ class DetailSignupPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "mainColor-3")
-        signup.addTarget(self, action: #selector(signupFinish), for: .touchUpInside)
-        nickNameCheck.addTarget(self, action: #selector(nameCheck), for: .touchUpInside)
+        signup.addTarget(self, action: #selector(clickSignupFinish), for: .touchUpInside)
+        nickNameCheck.addTarget(self, action: #selector(clickNameCheck), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -96,13 +96,13 @@ class DetailSignupPage: UIViewController {
         }
     }
     
-    @objc func nameCheck() {
+    @objc func clickNameCheck() {
         let idAlert  = DefaultAlert()
         idAlert.alertMessage(title: "사용 가능한 별명입니다.")
         present(idAlert, animated: true, completion: nil)
     }
     
-    @objc func signupFinish() {
+    @objc func clickSignupFinish() {
         navigationController?.pushViewController(MainPage(), animated: true)
     }
 }
