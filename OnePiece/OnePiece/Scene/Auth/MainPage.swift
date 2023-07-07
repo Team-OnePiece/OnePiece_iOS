@@ -31,7 +31,7 @@ class MainPage: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "mainColor-3")
         navigationItem.hidesBackButton = true
         feedPlusButton.addTarget(self, action: #selector(clickFeedPlus), for: .touchUpInside)
     }
@@ -73,7 +73,7 @@ class MainPage: UIViewController {
         self.navigationController?.pushViewController(FeedContentPage(), animated: true)
         let backButton = UIBarButtonItem(title: "피드 작성", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
-        self.navigationItem.backBarButtonItem?.tintColor = .black
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
     }
 }
 

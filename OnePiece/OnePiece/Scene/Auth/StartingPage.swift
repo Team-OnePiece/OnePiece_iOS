@@ -87,13 +87,13 @@ extension StartingPage {
     private func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
             passwordTextField.isSecureTextEntry.toggle()
-            self.eyeButton.isSelected.toggle ()
+            self.eyeButton.isSelected.toggle()
         }))
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.imagePadding = 10
         buttonConfiguration.baseBackgroundColor = .clear
-        eyeButton.setImage (UIImage (named: "closeEye"), for: .normal)
-        self.eyeButton.setImage(UIImage (named: "openEye"), for: .selected)
+        eyeButton.setImage(UIImage(named: "closeEye"), for: .normal)
+        self.eyeButton.setImage(UIImage(named: "openEye"), for: .selected)
         self.eyeButton.configuration = buttonConfiguration
         self.passwordTextField.rightView = eyeButton
         self.passwordTextField.rightViewMode = .always
