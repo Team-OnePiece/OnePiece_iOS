@@ -8,5 +8,6 @@ target 'OnePiece' do
   # Pods for OnePiece
 pod 'SnapKit'
 pod 'Then'
+pod 'Moya'
 
 end
