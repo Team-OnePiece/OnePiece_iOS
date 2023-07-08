@@ -1,8 +1,8 @@
 //
-//  SignupPage.swift
+//  SibalViewController.swift
 //  OnePiece
 //
-//  Created by 조영준 on 2023/06/30.
+//  Created by 조영준 on 2023/07/09.
 //
 
 import UIKit
@@ -10,31 +10,32 @@ import SnapKit
 import Then
 
 class SignupPage: UIViewController {
+
     
     let idTextField = DefaultTextField(placeholder: "아이디")
-    let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: (UIColor(named: "gray-000")!)
-                                      
-    let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
-                                      
+    let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     var eyeButton = UIButton(type: .custom)
-    let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
+    let nfextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "mainColor-3")
-        nextPageButton.addTarget(self, action: #selector(nextSignupPage), for: .touchUpInside)
-        idCheckButton.addTarget(self, action: #selector(idCheck), for: .touchUpInside)
         showPasswordButton()
+        nfextPageButton.addTarget(self, action: #selector(nextSignupPage), for: .touchUpInside)
+        idCheckButton.addTarget(self, action: #selector(idCheck), for: .touchUpInside)
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
         makeConstraints()
     }
+
     func addSubViews() {
         [
             idTextField,
             idCheckButton,
             passwordTextField,
-            nextPageButton,
+            nfextPageButton,
         ].forEach({view.addSubview($0)})
     }
     func makeConstraints() {
@@ -52,7 +53,7 @@ class SignupPage: UIViewController {
             $0.top.equalTo(idTextField.snp.bottom).offset(10)
             $0.left.right.equalToSuperview().inset(25)
         }
-        nextPageButton.snp.makeConstraints {
+        nfextPageButton.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(73)
             $0.left.right.equalToSuperview().inset(25)
         }
@@ -60,7 +61,6 @@ class SignupPage: UIViewController {
 }
 
 extension SignupPage {
-    
     private func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
             passwordTextField.isSecureTextEntry.toggle()
@@ -75,8 +75,6 @@ extension SignupPage {
         self.passwordTextField.rightView = eyeButton
         self.passwordTextField.rightViewMode = .always
     }
-    
-    
     @objc func idCheck() {
         //서버연동하면 중복여부에 따라 알림 메세지가 달라지게하기
         let idAlert  = DefaultAlert()
