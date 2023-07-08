@@ -74,7 +74,6 @@ class LoginPage: UIViewController, UITextFieldDelegate {
         loginButton.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(97)
             $0.left.right.equalToSuperview().inset(25)
-            $0.height.equalTo(48)
         }
         signupLabel.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(10)

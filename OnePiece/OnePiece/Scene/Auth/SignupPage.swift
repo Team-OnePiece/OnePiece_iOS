@@ -12,7 +12,8 @@ import Then
 class SignupPage: UIViewController {
     
     let idTextField = DefaultTextField(placeholder: "아이디")
-    let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: (UIColor(named: "gray-000")!)
+                                      
     let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
     var eyeButton = UIButton(type: .custom)
     let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
@@ -40,18 +41,15 @@ class SignupPage: UIViewController {
             $0.top.equalToSuperview().inset(125)
             $0.left.equalToSuperview().inset(25)
             $0.right.equalToSuperview().inset(105)
-            $0.height.equalTo(48)
         }
         idCheckButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(125)
             $0.left.equalTo(idTextField.snp.right).offset(8)
             $0.right.equalToSuperview().inset(25)
-            $0.height.equalTo(48)
         }
         passwordTextField.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom).offset(10)
             $0.left.right.equalToSuperview().inset(25)
-            $0.height.equalTo(48)
         }
         nextPageButton.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(73)
