@@ -12,22 +12,10 @@ import Then
 class SignupPage: UIViewController {
     
     let idTextField = DefaultTextField(placeholder: "아이디")
-    let idCheckButton = UIButton(type: .system).then {
-        $0.setTitle("중복확인", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        $0.setTitleColor(UIColor(named: "gray-000"), for: .normal)
-        $0.backgroundColor = UIColor(named: "mainColor-1")
-        $0.layer.cornerRadius = 8
-    }
+    let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
     var eyeButton = UIButton(type: .custom)
-    let nextPageButton = UIButton(type: .system).then {
-        $0.setTitle("다음", for: .normal)
-        $0.setTitleColor(UIColor(named: "gray-000"), for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
-        $0.backgroundColor = UIColor(named: "mainColor-1")
-        $0.layer.cornerRadius = 8
-    }
+    let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "mainColor-3")
@@ -68,7 +56,6 @@ class SignupPage: UIViewController {
         nextPageButton.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(73)
             $0.left.right.equalToSuperview().inset(25)
-            $0.height.equalTo(48)
         }
     }
 }
@@ -92,6 +79,7 @@ extension SignupPage {
     
     
     @objc func idCheck() {
+        //서버연동하면 중복여부에 따라 알림 메세지가 달라지게하기
         let idAlert  = DefaultAlert()
         idAlert.alertMessage(title: "사용 가능한 아이디입니다.")
         present(idAlert, animated: true, completion: nil)

@@ -1,8 +1,9 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 
-class StartingPage: UIViewController {
+class LoginPage: UIViewController, UITextFieldDelegate {
     
     let mainLogo = UIImageView().then {
         $0.image = UIImage(named: "mainLogo")
@@ -15,26 +16,25 @@ class StartingPage: UIViewController {
     let idTextField = DefaultTextField(placeholder: "아이디")
     let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
     var eyeButton = UIButton(type: .custom)
-    let loginButton = UIButton(type: .system).then {
-        $0.setTitle("로그인", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.backgroundColor = .white
-        $0.layer.cornerRadius = 8
+    let loginButton = DefaultButton(title: "로그인", backgroundColor: .black, titleColor: UIColor(named: "gray-000")!)
+    let signupLabel = UILabel().then {
+        $0.text = "아직 회원이 아니신가요?"
+        $0.textColor = .black
+        $0.font = UIFont(name: "Orbit-Regular", size: 14)
     }
     let signupButton = UIButton(type: .system).then {
         $0.setTitle("회원가입", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
-        $0.setTitleColor(UIColor.white, for: .normal)
-        $0.backgroundColor = UIColor(named: "mainColor-1")
-        $0.layer.cornerRadius = 8
+        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 14)
+        $0.setTitleColor(UIColor.red, for: .normal)
+        $0.backgroundColor = .cyan
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "mainColor-3")
-        loginButton.addTarget(self, action: #selector(moveloginView), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(clickLogin), for: .touchUpInside)
         signupButton.addTarget(self, action: #selector(moveSignupView), for: .touchUpInside)
         showPasswordButton()
+        idTextField.delegate = self
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -48,6 +48,7 @@ class StartingPage: UIViewController {
             idTextField,
             passwordTextField,
             loginButton,
+            signupLabel,
             signupButton,
         ].forEach({view.addSubview($0)})
     }
@@ -71,19 +72,39 @@ class StartingPage: UIViewController {
             $0.right.left.equalToSuperview().inset(25)
         }
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(96)
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(97)
             $0.left.right.equalToSuperview().inset(25)
             $0.height.equalTo(48)
+        }
+        signupLabel.snp.makeConstraints {
+            $0.top.equalTo(loginButton.snp.bottom).offset(10)
+            $0.left.equalToSuperview().inset(85)
         }
         signupButton.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(25)
-            $0.height.equalTo(48)
+            $0.right.equalToSuperview().inset(65)
         }
     }
+    //비밀번호가 마지막에 입력되면 버튼색이 안바뀌는 오류
+//    func textFieldDidChangeSelection(_ textField: UITextField) {
+//        changeButtonColor()
+//    }
+//    func changeButtonColor() {
+//        if (idTextField.text?.isEmpty == true) {
+//            loginButton.backgroundColor = .blue
+//        } else {
+//            loginButton.backgroundColor = UIColor(named: "mainColor-1")
+//        }
+//        if (passwordTextField.text?.isEmpty == true) {
+//            loginButton.backgroundColor = .blue
+//        }
+//        else {
+//            loginButton.backgroundColor = UIColor(named: "mainColor-1")
+//        }
+//    }
 }
 //암호를 봤다가 다시 감췄을 때 입력하면 암호가 모두 삭제되는 버그 수정하기
-extension StartingPage {
+extension LoginPage {
     private func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
             passwordTextField.isSecureTextEntry.toggle()
@@ -99,7 +120,7 @@ extension StartingPage {
         self.passwordTextField.rightViewMode = .always
     }
     //MARK: -디자인 바뀌면 네비게이션 바 커스텀하기
-    @objc func moveloginView() {
+    @objc func clickLogin() {
         self.navigationController?.pushViewController(MainPage(), animated: true)
         let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = loginBackbutton
