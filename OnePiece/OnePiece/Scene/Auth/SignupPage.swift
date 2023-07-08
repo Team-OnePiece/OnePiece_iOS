@@ -15,6 +15,7 @@ class SignupPage: UIViewController {
     let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: (UIColor(named: "gray-000")!)
                                       
     let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
+                                      
     var eyeButton = UIButton(type: .custom)
     let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     override func viewDidLoad() {
