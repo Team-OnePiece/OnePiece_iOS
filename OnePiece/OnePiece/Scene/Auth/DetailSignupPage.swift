@@ -30,6 +30,7 @@ class DetailSignupPage: UIViewController {
         view.backgroundColor = UIColor(named: "mainColor-3")
         signup.addTarget(self, action: #selector(clickSignupFinish), for: .touchUpInside)
         nickNameCheck.addTarget(self, action: #selector(clickNameCheck), for: .touchUpInside)
+        imageAdd.addTarget(self, action: #selector(photoAdd), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,5 +103,26 @@ class DetailSignupPage: UIViewController {
     
     @objc func clickSignupFinish() {
         navigationController?.pushViewController(MainPage(), animated: true)
+    }
+}
+
+extension DetailSignupPage: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc func photoAdd(){
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(imagePicker, animated: true)
+    }//추가하기 버튼을 누르면 앨범에 있는 사진을 보여주는 코드
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            profileImage.contentMode = .scaleAspectFill
+            profileImage.image = pickedImage //4
+        }
+        dismiss(animated: true, completion: nil)
+    }//앨범에 있는 사진을 프로필 이미지로 적용시키는 코드
+
+        
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }
