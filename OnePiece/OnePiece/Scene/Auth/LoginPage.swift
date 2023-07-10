@@ -77,7 +77,7 @@ class LoginPage: UIViewController {
             $0.right.left.equalToSuperview().inset(25)
         }
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(97)
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(96)
             $0.left.right.equalToSuperview().inset(25)
         }
         signupButton.snp.makeConstraints {
