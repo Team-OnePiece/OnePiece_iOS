@@ -19,6 +19,8 @@
 		880A43362A5827EA0073DDDC /* ServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43352A5827EA0073DDDC /* ServiceAPI.swift */; };
 		880A43382A582C580073DDDC /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43372A582C580073DDDC /* DefaultButton.swift */; };
 		880A43762A59D4FA0073DDDC /* SignupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43752A59D4FA0073DDDC /* SignupPage.swift */; };
+		880A43792A5AF0D40073DDDC /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43782A5AF0D40073DDDC /* MoyaLoggerPlugin.swift */; };
+		880A437D2A5AF2090073DDDC /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A437C2A5AF2090073DDDC /* AuthResponse.swift */; };
 		885160E62A3C54860029A414 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E52A3C54860029A414 /* AppDelegate.swift */; };
 		885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E72A3C54860029A414 /* SceneDelegate.swift */; };
 		885160EA2A3C54860029A414 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E92A3C54860029A414 /* LoginPage.swift */; };
@@ -39,6 +41,8 @@
 		880A43352A5827EA0073DDDC /* ServiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPI.swift; sourceTree = "<group>"; };
 		880A43372A582C580073DDDC /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		880A43752A59D4FA0073DDDC /* SignupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPage.swift; sourceTree = "<group>"; };
+		880A43782A5AF0D40073DDDC /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
+		880A437C2A5AF2090073DDDC /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		885160E22A3C54860029A414 /* OnePiece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePiece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885160E52A3C54860029A414 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		885160E72A3C54860029A414 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,7 +142,8 @@
 		880A43332A5827D80073DDDC /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				880A43342A5827DE0073DDDC /* API */,
+				880A43772A5AF0AB0073DDDC /* Plugin */,
+				880A437A2A5AF1D50073DDDC /* Auth */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -149,6 +154,31 @@
 				880A43352A5827EA0073DDDC /* ServiceAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		880A43772A5AF0AB0073DDDC /* Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				880A43782A5AF0D40073DDDC /* MoyaLoggerPlugin.swift */,
+			);
+			path = Plugin;
+			sourceTree = "<group>";
+		};
+		880A437A2A5AF1D50073DDDC /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				880A437B2A5AF1E50073DDDC /* Response */,
+				880A43342A5827DE0073DDDC /* API */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		880A437B2A5AF1E50073DDDC /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				880A437C2A5AF2090073DDDC /* AuthResponse.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 		885160D92A3C54860029A414 = {
@@ -313,6 +343,8 @@
 				885160EA2A3C54860029A414 /* LoginPage.swift in Sources */,
 				885160E62A3C54860029A414 /* AppDelegate.swift in Sources */,
 				880A42C22A5476CF0073DDDC /* DefaultTextField.swift in Sources */,
+				880A437D2A5AF2090073DDDC /* AuthResponse.swift in Sources */,
+				880A43792A5AF0D40073DDDC /* MoyaLoggerPlugin.swift in Sources */,
 				880A42CA2A56DC970073DDDC /* CustomCell.swift in Sources */,
 				880A42B12A50748F0073DDDC /* DetailSignupPage.swift in Sources */,
 				880A43762A59D4FA0073DDDC /* SignupPage.swift in Sources */,
