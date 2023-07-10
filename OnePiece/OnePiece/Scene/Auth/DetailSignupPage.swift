@@ -19,7 +19,9 @@ class DetailSignupPage: UIViewController {
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
         $0.backgroundColor = .none
     }
-    let studentId = DefaultTextField(placeholder: "학번")
+    let studentGrade = DefaultTextField(placeholder: "학년")
+    let studentClass = DefaultTextField(placeholder: "반")
+    let studentNumber = DefaultTextField(placeholder: "번호")
     let nickName = DefaultTextField(placeholder: "별명")
     let nickNameCheck = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     let signup = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
@@ -40,7 +42,9 @@ class DetailSignupPage: UIViewController {
             profileImage,
             imageAdd,
             addImageView,
-            studentId,
+            studentGrade,
+            studentClass,
+            studentNumber,
             nickName,
             nickNameCheck,
             signup
@@ -59,34 +63,40 @@ class DetailSignupPage: UIViewController {
             $0.top.equalTo(profileImage.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
         }
-        studentId.snp.makeConstraints {
-            $0.top.equalTo(imageAdd.snp.bottom).offset(10)//나중에 수정하기
-            $0.left.right.equalToSuperview().inset(25)
-            $0.height.equalTo(48)
+        studentGrade.snp.makeConstraints {
+            $0.top.equalTo(imageAdd.snp.bottom).offset(10)
+            $0.left.equalToSuperview().inset(25)
+        }
+        studentClass.snp.makeConstraints {
+            $0.top.equalTo(imageAdd.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.left.equalTo(studentGrade.snp.right).offset(5)
+            $0.right.equalToSuperview().inset(140)
+        }
+        studentNumber.snp.makeConstraints {
+            $0.top.equalTo(imageAdd.snp.bottom).offset(10)
+            $0.left.equalTo(studentClass.snp.right).offset(5)
+            $0.right.equalToSuperview().inset(25)
         }
         nickName.snp.makeConstraints {
-            $0.top.equalTo(studentId.snp.bottom).offset(6)
+            $0.top.equalTo(studentGrade.snp.bottom).offset(6)
             $0.left.equalToSuperview().inset(25)
             $0.right.equalToSuperview().inset(105)
-            $0.height.equalTo(48)
         }
         nickNameCheck.snp.makeConstraints {
-            $0.top.equalTo(studentId.snp.bottom).offset(6)
+            $0.top.equalTo(studentGrade.snp.bottom).offset(6)
             $0.left.equalTo(nickName.snp.right).offset(8)
             $0.right.equalToSuperview().inset(25)
-            $0.height.equalTo(48)
         }
         signup.snp.makeConstraints {
             $0.top.equalTo(nickName.snp.bottom).offset(30)
             $0.left.equalToSuperview().inset(25)
             $0.right.equalToSuperview().inset(25)
-            $0.height.equalTo(48)
         }
     }
     
     @objc func clickNameCheck() {
-        let idAlert  = DefaultAlert()
-        idAlert.alertMessage(title: "사용 가능한 별명입니다.")
+        let idAlert  = DefaultAlert(title: "사용 가능한 별명입니다.")
         present(idAlert, animated: true, completion: nil)
     }
     
