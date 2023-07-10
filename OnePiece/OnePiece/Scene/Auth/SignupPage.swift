@@ -77,9 +77,8 @@ extension SignupPage {
     }
     @objc func idCheck() {
         //서버연동하면 중복여부에 따라 알림 메세지가 달라지게하기
-        let idAlert  = DefaultAlert()
-        idAlert.alertMessage(title: "사용 가능한 아이디입니다.")
-        present(idAlert, animated: true, completion: nil)
+        let idAlert  = DefaultAlert(title: "사용 가능한 아이디입니다.")
+        self.present(idAlert, animated: true)
     }
     
     @objc func nextSignupPage() {
