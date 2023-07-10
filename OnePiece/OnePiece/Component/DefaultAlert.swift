@@ -29,6 +29,18 @@ class DefaultAlert: UIViewController {
         setup()
     }
     
+    init(
+        title: String
+    ) {
+        super.init(nibName: nil, bundle: nil)
+        self.titleLabel.text = title
+        self.modalPresentationStyle = .overFullScreen
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setup() {
         view.addSubview(alertView)
         [
@@ -59,9 +71,5 @@ class DefaultAlert: UIViewController {
     }
     @objc func closeButtonTapped() {
         dismiss(animated: true)
-    }
-    func alertMessage(title: String) {
-        titleLabel.text = title
-        self.modalPresentationStyle = .overFullScreen
     }
 }
