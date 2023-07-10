@@ -20,6 +20,10 @@ class MainPage: UIViewController {
         $0.font = UIFont(name: "Orbit-Regular", size: 14)
         $0.textColor = UIColor(named: "gray-800")
     }
+    let settingButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "setting"), for: .normal)
+        $0.tintColor = UIColor(named: "settingColor")
+    }
     let tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: "mainColor-3")
     }
@@ -44,6 +48,7 @@ class MainPage: UIViewController {
         [
             mainLogo,
             mainLabel,
+            settingButton,
             tableView,
             feedPlusButton
         ].forEach({view.addSubview($0)})
@@ -57,6 +62,10 @@ class MainPage: UIViewController {
         mainLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(133)
             $0.left.right.equalToSuperview().inset(27)
+        }
+        settingButton.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(59)
+            $0.right.equalToSuperview().inset(20)
         }
         tableView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(155)
