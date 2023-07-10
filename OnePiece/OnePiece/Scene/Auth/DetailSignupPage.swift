@@ -4,6 +4,12 @@ import Then
 
 class DetailSignupPage: UIViewController {
 
+    let schoolStackView = UIStackView().then {
+        $0.distribution = .fillEqually
+        $0.axis = .horizontal
+        $0.backgroundColor = .clear
+        $0.spacing = 5
+    }
     let profileImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.backgroundColor = .white
@@ -19,9 +25,15 @@ class DetailSignupPage: UIViewController {
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
         $0.backgroundColor = .none
     }
-    let studentGrade = DefaultTextField(placeholder: "학년")
-    let studentClass = DefaultTextField(placeholder: "반")
-    let studentNumber = DefaultTextField(placeholder: "번호")
+    let studentGrade = DefaultTextField(placeholder: "학년").then {
+        $0.keyboardType = .numberPad
+    }
+    let studentClass = DefaultTextField(placeholder: "반").then {
+        $0.keyboardType = .numberPad
+    }
+    let studentNumber = DefaultTextField(placeholder: "번호").then {
+        $0.keyboardType = .numberPad
+    }
     let nickName = DefaultTextField(placeholder: "별명")
     let nickNameCheck = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     let signup = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
@@ -43,13 +55,16 @@ class DetailSignupPage: UIViewController {
             profileImage,
             imageAdd,
             addImageView,
-            studentGrade,
-            studentClass,
-            studentNumber,
+            schoolStackView,
             nickName,
             nickNameCheck,
             signup
         ].forEach({view.addSubview($0)})
+        [
+            studentGrade,
+            studentClass,
+            studentNumber
+        ].forEach({schoolStackView.addArrangedSubview($0)})
     }
     func makeConstraints() {
         profileImage.snp.makeConstraints {
@@ -64,20 +79,9 @@ class DetailSignupPage: UIViewController {
             $0.top.equalTo(profileImage.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
         }
-        studentGrade.snp.makeConstraints {
+        schoolStackView.snp.makeConstraints {
             $0.top.equalTo(imageAdd.snp.bottom).offset(10)
-            $0.left.equalToSuperview().inset(25)
-        }
-        studentClass.snp.makeConstraints {
-            $0.top.equalTo(imageAdd.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
-            $0.left.equalTo(studentGrade.snp.right).offset(5)
-            $0.right.equalToSuperview().inset(140)
-        }
-        studentNumber.snp.makeConstraints {
-            $0.top.equalTo(imageAdd.snp.bottom).offset(10)
-            $0.left.equalTo(studentClass.snp.right).offset(5)
-            $0.right.equalToSuperview().inset(25)
+            $0.left.right.equalToSuperview().inset(25)
         }
         nickName.snp.makeConstraints {
             $0.top.equalTo(studentGrade.snp.bottom).offset(6)
@@ -116,7 +120,8 @@ extension DetailSignupPage: UIImagePickerControllerDelegate, UINavigationControl
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profileImage.contentMode = .scaleAspectFill
-            profileImage.image = pickedImage //4
+            profileImage.image = pickedImage
+            addImageView.isHidden = true
         }
         dismiss(animated: true, completion: nil)
     }//앨범에 있는 사진을 프로필 이미지로 적용시키는 코드
