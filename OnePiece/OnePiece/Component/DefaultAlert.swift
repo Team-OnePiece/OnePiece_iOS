@@ -22,10 +22,9 @@ class DefaultAlert: UIViewController {
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.clear
+        view.backgroundColor = UIColor.quaternaryLabel
         setup()
     }
     
@@ -35,6 +34,7 @@ class DefaultAlert: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.titleLabel.text = title
         self.modalPresentationStyle = .overFullScreen
+        self.modalTransitionStyle = .crossDissolve
     }
 
     required init?(coder: NSCoder) {
@@ -65,7 +65,7 @@ class DefaultAlert: UIViewController {
         closeButton.snp.makeConstraints {
             $0.top.equalTo(lineView.snp.bottom).offset(13)
             $0.left.right.equalToSuperview().inset(20)
-            $0.height.equalTo(44)
+            $0.height.equalTo(22)
         }
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
