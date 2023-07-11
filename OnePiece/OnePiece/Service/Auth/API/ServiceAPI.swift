@@ -2,8 +2,7 @@ import Foundation
 import Moya
 
 enum ServiceAPI {
-    case signup(id: String, password: String)
-    case signup2(nickName: String, profile: String, schoolNumber: Int, classNumber: String, studentNumber: Int)
+    case signup(id: String, password: String, nickName: String, profile: String, schoolNumber: Int, classNumber: String, studentNumber: Int)
     case login(id: String, password: String)
 }
 
@@ -16,8 +15,6 @@ extension ServiceAPI: TargetType {
         switch self {
         case .signup:
             return "/user/signup"
-        case .signup2:
-            return "/user/signup"
         case .login:
             return "/user/login"
         }
@@ -27,8 +24,6 @@ extension ServiceAPI: TargetType {
         switch self {
         case .signup:
             return .post
-        case .signup2:
-            return .post
         case .login:
             return .post
         }
@@ -36,15 +31,11 @@ extension ServiceAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .signup(let id, let password):
+        case .signup(let id, let password, let nickName, let profile, let schoolNumber, let classNumber, let studentNumber):
             return .requestParameters(
                 parameters: [
                     "userId": id, //(아이디는 1~20자 영문 대 소문자, 숫자 사용하세요)
-                    "userPassword": password
-                ], encoding: JSONEncoding.default)
-        case .signup2(let nickName, let profile, let schoolNumber, let classNumber, let studentNumber):
-            return .requestParameters(
-                parameters: [
+                    "userPassword": password,
                     "nickName": nickName,
                     "profile": profile,
                     "schoolNumber": studentNumber,  // (범위 1 ~ 3)
