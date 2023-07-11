@@ -20,7 +20,7 @@ class MainPage: UIViewController {
         $0.font = UIFont(name: "Orbit-Regular", size: 14)
         $0.textColor = UIColor(named: "gray-800")
     }
-    let settingButton = UIButton(type: .system).then {
+    let myPageButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "setting"), for: .normal)
         $0.tintColor = UIColor(named: "settingColor")
     }
@@ -38,6 +38,7 @@ class MainPage: UIViewController {
         view.backgroundColor = UIColor(named: "mainColor-3")
         navigationItem.hidesBackButton = true
         feedPlusButton.addTarget(self, action: #selector(clickFeedPlus), for: .touchUpInside)
+        myPageButton.addTarget(self, action: #selector(clickMyPage), for: .touchUpInside)
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -48,27 +49,27 @@ class MainPage: UIViewController {
         [
             mainLogo,
             mainLabel,
-            settingButton,
+            myPageButton,
             tableView,
             feedPlusButton
         ].forEach({view.addSubview($0)})
     }
     func makeConstraints() {
         mainLogo.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(59)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.left.equalToSuperview().inset(20)
             $0.width.height.equalTo(35)
         }
         mainLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(133)
-            $0.left.right.equalToSuperview().inset(27)
+            $0.top.equalTo(mainLogo.snp.bottom).offset(31)
+            $0.left.right.equalToSuperview().inset(45)
         }
-        settingButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(59)
+        myPageButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.right.equalToSuperview().inset(20)
         }
         tableView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(155)
+            $0.top.equalTo(mainLabel.snp.bottom)
             $0.bottom.equalToSuperview()
             $0.left.right.equalToSuperview().inset(27)
         }
@@ -84,6 +85,11 @@ class MainPage: UIViewController {
         self.navigationItem.backBarButtonItem = backButton
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
     }
+    
+    @objc func clickMyPage() {
+        self.navigationController?.pushViewController(MyPage(), animated: true)
+    }
+
 }
 
 extension MainPage: UITableViewDelegate, UITableViewDataSource {

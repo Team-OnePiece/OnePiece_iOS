@@ -12,5 +12,16 @@ class FeedContentPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "mainColor-3")
+//        navigationBar()
     }
+    
+//    func navigationBar() {
+//        let closeButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(closeTab))
+//        navigationItem.rightBarButtonItem = closeButton
+//        closeButton.tintColor = UIColor(named: "gray-800")
+//        closeButton.font = UIFont(name: "Orbit-Regular", size: 100)
+//    }
+//@objc func closeTab() {
+//        navigationController?.popViewController(animated: true)
+//}
 }

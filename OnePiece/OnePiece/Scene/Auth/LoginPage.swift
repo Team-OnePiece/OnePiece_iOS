@@ -3,7 +3,7 @@ import SnapKit
 import Then
 import Moya
 
-class LoginPage: UIViewController {
+class LoginPage: UIViewController, UITextFieldDelegate {
     
     let stackView = UIStackView().then {
         $0.alignment = .center
@@ -39,7 +39,6 @@ class LoginPage: UIViewController {
         loginButton.addTarget(self, action: #selector(clickLogin), for: .touchUpInside)
         signupButton.addTarget(self, action: #selector(moveSignupView), for: .touchUpInside)
         showPasswordButton()
-        //        setupTextFieldHandler()
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -77,7 +76,7 @@ class LoginPage: UIViewController {
             $0.right.left.equalToSuperview().inset(25)
         }
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(96)
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(363)
             $0.left.right.equalToSuperview().inset(25)
         }
         signupButton.snp.makeConstraints {
@@ -88,19 +87,9 @@ class LoginPage: UIViewController {
             $0.centerX.equalToSuperview()
         }
     }
-    //비밀번호가 마지막에 입력되면 버튼색이 안바뀌는 오류
-    //    private func setupTextFieldHandler() {
-    //           idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-    //       }
-    //
-    //       @objc private func textFieldDidChange(_ textField: UITextField) {
-    //           let textIsEmpty = idTextField.text?.isEmpty ?? true
-    //           loginButton.isEnabled = !textIsEmpty
-    //           loginButton.backgroundColor = textIsEmpty ? UIColor.blue.cgColor.alpha = 0.1 UIColor(named: "mainColor-1")!
-    //       }
-    
+
 }
-//암호를 봤다가 다시 감췄을 때 입력하면 암호가 모두 삭제되는 버그 수정하기
+//암호를 봤다가 다시 감췄을 때 입력하면 암호가 모두 삭제되는 버그 수정하기?버그가 아닐수도...
 extension LoginPage {
     private func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
@@ -119,21 +108,19 @@ extension LoginPage {
     //MARK: -디자인 바뀌면 네비게이션 바 커스텀하기
     @objc func clickLogin() {
         if (idTextField.text?.isEmpty == true || passwordTextField.text?.isEmpty == true) {
-            //
-                        } else {
-        
-                self.navigationController?.pushViewController(MainPage(), animated: true)
-                let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
-                self.navigationItem.backBarButtonItem = loginBackbutton
-                self.navigationItem.backBarButtonItem?.tintColor = .black
-            }
-                         }
-                         
-                         @objc func moveSignupView() {
-                self.navigationController?.pushViewController(SignupPage(), animated: true)
-                let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-                self.navigationItem.backBarButtonItem = signupBackbutton
-                self.navigationItem.backBarButtonItem?.tintColor = .black
-            }
-                         }
-                         
+        } else {
+            self.navigationController?.pushViewController(MainPage(), animated: true)
+            let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
+            self.navigationItem.backBarButtonItem = loginBackbutton
+            self.navigationItem.backBarButtonItem?.tintColor = .black
+        }
+    }
+    
+    @objc func moveSignupView() {
+        self.navigationController?.pushViewController(SignupPage(), animated: true)
+        let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = signupBackbutton
+        self.navigationItem.backBarButtonItem?.tintColor = .black
+    }
+}
+

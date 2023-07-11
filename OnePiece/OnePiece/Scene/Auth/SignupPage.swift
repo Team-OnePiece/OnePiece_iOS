@@ -1,13 +1,7 @@
-//
-//  SibalViewController.swift
-//  OnePiece
-//
-//  Created by 조영준 on 2023/07/09.
-//
-
 import UIKit
 import SnapKit
 import Then
+import Moya
 
 class SignupPage: UIViewController {
 
@@ -16,13 +10,13 @@ class SignupPage: UIViewController {
     let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     var eyeButton = UIButton(type: .custom)
     let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
-    let nfextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "mainColor-3")
         showPasswordButton()
-        nfextPageButton.addTarget(self, action: #selector(nextSignupPage), for: .touchUpInside)
+        nextPageButton.addTarget(self, action: #selector(nextSignupPage), for: .touchUpInside)
         idCheckButton.addTarget(self, action: #selector(idCheck), for: .touchUpInside)
     }
     override func viewDidLayoutSubviews() {
@@ -35,7 +29,7 @@ class SignupPage: UIViewController {
             idTextField,
             idCheckButton,
             passwordTextField,
-            nfextPageButton,
+            nextPageButton,
         ].forEach({view.addSubview($0)})
     }
     func makeConstraints() {
@@ -53,7 +47,7 @@ class SignupPage: UIViewController {
             $0.top.equalTo(idTextField.snp.bottom).offset(10)
             $0.left.right.equalToSuperview().inset(25)
         }
-        nfextPageButton.snp.makeConstraints {
+        nextPageButton.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(73)
             $0.left.right.equalToSuperview().inset(25)
         }
@@ -61,6 +55,7 @@ class SignupPage: UIViewController {
 }
 
 extension SignupPage {
+    
     private func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
             passwordTextField.isSecureTextEntry.toggle()
@@ -79,6 +74,7 @@ extension SignupPage {
         //서버연동하면 중복여부에 따라 알림 메세지가 달라지게하기
         let idAlert  = DefaultAlert(title: "사용 가능한 아이디입니다.")
         self.present(idAlert, animated: true)
+
     }
     
     @objc func nextSignupPage() {
