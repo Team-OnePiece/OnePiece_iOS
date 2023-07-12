@@ -25,11 +25,13 @@ class DefaultTextField: UITextField {
         self.isSecureTextEntry = isSecure
         self.backgroundColor = .white
         self.layer.cornerRadius = 8
-        let spacerView = UIView(frame: CGRect(x: 0, y: 0, width: 17, height: 0))
+        let spacerView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
         self.leftView = spacerView
         self.rightView = spacerView
         self.leftViewMode = .always
         self.rightViewMode = .always
+        self.layer.borderColor = UIColor(named: "gray-400")?.cgColor
+        self.layer.borderWidth = 0.5
     }
 
     required init?(coder: NSCoder) {
@@ -52,7 +54,7 @@ class DefaultTextField: UITextField {
         self.attributedPlaceholder = NSAttributedString(
             string: placeholderText,
             attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor(named: "mainColor-4"),
+                NSAttributedString.Key.foregroundColor: UIColor(named: "gray-600"),
                 NSAttributedString.Key.font: UIFont(name: "Orbit-Regular", size: 16) as Any
             ]
         )

@@ -35,7 +35,7 @@ class LoginPage: UIViewController, UITextFieldDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "mainColor-3")
+        view.backgroundColor = .white
         loginButton.addTarget(self, action: #selector(clickLogin), for: .touchUpInside)
         signupButton.addTarget(self, action: #selector(moveSignupView), for: .touchUpInside)
         showPasswordButton()
@@ -117,7 +117,7 @@ extension LoginPage {
     }
     
     @objc func moveSignupView() {
-        self.navigationController?.pushViewController(SignupPage(), animated: true)
+        self.navigationController?.pushViewController(IdSignupPage(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = .black

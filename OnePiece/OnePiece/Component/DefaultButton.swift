@@ -14,7 +14,8 @@ class DefaultButton: UIButton {
     init(
         title: String,
         backgroundColor : UIColor,
-        titleColor: UIColor
+        titleColor: UIColor,
+        type: UIButton.ButtonType = .system
     ) {
         super.init(frame: .zero)
         self.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
