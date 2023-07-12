@@ -11,7 +11,7 @@ class FeedContentPage: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "mainColor-3")
+        view.backgroundColor = .white
 //        navigationBar()
     }
     

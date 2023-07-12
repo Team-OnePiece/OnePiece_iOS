@@ -25,7 +25,7 @@ class MainPage: UIViewController {
         $0.tintColor = UIColor(named: "settingColor")
     }
     let tableView = UITableView().then {
-        $0.backgroundColor = UIColor(named: "mainColor-3")
+        $0.backgroundColor = .white
     }
     let feedPlusButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "feedPlusIcon"), for: .normal)
@@ -35,7 +35,7 @@ class MainPage: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "mainColor-3")
+        view.backgroundColor = .white
         navigationItem.hidesBackButton = true
         feedPlusButton.addTarget(self, action: #selector(clickFeedPlus), for: .touchUpInside)
         myPageButton.addTarget(self, action: #selector(clickMyPage), for: .touchUpInside)
