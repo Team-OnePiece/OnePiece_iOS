@@ -87,7 +87,10 @@ class MainPage: UIViewController {
     }
     
     @objc func clickMyPage() {
-        self.navigationController?.pushViewController(MyPage(), animated: true)
+        self.navigationController?.pushViewController(UserPage(), animated: true)
+        let mainPageBackbutton = UIBarButtonItem(title: "마이페이지", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = mainPageBackbutton
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
     }
 
 }

@@ -69,11 +69,11 @@ class LoginPage: UIViewController, UITextFieldDelegate {
         }
         idTextField.snp.makeConstraints {
             $0.top.equalTo(mainTitle.snp.bottom).offset(18)
-            $0.right.left.equalToSuperview().inset(25)
+            $0.left.right.equalToSuperview().inset(25)
         }
         passwordTextField.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom).offset(10)
-            $0.right.left.equalToSuperview().inset(25)
+            $0.left.right.equalToSuperview().inset(25)
         }
         loginButton.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(363)

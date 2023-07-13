@@ -19,7 +19,7 @@
 		880A43382A582C580073DDDC /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43372A582C580073DDDC /* DefaultButton.swift */; };
 		880A43792A5AF0D40073DDDC /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43782A5AF0D40073DDDC /* MoyaLoggerPlugin.swift */; };
 		880A437D2A5AF2090073DDDC /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A437C2A5AF2090073DDDC /* AuthResponse.swift */; };
-		880A43E12A5D2FB30073DDDC /* MyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43E02A5D2FB30073DDDC /* MyPage.swift */; };
+		880A43E12A5D2FB30073DDDC /* UserPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43E02A5D2FB30073DDDC /* UserPage.swift */; };
 		880A43E42A5D4ACF0073DDDC /* SchoolInfoSignupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43E32A5D4ACF0073DDDC /* SchoolInfoSignupPage.swift */; };
 		880A43E62A5D4B1C0073DDDC /* NickNameSignupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43E52A5D4B1C0073DDDC /* NickNameSignupPage.swift */; };
 		880A43E82A5D57840073DDDC /* IdSignupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43E72A5D57840073DDDC /* IdSignupPage.swift */; };
@@ -29,6 +29,7 @@
 		885160EA2A3C54860029A414 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885160E92A3C54860029A414 /* LoginPage.swift */; };
 		885160EF2A3C54870029A414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 885160EE2A3C54870029A414 /* Assets.xcassets */; };
 		885160F22A3C54870029A414 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885160F02A3C54870029A414 /* LaunchScreen.storyboard */; };
+		8875E2982A5EC42600CA20C1 /* UserModifyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875E2972A5EC42600CA20C1 /* UserModifyPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +45,7 @@
 		880A43372A582C580073DDDC /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		880A43782A5AF0D40073DDDC /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		880A437C2A5AF2090073DDDC /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
-		880A43E02A5D2FB30073DDDC /* MyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPage.swift; sourceTree = "<group>"; };
+		880A43E02A5D2FB30073DDDC /* UserPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPage.swift; sourceTree = "<group>"; };
 		880A43E32A5D4ACF0073DDDC /* SchoolInfoSignupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolInfoSignupPage.swift; sourceTree = "<group>"; };
 		880A43E52A5D4B1C0073DDDC /* NickNameSignupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameSignupPage.swift; sourceTree = "<group>"; };
 		880A43E72A5D57840073DDDC /* IdSignupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdSignupPage.swift; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 		885160EE2A3C54870029A414 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885160F12A3C54870029A414 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		885160F32A3C54870029A414 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8875E2972A5EC42600CA20C1 /* UserModifyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModifyPage.swift; sourceTree = "<group>"; };
 		A1B02E6DA75B3D95E03B89B7 /* Pods-OnePiece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.release.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.release.xcconfig"; sourceTree = "<group>"; };
 		F32A90BC03FB9EDFE738B3DB /* Pods-OnePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.debug.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				880A42CB2A56E1EB0073DDDC /* Main */,
+				8875E2962A5EC40800CA20C1 /* User */,
 				880A42C82A56DC710073DDDC /* Custom */,
 				880A42AB2A4E81190073DDDC /* Auth */,
 			);
@@ -140,7 +143,6 @@
 			children = (
 				880A42B32A5167E30073DDDC /* MainPage.swift */,
 				880A42CC2A56E2110073DDDC /* FeedContentPage.swift */,
-				880A43E02A5D2FB30073DDDC /* MyPage.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -238,6 +240,15 @@
 				885160F02A3C54870029A414 /* LaunchScreen.storyboard */,
 			);
 			path = SupportFile;
+			sourceTree = "<group>";
+		};
+		8875E2962A5EC40800CA20C1 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				880A43E02A5D2FB30073DDDC /* UserPage.swift */,
+				8875E2972A5EC42600CA20C1 /* UserModifyPage.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,9 +372,10 @@
 				880A43E82A5D57840073DDDC /* IdSignupPage.swift in Sources */,
 				885160EA2A3C54860029A414 /* LoginPage.swift in Sources */,
 				885160E62A3C54860029A414 /* AppDelegate.swift in Sources */,
+				8875E2982A5EC42600CA20C1 /* UserModifyPage.swift in Sources */,
 				880A42C22A5476CF0073DDDC /* DefaultTextField.swift in Sources */,
 				880A437D2A5AF2090073DDDC /* AuthResponse.swift in Sources */,
-				880A43E12A5D2FB30073DDDC /* MyPage.swift in Sources */,
+				880A43E12A5D2FB30073DDDC /* UserPage.swift in Sources */,
 				880A43792A5AF0D40073DDDC /* MoyaLoggerPlugin.swift in Sources */,
 				880A42CA2A56DC970073DDDC /* CustomCell.swift in Sources */,
 				880A43E62A5D4B1C0073DDDC /* NickNameSignupPage.swift in Sources */,
