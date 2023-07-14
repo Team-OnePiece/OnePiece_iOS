@@ -83,7 +83,7 @@ class MainPage: UIViewController {
         self.navigationController?.pushViewController(FeedContentPage(), animated: true)
         let backButton = UIBarButtonItem(title: "피드 작성", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backButton
-        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-200")
     }
     
     @objc func clickMyPage() {
