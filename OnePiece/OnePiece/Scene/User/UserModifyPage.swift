@@ -27,17 +27,11 @@ class UserModifyPage: UIViewController, UINavigationControllerDelegate {
     }
     let idModifyTextField = DefaultTextField(placeholder: "핫걸")
     let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    @objc func clickModifyButton() {
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
-        picker.delegate = self
-        self.present(picker, animated: true)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        profileModifyButton.addTarget(self, action: #selector(clickModifyButton), for: .touchUpInside)
+        profileModifyButton.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
+        idCheckButton.addTarget(self, action: #selector(clickIdCheck), for: .touchUpInside)
     }
     override func viewDidLayoutSubviews() {
         layout()
@@ -73,6 +67,17 @@ class UserModifyPage: UIViewController, UINavigationControllerDelegate {
             $0.left.equalTo(idModifyTextField.snp.right).offset(4)
             $0.right.equalToSuperview().inset(25)
         }
+    }
+    @objc func clickProfileModifyButton() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = self
+        self.present(picker, animated: true)
+    }
+    @objc func clickIdCheck() {
+        let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
+        self.present(alert, animated: true)
     }
 }
 
