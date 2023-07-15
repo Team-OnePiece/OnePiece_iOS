@@ -13,7 +13,7 @@ class NickNameSignupPage: UIViewController {
 
     let idTextField = DefaultTextField(placeholder: "별명")
     let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    let nextPageButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     let progress = UIImageView().then {
         $0.image = UIImage(named: "progress4")
         
