@@ -30,12 +30,16 @@ class MainPage: UIViewController {
     let feedPlusButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "feedPlusIcon"), for: .normal)
         $0.backgroundColor = UIColor(named: "mainColor-1")
-        $0.tintColor = .white
+        $0.tintColor = UIColor(named: "gray-200")
         $0.layer.cornerRadius = 40
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        tableView.rowHeight = 408
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
         navigationItem.hidesBackButton = true
         feedPlusButton.addTarget(self, action: #selector(clickFeedPlus), for: .touchUpInside)
         myPageButton.addTarget(self, action: #selector(clickMyPage), for: .touchUpInside)
