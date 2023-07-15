@@ -41,6 +41,7 @@ class MainPage: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         navigationItem.hidesBackButton = true
+        tableView.register(CustomCell.self, forCellReuseIdentifier: "CellId")
         feedPlusButton.addTarget(self, action: #selector(clickFeedPlus), for: .touchUpInside)
         myPageButton.addTarget(self, action: #selector(clickMyPage), for: .touchUpInside)
     }
@@ -101,14 +102,13 @@ class MainPage: UIViewController {
 
 extension MainPage: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellArr.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.cellId, for: indexPath) as! CustomCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! CustomCell
 //        cell.textLabel?.text = cellArr[indexPath.row]
         return cell
     }
-    
 }
 
