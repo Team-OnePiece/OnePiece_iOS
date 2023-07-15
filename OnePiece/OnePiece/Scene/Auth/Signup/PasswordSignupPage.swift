@@ -2,10 +2,10 @@ import UIKit
 import SnapKit
 import Then
 
-class PasswordSignupPage: UIViewController {
+class PasswordSignupPage: UIViewController, UITextFieldDelegate {
     
     let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
-    let passwordTextFieldCheck = DefaultTextField(placeholder: "비밀번호", isSecure: true)
+    let passwordCheckTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
     var eyeButton = UIButton(type: .custom)
     var checkEyeButton = UIButton(type: .custom)
     let progress = UIImageView().then {
@@ -15,9 +15,15 @@ class PasswordSignupPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        passwordTextField.delegate = self
+        passwordCheckTextField.delegate = self
+        passwordCheckTextField.returnKeyType = .done
         nextPageButton.addTarget(self, action: #selector(clickNextPage), for: .touchUpInside)
         showPasswordButton()
         checkShowPasswordButton()
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -26,7 +32,7 @@ class PasswordSignupPage: UIViewController {
     func addSubViews() {
         [
             passwordTextField,
-            passwordTextFieldCheck,
+            passwordCheckTextField,
             progress,
             nextPageButton
         ].forEach({view.addSubview($0)})
@@ -40,7 +46,7 @@ class PasswordSignupPage: UIViewController {
             $0.top.equalTo(progress.snp.bottom).offset(48)
             $0.left.right.equalToSuperview().inset(25)
         }
-        passwordTextFieldCheck.snp.makeConstraints {
+        passwordCheckTextField.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(24)
             $0.left.right.equalToSuperview().inset(25)
         }
@@ -75,7 +81,7 @@ extension PasswordSignupPage {
     
     func checkShowPasswordButton() {
         checkEyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
-            passwordTextFieldCheck.isSecureTextEntry.toggle()
+            passwordCheckTextField.isSecureTextEntry.toggle()
             self.checkEyeButton.isSelected.toggle ()
         }))
         var buttonConfiguration2 = UIButton.Configuration.plain()
@@ -84,7 +90,15 @@ extension PasswordSignupPage {
         checkEyeButton.setImage (UIImage (named: "closeEye"), for: .normal)
         self.checkEyeButton.setImage(UIImage (named: "openEye"), for: .selected)
         self.checkEyeButton.configuration = buttonConfiguration2
-        self.passwordTextFieldCheck.rightView = checkEyeButton
-        self.passwordTextFieldCheck.rightViewMode = .always
+        self.passwordCheckTextField.rightView = checkEyeButton
+        self.passwordCheckTextField.rightViewMode = .always
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == passwordTextField {
+            passwordTextField.becomeFirstResponder()
+        } else {
+            passwordCheckTextField.resignFirstResponder()
+        }
+        return true
     }
 }

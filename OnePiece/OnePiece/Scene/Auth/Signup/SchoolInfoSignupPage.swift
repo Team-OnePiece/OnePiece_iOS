@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class SchoolInfoSignupPage: UIViewController {
+class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
 
     let stackView = UIStackView().then {
         $0.distribution = .fillEqually
@@ -27,9 +27,18 @@ class SchoolInfoSignupPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        number.returnKeyType = .done
+        grade.keyboardType = .numberPad
+        studentclass.keyboardType = .numberPad
+        number.keyboardType = .numberPad
+        grade.delegate = self
+        studentclass.delegate = self
+        number.delegate = self
         nextPageButton.addTarget(self, action: #selector(clickNextPage), for: .touchUpInside)
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     override func viewDidLayoutSubviews() {
         addSubViews()
         makeConstraints()
@@ -58,6 +67,10 @@ class SchoolInfoSignupPage: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        number.resignFirstResponder()
+        return true
+    }
     @objc func clickNextPage() {
         self.navigationController?.pushViewController(NickNameSignupPage(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class IdSignupPage: UIViewController {
+class IdSignupPage: UIViewController, UITextFieldDelegate {
 
     let idTextField = DefaultTextField(placeholder: "아이디")
     let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
@@ -21,8 +21,13 @@ class IdSignupPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        idTextField.delegate = self
+        idTextField.returnKeyType = .done
         nextPageButton.addTarget(self, action: #selector(clickNextePage), for: .touchUpInside)
         idCheckButton.addTarget(self, action: #selector(idCheck), for: .touchUpInside)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -60,7 +65,10 @@ class IdSignupPage: UIViewController {
 }
 
 extension IdSignupPage {
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        idTextField.resignFirstResponder()
+        return true
+    }
     @objc func idCheck() {
         let idAlert  = DefaultAlert(title: "사용 가능한 아이디입니다.")
         self.present(idAlert, animated: true)

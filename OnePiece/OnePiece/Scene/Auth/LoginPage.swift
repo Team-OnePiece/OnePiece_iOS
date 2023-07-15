@@ -36,10 +36,16 @@ class LoginPage: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        idTextField.delegate = self
+        passwordTextField.delegate = self
         loginButton.addTarget(self, action: #selector(clickLogin), for: .touchUpInside)
         signupButton.addTarget(self, action: #selector(moveSignupView), for: .touchUpInside)
         showPasswordButton()
+        passwordTextField.returnKeyType = .done
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
     override func viewDidLayoutSubviews() {
         addSubViews()
         makeConstraints()
@@ -105,6 +111,14 @@ extension LoginPage {
         self.passwordTextField.rightView = eyeButton
         self.passwordTextField.rightViewMode = .always
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == idTextField {
+            passwordTextField.becomeFirstResponder()
+        } else {
+            passwordTextField.resignFirstResponder()
+        }
+        return true
+    }
     //MARK: -디자인 바뀌면 네비게이션 바 커스텀하기
     @objc func clickLogin() {
         if (idTextField.text?.isEmpty == true || passwordTextField.text?.isEmpty == true) {
@@ -123,4 +137,3 @@ extension LoginPage {
         self.navigationItem.backBarButtonItem?.tintColor = .black
     }
 }
-
