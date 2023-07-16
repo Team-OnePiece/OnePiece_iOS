@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class MainPage: UIViewController {
+class MainPage: UIViewController, UINavigationControllerDelegate {
     
     var cellArr: [String] =  []
     let mainLogo = UIImageView().then {
@@ -85,10 +85,11 @@ class MainPage: UIViewController {
         }
     }
     @objc func clickFeedPlus() {
-        self.navigationController?.pushViewController(FeedContentPage(), animated: true)
-        let backButton = UIBarButtonItem(title: "피드 작성", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = backButton
-        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = self
+        self.present(picker, animated: true)
     }
     
     @objc func clickMyPage() {
@@ -100,6 +101,25 @@ class MainPage: UIViewController {
 
 }
 
+
+extension MainPage: UIImagePickerControllerDelegate {
+//     이미지 피커에서 이미지를 선택하지 않고 취소했을 때 호출되는 메소드
+func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    self.dismiss(animated: true) {
+    }
+}
+    // 이미지 피커에서 이미지를 선택했을 때 호출되는 메소드
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true) {
+            let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+            self.navigationController?.pushViewController(FeedContentPage(), animated: true)
+            let backButton = UIBarButtonItem(title: "피드 작성", style: .plain, target: nil, action: nil)
+            self.navigationItem.backBarButtonItem = backButton
+            self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        }
+    }
+}
+
 extension MainPage: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -107,7 +127,7 @@ extension MainPage: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! CustomCell
-//        cell.textLabel?.text = cellArr[indexPath.row]
+        //        cell.textLabel?.text = cellArr[indexPath.row]
         return cell
     }
 }
