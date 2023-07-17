@@ -22,6 +22,7 @@ class IdSignupPage: UIViewController, UITextFieldDelegate {
         idTextField.returnKeyType = .done
         nextPageButton.addTarget(self, action: #selector(clickNextePage), for: .touchUpInside)
         idCheckButton.addTarget(self, action: #selector(idCheck), for: .touchUpInside)
+        idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -79,5 +80,21 @@ extension IdSignupPage {
         signupBackbutton.setTitleTextAttributes([
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let id = idTextField.text
+        else {return}
+        if id.isEmpty == true {
+            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
+            nextPageButton.alpha = 0.8
+            idCheckButton.backgroundColor = UIColor(named: "mainColor-1")
+            idCheckButton.alpha = 0.8
+        } else {
+            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
+            nextPageButton.alpha  = 1.0
+            idCheckButton.backgroundColor = UIColor(named: "mainColor-1")
+            idCheckButton.alpha = 1.0
+        }
     }
 }

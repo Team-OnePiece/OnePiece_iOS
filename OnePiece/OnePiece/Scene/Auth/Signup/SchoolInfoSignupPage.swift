@@ -34,6 +34,9 @@ class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
         grade.delegate = self
         studentclass.delegate = self
         number.delegate = self
+        grade.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        studentclass.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        number.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         nextPageButton.addTarget(self, action: #selector(clickNextPage), for: .touchUpInside)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -79,5 +82,19 @@ class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
         signupBackbutton.setTitleTextAttributes([
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let schoolGrade = grade.text,
+              let schoolClass = studentclass.text,
+              let schoolNumber = number.text
+        else {return}
+        if schoolGrade.isEmpty == true || schoolClass.isEmpty == true || schoolNumber.isEmpty == true {
+            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
+            nextPageButton.alpha = 0.8
+        } else {
+            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
+            nextPageButton.alpha  = 1.0
+        }
     }
 }

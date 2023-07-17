@@ -25,6 +25,7 @@ class NickNameSignupPage: UIViewController, UITextFieldDelegate {
         nickNameTextField.delegate = self
         nextPageButton.addTarget(self, action: #selector(clickMainPage), for: .touchUpInside)
         nickNameCheckButton.addTarget(self, action: #selector(nickNameCheck), for: .touchUpInside)
+        nickNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -83,5 +84,20 @@ extension NickNameSignupPage {
         signupBackbutton.setTitleTextAttributes([
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
+    }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let nickName = nickNameTextField.text
+        else {return}
+        if nickName.isEmpty == true {
+            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
+            nextPageButton.alpha = 0.8
+            nickNameCheckButton.backgroundColor = UIColor(named: "mainColor-1")
+            nickNameCheckButton.alpha = 0.8
+        } else {
+            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
+            nextPageButton.alpha  = 1.0
+            nickNameCheckButton.backgroundColor = UIColor(named: "mainColor-1")
+            nickNameCheckButton.alpha = 1.0
+        }
     }
 }

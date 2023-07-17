@@ -19,6 +19,8 @@ class PasswordSignupPage: UIViewController, UITextFieldDelegate {
         passwordCheckTextField.delegate = self
         passwordCheckTextField.returnKeyType = .done
         nextPageButton.addTarget(self, action: #selector(clickNextPage), for: .touchUpInside)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        passwordCheckTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         showPasswordButton()
         checkShowPasswordButton()
     }
@@ -103,5 +105,17 @@ extension PasswordSignupPage {
             passwordCheckTextField.resignFirstResponder()
         }
         return true
+    }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let password = passwordTextField.text,
+              let passwordCheck = passwordCheckTextField.text
+        else {return}
+        if password.isEmpty == true || passwordCheck.isEmpty == true {
+            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
+            nextPageButton.alpha = 0.8
+        } else {
+            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
+            nextPageButton.alpha  = 1.0
+        }
     }
 }
