@@ -14,6 +14,8 @@ class UserModifyPage: UIViewController, UINavigationControllerDelegate {
     let profileBackground = UIImageView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 50
+        $0.layer.borderColor = UIColor(named: "gray-500")?.cgColor
+        $0.layer.borderWidth = 1
         $0.clipsToBounds = true
     }
     let profile = UIImageView().then {
@@ -52,6 +54,7 @@ class UserModifyPage: UIViewController, UINavigationControllerDelegate {
         }
         profile.snp.makeConstraints {
             $0.center.equalToSuperview()
+            $0.width.height.equalTo(60)
         }
         profileModifyButton.snp.makeConstraints {
             $0.top.equalTo(profileBackground.snp.bottom).offset(10)
@@ -94,6 +97,7 @@ extension UserModifyPage: UIImagePickerControllerDelegate {
             let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
             self.profileBackground.image = img
             self.profile.isHidden = true
+            self.profileBackground.layer.borderWidth = 0
         }
     }
 }

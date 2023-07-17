@@ -11,11 +11,15 @@ import Then
 
 class UserPage: UIViewController {
 
-    let profile = UIImageView().then {
-        $0.image = UIImage(named: "profile")
+    let profileBackground = UIImageView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 50
+        $0.layer.borderColor = UIColor(named: "gray-500")?.cgColor
+        $0.layer.borderWidth = 1
         $0.clipsToBounds = true
+    }
+    let profile = UIImageView().then {
+        $0.image = UIImage(named: "profile")
     }
     let messageLabel = UILabel().then {
         $0.text = "\t\t\t00님,\n\t\t\t오늘은\n어떤 하루를 보냈나요?"
@@ -37,15 +41,20 @@ class UserPage: UIViewController {
     }
     func layout() {
         [
-            profile,
+            profileBackground,
             messageLabel,
             modifyButton
         ].forEach({view.addSubview($0)})
+        profileBackground.addSubview(profile)
         
-        profile.snp.makeConstraints {
+        profileBackground.snp.makeConstraints {
             $0.top.equalToSuperview().inset(152)
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(100)
+        }
+        profile.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.height.equalTo(60)
         }
         messageLabel.snp.makeConstraints {
             $0.top.equalTo(profile.snp.bottom).offset(45)
