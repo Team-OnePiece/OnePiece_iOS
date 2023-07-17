@@ -22,6 +22,7 @@ class DefaultButton: UIButton {
         self.backgroundColor = backgroundColor
         self.setTitleColor(titleColor, for: .normal)
         self.layer.cornerRadius = 8
+        self.alpha = 0.8
     }
     
     required init?(coder aDecoder: NSCoder) {
