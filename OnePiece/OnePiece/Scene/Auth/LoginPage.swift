@@ -140,9 +140,6 @@ extension LoginPage {
         self.navigationItem.backBarButtonItem = signupBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = .black
     }
-}
-
-extension LoginPage {
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let id = idTextField.text,
               let password = passwordTextField.text else {return}
@@ -154,32 +151,4 @@ extension LoginPage {
             loginButton.alpha  = 1.0
         }
     }
-//    @objc func idTextFiedDidChange(_ textField: UITextField) {
-//        guard let password = passwordTextField.text else { return }
-//        if password.isEmpty == true {
-//            loginButton.backgroundColor = UIColor(named: "mainColor-1")
-//            loginButton.alpha = 0.8
-//        } else {
-//            loginButton.backgroundColor = UIColor(named: "mainColor-1")
-//            loginButton.alpha  = 1.0
-//        }
-//    }
-//                if textField == emailTextField {
-//                    self.isEmailError = checkEmail()
-//
-//                    // 비밀번호
-//                } else if textField == passwordTextField || textField == checkingpasswordTextField {
-//                    self.isPasswordError = checkPassword()
-//                    self.isPasswordCheckError = checkPasswordCheck()
-//                }
-//                // 모두 true -> 시작하기 버튼색 바꾸기
-//                if isEmailError && isPasswordError && isPasswordCheckError {
-//                    self.confirmButton.backgroundColor = UIColor.DeepYellow
-//                    confirmButton.isEnabled = true
-//                    confirmButton.isHidden = false
-//
-//                } else {
-//                    confirmButton.isHidden = true
-//                    confirmButton.isEnabled = false
-//                }
 }
