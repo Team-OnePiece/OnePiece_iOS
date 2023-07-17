@@ -79,6 +79,9 @@ extension NickNameSignupPage {
         self.navigationController?.pushViewController(MainPage(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
-        self.navigationItem.backBarButtonItem?.tintColor = .black
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        signupBackbutton.setTitleTextAttributes([
+            .font: UIFont(name: "Orbit-Regular", size: 16)
+        ], for: .normal)
     }
 }

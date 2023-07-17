@@ -34,6 +34,7 @@ class UserModifyPage: UIViewController, UINavigationControllerDelegate {
         view.backgroundColor = .white
         profileModifyButton.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
         idCheckButton.addTarget(self, action: #selector(clickIdCheck), for: .touchUpInside)
+        finishModify()
     }
     override func viewDidLayoutSubviews() {
         layout()
@@ -70,6 +71,18 @@ class UserModifyPage: UIViewController, UINavigationControllerDelegate {
             $0.left.equalTo(idModifyTextField.snp.right).offset(4)
             $0.right.equalToSuperview().inset(25)
         }
+    }
+    func finishModify() {
+        let finishButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(clickMoveUserPage))
+        self.navigationItem.rightBarButtonItem = finishButton
+        finishButton.tintColor = UIColor(named: "gray-800")
+        finishButton.setTitleTextAttributes([
+            .font: UIFont(name: "Orbit-Regular", size: 16)
+        ], for: .normal)
+
+    }
+    @objc func clickMoveUserPage() {
+        self.navigationController?.popViewController(animated: true)
     }
     @objc func clickProfileModifyButton() {
         let picker = UIImagePickerController()

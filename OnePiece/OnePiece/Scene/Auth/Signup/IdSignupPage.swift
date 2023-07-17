@@ -14,10 +14,7 @@ class IdSignupPage: UIViewController, UITextFieldDelegate {
     let idTextField = DefaultTextField(placeholder: "아이디")
     let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    let progress = UIImageView().then {
-        $0.image = UIImage(named: "progress1")
-        
-    }
+    var progress = ProgressView(cir1Color: UIColor(named: "mainColor-1")!, cir2Color: UIColor(named: "mainColor-2")!, cir3Color: UIColor(named: "mainColor-2")!, cir4Color: UIColor(named: "mainColor-2")!)
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -44,7 +41,7 @@ class IdSignupPage: UIViewController, UITextFieldDelegate {
     }
     func makeConstraints() {
         progress.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(131)
+            $0.top.equalToSuperview().offset(131)
             $0.left.right.equalToSuperview().inset(25)
         }
         idTextField.snp.makeConstraints {
@@ -78,6 +75,9 @@ extension IdSignupPage {
         self.navigationController?.pushViewController(PasswordSignupPage(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
-        self.navigationItem.backBarButtonItem?.tintColor = .black
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        signupBackbutton.setTitleTextAttributes([
+            .font: UIFont(name: "Orbit-Regular", size: 16)
+        ], for: .normal)
     }
 }

@@ -101,6 +101,7 @@ class LoginPage: UIViewController, UITextFieldDelegate {
 }
 //암호를 봤다가 다시 감췄을 때 입력하면 암호가 모두 삭제되는 버그 수정하기?버그가 아닐수도...
 extension LoginPage {
+    //MARK: 프젝하다가 시간 여유생기면 코드 이해해보기
     private func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
             passwordTextField.isSecureTextEntry.toggle()
@@ -115,6 +116,7 @@ extension LoginPage {
         self.passwordTextField.rightView = eyeButton
         self.passwordTextField.rightViewMode = .always
     }
+    //MARK: 여기까지
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == idTextField {
             passwordTextField.becomeFirstResponder()
@@ -123,7 +125,7 @@ extension LoginPage {
         }
         return true
     }
-    //MARK: -디자인 바뀌면 네비게이션 바 커스텀하기
+    //MARK: 디자인 바뀌면 네비게이션 바 커스텀하기
     @objc func clickLogin() {
         if (idTextField.text?.isEmpty == true || passwordTextField.text?.isEmpty == true) {
         } else {
@@ -138,7 +140,10 @@ extension LoginPage {
         self.navigationController?.pushViewController(IdSignupPage(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
-        self.navigationItem.backBarButtonItem?.tintColor = .black
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        signupBackbutton.setTitleTextAttributes([
+            .font: UIFont(name: "Orbit-Regular", size: 16)
+        ], for: .normal)
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let id = idTextField.text,

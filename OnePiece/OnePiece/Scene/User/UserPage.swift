@@ -68,8 +68,11 @@ class UserPage: UIViewController {
 
     @objc func clickModifyPage() {
         self.navigationController?.pushViewController(UserModifyPage(), animated: true)
-        let myPageBackbutton = UIBarButtonItem(title: "마이페이지", style: .plain, target: nil, action: nil)
+        let myPageBackbutton = UIBarButtonItem(title: "프로필 수정", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = myPageBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        myPageBackbutton.setTitleTextAttributes([
+            .font: UIFont(name: "Orbit-Regular", size: 16)
+        ], for: .normal)
     }
 }

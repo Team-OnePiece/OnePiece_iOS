@@ -57,16 +57,19 @@ class PasswordSignupPage: UIViewController, UITextFieldDelegate {
     }
     @objc func clickNextPage() {
         self.navigationController?.pushViewController(SchoolInfoSignupPage(), animated: true)
-            let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-            self.navigationItem.backBarButtonItem = signupBackbutton
-            self.navigationItem.backBarButtonItem?.tintColor = .black
+        let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = signupBackbutton
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        signupBackbutton.setTitleTextAttributes([
+            .font: UIFont(name: "Orbit-Regular", size: 16)
+        ], for: .normal)
     }
 }
 
 extension PasswordSignupPage {
     func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
-        passwordTextField.isSecureTextEntry.toggle()
+            passwordTextField.isSecureTextEntry.toggle()
             self.eyeButton.isSelected.toggle()
         }))
         var buttonConfiguration = UIButton.Configuration.plain()
