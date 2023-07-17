@@ -21,7 +21,9 @@ class LoginPage: UIViewController, UITextFieldDelegate {
     let idTextField = DefaultTextField(placeholder: "아이디")
     let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
     var eyeButton = UIButton(type: .custom)
-    let loginButton = DefaultButton(title: "로그인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    let loginButton = DefaultButton(title: "로그인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
+        $0.alpha = 0.8
+    }
     let signupLabel = UILabel().then {
         $0.text = "아직 회원이 아니신가요?"
         $0.textColor = .black
@@ -42,6 +44,8 @@ class LoginPage: UIViewController, UITextFieldDelegate {
         signupButton.addTarget(self, action: #selector(moveSignupView), for: .touchUpInside)
         showPasswordButton()
         passwordTextField.returnKeyType = .done
+        idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             self.view.endEditing(true)
@@ -136,4 +140,46 @@ extension LoginPage {
         self.navigationItem.backBarButtonItem = signupBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = .black
     }
+}
+
+extension LoginPage {
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let id = idTextField.text,
+              let password = passwordTextField.text else {return}
+        if id.isEmpty == true || password.isEmpty == true {
+            loginButton.backgroundColor = UIColor(named: "mainColor-1")
+            loginButton.alpha = 0.8
+        } else {
+            loginButton.backgroundColor = UIColor(named: "mainColor-1")
+            loginButton.alpha  = 1.0
+        }
+    }
+//    @objc func idTextFiedDidChange(_ textField: UITextField) {
+//        guard let password = passwordTextField.text else { return }
+//        if password.isEmpty == true {
+//            loginButton.backgroundColor = UIColor(named: "mainColor-1")
+//            loginButton.alpha = 0.8
+//        } else {
+//            loginButton.backgroundColor = UIColor(named: "mainColor-1")
+//            loginButton.alpha  = 1.0
+//        }
+//    }
+//                if textField == emailTextField {
+//                    self.isEmailError = checkEmail()
+//
+//                    // 비밀번호
+//                } else if textField == passwordTextField || textField == checkingpasswordTextField {
+//                    self.isPasswordError = checkPassword()
+//                    self.isPasswordCheckError = checkPasswordCheck()
+//                }
+//                // 모두 true -> 시작하기 버튼색 바꾸기
+//                if isEmailError && isPasswordError && isPasswordCheckError {
+//                    self.confirmButton.backgroundColor = UIColor.DeepYellow
+//                    confirmButton.isEnabled = true
+//                    confirmButton.isHidden = false
+//
+//                } else {
+//                    confirmButton.isHidden = true
+//                    confirmButton.isEnabled = false
+//                }
 }
