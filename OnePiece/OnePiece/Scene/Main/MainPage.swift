@@ -87,7 +87,7 @@ class MainPage: UIViewController, UINavigationControllerDelegate {
     @objc func clickFeedPlus() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
+        picker.allowsEditing = false
         picker.delegate = self
         self.present(picker, animated: true)
     }
@@ -114,7 +114,7 @@ extension MainPage: UIImagePickerControllerDelegate {
     // 이미지 피커에서 이미지를 선택했을 때 호출되는 메소드
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
-            let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+            let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
             self.navigationController?.pushViewController(FeedContentPage(), animated: true)
             let backButton = UIBarButtonItem(title: "피드 작성", style: .plain, target: nil, action: nil)
             self.navigationItem.backBarButtonItem = backButton
