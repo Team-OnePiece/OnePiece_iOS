@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class UserModifyPage: UIViewController, UINavigationControllerDelegate {
+class UserModifyPage: UIViewController,UITextFieldDelegate, UINavigationControllerDelegate {
 
     let profileBackground = UIImageView().then {
         $0.backgroundColor = .white
@@ -35,6 +35,8 @@ class UserModifyPage: UIViewController, UINavigationControllerDelegate {
         profileModifyButton.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
         idCheckButton.addTarget(self, action: #selector(clickIdCheck), for: .touchUpInside)
         finishModify()
+        idModifyTextField.delegate = self
+        idModifyTextField.addTarget(self, action: #selector(textFieldDidChange(_ :)), for: .allEditingEvents)
     }
     override func viewDidLayoutSubviews() {
         layout()
@@ -94,6 +96,17 @@ class UserModifyPage: UIViewController, UINavigationControllerDelegate {
     @objc func clickIdCheck() {
         let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
         self.present(alert, animated: true)
+    }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let idCheck = idModifyTextField.text
+        else {return}
+        if idCheck.isEmpty == true {
+            idCheckButton.backgroundColor = UIColor(named: "mainColor-1")
+            idCheckButton.alpha = 0.8
+        } else {
+            idCheckButton.backgroundColor = UIColor(named: "mainColor-1")
+            idCheckButton.alpha  = 1.0
+        }
     }
 }
 
