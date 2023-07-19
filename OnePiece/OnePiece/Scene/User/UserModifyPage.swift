@@ -81,7 +81,27 @@ class UserModifyPage: UIViewController,UITextFieldDelegate, UINavigationControll
         finishButton.setTitleTextAttributes([
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
 
+extension UserModifyPage: UIImagePickerControllerDelegate {
+//     이미지 피커에서 이미지를 선택하지 않고 취소했을 때 호출되는 메소드
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true) {
+        }
+    }
+
+    // 이미지 피커에서 이미지를 선택했을 때 호출되는 메소드
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true) {
+            let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+            self.profileBackground.image = img
+            self.profile.isHidden = true
+            self.profileBackground.layer.borderWidth = 0
+        }
     }
     @objc func clickMoveUserPage() {
         self.navigationController?.popViewController(animated: true)
@@ -106,24 +126,6 @@ class UserModifyPage: UIViewController,UITextFieldDelegate, UINavigationControll
         } else {
             idCheckButton.backgroundColor = UIColor(named: "mainColor-1")
             idCheckButton.alpha  = 1.0
-        }
-    }
-}
-
-extension UserModifyPage: UIImagePickerControllerDelegate {
-//     이미지 피커에서 이미지를 선택하지 않고 취소했을 때 호출되는 메소드
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true) {
-        }
-    }
-
-    // 이미지 피커에서 이미지를 선택했을 때 호출되는 메소드
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true) {
-            let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-            self.profileBackground.image = img
-            self.profile.isHidden = true
-            self.profileBackground.layer.borderWidth = 0
         }
     }
 }
