@@ -1,14 +1,14 @@
 import Foundation
 import Moya
 
-enum ServiceAPI {
-    case signup(id: String, password: String, nickName: String, profile: String, schoolNumber: Int, classNumber: String, studentNumber: Int)
+enum AuthAPI {
+    case signup(id: String, password: String, passwordValid: String,nickName: String, profile: String, grade: Int, classNumber: String, number: Int)
     case login(id: String, password: String)
 }
 
-extension ServiceAPI: TargetType {
+extension AuthAPI: TargetType {
     var baseURL: URL {
-        return URL(string: "http//:192.168.1.23:8080")!
+        return URL(string: "http://localhost:8080")!
     }
     
     var path: String {
@@ -31,24 +31,24 @@ extension ServiceAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .signup(let id, let password, let nickName, let profile, let schoolNumber, let classNumber, let studentNumber):
+        case .signup(let id, let password, let passwordValid, let nickName, let profile, let grade, let classNumber, let number):
             return .requestParameters(
                 parameters: [
-                    "userId": id, //(아이디는 1~20자 영문 대 소문자, 숫자 사용하세요)
-                    "userPassword": password,
+                    "accountId": id, //(아이디는 1~20자 영문 대 소문자, 숫자 사용하세요)
+                    "password": password,
+                    "paswordValid": passwordValid,
                     "nickName": nickName,
-                    "profile": profile,
-                    "schoolNumber": studentNumber,  // (범위 1 ~ 3)
+                    "profileImage": profile,
+                    "grade": grade,  // (범위 1 ~ 3)
                     "classNumber": classNumber,   // (범위 1 ~ 4)
-                    "studentNumber": studentNumber
+                    "number": number
                 ], encoding: JSONEncoding.default)
         case .login(let id, let password):
             return .requestParameters(
                 parameters: [
-                    "id": id,
+                    "accountId": id,
                     "password": password
-                ],
-                encoding: JSONEncoding.default)
+                ], encoding: JSONEncoding.default)
         }
     }
     
