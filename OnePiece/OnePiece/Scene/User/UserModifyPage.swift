@@ -114,8 +114,13 @@ extension UserModifyPage: UIImagePickerControllerDelegate {
         self.present(picker, animated: true)
     }
     @objc func clickIdCheck() {
-        let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
-        self.present(alert, animated: true)
+        if idModifyTextField.text?.isEmpty == false {
+            let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
+            self.present(alert, animated: true)
+        } else {
+            let alert = DefaultAlert(title: "별명을 입력하세요.")
+            self.present(alert, animated: true)
+        }
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let idCheck = idModifyTextField.text
