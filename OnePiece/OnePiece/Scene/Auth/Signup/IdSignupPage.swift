@@ -14,7 +14,7 @@ class IdSignupPage: UIViewController, UITextFieldDelegate {
     let idTextField = DefaultTextField(placeholder: "아이디")
     let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    var progress = ProgressView(cir1Color: UIColor(named: "mainColor-1")!, cir2Color: UIColor(named: "mainColor-2")!, cir3Color: UIColor(named: "mainColor-2")!, cir4Color: UIColor(named: "mainColor-2")!)
+    let progress = ProgressView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -42,7 +42,8 @@ class IdSignupPage: UIViewController, UITextFieldDelegate {
     }
     func makeConstraints() {
         progress.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(131)
+            $0.top.equalToSuperview()
+            $0.height.equalTo(200)
             $0.left.right.equalToSuperview().inset(25)
         }
         idTextField.snp.makeConstraints {
@@ -68,8 +69,13 @@ extension IdSignupPage {
         return true
     }
     @objc func idCheck() {
-        let idAlert  = DefaultAlert(title: "사용 가능한 아이디입니다.")
-        self.present(idAlert, animated: true)
+        if idTextField.text?.isEmpty == true {
+            let enterId = DefaultAlert(title: "아이디를 입력해주세요.")
+            self.present(enterId, animated: true)
+        } else {
+            let idAlert  = DefaultAlert(title: "사용 가능한 아이디입니다.")
+            self.present(idAlert, animated: true)
+        }
     }
     
     @objc func clickNextePage() {

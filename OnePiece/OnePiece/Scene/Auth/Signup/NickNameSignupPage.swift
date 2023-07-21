@@ -72,8 +72,13 @@ extension NickNameSignupPage {
         return true
     }
     @objc func nickNameCheck() {
-        let idAlert  = DefaultAlert(title: "사용 가능한 별명입니다.")
-        self.present(idAlert, animated: true)
+        if nickNameTextField.text?.isEmpty == true {
+            let enterNickName = DefaultAlert(title: "별명을 입력해주세요.")
+            self.present(enterNickName, animated: true)
+        } else {
+            let nickNameAlert  = DefaultAlert(title: "사용 가능한 별명입니다.")
+            self.present(nickNameAlert, animated: true)
+        }
     }
     
     @objc func clickMainPage() {

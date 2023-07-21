@@ -5,7 +5,7 @@ import Then
 class PasswordSignupPage: UIViewController, UITextFieldDelegate {
     
     let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
-    let passwordCheckTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
+    let passwordCheckTextField = DefaultTextField(placeholder: "비밀번호 확인", isSecure: true)
     var eyeButton = UIButton(type: .custom)
     var checkEyeButton = UIButton(type: .custom)
     let progress = UIImageView().then {
