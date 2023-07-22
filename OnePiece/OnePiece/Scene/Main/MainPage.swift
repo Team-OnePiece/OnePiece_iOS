@@ -20,12 +20,23 @@ class MainPage: UIViewController, UINavigationControllerDelegate {
         $0.font = UIFont(name: "Orbit-Regular", size: 14)
         $0.textColor = UIColor(named: "gray-800")
     }
+    let groupButton = UIButton(type: .system).then {
+        $0.setTitle("2023", for: .normal)
+        $0.setTitleColor(UIColor(named: "gray-500"), for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 20)
+    }
+    let buttonAction = UIAction(title: "가보자고", handler: {_ in})
+    let Action = UIAction(title: "신기하네", handler: {_ in})
+    func clickPopup() {
+        groupButton.menu = UIMenu(title: "ㅅㅂ", identifier: nil, options: .displayInline, children: [buttonAction, Action])
+    }
     let myPageButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "setting"), for: .normal)
         $0.tintColor = UIColor(named: "settingColor")
     }
     let tableView = UITableView().then {
         $0.backgroundColor = .white
+        $0.showsVerticalScrollIndicator = false
     }
     let feedPlusButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "feedPlusIcon"), for: .normal)
@@ -44,6 +55,7 @@ class MainPage: UIViewController, UINavigationControllerDelegate {
         tableView.register(CustomCell.self, forCellReuseIdentifier: "CellId")
         feedPlusButton.addTarget(self, action: #selector(clickFeedPlus), for: .touchUpInside)
         myPageButton.addTarget(self, action: #selector(clickMyPage), for: .touchUpInside)
+        clickPopup()
     }
     override func viewDidLayoutSubviews() {
         addSubViews()
@@ -53,6 +65,7 @@ class MainPage: UIViewController, UINavigationControllerDelegate {
     func addSubViews() {
         [
             mainLogo,
+            groupButton,
             mainLabel,
             myPageButton,
             tableView,
@@ -64,6 +77,10 @@ class MainPage: UIViewController, UINavigationControllerDelegate {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.left.equalToSuperview().inset(20)
             $0.width.height.equalTo(35)
+        }
+        groupButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.centerX.equalToSuperview()
         }
         mainLabel.snp.makeConstraints {
             $0.top.equalTo(mainLogo.snp.bottom).offset(31)
@@ -87,7 +104,7 @@ class MainPage: UIViewController, UINavigationControllerDelegate {
     @objc func clickFeedPlus() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
-        picker.allowsEditing = false
+        picker.allowsEditing = true
         picker.delegate = self
         self.present(picker, animated: true)
     }
@@ -128,7 +145,7 @@ extension MainPage: UIImagePickerControllerDelegate {
 
 extension MainPage: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
