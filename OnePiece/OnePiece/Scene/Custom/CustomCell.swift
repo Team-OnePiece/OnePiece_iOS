@@ -50,10 +50,14 @@ class CustomCell: UITableViewCell {
         $0.setImage(UIImage(named: "dontLike"), for: .normal)
         $0.setImage(UIImage(named: "likeIcon"), for: .selected)
     }
-    
     var countLike = UILabel().then {
         $0.text = "0"
         $0.font = UIFont(name: "Orbit-Regular", size: 16)
+    }
+    let placeLabel = UILabel().then {
+        $0.text = "몰라임마"
+        $0.textColor = UIColor(named: "gray-800")
+        $0.font = UIFont(name: "Orbit-Regular", size: 8)
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -75,7 +79,8 @@ class CustomCell: UITableViewCell {
             feedSetting,
             feedImageView,
             likeIcon,
-            countLike
+            countLike,
+            placeLabel
         ].forEach({contentView.addSubview($0)})
     }
     func makeConstraints() {
@@ -112,6 +117,10 @@ class CustomCell: UITableViewCell {
         countLike.snp.makeConstraints {
             $0.top.equalTo(feedImageView.snp.bottom).offset(18)
             $0.left.equalTo(likeIcon.snp.right).offset(8)
+        }
+        placeLabel.snp.makeConstraints {
+            $0.top.equalTo(countLike.snp.bottom).offset(7)
+            $0.left.equalToSuperview().inset(12)
         }
     }
     @objc func clickSetting() {
