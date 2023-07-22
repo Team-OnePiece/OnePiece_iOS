@@ -45,9 +45,21 @@ class CustomCell: UITableViewCell {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
     }
+    var isLiked = false
+    var likeIcon = UIButton(type: .custom).then {
+        $0.setImage(UIImage(named: "dontLike"), for: .normal)
+        $0.setImage(UIImage(named: "likeIcon"), for: .selected)
+    }
+    var count = 0
+    var countLike = UILabel().then {
+//        $0.text = "\(count)"
+        $0.font = UIFont(name: "Orbit-Regular", size: 16)
+    }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
+        feedSetting.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
+        likeIcon.addTarget(self, action: #selector(clikcLike), for: .touchUpInside)
         addSubviews()
         makeConstraints()
     }
@@ -61,7 +73,9 @@ class CustomCell: UITableViewCell {
             userSchoolNumber,
             dateLabel,
             feedSetting,
-            feedImageView
+            feedImageView,
+            likeIcon,
+            countLike
         ].forEach({contentView.addSubview($0)})
     }
     func makeConstraints() {
@@ -83,7 +97,7 @@ class CustomCell: UITableViewCell {
             $0.right.equalToSuperview().inset(27)
         }
         feedSetting.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(17)
+            $0.top.equalToSuperview().inset(14)
             $0.left.equalTo(dateLabel.snp.right).offset(14)
         }
         feedImageView.snp.makeConstraints {
@@ -91,5 +105,23 @@ class CustomCell: UITableViewCell {
             $0.left.right.equalToSuperview()
             $0.bottom.equalToSuperview().inset(68)
         }
+        likeIcon.snp.makeConstraints {
+            $0.top.equalTo(feedImageView.snp.bottom).offset(18)
+            $0.left.equalToSuperview().inset(12)
+        }
+        countLike.snp.makeConstraints {
+            $0.top.equalTo(feedImageView.snp.bottom).offset(18)
+            $0.left.equalTo(likeIcon.snp.right).offset(8)
+        }
+    }
+    @objc func clickSetting() {
+        let alert = ContentAlert()
+        alert.modalPresentationStyle = .overFullScreen
+        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
+    }
+    @objc func clikcLike() {
+        isLiked.toggle()
+        likeIcon.isSelected = isLiked
     }
 }
+
