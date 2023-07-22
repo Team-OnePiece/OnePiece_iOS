@@ -12,7 +12,7 @@ import Then
 class CustomCell: UITableViewCell {
 
     static let cellId = "CellId"
-    
+    var likeCount = 0
     let profileImageView = UIImageView().then {
         $0.image = UIImage(named: "feedImage")
         $0.layer.cornerRadius = 15
@@ -50,9 +50,9 @@ class CustomCell: UITableViewCell {
         $0.setImage(UIImage(named: "dontLike"), for: .normal)
         $0.setImage(UIImage(named: "likeIcon"), for: .selected)
     }
-    var count = 0
+    
     var countLike = UILabel().then {
-//        $0.text = "\(count)"
+        $0.text = "0"
         $0.font = UIFont(name: "Orbit-Regular", size: 16)
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -122,6 +122,13 @@ class CustomCell: UITableViewCell {
     @objc func clikcLike() {
         isLiked.toggle()
         likeIcon.isSelected = isLiked
+        if likeIcon.isSelected == true {
+            likeCount += 1
+            countLike.text = String(likeCount)
+        } else if likeIcon.isSelected == false {
+            likeCount -= 1
+            countLike.text = String(likeCount)
+        }
     }
 }
 
