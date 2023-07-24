@@ -13,6 +13,7 @@ class FeedContentPage: UIViewController {
 
     let placeTextField = DefaultTextField(placeholder: "위치를 입력하세요").then {
         $0.textAlignment = .center
+        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
     }
     let explainLabel = UILabel().then {
         $0.text = "태그는 최대 6개까지 작성 가능합니다."
@@ -33,6 +34,14 @@ class FeedContentPage: UIViewController {
         $0.textColor = UIColor(named: "gray-900")
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
+    let groupChoiceButton = UIButton(type: .system).then {
+        $0.setTitle("2023", for: .normal)
+        $0.setTitleColor(UIColor(named: "gray-600"), for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 20)
+        $0.layer.cornerRadius = 20
+        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.layer.borderWidth = 2
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -47,7 +56,8 @@ class FeedContentPage: UIViewController {
             placeTextField,
             explainLabel,
             tagPlusButton,
-            groupChoiceLabel
+            groupChoiceLabel,
+            groupChoiceButton
         ].forEach({view.addSubview($0)})
     }
     func makeConstraints() {
@@ -68,6 +78,12 @@ class FeedContentPage: UIViewController {
         groupChoiceLabel.snp.makeConstraints {
             $0.top.equalTo(tagPlusButton.snp.bottom).offset(54)
             $0.left.equalToSuperview().inset(25)
+        }
+        groupChoiceButton.snp.makeConstraints {
+            $0.top.equalTo(groupChoiceLabel.snp.bottom).offset(10)
+            $0.left.equalToSuperview().inset(25)
+            $0.right.equalToSuperview().inset(165)
+            $0.height.equalTo(38)
         }
     }
     func finishFeedWirte() {
