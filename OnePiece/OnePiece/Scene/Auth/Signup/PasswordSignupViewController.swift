@@ -3,16 +3,16 @@ import Moya
 import SnapKit
 import Then
 
-class PasswordSignupPage: UIViewController, UITextFieldDelegate {
+class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
     
-    let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
-    let passwordCheckTextField = DefaultTextField(placeholder: "비밀번호 확인", isSecure: true)
-    var eyeButton = UIButton(type: .custom)
-    var checkEyeButton = UIButton(type: .custom)
-    let progress = UIImageView().then {
+    private let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
+    private let passwordCheckTextField = DefaultTextField(placeholder: "비밀번호 확인", isSecure: true)
+    private var eyeButton = UIButton(type: .custom)
+    private var checkEyeButton = UIButton(type: .custom)
+    private let progress = UIImageView().then {
         $0.image = UIImage(named: "progress2")
     }
-    let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -32,7 +32,7 @@ class PasswordSignupPage: UIViewController, UITextFieldDelegate {
         addSubViews()
         makeConstraints()
     }
-    func addSubViews() {
+    private func addSubViews() {
         [
             passwordTextField,
             passwordCheckTextField,
@@ -40,7 +40,7 @@ class PasswordSignupPage: UIViewController, UITextFieldDelegate {
             nextPageButton
         ].forEach({view.addSubview($0)})
     }
-    func makeConstraints() {
+    private func makeConstraints() {
         progress.snp.makeConstraints {
             $0.top.equalToSuperview().inset(131)
             $0.left.right.equalToSuperview().inset(25)
@@ -58,11 +58,11 @@ class PasswordSignupPage: UIViewController, UITextFieldDelegate {
             $0.left.right.equalToSuperview().inset(25)
         }
     }
-    @objc func clickNextPage() {
+    @objc private func clickNextPage() {
         let userInfo = UserInfo.shared
         userInfo.password = passwordTextField.text
         userInfo.passwordValid = passwordCheckTextField.text
-        self.navigationController?.pushViewController(SchoolInfoSignupPage(), animated: true)
+        self.navigationController?.pushViewController(SchoolInfoSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
@@ -72,8 +72,8 @@ class PasswordSignupPage: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension PasswordSignupPage {
-    func showPasswordButton() {
+extension PasswordSignupViewController {
+    private func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
             passwordTextField.isSecureTextEntry.toggle()
             self.eyeButton.isSelected.toggle()
@@ -88,7 +88,7 @@ extension PasswordSignupPage {
         self.passwordTextField.rightViewMode = .always
     }
     
-    func checkShowPasswordButton() {
+    private func checkShowPasswordButton() {
         checkEyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
             passwordCheckTextField.isSecureTextEntry.toggle()
             self.checkEyeButton.isSelected.toggle ()
@@ -110,7 +110,7 @@ extension PasswordSignupPage {
         }
         return true
     }
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let password = passwordTextField.text,
               let passwordCheck = passwordCheckTextField.text
         else {return}

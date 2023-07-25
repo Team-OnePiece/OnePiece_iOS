@@ -3,17 +3,17 @@ import SnapKit
 import Then
 import Moya
 
-class LoginPage: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let stackView = UIStackView().then {
         $0.alignment = .center
         $0.axis = .horizontal
         $0.backgroundColor = .clear
     }
-    let mainLogo = UIImageView().then {
+    let mainLogoImage = UIImageView().then {
         $0.image = UIImage(named: "mainLogo")
     }
-    let mainTitle = UILabel().then {
+    let mainTitleLabel = UILabel().then {
         $0.text = "One Piece"
         $0.font = UIFont(name: "Orbit-Regular", size: 24)
         $0.textColor = UIColor(named: "gray-700")
@@ -56,8 +56,8 @@ class LoginPage: UIViewController, UITextFieldDelegate {
     
     func addSubViews() {
         [
-            mainLogo,
-            mainTitle,
+            mainLogoImage,
+            mainTitleLabel,
             idTextField,
             passwordTextField,
             loginButton,
@@ -67,17 +67,17 @@ class LoginPage: UIViewController, UITextFieldDelegate {
     }
     func makeConstraints() {
         //MARK: -디자인 수정되면 다시 레이아웃 잡기
-        mainLogo.snp.makeConstraints {
+        mainLogoImage.snp.makeConstraints {
             $0.top.equalToSuperview().inset(169)
             $0.left.equalToSuperview().inset(25)
             $0.width.height.equalTo(35)
         }
-        mainTitle.snp.makeConstraints {
+        mainTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(169)
-            $0.left.equalTo(mainLogo.snp.right).offset(9)
+            $0.left.equalTo(mainLogoImage.snp.right).offset(9)
         }
         idTextField.snp.makeConstraints {
-            $0.top.equalTo(mainTitle.snp.bottom).offset(18)
+            $0.top.equalTo(mainTitleLabel.snp.bottom).offset(18)
             $0.left.right.equalToSuperview().inset(25)
         }
         passwordTextField.snp.makeConstraints {
@@ -98,7 +98,7 @@ class LoginPage: UIViewController, UITextFieldDelegate {
     }
 }
 //암호를 봤다가 다시 감췄을 때 입력하면 암호가 모두 삭제되는 버그 수정하기?버그가 아닐수도...
-extension LoginPage {
+extension LoginViewController {
     //MARK: 프젝하다가 시간 여유생기면 코드 이해해보기
     private func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
@@ -124,7 +124,7 @@ extension LoginPage {
         return true
     }
     @objc func moveSignupView() {
-        self.navigationController?.pushViewController(IdSignupPage(), animated: true)
+        self.navigationController?.pushViewController(IdSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
@@ -160,7 +160,7 @@ extension LoginPage {
                                 if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
                                     DispatchQueue.main.async {
 //                                                                        Token.accessToken = data.token
-                                        self.navigationController?.pushViewController(MainPage(), animated: true)
+                                        self.navigationController?.pushViewController(MainViewController(), animated: true)
                                         let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
                                         self.navigationItem.backBarButtonItem = loginBackbutton
                                         self.navigationItem.backBarButtonItem?.tintColor = .black
@@ -183,7 +183,7 @@ extension LoginPage {
                         }
                     }
                 }
-        self.navigationController?.pushViewController(MainPage(), animated: true)
+        self.navigationController?.pushViewController(MainViewController(), animated: true)
         let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = loginBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = .black

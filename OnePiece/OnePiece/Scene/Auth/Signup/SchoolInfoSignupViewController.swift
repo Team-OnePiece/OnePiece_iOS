@@ -10,34 +10,34 @@ import SnapKit
 import Then
 import Moya
 
-class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
+class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
     
-    let stackView = UIStackView().then {
+    private let stackView = UIStackView().then {
         $0.distribution = .fillEqually
         $0.axis = .horizontal
         $0.backgroundColor = .clear
         $0.spacing = 5
     }
-    let progress = UIImageView().then {
+    private let progress = UIImageView().then {
         $0.image = UIImage(named: "progress3")
     }
-    let grade = DefaultTextField(placeholder: "학년")
-    let studentclass = DefaultTextField(placeholder: "반")
-    let number = DefaultTextField(placeholder: "번호")
-    let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let gradeTextField = DefaultTextField(placeholder: "학년")
+    private let classTextField = DefaultTextField(placeholder: "반")
+    private let numberTextField = DefaultTextField(placeholder: "번호")
+    private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        number.returnKeyType = .done
-        grade.keyboardType = .numberPad
-        studentclass.keyboardType = .numberPad
-        number.keyboardType = .numberPad
-        grade.delegate = self
-        studentclass.delegate = self
-        number.delegate = self
-        grade.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
-        studentclass.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
-        number.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        numberTextField.returnKeyType = .done
+        gradeTextField.keyboardType = .numberPad
+        classTextField.keyboardType = .numberPad
+        numberTextField.keyboardType = .numberPad
+        gradeTextField.delegate = self
+        classTextField.delegate = self
+        numberTextField.delegate = self
+        gradeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        classTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        numberTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         nextPageButton.addTarget(self, action: #selector(clickNextPage), for: .touchUpInside)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -48,15 +48,15 @@ class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
         makeConstraints()
     }
     
-    func addSubViews() {
+    private func addSubViews() {
         [
             progress,
             stackView,
             nextPageButton
         ].forEach({view.addSubview($0)})
-        [grade, studentclass, number].forEach({stackView.addArrangedSubview($0)})
+        [gradeTextField, classTextField, numberTextField].forEach({stackView.addArrangedSubview($0)})
     }
-    func makeConstraints() {
+    private func makeConstraints() {
         progress.snp.makeConstraints {
             $0.top.equalToSuperview().inset(131)
             $0.left.right.equalToSuperview().inset(25)
@@ -72,17 +72,17 @@ class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        number.resignFirstResponder()
+        numberTextField.resignFirstResponder()
         return true
     }
 }
-extension SchoolInfoSignupPage {
-    @objc func clickNextPage() {
+extension SchoolInfoSignupViewController {
+    @objc private func clickNextPage() {
         let userInfo = UserInfo.shared
-        userInfo.grade = Int(grade.text!)
-        userInfo.classNumber = Int(studentclass.text!)
-        userInfo.number = Int(number.text!)
-        self.navigationController?.pushViewController(NickNameSignupPage(), animated: true)
+        userInfo.grade = Int(gradeTextField.text!)
+        userInfo.classNumber = Int(classTextField.text!)
+        userInfo.number = Int(numberTextField.text!)
+        self.navigationController?.pushViewController(NickNameSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
@@ -91,10 +91,10 @@ extension SchoolInfoSignupPage {
         ], for: .normal)
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let schoolGrade = grade.text,
-              let schoolClass = studentclass.text,
-              let schoolNumber = number.text
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        guard let schoolGrade = gradeTextField.text,
+              let schoolClass = classTextField.text,
+              let schoolNumber = numberTextField.text
         else {return}
         if schoolGrade.isEmpty == true || schoolClass.isEmpty == true || schoolNumber.isEmpty == true {
             nextPageButton.backgroundColor = UIColor(named: "mainColor-1")

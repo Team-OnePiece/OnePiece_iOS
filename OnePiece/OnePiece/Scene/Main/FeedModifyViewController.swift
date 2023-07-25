@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class FeedModifyPage: UIViewController {
+class FeedModifyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red

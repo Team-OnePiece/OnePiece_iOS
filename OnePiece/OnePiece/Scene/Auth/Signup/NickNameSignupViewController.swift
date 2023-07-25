@@ -10,12 +10,12 @@ import SnapKit
 import Then
 import Moya
 
-class NickNameSignupPage: UIViewController, UITextFieldDelegate {
+class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
 
-    let nickNameTextField = DefaultTextField(placeholder: "별명")
-    let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    let nextPageButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    let progress = UIImageView().then {
+    private let nickNameTextField = DefaultTextField(placeholder: "별명")
+    private let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let nextPageButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let progress = UIImageView().then {
         $0.image = UIImage(named: "progress4")
         
     }
@@ -36,7 +36,7 @@ class NickNameSignupPage: UIViewController, UITextFieldDelegate {
         makeConstraints()
     }
 
-    func addSubViews() {
+    private func addSubViews() {
         [
             progress,
             nickNameTextField,
@@ -44,7 +44,7 @@ class NickNameSignupPage: UIViewController, UITextFieldDelegate {
             nextPageButton,
         ].forEach({view.addSubview($0)})
     }
-    func makeConstraints() {
+    private func makeConstraints() {
         progress.snp.makeConstraints {
             $0.top.equalToSuperview().inset(131)
             $0.left.right.equalToSuperview().inset(25)
@@ -66,13 +66,13 @@ class NickNameSignupPage: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension NickNameSignupPage {
+extension NickNameSignupViewController {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nickNameTextField.resignFirstResponder()
         return true
     }
-    @objc func nickNameCheck() {
+    @objc private func nickNameCheck() {
         if nickNameTextField.text?.isEmpty == true {
             let enterNickName = DefaultAlert(title: "별명을 입력해주세요.")
             self.present(enterNickName, animated: true)
@@ -82,7 +82,7 @@ extension NickNameSignupPage {
         }
     }
     
-    @objc func clickMainPage() {
+    @objc private func clickMainPage() {
         let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
         let userInfo = UserInfo.shared
         userInfo.nickName = nickNameTextField.text
@@ -94,7 +94,7 @@ extension NickNameSignupPage {
                     if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
                         DispatchQueue.main.async {
 //                                                                        Token.accessToken = data.token
-                            self.navigationController?.pushViewController(MainPage(), animated: true)
+                            self.navigationController?.pushViewController(MainViewController(), animated: true)
                             let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
                             self.navigationItem.backBarButtonItem = signupBackbutton
                             self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")

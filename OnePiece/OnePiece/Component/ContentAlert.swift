@@ -62,8 +62,7 @@ class ContentAlert: UIViewController {
     }
     @objc func clickModify() {
         self.dismiss(animated: true)
-        self.navigationController?.present(FeedModifyPage(), animated: true)
-        //외 않되..
+        self.navigationController?.present(FeedModifyViewController(), animated: true)
     }
     @objc func clickDelete() {
         self.dismiss(animated: true)

@@ -10,12 +10,12 @@ import SnapKit
 import Then
 import Moya
 
-class IdSignupPage: UIViewController, UITextFieldDelegate {
+class IdSignupViewController: UIViewController, UITextFieldDelegate {
 
-    let idTextField = DefaultTextField(placeholder: "아이디")
-    let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    let progress = ProgressView()
+    private let idTextField = DefaultTextField(placeholder: "아이디")
+    private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let progress = ProgressView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -33,7 +33,7 @@ class IdSignupPage: UIViewController, UITextFieldDelegate {
         makeConstraints()
     }
 
-    func addSubViews() {
+    private func addSubViews() {
         [
             progress,
             idTextField,
@@ -41,7 +41,7 @@ class IdSignupPage: UIViewController, UITextFieldDelegate {
             nextPageButton,
         ].forEach({view.addSubview($0)})
     }
-    func makeConstraints() {
+    private func makeConstraints() {
         progress.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.height.equalTo(200)
@@ -64,12 +64,12 @@ class IdSignupPage: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension IdSignupPage {
+extension IdSignupViewController {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         idTextField.resignFirstResponder()
         return true
     }
-    @objc func idCheck() {
+    @objc private func idCheck() {
         if idTextField.text?.isEmpty == true {
             let enterId = DefaultAlert(title: "아이디를 입력해주세요.")
             self.present(enterId, animated: true)
@@ -82,10 +82,10 @@ extension IdSignupPage {
 //        let userInfo = UserInfo.shared
 //        userInfo.accountId = idTextField.text
 //    }
-    @objc func clickNextePage() {
+    @objc private func clickNextePage() {
         let userInfo = UserInfo.shared
         userInfo.accountId = idTextField.text
-        self.navigationController?.pushViewController(PasswordSignupPage(), animated: true)
+        self.navigationController?.pushViewController(PasswordSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
@@ -94,7 +94,7 @@ extension IdSignupPage {
         ], for: .normal)
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let id = idTextField.text
         else {return}
         if id.isEmpty == true {

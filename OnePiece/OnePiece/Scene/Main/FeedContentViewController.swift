@@ -9,18 +9,18 @@ import UIKit
 import SnapKit
 import Then
 
-class FeedContentPage: UIViewController {
+class FeedContentViewController: UIViewController {
 
-    let placeTextField = DefaultTextField(placeholder: "위치를 입력하세요").then {
+    private let placeTextField = DefaultTextField(placeholder: "위치를 입력하세요").then {
         $0.textAlignment = .center
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
     }
-    let explainLabel = UILabel().then {
+    private let explainLabel = UILabel().then {
         $0.text = "태그는 최대 6개까지 작성 가능합니다."
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
-    let tagPlusButton = UIButton(type: .system).then {
+    private let tagPlusButton = UIButton(type: .system).then {
         $0.setTitle("+", for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 32)
         $0.setTitleColor(UIColor(named: "gray-700"), for: .normal)
@@ -29,12 +29,12 @@ class FeedContentPage: UIViewController {
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
         $0.layer.borderWidth = 2
     }
-    let groupChoiceLabel = UILabel().then {
+    private let groupChoiceLabel = UILabel().then {
         $0.text = "어느 그룹에 업로드 하시겠습니까?"
         $0.textColor = UIColor(named: "gray-900")
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
-    let groupChoiceButton = UIButton(type: .system).then {
+    private let groupChoiceButton = UIButton(type: .system).then {
         $0.setTitle("2023", for: .normal)
         $0.setTitleColor(UIColor(named: "gray-600"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 20)
@@ -51,17 +51,16 @@ class FeedContentPage: UIViewController {
         addSubViews()
         makeConstraints()
     }
-    func addSubViews() {
+    private func addSubViews() {
         [
             placeTextField,
             explainLabel,
             tagPlusButton,
-            
             groupChoiceLabel,
             groupChoiceButton
         ].forEach({view.addSubview($0)})
     }
-    func makeConstraints() {
+    private func makeConstraints() {
         placeTextField.snp.makeConstraints {
             $0.top.equalToSuperview().inset(143)
             $0.left.right.equalToSuperview().inset(25)
@@ -87,7 +86,7 @@ class FeedContentPage: UIViewController {
             $0.height.equalTo(38)
         }
     }
-    func finishFeedWirte() {
+    private func finishFeedWirte() {
         let finishButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(finishFeed))
         self.navigationItem.rightBarButtonItem = finishButton
         finishButton.tintColor = UIColor(named: "gray-800")
@@ -95,7 +94,7 @@ class FeedContentPage: UIViewController {
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
     }
-    @objc func finishFeed() {
+    @objc private func finishFeed() {
         self.navigationController?.popViewController(animated: true)
         //여기서 서버통신~
     }
