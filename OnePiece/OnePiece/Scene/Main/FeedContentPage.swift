@@ -56,6 +56,7 @@ class FeedContentPage: UIViewController {
             placeTextField,
             explainLabel,
             tagPlusButton,
+            
             groupChoiceLabel,
             groupChoiceButton
         ].forEach({view.addSubview($0)})
