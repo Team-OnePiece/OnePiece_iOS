@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 
 class NickNameSignupPage: UIViewController, UITextFieldDelegate {
 
@@ -82,13 +83,42 @@ extension NickNameSignupPage {
     }
     
     @objc func clickMainPage() {
-        self.navigationController?.pushViewController(MainPage(), animated: true)
-        let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = signupBackbutton
-        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-        signupBackbutton.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
-        ], for: .normal)
+        let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
+        let userInfo = UserInfo.shared
+        userInfo.nickName = nickNameTextField.text
+        provider.request(.signup(UserInfo.shared)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
+                        DispatchQueue.main.async {
+//                                                                        Token.accessToken = data.token
+                            self.navigationController?.pushViewController(MainPage(), animated: true)
+                            let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+                            self.navigationItem.backBarButtonItem = signupBackbutton
+                            self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+                            signupBackbutton.setTitleTextAttributes([
+                                .font: UIFont(name: "Orbit-Regular", size: 16)
+                            ], for: .normal)
+                        }
+                    } else {
+                        print("auth json decode fail")
+                        let alert = DefaultAlert(title: "회원가입 실패")
+                        print(result.statusCode)
+                        self.present(alert, animated: true)
+                    }
+                default:
+                    let alert = DefaultAlert(title: "회원가입 실패")
+                    print(result.statusCode)
+                    self.present(alert, animated: true)
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+                let alert = DefaultAlert(title: "회원가입 실패")
+                self.present(alert, animated: true)
+            }
+        }
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let nickName = nickNameTextField.text

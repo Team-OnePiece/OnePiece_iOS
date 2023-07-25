@@ -183,9 +183,9 @@ extension LoginPage {
                         }
                     }
                 }
-//        self.navigationController?.pushViewController(MainPage(), animated: true)
-//        let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
-//        self.navigationItem.backBarButtonItem = loginBackbutton
-//        self.navigationItem.backBarButtonItem?.tintColor = .black
+        self.navigationController?.pushViewController(MainPage(), animated: true)
+        let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = loginBackbutton
+        self.navigationItem.backBarButtonItem?.tintColor = .black
     }
 }

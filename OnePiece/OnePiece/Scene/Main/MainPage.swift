@@ -81,6 +81,7 @@ class MainPage: UIViewController, UINavigationControllerDelegate {
         groupButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
+//            $0.left.right.equalToSuperview().inset(125)
         }
         mainLabel.snp.makeConstraints {
             $0.top.equalTo(mainLogo.snp.bottom).offset(31)
@@ -118,7 +119,6 @@ class MainPage: UIViewController, UINavigationControllerDelegate {
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
     }
-
 }
 
 

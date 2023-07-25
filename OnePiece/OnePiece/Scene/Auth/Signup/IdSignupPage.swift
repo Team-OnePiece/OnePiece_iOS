@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 
 class IdSignupPage: UIViewController, UITextFieldDelegate {
 
@@ -77,8 +78,13 @@ extension IdSignupPage {
             self.present(idAlert, animated: true)
         }
     }
-    
+//    func user() {
+//        let userInfo = UserInfo.shared
+//        userInfo.accountId = idTextField.text
+//    }
     @objc func clickNextePage() {
+        let userInfo = UserInfo.shared
+        userInfo.accountId = idTextField.text
         self.navigationController?.pushViewController(PasswordSignupPage(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton

@@ -41,37 +41,69 @@ class ProgressView: UIView {
     let line1 = UIView().then {
         $0.backgroundColor = UIColor(named: "gray-500")
     }
-    init(
-        cir1Color: String,
-        cir2Color: String,
-        cir3Color: String,
-        cir4Color: String
-    ) {
-        super.init()
-        cir1.backgroundColor = cir1Color
-        cir2.backgroundColor = cir2Color
-        cir3.backgroundColor = cir3Color
-        cir4.backgroundColor = cir4Color
+    let line2 = UIView().then {
+        $0.backgroundColor = UIColor(named: "gray-500")
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    let line3 = UIView().then {
+        $0.backgroundColor = UIColor(named: "gray-500")
     }
-    override func layoutSubviews() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         makeConstraints()
     }
-    override func addSubview(_ view: UIView) {
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
+//        makeConstraints()
+    }
+    func makeConstraints() {
         [
             cir1,
             cir2,
             cir3,
-            cir4
-        ].forEach({view.addSubview($0)})
+            cir4,
+            line1,
+            line2,
+            line3
+        ].forEach({addSubview($0)})
         cir1.addSubview(cirtitle1)
         cir2.addSubview(cirtitle2)
         cir3.addSubview(cirtitle3)
         cir4.addSubview(cirtitle4)
-    }
-    func makeConstraints() {
-        
+        cir1.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.left.equalToSuperview()
+        }
+        cir2.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.left.equalTo(line1.snp.right)
+        }
+        cir3.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.left.equalTo(line2.snp.right)
+        }
+        cir4.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.left.equalTo(line3.snp.right)
+        }
+        line1.snp.makeConstraints {
+            $0.height.equalTo(1)
+            $0.top.equalToSuperview().inset(16.92)
+            $0.left.equalTo(cir1.snp.right)
+        }
+        line2.snp.makeConstraints {
+            $0.height.equalTo(1)
+            $0.top.equalToSuperview().inset(16.92)
+            $0.left.equalTo(cir2.snp.right)
+        }
+        line3.snp.makeConstraints {
+            $0.height.equalTo(1)
+            $0.top.equalToSuperview().inset(16.92)
+            $0.left.equalTo(cir3.snp.right)
+        }
     }
 }

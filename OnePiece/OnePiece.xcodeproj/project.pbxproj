@@ -15,7 +15,7 @@
 		880A42C22A5476CF0073DDDC /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42C12A5476CF0073DDDC /* DefaultTextField.swift */; };
 		880A42CA2A56DC970073DDDC /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42C92A56DC970073DDDC /* CustomCell.swift */; };
 		880A42CD2A56E2110073DDDC /* FeedContentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42CC2A56E2110073DDDC /* FeedContentPage.swift */; };
-		880A43362A5827EA0073DDDC /* ServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43352A5827EA0073DDDC /* ServiceAPI.swift */; };
+		880A43362A5827EA0073DDDC /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43352A5827EA0073DDDC /* AuthAPI.swift */; };
 		880A43382A582C580073DDDC /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43372A582C580073DDDC /* DefaultButton.swift */; };
 		880A43792A5AF0D40073DDDC /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A43782A5AF0D40073DDDC /* MoyaLoggerPlugin.swift */; };
 		880A437D2A5AF2090073DDDC /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A437C2A5AF2090073DDDC /* AuthResponse.swift */; };
@@ -30,6 +30,10 @@
 		885160EF2A3C54870029A414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 885160EE2A3C54870029A414 /* Assets.xcassets */; };
 		885160F22A3C54870029A414 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885160F02A3C54870029A414 /* LaunchScreen.storyboard */; };
 		8875E2982A5EC42600CA20C1 /* UserModifyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875E2972A5EC42600CA20C1 /* UserModifyPage.swift */; };
+		888D49932A6C2E6600124F93 /* FeedModifyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D49922A6C2E6500124F93 /* FeedModifyPage.swift */; };
+		888D49C02A6F891D00124F93 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D49BF2A6F891D00124F93 /* UserInfo.swift */; };
+		88B890422A631BE400BDFD55 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B890412A631BE400BDFD55 /* ProgressView.swift */; };
+		88B8906F2A67A39400BDFD55 /* ContentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8906E2A67A39400BDFD55 /* ContentAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +45,7 @@
 		880A42C12A5476CF0073DDDC /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
 		880A42C92A56DC970073DDDC /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		880A42CC2A56E2110073DDDC /* FeedContentPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContentPage.swift; sourceTree = "<group>"; };
-		880A43352A5827EA0073DDDC /* ServiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPI.swift; sourceTree = "<group>"; };
+		880A43352A5827EA0073DDDC /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		880A43372A582C580073DDDC /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		880A43782A5AF0D40073DDDC /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		880A437C2A5AF2090073DDDC /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
@@ -58,6 +62,10 @@
 		885160F12A3C54870029A414 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		885160F32A3C54870029A414 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8875E2972A5EC42600CA20C1 /* UserModifyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModifyPage.swift; sourceTree = "<group>"; };
+		888D49922A6C2E6500124F93 /* FeedModifyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModifyPage.swift; sourceTree = "<group>"; };
+		888D49BF2A6F891D00124F93 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		88B890412A631BE400BDFD55 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		88B8906E2A67A39400BDFD55 /* ContentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAlert.swift; sourceTree = "<group>"; };
 		A1B02E6DA75B3D95E03B89B7 /* Pods-OnePiece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.release.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.release.xcconfig"; sourceTree = "<group>"; };
 		F32A90BC03FB9EDFE738B3DB /* Pods-OnePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.debug.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,7 +111,7 @@
 		880A42AB2A4E81190073DDDC /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				885160E92A3C54860029A414 /* LoginPage.swift */,
+				888D49302A6A022E00124F93 /* Login */,
 				880A43E22A5D4A300073DDDC /* Signup */,
 			);
 			path = Auth;
@@ -115,6 +123,8 @@
 				880A42C12A5476CF0073DDDC /* DefaultTextField.swift */,
 				880A43372A582C580073DDDC /* DefaultButton.swift */,
 				880A42B82A52D1360073DDDC /* DefaultAlert.swift */,
+				88B8906E2A67A39400BDFD55 /* ContentAlert.swift */,
+				88B890412A631BE400BDFD55 /* ProgressView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -122,10 +132,10 @@
 		880A42C72A5662610073DDDC /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				880A42AB2A4E81190073DDDC /* Auth */,
 				880A42CB2A56E1EB0073DDDC /* Main */,
 				8875E2962A5EC40800CA20C1 /* User */,
 				880A42C82A56DC710073DDDC /* Custom */,
-				880A42AB2A4E81190073DDDC /* Auth */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -143,6 +153,7 @@
 			children = (
 				880A42B32A5167E30073DDDC /* MainPage.swift */,
 				880A42CC2A56E2110073DDDC /* FeedContentPage.swift */,
+				888D49922A6C2E6500124F93 /* FeedModifyPage.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -150,6 +161,8 @@
 		880A43332A5827D80073DDDC /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				888D49BE2A6F890800124F93 /* UserSignup */,
+				888D492D2A69739200124F93 /* Header */,
 				880A43772A5AF0AB0073DDDC /* Plugin */,
 				880A437A2A5AF1D50073DDDC /* Auth */,
 			);
@@ -159,7 +172,7 @@
 		880A43342A5827DE0073DDDC /* API */ = {
 			isa = PBXGroup;
 			children = (
-				880A43352A5827EA0073DDDC /* ServiceAPI.swift */,
+				880A43352A5827EA0073DDDC /* AuthAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -175,8 +188,8 @@
 		880A437A2A5AF1D50073DDDC /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				880A437B2A5AF1E50073DDDC /* Response */,
 				880A43342A5827DE0073DDDC /* API */,
+				880A437B2A5AF1E50073DDDC /* Response */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -224,8 +237,8 @@
 				880A43332A5827D80073DDDC /* Service */,
 				880A42C02A5476A30073DDDC /* Component */,
 				880A42C72A5662610073DDDC /* Scene */,
-				885160F32A3C54870029A414 /* Info.plist */,
 				885160F92A3C55890029A414 /* SupportFile */,
+				885160F32A3C54870029A414 /* Info.plist */,
 			);
 			path = OnePiece;
 			sourceTree = "<group>";
@@ -249,6 +262,29 @@
 				8875E2972A5EC42600CA20C1 /* UserModifyPage.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		888D492D2A69739200124F93 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		888D49302A6A022E00124F93 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				885160E92A3C54860029A414 /* LoginPage.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		888D49BE2A6F890800124F93 /* UserSignup */ = {
+			isa = PBXGroup;
+			children = (
+				888D49BF2A6F891D00124F93 /* UserInfo.swift */,
+			);
+			path = UserSignup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				888D49932A6C2E6600124F93 /* FeedModifyPage.swift in Sources */,
 				880A42B92A52D1360073DDDC /* DefaultAlert.swift in Sources */,
 				880A43EC2A5E378D0073DDDC /* PasswordSignupPage.swift in Sources */,
 				880A43E82A5D57840073DDDC /* IdSignupPage.swift in Sources */,
@@ -379,11 +416,14 @@
 				880A43792A5AF0D40073DDDC /* MoyaLoggerPlugin.swift in Sources */,
 				880A42CA2A56DC970073DDDC /* CustomCell.swift in Sources */,
 				880A43E62A5D4B1C0073DDDC /* NickNameSignupPage.swift in Sources */,
-				880A43362A5827EA0073DDDC /* ServiceAPI.swift in Sources */,
+				880A43362A5827EA0073DDDC /* AuthAPI.swift in Sources */,
 				880A43382A582C580073DDDC /* DefaultButton.swift in Sources */,
 				880A43E42A5D4ACF0073DDDC /* SchoolInfoSignupPage.swift in Sources */,
 				880A42CD2A56E2110073DDDC /* FeedContentPage.swift in Sources */,
+				88B890422A631BE400BDFD55 /* ProgressView.swift in Sources */,
 				885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */,
+				88B8906F2A67A39400BDFD55 /* ContentAlert.swift in Sources */,
+				888D49C02A6F891D00124F93 /* UserInfo.swift in Sources */,
 				880A42B42A5167E30073DDDC /* MainPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

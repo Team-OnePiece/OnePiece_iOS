@@ -1,4 +1,5 @@
 import UIKit
+import Moya
 import SnapKit
 import Then
 
@@ -58,6 +59,9 @@ class PasswordSignupPage: UIViewController, UITextFieldDelegate {
         }
     }
     @objc func clickNextPage() {
+        let userInfo = UserInfo.shared
+        userInfo.password = passwordTextField.text
+        userInfo.passwordValid = passwordCheckTextField.text
         self.navigationController?.pushViewController(SchoolInfoSignupPage(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton

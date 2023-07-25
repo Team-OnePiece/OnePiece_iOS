@@ -8,9 +8,10 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 
 class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
-
+    
     let stackView = UIStackView().then {
         $0.distribution = .fillEqually
         $0.axis = .horizontal
@@ -46,7 +47,7 @@ class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
         addSubViews()
         makeConstraints()
     }
-
+    
     func addSubViews() {
         [
             progress,
@@ -74,7 +75,13 @@ class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
         number.resignFirstResponder()
         return true
     }
+}
+extension SchoolInfoSignupPage {
     @objc func clickNextPage() {
+        let userInfo = UserInfo.shared
+        userInfo.grade = Int(grade.text!)
+        userInfo.classNumber = Int(studentclass.text!)
+        userInfo.number = Int(number.text!)
         self.navigationController?.pushViewController(NickNameSignupPage(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
@@ -98,3 +105,4 @@ class SchoolInfoSignupPage: UIViewController, UITextFieldDelegate {
         }
     }
 }
+
