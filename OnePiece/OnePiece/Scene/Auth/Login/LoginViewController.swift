@@ -9,6 +9,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.alignment = .center
         $0.axis = .horizontal
         $0.backgroundColor = .clear
+        $0.spacing = 5
     }
     let mainLogoImage = UIImageView().then {
         $0.image = UIImage(named: "mainLogo")
@@ -183,7 +184,7 @@ extension LoginViewController {
                         }
                     }
                 }
-        self.navigationController?.pushViewController(MainViewController(), animated: true)
+        self.navigationController?.pushViewController(FeedContentViewController(), animated: true)
         let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = loginBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = .black

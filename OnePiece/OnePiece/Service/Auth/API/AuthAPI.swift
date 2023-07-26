@@ -8,7 +8,7 @@ enum AuthAPI {
 
 extension AuthAPI: TargetType {
     var baseURL: URL {
-        return URL(string: "http://localhost:8080")!
+        return URL(string: "http://54.180.94.103:8080")!
     }
     
     var path: String {
@@ -34,18 +34,18 @@ extension AuthAPI: TargetType {
         case .signup(_):
             return .requestParameters(
                 parameters: [
-                    "accountId":UserInfo.shared, //(아이디는 1~20자 영문 대 소문자, 숫자 사용하세요)
+                    "account_id":UserInfo.shared, //(아이디는 1~20자 영문 대 소문자, 숫자 사용하세요)
                     "password": UserInfo.shared,
-                    "paswordValid": UserInfo.shared,
-                    "nickName": UserInfo.shared,
+                    "pasword_valid": UserInfo.shared,
+                    "nickname": UserInfo.shared,
                     "grade": UserInfo.shared,  // (범위 1 ~ 3)
-                    "classNumber": UserInfo.shared,   // (범위 1 ~ 4)
+                    "class_number": UserInfo.shared,   // (범위 1 ~ 4)
                     "number": UserInfo.shared
                 ], encoding: JSONEncoding.default)
         case .login(let id, let password):
             return .requestParameters(
                 parameters: [
-                    "accountId": id,
+                    "account_id": id,
                     "password": password
                 ], encoding: JSONEncoding.default)
         }

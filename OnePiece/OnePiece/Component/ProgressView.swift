@@ -49,6 +49,7 @@ class ProgressView: UIView {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         makeConstraints()
     }
     required init?(coder: NSCoder) {
