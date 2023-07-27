@@ -5,36 +5,35 @@ import Moya
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    let stackView = UIStackView().then {
+    private let stackView = UIStackView().then {
         $0.alignment = .center
         $0.axis = .horizontal
         $0.backgroundColor = .clear
         $0.spacing = 5
     }
-    let mainLogoImage = UIImageView().then {
+    private let mainLogoImage = UIImageView().then {
         $0.image = UIImage(named: "mainLogo")
     }
-    let mainTitleLabel = UILabel().then {
+    private let mainTitleLabel = UILabel().then {
         $0.text = "One Piece"
         $0.font = UIFont(name: "Orbit-Regular", size: 24)
         $0.textColor = UIColor(named: "gray-700")
     }
-    let idTextField = DefaultTextField(placeholder: "아이디")
-    let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
-    var eyeButton = UIButton(type: .custom)
-    var loginButton = DefaultButton(title: "로그인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    let loginFailLabel = UILabel().then {
-//        $0.text = "아이디 또는 비밀번호를 확인하세요."
+    private let idTextField = DefaultTextField(placeholder: "아이디")
+    private let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
+    private var eyeButton = UIButton(type: .custom)
+    private let loginButton = DefaultButton(title: "로그인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let loginFailLabel = UILabel().then {
         $0.text = ""
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
-    let signupLabel = UILabel().then {
+    private let signupLabel = UILabel().then {
         $0.text = "아직 회원이 아니신가요?"
         $0.textColor = .black
         $0.font = UIFont(name: "Orbit-Regular", size: 14)
     }
-    let signupButton = UIButton(type: .system).then {
+    private let signupButton = UIButton(type: .system).then {
         $0.backgroundColor = .clear
         $0.setTitle("회원가입", for: .normal)
         $0.setTitleColor(UIColor.red, for: .normal)
@@ -55,12 +54,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    override func viewDidLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         addSubViews()
         makeConstraints()
     }
-    
-    func addSubViews() {
+    private func addSubViews() {
         [
             mainLogoImage,
             mainTitleLabel,
@@ -72,8 +70,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         ].forEach({view.addSubview($0)})
         [signupLabel, signupButton].forEach({stackView.addArrangedSubview($0)})
     }
-    func makeConstraints() {
-        //MARK: -디자인 수정되면 다시 레이아웃 잡기
+    private func makeConstraints() {
         mainLogoImage.snp.makeConstraints {
             $0.top.equalToSuperview().inset(169)
             $0.left.equalToSuperview().inset(25)
@@ -108,9 +105,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-//암호를 봤다가 다시 감췄을 때 입력하면 암호가 모두 삭제되는 버그 수정하기?버그가 아닐수도...
 extension LoginViewController {
-    //MARK: 프젝하다가 시간 여유생기면 코드 이해해보기
     private func showPasswordButton() {
         eyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
             passwordTextField.isSecureTextEntry.toggle()
@@ -125,7 +120,6 @@ extension LoginViewController {
         self.passwordTextField.rightView = eyeButton
         self.passwordTextField.rightViewMode = .always
     }
-    //MARK: 여기까지
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == idTextField {
             passwordTextField.becomeFirstResponder()
@@ -134,7 +128,7 @@ extension LoginViewController {
         }
         return true
     }
-    @objc func moveSignupView() {
+    @objc private func moveSignupView() {
         self.navigationController?.pushViewController(IdSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
@@ -143,7 +137,7 @@ extension LoginViewController {
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
     }
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let id = idTextField.text,
               let password = passwordTextField.text else {return}
         if id.isEmpty == true || password.isEmpty == true {
@@ -154,9 +148,9 @@ extension LoginViewController {
             loginButton.alpha  = 1.0
         }
     }
-    @objc func clickLogin() {
-        if (idTextField.text?.isEmpty == true || passwordTextField.text?.isEmpty == true) {
-            //레이블알림 띄우기
+    @objc private func clickLogin() {
+        if (idTextField.text!.isEmpty || passwordTextField.text!.isEmpty) {
+            self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
         } else {
             let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
             guard let idText = self.idTextField.text,
@@ -170,15 +164,15 @@ extension LoginViewController {
                     case 200:
                         if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
                             DispatchQueue.main.async {
-                                //                                                                        Token.accessToken = data.token
+                                //Token.accessToken = data.token
                                 self.navigationController?.pushViewController(MainViewController(), animated: true)
                                 let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
                                 self.navigationItem.backBarButtonItem = loginBackbutton
                                 self.navigationItem.backBarButtonItem?.tintColor = .black
                             }
                         } else {
-                            print("auth json decode fail")
                             self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
+                            print("auth json decode fail")
                             print(result.statusCode)
                         }
                     default:
@@ -186,14 +180,10 @@ extension LoginViewController {
                         print(result.statusCode)
                     }
                 case .failure(let err):
-                    print("\(err.localizedDescription)")
                     self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
+                    print("\(err.localizedDescription)")
                 }
             }
         }
-//        self.navigationController?.pushViewController(MainViewController(), animated: true)
-//        let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
-//        self.navigationItem.backBarButtonItem = loginBackbutton
-//        self.navigationItem.backBarButtonItem?.tintColor = .black
     }
 }
