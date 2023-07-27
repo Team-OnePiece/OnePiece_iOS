@@ -140,7 +140,7 @@ extension LoginViewController {
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let id = idTextField.text,
               let password = passwordTextField.text else {return}
-        if id.isEmpty == true || password.isEmpty == true {
+        if id.isEmpty || password.isEmpty {
             loginButton.backgroundColor = UIColor(named: "mainColor-1")
             loginButton.alpha = 0.8
         } else {
