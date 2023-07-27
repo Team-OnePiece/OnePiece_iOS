@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import Moya
 import SnapKit
 import Then
-import Moya
 
 class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
 
@@ -121,9 +121,8 @@ extension NickNameSignupViewController {
         }
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let nickName = nickNameTextField.text
-        else {return}
-        if nickName.isEmpty == true {
+        guard let nickName = nickNameTextField.text else {return}
+        if nickName.isEmpty {
             nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha = 0.8
             nickNameCheckButton.backgroundColor = UIColor(named: "mainColor-1")

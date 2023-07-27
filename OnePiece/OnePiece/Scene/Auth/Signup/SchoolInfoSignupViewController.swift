@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import Moya
 import SnapKit
 import Then
-import Moya
 
 class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
     
@@ -96,7 +96,7 @@ extension SchoolInfoSignupViewController {
               let schoolClass = classTextField.text,
               let schoolNumber = numberTextField.text
         else {return}
-        if schoolGrade.isEmpty == true || schoolClass.isEmpty == true || schoolNumber.isEmpty == true {
+        if schoolGrade.isEmpty || schoolClass.isEmpty || schoolNumber.isEmpty {
             nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha = 0.8
         } else {

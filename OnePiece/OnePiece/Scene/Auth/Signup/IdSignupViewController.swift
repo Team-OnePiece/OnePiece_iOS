@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import Moya
 import SnapKit
 import Then
-import Moya
 
 class IdSignupViewController: UIViewController, UITextFieldDelegate {
 
@@ -38,7 +38,7 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
             progress,
             idTextField,
             idCheckButton,
-            nextPageButton,
+            nextPageButton
         ].forEach({view.addSubview($0)})
     }
     private func makeConstraints() {
@@ -70,6 +70,7 @@ extension IdSignupViewController {
         return true
     }
     @objc private func idCheck() {
+        //서버 통신 완료 후 수정
         if idTextField.text?.isEmpty == true {
             let enterId = DefaultAlert(title: "아이디를 입력해주세요.")
             self.present(enterId, animated: true)
@@ -78,10 +79,6 @@ extension IdSignupViewController {
             self.present(idAlert, animated: true)
         }
     }
-//    func user() {
-//        let userInfo = UserInfo.shared
-//        userInfo.accountId = idTextField.text
-//    }
     @objc private func clickNextePage() {
         let userInfo = UserInfo.shared
         userInfo.accountId = idTextField.text
@@ -93,11 +90,9 @@ extension IdSignupViewController {
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
     }
-    
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard let id = idTextField.text
-        else {return}
-        if id.isEmpty == true {
+        guard let id = idTextField.text else {return}
+        if id.isEmpty{
             nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha = 0.8
             idCheckButton.backgroundColor = UIColor(named: "mainColor-1")

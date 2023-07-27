@@ -114,7 +114,7 @@ extension PasswordSignupViewController {
         guard let password = passwordTextField.text,
               let passwordCheck = passwordCheckTextField.text
         else {return}
-        if password.isEmpty == true || passwordCheck.isEmpty == true {
+        if password.isEmpty || passwordCheck.isEmpty {
             nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha = 0.8
         } else {
