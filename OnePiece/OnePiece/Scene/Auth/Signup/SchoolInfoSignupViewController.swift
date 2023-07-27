@@ -43,7 +43,7 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    override func viewDidLayoutSubviews() {
+        override func viewWillLayoutSubviews() {
         addSubViews()
         makeConstraints()
     }

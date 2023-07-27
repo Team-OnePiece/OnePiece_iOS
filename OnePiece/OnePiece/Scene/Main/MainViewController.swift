@@ -57,7 +57,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         myPageButton.addTarget(self, action: #selector(clickMyPage), for: .touchUpInside)
         clickPopup()
     }
-    override func viewDidLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         addSubViews()
         makeConstraints()
     }

@@ -64,7 +64,7 @@ class FeedContentViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(TagListCell.self, forCellWithReuseIdentifier: cellIdentifier)
     }
-    override func viewDidLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         addSubViews()
         makeConstraints()
     }

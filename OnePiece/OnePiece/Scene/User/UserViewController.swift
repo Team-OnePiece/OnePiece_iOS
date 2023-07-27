@@ -36,7 +36,7 @@ class UserViewController: UIViewController {
         view.backgroundColor = .white
         modifyButton.addTarget(self, action: #selector(clickModifyPage), for: .touchUpInside)
     }
-    override func viewDidLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         layout()
     }
     private func layout() {

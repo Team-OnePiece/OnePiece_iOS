@@ -38,7 +38,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         idModifyTextField.delegate = self
         idModifyTextField.addTarget(self, action: #selector(textFieldDidChange(_ :)), for: .allEditingEvents)
     }
-    override func viewDidLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         layout()
     }
     private func layout() {
