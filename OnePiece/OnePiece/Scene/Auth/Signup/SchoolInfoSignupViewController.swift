@@ -18,13 +18,11 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
         $0.backgroundColor = .clear
         $0.spacing = 5
     }
-    private let progress = UIImageView().then {
-        $0.image = UIImage(named: "progress3")
-    }
     private let gradeTextField = DefaultTextField(placeholder: "학년")
     private let classTextField = DefaultTextField(placeholder: "반")
     private let numberTextField = DefaultTextField(placeholder: "번호")
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let progressImage = UIImageView(image: UIImage(named: "progress3"))
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -50,19 +48,21 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
     
     private func addSubViews() {
         [
-            progress,
+            progressImage,
             stackView,
             nextPageButton
         ].forEach({view.addSubview($0)})
         [gradeTextField, classTextField, numberTextField].forEach({stackView.addArrangedSubview($0)})
     }
     private func makeConstraints() {
-        progress.snp.makeConstraints {
+        progressImage.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(131)
-            $0.left.right.equalToSuperview().inset(25)
+            $0.width.equalTo(340)
+            $0.height.equalTo(35)
         }
         stackView.snp.makeConstraints {
-            $0.top.equalTo(progress.snp.bottom).offset(43)
+            $0.top.equalTo(progressImage.snp.bottom).offset(43)
             $0.left.right.equalToSuperview().inset(25)
         }
         nextPageButton.snp.makeConstraints {

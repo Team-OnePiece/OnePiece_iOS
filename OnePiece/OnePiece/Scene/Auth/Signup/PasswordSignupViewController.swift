@@ -9,9 +9,7 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
     private let passwordCheckTextField = DefaultTextField(placeholder: "비밀번호 확인", isSecure: true)
     private var eyeButton = UIButton(type: .custom)
     private var checkEyeButton = UIButton(type: .custom)
-    private let progress = UIImageView().then {
-        $0.image = UIImage(named: "progress2")
-    }
+    private let progressImage = UIImageView(image: UIImage(named: "progress2"))
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,17 +34,19 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
         [
             passwordTextField,
             passwordCheckTextField,
-            progress,
+            progressImage,
             nextPageButton
         ].forEach({view.addSubview($0)})
     }
     private func makeConstraints() {
-        progress.snp.makeConstraints {
+        progressImage.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(131)
-            $0.left.right.equalToSuperview().inset(25)
+            $0.width.equalTo(340)
+            $0.height.equalTo(35)
         }
         passwordTextField.snp.makeConstraints {
-            $0.top.equalTo(progress.snp.bottom).offset(48)
+            $0.top.equalTo(progressImage.snp.bottom).offset(48)
             $0.left.right.equalToSuperview().inset(25)
         }
         passwordCheckTextField.snp.makeConstraints {

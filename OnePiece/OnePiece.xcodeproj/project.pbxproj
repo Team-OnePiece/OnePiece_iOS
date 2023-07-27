@@ -34,7 +34,6 @@
 		8875E2982A5EC42600CA20C1 /* UserModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875E2972A5EC42600CA20C1 /* UserModifyViewController.swift */; };
 		888D49932A6C2E6600124F93 /* FeedModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D49922A6C2E6500124F93 /* FeedModifyViewController.swift */; };
 		888D49C02A6F891D00124F93 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D49BF2A6F891D00124F93 /* UserInfo.swift */; };
-		88B890422A631BE400BDFD55 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B890412A631BE400BDFD55 /* ProgressView.swift */; };
 		88B8906F2A67A39400BDFD55 /* ContentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8906E2A67A39400BDFD55 /* ContentAlert.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +67,6 @@
 		8875E2972A5EC42600CA20C1 /* UserModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModifyViewController.swift; sourceTree = "<group>"; };
 		888D49922A6C2E6500124F93 /* FeedModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModifyViewController.swift; sourceTree = "<group>"; };
 		888D49BF2A6F891D00124F93 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		88B890412A631BE400BDFD55 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		88B8906E2A67A39400BDFD55 /* ContentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAlert.swift; sourceTree = "<group>"; };
 		A1B02E6DA75B3D95E03B89B7 /* Pods-OnePiece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.release.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.release.xcconfig"; sourceTree = "<group>"; };
 		F32A90BC03FB9EDFE738B3DB /* Pods-OnePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.debug.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				880A43372A582C580073DDDC /* DefaultButton.swift */,
 				880A42B82A52D1360073DDDC /* DefaultAlert.swift */,
 				88B8906E2A67A39400BDFD55 /* ContentAlert.swift */,
-				88B890412A631BE400BDFD55 /* ProgressView.swift */,
 				887015682A6FF66C00E09096 /* TagListView.swift */,
 			);
 			path = Component;
@@ -426,7 +423,6 @@
 				880A43382A582C580073DDDC /* DefaultButton.swift in Sources */,
 				880A43E42A5D4ACF0073DDDC /* SchoolInfoSignupViewController.swift in Sources */,
 				880A42CD2A56E2110073DDDC /* FeedContentViewController.swift in Sources */,
-				88B890422A631BE400BDFD55 /* ProgressView.swift in Sources */,
 				885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */,
 				88B8906F2A67A39400BDFD55 /* ContentAlert.swift in Sources */,
 				8870156B2A6FF90900E09096 /* TagListCell.swift in Sources */,

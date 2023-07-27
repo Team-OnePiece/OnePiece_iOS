@@ -15,10 +15,7 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
     private let nickNameTextField = DefaultTextField(placeholder: "별명")
     private let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let nextPageButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    private let progress = UIImageView().then {
-        $0.image = UIImage(named: "progress4")
-        
-    }
+    private let progressImage = UIImageView(image: UIImage(named: "progress4"))
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -38,24 +35,26 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
 
     private func addSubViews() {
         [
-            progress,
+            progressImage,
             nickNameTextField,
             nickNameCheckButton,
             nextPageButton,
         ].forEach({view.addSubview($0)})
     }
     private func makeConstraints() {
-        progress.snp.makeConstraints {
+        progressImage.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(131)
-            $0.left.right.equalToSuperview().inset(25)
+            $0.width.equalTo(340)
+            $0.height.equalTo(35)
         }
         nickNameTextField.snp.makeConstraints {
-            $0.top.equalTo(progress.snp.bottom).offset(44)
+            $0.top.equalTo(progressImage.snp.bottom).offset(44)
             $0.left.equalToSuperview().inset(25)
             $0.right.equalToSuperview().inset(105)
         }
         nickNameCheckButton.snp.makeConstraints {
-            $0.top.equalTo(progress.snp.bottom).offset(44)
+            $0.top.equalTo(progressImage.snp.bottom).offset(44)
             $0.left.equalTo(nickNameTextField.snp.right).offset(8)
             $0.right.equalToSuperview().inset(25)
         }

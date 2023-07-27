@@ -15,7 +15,7 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
     private let idTextField = DefaultTextField(placeholder: "아이디")
     private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    private let progress = ProgressView()
+    private let progressImage = UIImageView(image: UIImage(named: "progress1"))
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -32,28 +32,28 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
         addSubViews()
         makeConstraints()
     }
-
     private func addSubViews() {
         [
-            progress,
+            progressImage,
             idTextField,
             idCheckButton,
             nextPageButton
         ].forEach({view.addSubview($0)})
     }
     private func makeConstraints() {
-        progress.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.height.equalTo(200)
-            $0.left.right.equalToSuperview().inset(25)
+        progressImage.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(131)
+            $0.width.equalTo(340)
+            $0.height.equalTo(35)
         }
         idTextField.snp.makeConstraints {
-            $0.top.equalTo(progress.snp.bottom).offset(44)
+            $0.top.equalTo(progressImage.snp.bottom).offset(44)
             $0.left.equalToSuperview().inset(25)
             $0.right.equalToSuperview().inset(105)
         }
         idCheckButton.snp.makeConstraints {
-            $0.top.equalTo(progress.snp.bottom).offset(44)
+            $0.top.equalTo(progressImage.snp.bottom).offset(44)
             $0.left.equalTo(idTextField.snp.right).offset(8)
             $0.right.equalToSuperview().inset(25)
         }
