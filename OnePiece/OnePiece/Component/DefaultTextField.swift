@@ -21,7 +21,7 @@ class DefaultTextField: UITextField {
         self.placeholderText = placeholder
         self.font = UIFont.systemFont(ofSize: 16)
         self.autocapitalizationType = .none
-        self.autocorrectionType = .no
+        self.autocorrectionType = .default
         self.isSecureTextEntry = isSecure
         self.backgroundColor = .white
         self.layer.cornerRadius = 8
@@ -43,13 +43,11 @@ class DefaultTextField: UITextField {
         makeConstraints()
         fieldSetting()
     }
-
     private func makeConstraints() {
         self.snp.makeConstraints {
             $0.height.equalTo(48)
         }
     }
-
     private func fieldSetting() {
         self.attributedPlaceholder = NSAttributedString(
             string: placeholderText,

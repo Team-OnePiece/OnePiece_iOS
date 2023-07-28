@@ -41,11 +41,10 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-        override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         addSubViews()
         makeConstraints()
     }
-    
     private func addSubViews() {
         [
             progressImage,

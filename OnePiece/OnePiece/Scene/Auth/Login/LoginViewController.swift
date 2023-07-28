@@ -5,7 +5,7 @@ import Moya
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    private let stackView = UIStackView().then {
+    private let signupStackView = UIStackView().then {
         $0.alignment = .center
         $0.axis = .horizontal
         $0.backgroundColor = .clear
@@ -66,9 +66,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             passwordTextField,
             loginFailLabel,
             loginButton,
-            stackView
+            signupStackView
         ].forEach({view.addSubview($0)})
-        [signupLabel, signupButton].forEach({stackView.addArrangedSubview($0)})
+        [signupLabel, signupButton].forEach({signupStackView.addArrangedSubview($0)})
     }
     private func makeConstraints() {
         mainLogoImage.snp.makeConstraints {
@@ -99,7 +99,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         signupButton.snp.makeConstraints {
             $0.height.equalTo(24)
         }
-        stackView.snp.makeConstraints {
+        signupStackView.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
         }

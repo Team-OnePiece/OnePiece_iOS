@@ -58,7 +58,7 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
             $0.right.equalToSuperview().inset(25)
         }
         nextPageButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(59)
+            $0.bottom.equalToSuperview().inset(46)
             $0.left.right.equalToSuperview().inset(25)
         }
     }

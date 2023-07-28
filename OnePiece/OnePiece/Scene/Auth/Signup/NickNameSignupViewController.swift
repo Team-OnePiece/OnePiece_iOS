@@ -14,14 +14,14 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
 
     private let nickNameTextField = DefaultTextField(placeholder: "별명")
     private let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    private let nextPageButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let signupButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress4"))
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         nickNameTextField.returnKeyType = .done
         nickNameTextField.delegate = self
-        nextPageButton.addTarget(self, action: #selector(clickMainPage), for: .touchUpInside)
+        signupButton.addTarget(self, action: #selector(clickMainPage), for: .touchUpInside)
         nickNameCheckButton.addTarget(self, action: #selector(nickNameCheck), for: .touchUpInside)
         nickNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
     }
@@ -32,13 +32,12 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
         addSubViews()
         makeConstraints()
     }
-
     private func addSubViews() {
         [
             progressImage,
             nickNameTextField,
             nickNameCheckButton,
-            nextPageButton,
+            signupButton
         ].forEach({view.addSubview($0)})
     }
     private func makeConstraints() {
@@ -58,7 +57,7 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
             $0.left.equalTo(nickNameTextField.snp.right).offset(8)
             $0.right.equalToSuperview().inset(25)
         }
-        nextPageButton.snp.makeConstraints {
+        signupButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(59)
             $0.left.right.equalToSuperview().inset(25)
         }
@@ -122,13 +121,13 @@ extension NickNameSignupViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let nickName = nickNameTextField.text else {return}
         if nickName.isEmpty {
-            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
-            nextPageButton.alpha = 0.8
+            signupButton.backgroundColor = UIColor(named: "mainColor-1")
+            signupButton.alpha = 0.8
             nickNameCheckButton.backgroundColor = UIColor(named: "mainColor-1")
             nickNameCheckButton.alpha = 0.8
         } else {
-            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
-            nextPageButton.alpha  = 1.0
+            signupButton.backgroundColor = UIColor(named: "mainColor-1")
+            signupButton.alpha  = 1.0
             nickNameCheckButton.backgroundColor = UIColor(named: "mainColor-1")
             nickNameCheckButton.alpha = 1.0
         }
