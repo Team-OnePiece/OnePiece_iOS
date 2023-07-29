@@ -102,6 +102,16 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
             $0.width.height.equalTo(80)
         }
     }
+    private func moveView(targetView: UIViewController, title: String) {
+        self.navigationController?.pushViewController(targetView, animated: true)
+        let toMoveView = UIBarButtonItem(title: title, style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = toMoveView
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        toMoveView.setTitleTextAttributes([
+            .font: UIFont(name: "Orbit-Regular", size: 16)
+        ], for: .normal)
+    }
+
     @objc private func clickFeedPlus() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -111,34 +121,17 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @objc private func clickMyPage() {
-        self.navigationController?.pushViewController(UserViewController(), animated: true)
-        let mainPageBackbutton = UIBarButtonItem(title: "마이페이지", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = mainPageBackbutton
-        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-        mainPageBackbutton.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
-        ], for: .normal)
+        moveView(targetView: UserViewController(), title: "마이페이지")
     }
 }
 
-
 extension MainViewController: UIImagePickerControllerDelegate {
-//     이미지 피커에서 이미지를 선택하지 않고 취소했을 때 호출되는 메소드
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true) {
-        }
+        self.dismiss(animated: true) {}
     }
-    // 이미지 피커에서 이미지를 선택했을 때 호출되는 메소드
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
-            let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-            self.navigationController?.pushViewController(FeedContentViewController(), animated: true)
-            let backButton = UIBarButtonItem(title: "피드 작성", style: .plain, target: nil, action: nil)
-            self.navigationItem.backBarButtonItem = backButton
-            self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-            backButton.setTitleTextAttributes([
-                .font: UIFont(name: "Orbit-Regular", size: 16)
-            ], for: .normal)
+            self.moveView(targetView: FeedContentViewController(), title: "피드 작성")
         }
     }
 }

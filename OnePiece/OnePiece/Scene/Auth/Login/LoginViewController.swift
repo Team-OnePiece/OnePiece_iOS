@@ -128,23 +128,27 @@ extension LoginViewController {
         }
         return true
     }
-    @objc private func moveSignupView() {
-        self.navigationController?.pushViewController(IdSignupViewController(), animated: true)
-        let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = signupBackbutton
+    private func moveView(targetView: UIViewController, title: String) {
+        self.navigationController?.pushViewController(targetView, animated: true)
+        let toMoveView = UIBarButtonItem(title: title, style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = toMoveView
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-        signupBackbutton.setTitleTextAttributes([
+        toMoveView.setTitleTextAttributes([
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
     }
+    @objc private func moveSignupView() {
+        moveView(targetView: IdSignupViewController(), title: "회원가입")
+    }
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let id = idTextField.text,
-              let password = passwordTextField.text else {return}
-        if id.isEmpty || password.isEmpty {
+              let password = passwordTextField.text,
+              !(id.isEmpty || password.isEmpty)
+        else {
             loginButton.alpha = 0.8
-        } else {
-            loginButton.alpha  = 1.0
+            return
         }
+        loginButton.alpha = 1.0
     }
     @objc private func clickLogin() {
         if (idTextField.text!.isEmpty || passwordTextField.text!.isEmpty) {
@@ -163,10 +167,7 @@ extension LoginViewController {
                         if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
                             DispatchQueue.main.async {
                                 //Token.accessToken = data.token
-                                self.navigationController?.pushViewController(MainViewController(), animated: true)
-                                let loginBackbutton = UIBarButtonItem(title: "로그인", style: .plain, target: nil, action: nil)
-                                self.navigationItem.backBarButtonItem = loginBackbutton
-                                self.navigationItem.backBarButtonItem?.tintColor = .black
+                                self.moveView(targetView: MainViewController(), title: "")
                             }
                         } else {
                             self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
@@ -183,5 +184,7 @@ extension LoginViewController {
                 }
             }
         }
+        self.moveView(targetView: MainViewController(), title: "")
+        //프젝완성되면 없앨 코드
     }
 }

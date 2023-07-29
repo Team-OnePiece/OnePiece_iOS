@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 class IdSignupViewController: UIViewController, UITextFieldDelegate {
-
+    
     private let idTextField = DefaultTextField(placeholder: "아이디")
     private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
@@ -80,14 +80,14 @@ extension IdSignupViewController {
         return true
     }
     @objc private func idCheck() {
-        guard let id = idTextField.text
-        else {return}
-        if id.isEmpty {
+        guard let id = idTextField.text,
+              !id.isEmpty
+        else {
             idEnterLabel.text = "아이디를 확인하세요."
-        } else {
-            let idAlert  = DefaultAlert(title: "사용 가능한 아이디입니다.")
-            self.present(idAlert, animated: true)
+            return
         }
+        let idAlert  = DefaultAlert(title: "사용 가능한 아이디입니다.")
+        self.present(idAlert, animated: true)
     }
     @objc private func clickNextePage() {
         let userInfo = UserInfo.shared
@@ -108,13 +108,14 @@ extension IdSignupViewController {
         ], for: .normal)
     }
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard let id = idTextField.text else {return}
-        if id.isEmpty{
+        guard let id = idTextField.text,
+              !id.isEmpty
+        else {
             nextPageButton.alpha = 0.8
             idCheckButton.alpha = 0.8
-        } else {
-            nextPageButton.alpha  = 1.0
-            idCheckButton.alpha = 1.0
+            return
         }
+        nextPageButton.alpha  = 1.0
+        idCheckButton.alpha = 1.0
     }
 }

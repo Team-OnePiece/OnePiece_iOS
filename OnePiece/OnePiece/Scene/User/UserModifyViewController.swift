@@ -10,7 +10,6 @@ import SnapKit
 import Then
 
 class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigationControllerDelegate {
-
     private let profileBackground = UIImageView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 50
@@ -29,6 +28,11 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
     }
     private let idModifyTextField = DefaultTextField(placeholder: "핫걸")
     private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let idEnterLabel = UILabel().then {
+        $0.text = ""
+        $0.textColor = .red
+        $0.font = UIFont(name: "Orbit-Regular", size: 12)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -46,7 +50,8 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
             profileBackground,
             profileModifyButton,
             idModifyTextField,
-            idCheckButton
+            idCheckButton,
+            idEnterLabel
         ].forEach({view.addSubview($0)})
         profileBackground.addSubview(profileImage)
         
@@ -73,6 +78,10 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
             $0.left.equalTo(idModifyTextField.snp.right).offset(4)
             $0.right.equalToSuperview().inset(25)
         }
+        idEnterLabel.snp.makeConstraints {
+            $0.top.equalTo(idModifyTextField.snp.bottom).offset(8)
+            $0.left.equalToSuperview().inset(28)
+        }
     }
     private func finishModify() {
         let finishButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(clickMoveUserPage))
@@ -88,13 +97,10 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
 }
 
 extension UserModifyViewController: UIImagePickerControllerDelegate {
-//     이미지 피커에서 이미지를 선택하지 않고 취소했을 때 호출되는 메소드
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true) {
         }
     }
-
-    // 이미지 피커에서 이미지를 선택했을 때 호출되는 메소드
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
             let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
@@ -114,23 +120,23 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         self.present(picker, animated: true)
     }
     @objc private func clickIdCheck() {
-        if idModifyTextField.text?.isEmpty == false {
-            let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
-            self.present(alert, animated: true)
-        } else {
-            let alert = DefaultAlert(title: "별명을 입력하세요.")
-            self.present(alert, animated: true)
+        guard let idModify = idModifyTextField.text,
+              !idModify.isEmpty
+        else {
+            idEnterLabel.text = "별명을 입력하세요."
+            return
         }
+        let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
+        self.present(alert, animated: true)
+        idEnterLabel.text = ""
     }
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard let idCheck = idModifyTextField.text
-        else {return}
-        if idCheck.isEmpty == true {
-            idCheckButton.backgroundColor = UIColor(named: "mainColor-1")
+        guard let idCheck = idModifyTextField.text,
+              !idCheck.isEmpty
+        else {
             idCheckButton.alpha = 0.8
-        } else {
-            idCheckButton.backgroundColor = UIColor(named: "mainColor-1")
-            idCheckButton.alpha  = 1.0
+            return
         }
+        idCheckButton.alpha  = 1.0
     }
 }
