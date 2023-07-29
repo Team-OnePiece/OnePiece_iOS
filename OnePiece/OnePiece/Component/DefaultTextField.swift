@@ -21,7 +21,7 @@ class DefaultTextField: UITextField {
         self.placeholderText = placeholder
         self.font = UIFont.systemFont(ofSize: 16)
         self.autocapitalizationType = .none
-        self.autocorrectionType = .default
+        self.autocorrectionType = .no
         self.isSecureTextEntry = isSecure
         self.backgroundColor = .white
         self.layer.cornerRadius = 8

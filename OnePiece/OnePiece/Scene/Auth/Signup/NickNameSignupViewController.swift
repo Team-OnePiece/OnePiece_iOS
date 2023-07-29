@@ -121,14 +121,10 @@ extension NickNameSignupViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let nickName = nickNameTextField.text else {return}
         if nickName.isEmpty {
-            signupButton.backgroundColor = UIColor(named: "mainColor-1")
             signupButton.alpha = 0.8
-            nickNameCheckButton.backgroundColor = UIColor(named: "mainColor-1")
             nickNameCheckButton.alpha = 0.8
         } else {
-            signupButton.backgroundColor = UIColor(named: "mainColor-1")
             signupButton.alpha  = 1.0
-            nickNameCheckButton.backgroundColor = UIColor(named: "mainColor-1")
             nickNameCheckButton.alpha = 1.0
         }
     }

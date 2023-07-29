@@ -115,10 +115,8 @@ extension PasswordSignupViewController {
               let passwordCheck = passwordCheckTextField.text
         else {return}
         if password.isEmpty || passwordCheck.isEmpty {
-            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha = 0.8
         } else {
-            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha  = 1.0
         }
     }

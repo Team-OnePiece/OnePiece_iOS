@@ -16,6 +16,11 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
     private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress1"))
+    private let idEnterLabel = UILabel().then {
+        $0.text = ""
+        $0.textColor = .red
+        $0.font = UIFont(name: "Orbit-Regular", size: 12)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -37,6 +42,7 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
             progressImage,
             idTextField,
             idCheckButton,
+            idEnterLabel,
             nextPageButton
         ].forEach({view.addSubview($0)})
     }
@@ -57,6 +63,10 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
             $0.left.equalTo(idTextField.snp.right).offset(8)
             $0.right.equalToSuperview().inset(25)
         }
+        idEnterLabel.snp.makeConstraints {
+            $0.top.equalTo(idTextField.snp.bottom).offset(8)
+            $0.left.equalToSuperview().inset(28)
+        }
         nextPageButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(46)
             $0.left.right.equalToSuperview().inset(25)
@@ -70,10 +80,10 @@ extension IdSignupViewController {
         return true
     }
     @objc private func idCheck() {
-        //서버 통신 완료 후 수정
-        if idTextField.text?.isEmpty == true {
-            let enterId = DefaultAlert(title: "아이디를 입력해주세요.")
-            self.present(enterId, animated: true)
+        guard let id = idTextField.text
+        else {return}
+        if id.isEmpty {
+            idEnterLabel.text = "아이디를 확인하세요."
         } else {
             let idAlert  = DefaultAlert(title: "사용 가능한 아이디입니다.")
             self.present(idAlert, animated: true)
@@ -82,6 +92,13 @@ extension IdSignupViewController {
     @objc private func clickNextePage() {
         let userInfo = UserInfo.shared
         userInfo.accountId = idTextField.text
+        guard let id = idTextField.text,
+              !id.isEmpty
+        else {
+            idEnterLabel.text = "아이디를 확인하세요."
+            return
+        }
+        idEnterLabel.text = ""
         self.navigationController?.pushViewController(PasswordSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
@@ -93,14 +110,10 @@ extension IdSignupViewController {
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let id = idTextField.text else {return}
         if id.isEmpty{
-            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha = 0.8
-            idCheckButton.backgroundColor = UIColor(named: "mainColor-1")
             idCheckButton.alpha = 0.8
         } else {
-            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha  = 1.0
-            idCheckButton.backgroundColor = UIColor(named: "mainColor-1")
             idCheckButton.alpha = 1.0
         }
     }

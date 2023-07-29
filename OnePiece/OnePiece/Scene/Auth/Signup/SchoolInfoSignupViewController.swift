@@ -96,10 +96,8 @@ extension SchoolInfoSignupViewController {
               let schoolNumber = numberTextField.text
         else {return}
         if schoolGrade.isEmpty || schoolClass.isEmpty || schoolNumber.isEmpty {
-            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha = 0.8
         } else {
-            nextPageButton.backgroundColor = UIColor(named: "mainColor-1")
             nextPageButton.alpha  = 1.0
         }
     }
