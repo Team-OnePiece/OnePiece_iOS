@@ -89,7 +89,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             $0.left.right.equalToSuperview().inset(25)
         }
         loginFailLabel.snp.makeConstraints {
-            $0.top.equalTo(passwordTextField.snp.bottom)
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(8)
             $0.left.equalToSuperview().inset(28)
         }
         loginButton.snp.makeConstraints {
@@ -141,10 +141,8 @@ extension LoginViewController {
         guard let id = idTextField.text,
               let password = passwordTextField.text else {return}
         if id.isEmpty || password.isEmpty {
-            loginButton.backgroundColor = UIColor(named: "mainColor-1")
             loginButton.alpha = 0.8
         } else {
-            loginButton.backgroundColor = UIColor(named: "mainColor-1")
             loginButton.alpha  = 1.0
         }
     }
