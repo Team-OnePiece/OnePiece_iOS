@@ -11,6 +11,11 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
     private var checkEyeButton = UIButton(type: .custom)
     private let progressImage = UIImageView(image: UIImage(named: "progress2"))
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let passwordEnterLabel = UILabel().then {
+        $0.text = ""
+        $0.textColor = .red
+        $0.font = UIFont(name: "Orbit-Regular", size: 12)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -21,7 +26,7 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         passwordCheckTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         showPasswordButton()
-        checkShowPasswordButton()
+        showPasswordCheckButton()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -35,6 +40,7 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
             passwordTextField,
             passwordCheckTextField,
             progressImage,
+            passwordEnterLabel,
             nextPageButton
         ].forEach({view.addSubview($0)})
     }
@@ -53,6 +59,10 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(24)
             $0.left.right.equalToSuperview().inset(25)
         }
+        passwordEnterLabel.snp.makeConstraints {
+            $0.top.equalTo(passwordCheckTextField.snp.bottom).offset(8)
+            $0.left.equalToSuperview().inset(28)
+        }
         nextPageButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(59)
             $0.left.right.equalToSuperview().inset(25)
@@ -62,6 +72,13 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
         let userInfo = UserInfo.shared
         userInfo.password = passwordTextField.text
         userInfo.passwordValid = passwordCheckTextField.text
+        guard let password = passwordTextField.text,
+              !password.isEmpty
+        else {
+            passwordEnterLabel.text = "비밀번호를 확인하세요."
+            return
+        }
+        passwordEnterLabel.text = ""
         self.navigationController?.pushViewController(SchoolInfoSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = signupBackbutton
@@ -88,7 +105,7 @@ extension PasswordSignupViewController {
         self.passwordTextField.rightViewMode = .always
     }
     
-    private func checkShowPasswordButton() {
+    private func showPasswordCheckButton() {
         checkEyeButton = UIButton.init (primaryAction: UIAction (handler: { [self]_ in
             passwordCheckTextField.isSecureTextEntry.toggle()
             self.checkEyeButton.isSelected.toggle ()
@@ -112,12 +129,12 @@ extension PasswordSignupViewController {
     }
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let password = passwordTextField.text,
-              let passwordCheck = passwordCheckTextField.text
-        else {return}
-        if password.isEmpty || passwordCheck.isEmpty {
+              let passwordCheck = passwordCheckTextField.text,
+              !(password.isEmpty || passwordCheck.isEmpty)
+        else {
             nextPageButton.alpha = 0.8
-        } else {
-            nextPageButton.alpha  = 1.0
+            return
         }
+        nextPageButton.alpha  = 1.0
     }
 }

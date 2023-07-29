@@ -16,6 +16,11 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
     private let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let signupButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress4"))
+    private let nickNameEnterLabel = UILabel().then {
+        $0.text = ""
+        $0.textColor = .red
+        $0.font = UIFont(name: "Orbit-Regular", size: 12)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -37,6 +42,7 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
             progressImage,
             nickNameTextField,
             nickNameCheckButton,
+            nickNameEnterLabel,
             signupButton
         ].forEach({view.addSubview($0)})
     }
@@ -57,6 +63,10 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
             $0.left.equalTo(nickNameTextField.snp.right).offset(8)
             $0.right.equalToSuperview().inset(25)
         }
+        nickNameEnterLabel.snp.makeConstraints {
+            $0.top.equalTo(nickNameTextField.snp.bottom).offset(8)
+            $0.left.equalToSuperview().inset(28)
+        }
         signupButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(59)
             $0.left.right.equalToSuperview().inset(25)
@@ -71,13 +81,14 @@ extension NickNameSignupViewController {
         return true
     }
     @objc private func nickNameCheck() {
-        if nickNameTextField.text?.isEmpty == true {
-            let enterNickName = DefaultAlert(title: "별명을 입력해주세요.")
-            self.present(enterNickName, animated: true)
-        } else {
-            let nickNameAlert  = DefaultAlert(title: "사용 가능한 별명입니다.")
-            self.present(nickNameAlert, animated: true)
+        guard let nickName = nickNameTextField.text,
+              !nickName.isEmpty
+        else {
+            nickNameEnterLabel.text = "별명을 확인하세요"
+            return
         }
+        let nickNameAlert  = DefaultAlert(title: "사용 가능한 별명입니다.")
+        self.present(nickNameAlert, animated: true)
     }
     
     @objc private func clickMainPage() {
@@ -119,13 +130,14 @@ extension NickNameSignupViewController {
         }
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let nickName = nickNameTextField.text else {return}
-        if nickName.isEmpty {
+        guard let nickName = nickNameTextField.text,
+              !nickName.isEmpty
+        else {
             signupButton.alpha = 0.8
             nickNameCheckButton.alpha = 0.8
-        } else {
+            return
+        }
             signupButton.alpha  = 1.0
             nickNameCheckButton.alpha = 1.0
-        }
     }
 }
