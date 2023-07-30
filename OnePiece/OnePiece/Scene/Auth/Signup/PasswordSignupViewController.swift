@@ -27,6 +27,7 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
         passwordCheckTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         showPasswordButton()
         showPasswordCheckButton()
+        setupKeyboardObservers()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -68,24 +69,26 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
             $0.left.right.equalToSuperview().inset(25)
         }
     }
-    @objc private func clickNextPage() {
-        let userInfo = UserInfo.shared
-        userInfo.password = passwordTextField.text
-        userInfo.passwordValid = passwordCheckTextField.text
-        guard let password = passwordTextField.text,
-              !password.isEmpty
-        else {
-            passwordEnterLabel.text = "비밀번호를 확인하세요."
-            return
+    private func setupKeyboardObservers() {
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
+      private func removeKeyboardObservers() {
+          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            UIView.animate(withDuration: 0.3) {
+                self.nextPageButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + 15)
+            }
         }
-        passwordEnterLabel.text = ""
-        self.navigationController?.pushViewController(SchoolInfoSignupViewController(), animated: true)
-        let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = signupBackbutton
-        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-        signupBackbutton.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
-        ], for: .normal)
+    }
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.nextPageButton.transform = .identity
+        }
     }
 }
 
@@ -136,5 +139,24 @@ extension PasswordSignupViewController {
             return
         }
         nextPageButton.alpha  = 1.0
+    }
+    @objc private func clickNextPage() {
+        let userInfo = UserInfo.shared
+        userInfo.password = passwordTextField.text
+        userInfo.passwordValid = passwordCheckTextField.text
+        guard let password = passwordTextField.text,
+              !password.isEmpty
+        else {
+            passwordEnterLabel.text = "비밀번호를 확인하세요."
+            return
+        }
+        passwordEnterLabel.text = ""
+        self.navigationController?.pushViewController(SchoolInfoSignupViewController(), animated: true)
+        let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = signupBackbutton
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        signupBackbutton.setTitleTextAttributes([
+            .font: UIFont(name: "Orbit-Regular", size: 16)
+        ], for: .normal)
     }
 }

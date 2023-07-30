@@ -30,6 +30,7 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
         signupButton.addTarget(self, action: #selector(clickMainPage), for: .touchUpInside)
         nickNameCheckButton.addTarget(self, action: #selector(nickNameCheck), for: .touchUpInside)
         nickNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        setupKeyboardObservers()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -71,6 +72,27 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
         signupButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(59)
             $0.left.right.equalToSuperview().inset(25)
+        }
+    }
+    private func setupKeyboardObservers() {
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
+      private func removeKeyboardObservers() {
+          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            UIView.animate(withDuration: 0.3) {
+                self.signupButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + 15)
+            }
+        }
+    }
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.signupButton.transform = .identity
         }
     }
     func signupFailAlert() {

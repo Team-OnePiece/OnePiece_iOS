@@ -29,6 +29,7 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
         nextPageButton.addTarget(self, action: #selector(clickNextePage), for: .touchUpInside)
         idCheckButton.addTarget(self, action: #selector(idCheck), for: .touchUpInside)
         idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        setupKeyboardObservers()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -71,6 +72,38 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
             $0.bottom.equalToSuperview().inset(46)
             $0.left.right.equalToSuperview().inset(25)
         }
+    }
+    private func setupKeyboardObservers() {
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
+      private func removeKeyboardObservers() {
+          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            UIView.animate(withDuration: 0.3) {
+                self.nextPageButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + 15)
+            }
+        }
+    }
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.nextPageButton.transform = .identity
+        }
+    }
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        guard let id = idTextField.text,
+              !id.isEmpty
+        else {
+            nextPageButton.alpha = 0.8
+            idCheckButton.alpha = 0.8
+            return
+        }
+        nextPageButton.alpha  = 1.0
+        idCheckButton.alpha = 1.0
     }
 }
 
@@ -122,16 +155,5 @@ extension IdSignupViewController {
         signupBackbutton.setTitleTextAttributes([
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
-    }
-    @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard let id = idTextField.text,
-              !id.isEmpty
-        else {
-            nextPageButton.alpha = 0.8
-            idCheckButton.alpha = 0.8
-            return
-        }
-        nextPageButton.alpha  = 1.0
-        idCheckButton.alpha = 1.0
     }
 }
