@@ -73,6 +73,10 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
             $0.left.right.equalToSuperview().inset(25)
         }
     }
+    func signupFailAlert() {
+        let alert = DefaultAlert(title: "회원가입 실패")
+        self.present(alert, animated: true)
+    }
 }
 
 extension NickNameSignupViewController {
@@ -107,7 +111,7 @@ extension NickNameSignupViewController {
             }
         }
     }
-    
+
     @objc private func clickMainPage() {
         let userInfo = UserInfo.shared
         userInfo.nickName = nickNameTextField.text
@@ -128,20 +132,17 @@ extension NickNameSignupViewController {
                             ], for: .normal)
                         }
                     } else {
+                        signupFailAlert()
                         print("auth json decode fail")
-                        let alert = DefaultAlert(title: "회원가입 실패")
                         print(result.statusCode)
-                        self.present(alert, animated: true)
                     }
                 default:
-                    let alert = DefaultAlert(title: "회원가입 실패")
+                    signupFailAlert()
                     print(result.statusCode)
-                    self.present(alert, animated: true)
                 }
             case .failure(let err):
+                signupFailAlert()
                 print("\(err.localizedDescription)")
-                let alert = DefaultAlert(title: "회원가입 실패")
-                self.present(alert, animated: true)
             }
         }
     }
