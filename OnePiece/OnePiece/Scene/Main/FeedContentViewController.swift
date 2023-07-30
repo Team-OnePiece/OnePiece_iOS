@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class FeedContentViewController: UIViewController {
+class FeedContentViewController: UIViewController, UITextFieldDelegate {
     
     let cellIdentifier = "cellId"
     var dataSource:[String] = []
@@ -60,9 +60,13 @@ class FeedContentViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         finishFeedWirte()
+        placeTextField.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(TagListCell.self, forCellWithReuseIdentifier: cellIdentifier)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     override func viewWillLayoutSubviews() {
         addSubViews()
@@ -107,6 +111,10 @@ class FeedContentViewController: UIViewController {
             $0.width.equalTo(50)
             $0.top.left.equalToSuperview().inset(3)
         }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        placeTextField.resignFirstResponder()
+        return true
     }
     private func finishFeedWirte() {
         let finishButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(finishFeed))
