@@ -86,8 +86,24 @@ extension IdSignupViewController {
             idEnterLabel.text = "아이디를 확인하세요."
             return
         }
-        let idAlert  = DefaultAlert(title: "사용 가능한 아이디입니다.")
-        self.present(idAlert, animated: true)
+        let provider  = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.idDuplicate(id: id)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    let alert = DefaultAlert(title: "사용 가능한 아이디입니다.")
+                    self.present(alert, animated: true)
+                case 409:
+                    let alert = DefaultAlert(title: "이미 사용 된 아이디입니다.")
+                    self.present(alert, animated: true)
+                default:
+                    self.idEnterLabel.text = "아이디를 확인해주세요."
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+            }
+        }
     }
     @objc private func clickNextePage() {
         let userInfo = UserInfo.shared
