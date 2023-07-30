@@ -4,6 +4,8 @@ import Moya
 enum AuthAPI {
     case signup(UserInfo)
     case login(id: String, password: String)
+    case idDuplicate(id: String)
+    case nickNameDuplicate(nickName: String)
 }
 
 extension AuthAPI: TargetType {
@@ -17,6 +19,10 @@ extension AuthAPI: TargetType {
             return "/user/signup"
         case .login:
             return "/user/login"
+        case .idDuplicate:
+            return "/user/id/duplicate"
+        case .nickNameDuplicate:
+            return "/user/nickname/duplicate"
         }
     }
     
@@ -26,6 +32,10 @@ extension AuthAPI: TargetType {
             return .post
         case .login:
             return .post
+        case .idDuplicate:
+            return .get
+        case .nickNameDuplicate:
+            return .get
         }
     }
     
@@ -34,7 +44,7 @@ extension AuthAPI: TargetType {
         case .signup(_):
             return .requestParameters(
                 parameters: [
-                    "account_id":UserInfo.shared, //(아이디는 1~20자 영문 대 소문자, 숫자 사용하세요)
+                    "account_id": UserInfo.shared, //(아이디는 1~20자 영문 대 소문자, 숫자 사용하세요)
                     "password": UserInfo.shared,
                     "pasword_valid": UserInfo.shared,
                     "nickname": UserInfo.shared,
@@ -48,9 +58,13 @@ extension AuthAPI: TargetType {
                     "account_id": id,
                     "password": password
                 ], encoding: JSONEncoding.default)
+        case .idDuplicate(let id):
+            return .requestParameters(parameters: ["accountId": id], encoding: URLEncoding.queryString)
+        case .nickNameDuplicate(let nickname):
+            return .requestParameters(parameters: ["nickname": nickname], encoding: URLEncoding.queryString)
         }
     }
-    
+
     var headers: [String : String]? {
         return nil
     }

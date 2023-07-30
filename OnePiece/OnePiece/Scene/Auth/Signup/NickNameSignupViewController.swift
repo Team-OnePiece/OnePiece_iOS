@@ -11,7 +11,8 @@ import SnapKit
 import Then
 
 class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
-
+    
+    private let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
     private let nickNameTextField = DefaultTextField(placeholder: "별명")
     private let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let signupButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
@@ -87,12 +88,27 @@ extension NickNameSignupViewController {
             nickNameEnterLabel.text = "별명을 확인하세요"
             return
         }
-        let nickNameAlert  = DefaultAlert(title: "사용 가능한 별명입니다.")
-        self.present(nickNameAlert, animated: true)
+        provider.request(.nickNameDuplicate(nickName: nickName)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
+                    self.present(alert, animated: true)
+                case 409:
+                    let alert = DefaultAlert(title: "이미 사용 된 별명입니다.")
+                    self.present(alert, animated: true)
+                default:
+                    self.nickNameEnterLabel.text = "별명을 확인하세요."
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+            }
+        }
     }
     
     @objc private func clickMainPage() {
-        let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
         let userInfo = UserInfo.shared
         userInfo.nickName = nickNameTextField.text
         provider.request(.signup(UserInfo.shared)) { res in
@@ -102,7 +118,7 @@ extension NickNameSignupViewController {
                 case 200:
                     if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
                         DispatchQueue.main.async {
-//                                                                        Token.accessToken = data.token
+                            //                                                                        Token.accessToken = data.token
                             self.navigationController?.pushViewController(MainViewController(), animated: true)
                             let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
                             self.navigationItem.backBarButtonItem = signupBackbutton
@@ -137,7 +153,7 @@ extension NickNameSignupViewController {
             nickNameCheckButton.alpha = 0.8
             return
         }
-            signupButton.alpha  = 1.0
-            nickNameCheckButton.alpha = 1.0
+        signupButton.alpha  = 1.0
+        nickNameCheckButton.alpha = 1.0
     }
 }
