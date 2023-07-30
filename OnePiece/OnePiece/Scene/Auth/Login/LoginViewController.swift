@@ -151,40 +151,39 @@ extension LoginViewController {
         loginButton.alpha = 1.0
     }
     @objc private func clickLogin() {
-        if (idTextField.text!.isEmpty || passwordTextField.text!.isEmpty) {
+        guard let id = self.idTextField.text,
+              let password = self.passwordTextField.text,
+              !(id.isEmpty || password.isEmpty)
+        else {
             self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
-        } else {
-            let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
-            guard let idText = self.idTextField.text,
-                  let passwordText = self.passwordTextField.text
-            else {return}
-            
-            provider.request(.login(id: idText, password: passwordText)) { res in
-                switch res {
-                case .success(let result):
-                    switch result.statusCode {
-                    case 200:
-                        if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
-                            DispatchQueue.main.async {
-                                //Token.accessToken = data.token
-                                self.moveView(targetView: MainViewController(), title: "")
-                            }
-                        } else {
-                            self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
-                            print("auth json decode fail")
-                            print(result.statusCode)
+            self.moveView(targetView: MainViewController(), title: "")
+            //프젝완성되면 없앨 코드
+            return
+        }
+        let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.login(id: id, password: password)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
+                        DispatchQueue.main.async {
+                            //                                Token.accessToken = data.token
+                            self.moveView(targetView: MainViewController(), title: "")
                         }
-                    default:
+                    } else {
                         self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
+                        print("auth json decode fail")
                         print(result.statusCode)
                     }
-                case .failure(let err):
+                default:
                     self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
-                    print("\(err.localizedDescription)")
+                    print(result.statusCode)
                 }
+            case .failure(let err):
+                self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
+                print("\(err.localizedDescription)")
             }
         }
-        self.moveView(targetView: MainViewController(), title: "")
-        //프젝완성되면 없앨 코드
     }
 }

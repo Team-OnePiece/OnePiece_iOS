@@ -132,16 +132,16 @@ extension NickNameSignupViewController {
                             ], for: .normal)
                         }
                     } else {
-                        signupFailAlert()
+                        self.signupFailAlert()
                         print("auth json decode fail")
                         print(result.statusCode)
                     }
                 default:
-                    signupFailAlert()
+                    self.signupFailAlert()
                     print(result.statusCode)
                 }
             case .failure(let err):
-                signupFailAlert()
+                self.signupFailAlert()
                 print("\(err.localizedDescription)")
             }
         }
