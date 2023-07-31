@@ -55,16 +55,16 @@ class DefaultAlert: UIViewController {
         }
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(33)
-            $0.leading.trailing.equalToSuperview().inset(47)
+            $0.left.right.equalToSuperview().inset(40)
         }
         lineView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(33)
-            $0.left.trailing.equalToSuperview().inset(25)
+            $0.left.right.equalToSuperview().inset(25)
             $0.height.equalTo(0.2)
         }
         closeButton.snp.makeConstraints {
             $0.top.equalTo(lineView.snp.bottom).offset(13)
-            $0.left.trailing.equalToSuperview().inset(20)
+            $0.left.right.equalToSuperview().inset(20)
             $0.height.equalTo(22)
         }
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
