@@ -142,9 +142,6 @@ extension NickNameSignupViewController {
             case .success(let result):
                 switch result.statusCode {
                 case 200:
-                    if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
-                        DispatchQueue.main.async {
-                            //                                                                        Token.accessToken = data.token
                             self.navigationController?.pushViewController(MainViewController(), animated: true)
                             let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
                             self.navigationItem.backBarButtonItem = signupBackbutton
@@ -152,12 +149,6 @@ extension NickNameSignupViewController {
                             signupBackbutton.setTitleTextAttributes([
                                 .font: UIFont(name: "Orbit-Regular", size: 16)
                             ], for: .normal)
-                        }
-                    } else {
-                        self.signupFailAlert()
-                        print("auth json decode fail")
-                        print(result.statusCode)
-                    }
                 default:
                     self.signupFailAlert()
                     print(result.statusCode)
