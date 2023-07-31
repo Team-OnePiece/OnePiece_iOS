@@ -5,6 +5,12 @@ import Moya
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    private let buttonStackView = UIStackView().then {
+        $0.alignment = .center
+        $0.axis = .vertical
+        $0.backgroundColor = .clear
+        $0.spacing = 11
+    }
     private let signupStackView = UIStackView().then {
         $0.alignment = .center
         $0.axis = .horizontal
@@ -50,6 +56,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.returnKeyType = .done
         idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        setupKeyboardObservers()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -65,10 +72,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             idTextField,
             passwordTextField,
             loginFailLabel,
-            loginButton,
-            signupStackView
+            signupStackView,
+            buttonStackView
         ].forEach({view.addSubview($0)})
         [signupLabel, signupButton].forEach({signupStackView.addArrangedSubview($0)})
+        [loginButton, signupStackView].forEach({buttonStackView.addArrangedSubview($0)})
     }
     private func makeConstraints() {
         mainLogoImage.snp.makeConstraints {
@@ -93,8 +101,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             $0.left.equalToSuperview().inset(28)
         }
         loginButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(95)
-            $0.left.right.equalToSuperview().inset(25)
+            $0.top.equalToSuperview()
+            $0.left.right.equalToSuperview()
         }
         signupButton.snp.makeConstraints {
             $0.height.equalTo(24)
@@ -102,6 +110,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         signupStackView.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
+        }
+        buttonStackView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(50)
+            $0.left.right.equalToSuperview().inset(25)
+        }
+    }
+    private func setupKeyboardObservers() {
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
+      private func removeKeyboardObservers() {
+          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            UIView.animate(withDuration: 0.3) {
+                self.buttonStackView.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + 15)
+            }
+        }
+    }
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.buttonStackView.transform = .identity
         }
     }
 }
