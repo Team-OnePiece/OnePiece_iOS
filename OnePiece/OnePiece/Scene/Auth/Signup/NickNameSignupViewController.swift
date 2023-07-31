@@ -143,7 +143,7 @@ extension NickNameSignupViewController {
             nickNameEnterLabel.text = "별명을 확인하세요."
             return
         }
-        userInfo.nickName = nickNameTextField.text
+        userInfo.nickName = nickName
         provider.request(.signup(UserInfo.shared)) { res in
             switch res {
             case .success(let result):
