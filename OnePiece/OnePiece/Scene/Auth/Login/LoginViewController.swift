@@ -107,10 +107,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         signupButton.snp.makeConstraints {
             $0.height.equalTo(24)
         }
-        signupStackView.snp.makeConstraints {
-            $0.top.equalTo(loginButton.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
-        }
         buttonStackView.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(50)
             $0.left.right.equalToSuperview().inset(25)
