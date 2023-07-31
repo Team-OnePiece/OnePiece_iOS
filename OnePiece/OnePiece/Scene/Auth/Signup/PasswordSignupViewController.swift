@@ -5,7 +5,7 @@ import Then
 
 class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
     
-    private let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
+    private let passwordTextField = DefaultTextField(placeholder: "비밀번호(16자이내 영문,숫자,특수문자)", isSecure: true)
     private let passwordCheckTextField = DefaultTextField(placeholder: "비밀번호 확인", isSecure: true)
     private var eyeButton = UIButton(type: .custom)
     private var checkEyeButton = UIButton(type: .custom)
@@ -133,7 +133,7 @@ extension PasswordSignupViewController {
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let password = passwordTextField.text,
               let passwordCheck = passwordCheckTextField.text,
-              !(password.isEmpty || passwordCheck.isEmpty)
+              !(password.isEmpty || passwordCheck.isEmpty) && password == passwordCheck
         else {
             nextPageButton.alpha = 0.8
             return
@@ -145,7 +145,8 @@ extension PasswordSignupViewController {
         userInfo.password = passwordTextField.text
         userInfo.passwordValid = passwordCheckTextField.text
         guard let password = passwordTextField.text,
-              !password.isEmpty
+              let passwordCheck = passwordCheckTextField.text,
+              !password.isEmpty && password == passwordCheck
         else {
             passwordEnterLabel.text = "비밀번호를 확인하세요."
             return
