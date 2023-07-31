@@ -140,13 +140,13 @@ extension IdSignupViewController {
     }
     @objc private func clickNextePage() {
         let userInfo = UserInfo.shared
-        userInfo.accountId = idTextField.text
         guard let id = idTextField.text,
               !id.isEmpty
         else {
             idEnterLabel.text = "아이디를 확인하세요."
             return
         }
+        userInfo.accountId = id
         idEnterLabel.text = ""
         self.navigationController?.pushViewController(PasswordSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
