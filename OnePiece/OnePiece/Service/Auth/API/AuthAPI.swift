@@ -66,6 +66,6 @@ extension AuthAPI: TargetType {
     }
 
     var headers: [String : String]? {
-        return nil
+        return Header.tokenIsEmpty.header()
     }
 }
