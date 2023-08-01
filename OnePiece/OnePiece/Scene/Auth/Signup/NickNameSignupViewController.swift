@@ -131,6 +131,7 @@ extension NickNameSignupViewController {
                 switch result.statusCode {
                 case 200:
                     let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
+                    self.nickNameEnterLabel.text = ""
                     self.present(alert, animated: true)
                 case 409:
                     let alert = DefaultAlert(title: "이미 사용 된 별명입니다.")
@@ -147,7 +148,13 @@ extension NickNameSignupViewController {
 
     @objc private func clickMainPage() {
         let userInfo = UserInfo.shared
-        userInfo.nickName = nickNameTextField.text
+        guard let nickName = nickNameTextField.text,
+              !nickName.isEmpty
+        else {
+            nickNameEnterLabel.text = "별명을 확인하세요."
+            return
+        }
+        userInfo.nickName = nickName
         provider.request(.signup(UserInfo.shared)) { res in
             switch res {
             case .success(let result):

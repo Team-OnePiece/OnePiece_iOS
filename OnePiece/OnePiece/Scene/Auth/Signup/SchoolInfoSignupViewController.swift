@@ -109,9 +109,6 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
 extension SchoolInfoSignupViewController {
     @objc private func clickNextPage() {
         let userInfo = UserInfo.shared
-        userInfo.grade = Int(gradeTextField.text!)
-        userInfo.classNumber = Int(classTextField.text!)
-        userInfo.number = Int(numberTextField.text!)
         guard let schoolGrade = gradeTextField.text,
               let schoolClass = classTextField.text,
               let schoolNumber = numberTextField.text,
@@ -120,6 +117,9 @@ extension SchoolInfoSignupViewController {
             schoolInfoEnterLabel.text = "다시 확인하세요."
             return
         }
+        userInfo.grade = Int(schoolGrade)
+        userInfo.classNumber = Int(schoolClass)
+        userInfo.number = Int(schoolNumber)
         schoolInfoEnterLabel.text = ""
         self.navigationController?.pushViewController(NickNameSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
