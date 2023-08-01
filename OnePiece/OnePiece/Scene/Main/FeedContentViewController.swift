@@ -10,9 +10,9 @@ import SnapKit
 import Then
 
 class FeedContentViewController: UIViewController, UITextFieldDelegate {
-    
-    let cellIdentifier = "cellId"
-    var dataSource:[String] = []
+    private var count = 0
+    private let cellIdentifier = "cellId"
+    private var dataSource:[String] = []
     private let placeTextField = DefaultTextField(placeholder: "위치를 입력하세요").then {
         $0.textAlignment = .center
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
@@ -21,6 +21,12 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
         $0.text = "태그는 최대 6개, 최대 10자까지 작성 가능합니다."
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
+    }
+    
+    private let placeTextFieldTextLengthLabel = UILabel().then {
+        $0.text = "0/10"
+        $0.textColor = UIColor(named: "gray-500")
+        $0.font = UIFont(name: "Orbit-Regular", size: 10)
     }
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
         let layout = UICollectionViewFlowLayout()
@@ -64,6 +70,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(TagListCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        placeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -80,12 +87,17 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
             groupChoiceLabel,
             groupChoiceButton
         ].forEach({view.addSubview($0)})
+        placeTextField.addSubview(placeTextFieldTextLengthLabel)
         collectionView.addSubview(tagPlusButton)
     }
     private func makeConstraints() {
         placeTextField.snp.makeConstraints {
             $0.top.equalToSuperview().inset(143)
             $0.left.right.equalToSuperview().inset(25)
+        }
+        placeTextFieldTextLengthLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(7)
+            $0.right.equalToSuperview().inset(10)
         }
         explainLabel.snp.makeConstraints {
             $0.top.equalTo(placeTextField.snp.bottom).offset(24)
@@ -116,6 +128,19 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
         placeTextField.resignFirstResponder()
         return true
     }
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        placeTextFieldTextLengthLabel.text = "\(String(placeTextField.text!.count))/10"
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            if let char = string.cString(using: String.Encoding.utf8) {
+                let isBackSpace = strcmp(char, "\\b")
+                if isBackSpace == -92 {
+                    return true
+                }
+            }
+            guard placeTextField.text!.count < 10 else { return false }
+            return true
+        }
     private func finishFeedWirte() {
         let finishButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(finishFeed))
         self.navigationItem.rightBarButtonItem = finishButton
