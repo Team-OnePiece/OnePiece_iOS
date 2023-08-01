@@ -11,6 +11,7 @@ import Then
 import Moya
 
 class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigationControllerDelegate {
+    private var selectImageURL: String = ""
     private let profileBackground = UIImageView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 50
@@ -30,7 +31,6 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
     private let nickNameModifyTextField = DefaultTextField(placeholder: "")
     private let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let nickNameEnterLabel = UILabel().then {
-        $0.text = ""
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
