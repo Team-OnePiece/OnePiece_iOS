@@ -6,6 +6,7 @@ enum AuthAPI {
     case login(id: String, password: String)
     case idDuplicate(id: String)
     case nickNameDuplicate(nickName: String)
+    case studentInfo(grade: Int, classNumber: Int, number: Int)
 }
 
 extension AuthAPI: TargetType {
@@ -23,6 +24,8 @@ extension AuthAPI: TargetType {
             return "/user/id/duplicate"
         case .nickNameDuplicate:
             return "/user/nickname/duplicate"
+        case.studentInfo:
+            return "user/student/id/duplicate"
         }
     }
     
@@ -35,6 +38,8 @@ extension AuthAPI: TargetType {
         case .idDuplicate:
             return .get
         case .nickNameDuplicate:
+            return .get
+        case .studentInfo:
             return .get
         }
     }
@@ -62,6 +67,13 @@ extension AuthAPI: TargetType {
             return .requestParameters(parameters: ["accountId": id], encoding: URLEncoding.queryString)
         case .nickNameDuplicate(let nickname):
             return .requestParameters(parameters: ["nickname": nickname], encoding: URLEncoding.queryString)
+        case .studentInfo(let grade, let classNumber, let number):
+            return .requestParameters(
+                parameters: [
+                    "grade": grade,
+                    "classNumber": classNumber,
+                    "number": number
+                ], encoding: URLEncoding.queryString)
         }
     }
 
