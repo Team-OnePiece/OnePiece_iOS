@@ -95,6 +95,17 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
             self.signupButton.transform = .identity
         }
     }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+                      let isBackSpace = strcmp(char, "\\b")
+                      if isBackSpace == -92 {
+                          return true
+                      }
+                }
+        guard nickNameTextField.text!.count < 9 else { return false }
+        return true
+    }
+
     func signupFailAlert() {
         let alert = DefaultAlert(title: "회원가입 실패")
         self.present(alert, animated: true)
