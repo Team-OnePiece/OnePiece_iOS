@@ -25,7 +25,7 @@ extension AuthAPI: TargetType {
         case .nickNameDuplicate:
             return "/user/nickname/duplicate"
         case.studentInfo:
-            return "user/student/id/duplicate"
+            return "/user/student/id/duplicate"
         }
     }
     
@@ -64,19 +64,18 @@ extension AuthAPI: TargetType {
                     "password": password
                 ], encoding: JSONEncoding.default)
         case .idDuplicate(let id):
-            return .requestParameters(parameters: ["accountId": id], encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: ["account_id": id], encoding: URLEncoding.queryString)
         case .nickNameDuplicate(let nickname):
             return .requestParameters(parameters: ["nickname": nickname], encoding: URLEncoding.queryString)
         case .studentInfo(let grade, let classNumber, let number):
+            let params: [String: Int] = ["grade": grade,
+                              "class_number": classNumber,
+                              "number": number]
             return .requestParameters(
-                parameters: [
-                    "grade": grade,
-                    "classNumber": classNumber,
-                    "number": number
-                ], encoding: URLEncoding.queryString)
+                parameters: params, encoding: URLEncoding.queryString)
         }
     }
-
+    
     var headers: [String : String]? {
         return Header.tokenIsEmpty.header()
     }
