@@ -142,15 +142,16 @@ extension PasswordSignupViewController {
     }
     @objc private func clickNextPage() {
         let userInfo = UserInfo.shared
-        userInfo.password = passwordTextField.text
-        userInfo.passwordValid = passwordCheckTextField.text
         guard let password = passwordTextField.text,
               let passwordCheck = passwordCheckTextField.text,
-              !password.isEmpty && password == passwordCheck
+
+              !(password.isEmpty || passwordCheck.isEmpty)
         else {
             passwordEnterLabel.text = "비밀번호를 확인하세요."
             return
         }
+        userInfo.password = password
+        userInfo.passwordValid = passwordCheck
         passwordEnterLabel.text = ""
         self.navigationController?.pushViewController(SchoolInfoSignupViewController(), animated: true)
         let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
