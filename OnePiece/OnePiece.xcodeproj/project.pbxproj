@@ -35,6 +35,7 @@
 		888D49932A6C2E6600124F93 /* FeedModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D49922A6C2E6500124F93 /* FeedModifyViewController.swift */; };
 		888D49C02A6F891D00124F93 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D49BF2A6F891D00124F93 /* UserInfo.swift */; };
 		88B8906F2A67A39400BDFD55 /* ContentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8906E2A67A39400BDFD55 /* ContentAlert.swift */; };
+		88BFF9F42A793CE10016D816 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BFF9F32A793CE10016D816 /* Header.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		888D49922A6C2E6500124F93 /* FeedModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModifyViewController.swift; sourceTree = "<group>"; };
 		888D49BF2A6F891D00124F93 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		88B8906E2A67A39400BDFD55 /* ContentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAlert.swift; sourceTree = "<group>"; };
+		88BFF9F32A793CE10016D816 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		A1B02E6DA75B3D95E03B89B7 /* Pods-OnePiece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.release.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.release.xcconfig"; sourceTree = "<group>"; };
 		F32A90BC03FB9EDFE738B3DB /* Pods-OnePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.debug.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -270,6 +272,7 @@
 		888D492D2A69739200124F93 /* Header */ = {
 			isa = PBXGroup;
 			children = (
+				88BFF9F32A793CE10016D816 /* Header.swift */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				880A43362A5827EA0073DDDC /* AuthAPI.swift in Sources */,
 				880A43382A582C580073DDDC /* DefaultButton.swift in Sources */,
 				880A43E42A5D4ACF0073DDDC /* SchoolInfoSignupViewController.swift in Sources */,
+				88BFF9F42A793CE10016D816 /* Header.swift in Sources */,
 				880A42CD2A56E2110073DDDC /* FeedContentViewController.swift in Sources */,
 				885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */,
 				88B8906F2A67A39400BDFD55 /* ContentAlert.swift in Sources */,

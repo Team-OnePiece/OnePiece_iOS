@@ -105,6 +105,16 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
         nextPageButton.alpha  = 1.0
         idCheckButton.alpha = 1.0
     }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+                      let isBackSpace = strcmp(char, "\\b")
+                      if isBackSpace == -92 {
+                          return true
+                      }
+                }
+        guard idTextField.text!.count < 20 else { return false }
+        return true
+    }
 }
 
 extension IdSignupViewController {
