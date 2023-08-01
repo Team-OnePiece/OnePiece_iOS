@@ -197,7 +197,7 @@ extension LoginViewController {
                 case 200:
                     if let data = try? JSONDecoder().decode(AuthResponse.self, from: result.data) {
                         DispatchQueue.main.async {
-                            //                                Token.accessToken = data.token
+                            Token.accessToken = data.accessToken
                             self.moveView(targetView: MainViewController(), title: "")
                         }
                     } else {
