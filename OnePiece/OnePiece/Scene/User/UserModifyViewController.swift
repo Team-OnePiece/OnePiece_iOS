@@ -38,7 +38,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         super.viewDidLoad()
         view.backgroundColor = .white
         profileModifyButton.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
-        nickNameCheckButton.addTarget(self, action: #selector(clickIdCheck), for: .touchUpInside)
+        nickNameCheckButton.addTarget(self, action: #selector(clickNickNameCheck), for: .touchUpInside)
         finishModify()
         nickNameModifyTextField.delegate = self
         nickNameModifyTextField.addTarget(self, action: #selector(textFieldDidChange(_ :)), for: .allEditingEvents)
@@ -142,7 +142,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         picker.delegate = self
         self.present(picker, animated: true)
     }
-    @objc private func clickIdCheck() {
+    @objc private func clickNickNameCheck() {
         guard let nickNameModify = nickNameModifyTextField.text,
               !nickNameModify.isEmpty
         else {
