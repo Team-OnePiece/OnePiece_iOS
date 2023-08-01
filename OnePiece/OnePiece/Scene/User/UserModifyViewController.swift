@@ -123,7 +123,8 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
             case .success(let result):
                 switch result.statusCode {
                 case 200:
-                    print("어케했지")
+                    let alert = DefaultAlert(title: "별명이 변경되었습니다.")
+                    self.present(alert, animated: true)
                     self.navigationController?.popViewController(animated: true)
                 default:
                     print("실패다 임마")
