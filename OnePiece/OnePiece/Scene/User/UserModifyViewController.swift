@@ -27,7 +27,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         $0.setTitleColor(UIColor(named: "gray-800"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
     }
-    private let nickNameModifyTextField = DefaultTextField(placeholder: "핫걸")
+    private let nickNameModifyTextField = DefaultTextField(placeholder: "")
     private let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let nickNameEnterLabel = UILabel().then {
         $0.text = ""
@@ -127,7 +127,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
                     self.present(alert, animated: true)
                     self.navigationController?.popViewController(animated: true)
                 default:
-                    print("실패다 임마")
+                    self.nickNameEnterLabel.text = "별명을 확인하세요"
                     print(result.statusCode)
                 }
             case .failure(let err):
