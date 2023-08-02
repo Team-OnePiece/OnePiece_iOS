@@ -68,9 +68,12 @@ extension AuthAPI: TargetType {
         case .nickNameDuplicate(let nickname):
             return .requestParameters(parameters: ["nickname": nickname], encoding: URLEncoding.queryString)
         case .studentInfo(let grade, let classNumber, let number):
-            let params: [String: Int] = ["grade": grade,
-                              "class_number": classNumber,
-                              "number": number]
+            let params: [String: Int] =
+            [
+                "grade": grade,
+                "class_number": classNumber,
+                "number": number
+            ]
             return .requestParameters(
                 parameters: params, encoding: URLEncoding.queryString)
         }

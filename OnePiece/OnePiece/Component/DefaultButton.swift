@@ -13,7 +13,7 @@ class DefaultButton: UIButton {
     
     init(
         title: String,
-        backgroundColor : UIColor,
+        backgroundColor: UIColor,
         titleColor: UIColor
     ) {
         super.init(frame: .zero)

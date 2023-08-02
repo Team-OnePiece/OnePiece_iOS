@@ -22,32 +22,10 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
-    
     private let placeTextFieldTextLengthLabel = UILabel().then {
         $0.text = "0/10"
         $0.textColor = UIColor(named: "gray-500")
         $0.font = UIFont(name: "Orbit-Regular", size: 10)
-    }
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 4
-        layout.minimumInteritemSpacing = 0
-        //        layout.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-        $0.register(TagListCell.self, forCellWithReuseIdentifier: "TagListCell")
-        $0.showsVerticalScrollIndicator = false
-        $0.collectionViewLayout = layout
-        $0.backgroundColor = .gray
-    }
-    //    let collectionView = TagListView()
-    private let tagPlusButton = UIButton(type: .system).then {
-        $0.setTitle("+", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 32)
-        $0.setTitleColor(UIColor(named: "gray-700"), for: .normal)
-        $0.backgroundColor = UIColor(named: "gray-000")
-        $0.layer.cornerRadius = 20
-        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
-        $0.layer.borderWidth = 2
     }
     private let groupChoiceLabel = UILabel().then {
         $0.text = "어느 그룹에 업로드 하시겠습니까?"
@@ -67,9 +45,6 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = .white
         finishFeedWirte()
         placeTextField.delegate = self
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(TagListCell.self, forCellWithReuseIdentifier: cellIdentifier)
         placeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,13 +57,11 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
     private func addSubViews() {
         [
             placeTextField,
-            collectionView,
             explainLabel,
             groupChoiceLabel,
             groupChoiceButton
         ].forEach({view.addSubview($0)})
         placeTextField.addSubview(placeTextFieldTextLengthLabel)
-        collectionView.addSubview(tagPlusButton)
     }
     private func makeConstraints() {
         placeTextField.snp.makeConstraints {
@@ -103,13 +76,8 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
             $0.top.equalTo(placeTextField.snp.bottom).offset(24)
             $0.left.equalToSuperview().inset(25)
         }
-        collectionView.snp.makeConstraints {
-            $0.top.equalTo(explainLabel.snp.bottom).offset(6)
-            $0.left.right.equalToSuperview().inset(25)
-            $0.height.equalTo(200)
-        }
         groupChoiceLabel.snp.makeConstraints {
-            $0.top.equalTo(collectionView.snp.bottom).offset(56)
+            $0.top.equalToSuperview().inset(300)
             $0.left.equalToSuperview().inset(25)
         }
         groupChoiceButton.snp.makeConstraints {
@@ -117,11 +85,6 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
             $0.left.equalToSuperview().inset(25)
             $0.right.equalToSuperview().inset(165)
             $0.height.equalTo(38)
-        }
-        tagPlusButton.snp.makeConstraints {
-            $0.height.equalTo(40)
-            $0.width.equalTo(50)
-            $0.top.left.equalToSuperview().inset(3)
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -155,16 +118,3 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension FeedContentViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: 40)
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? TagListCell else {
-            return UICollectionViewCell()}
-        return cell
-    }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
-    }
-}
