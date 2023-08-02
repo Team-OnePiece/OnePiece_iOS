@@ -134,6 +134,11 @@ extension MainViewController: UIImagePickerControllerDelegate {
             self.moveView(targetView: FeedContentViewController(), title: "피드 작성")
         }
     }
+    @objc func clickSetting() {
+        let alert = ContentAlert()
+        alert.modalPresentationStyle = .overFullScreen
+        self.navigationController?.pushViewController(alert, animated: true)
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -143,7 +148,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! CustomCell
-        //        cell.textLabel?.text = cellArr[indexPath.row]
+        
+        cell.feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
         return cell
     }
 }

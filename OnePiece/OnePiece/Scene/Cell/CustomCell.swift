@@ -34,7 +34,7 @@ class CustomCell: UITableViewCell {
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
-    private let feedSettingButton = UIButton(type: .system).then {
+    let feedSettingButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "feedSetting"), for: .normal)
         $0.tintColor = UIColor(named: "gray-800")
     }
@@ -62,7 +62,6 @@ class CustomCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
-        feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
         likeButton.addTarget(self, action: #selector(clikcLike), for: .touchUpInside)
         addSubviews()
         makeConstraints()
@@ -122,12 +121,6 @@ class CustomCell: UITableViewCell {
             $0.top.equalTo(countLikeLabel.snp.bottom).offset(7)
             $0.left.equalToSuperview().inset(12)
         }
-    }
-    @objc private func clickSetting() {
-        let alert = ContentAlert()
-        alert.modalPresentationStyle = .overFullScreen
-        //UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
-        //선배님이 보여주신 코드 수정하기
     }
     @objc private func clikcLike() {
         isLiked.toggle()
