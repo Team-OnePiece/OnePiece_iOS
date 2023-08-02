@@ -1,10 +1,3 @@
-//
-//  MyPage.swift
-//  OnePiece
-//
-//  Created by 조영준 on 2023/07/11.
-//
-
 import UIKit
 import SnapKit
 import Then
@@ -29,7 +22,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
     }
     private let nickNameModifyTextField = DefaultTextField(placeholder: "")
-    private let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let nickNameCheckButton = DefaultButton(type: .system, title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let nickNameEnterLabel = UILabel().then {
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
@@ -146,7 +139,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         guard let nickNameModify = nickNameModifyTextField.text,
               !nickNameModify.isEmpty
         else {
-            !nickNameCheckButton.isEnabled
+            nickNameEnterLabel.text = "별명을 확인하세요"
             return
         }
         let alert = DefaultAlert(title: "사용 가능한 별명입니다.")

@@ -28,7 +28,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private let idTextField = DefaultTextField(placeholder: "아이디")
     private let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
     private var eyeButton = UIButton(type: .custom)
-    private let loginButton = DefaultButton(title: "로그인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let loginButton = DefaultButton(type: .system, title: "로그인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let loginFailLabel = UILabel().then {
         $0.text = ""
         $0.textColor = .red

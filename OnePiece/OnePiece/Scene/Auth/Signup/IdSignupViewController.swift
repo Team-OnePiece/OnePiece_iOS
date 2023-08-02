@@ -13,8 +13,8 @@ import Then
 class IdSignupViewController: UIViewController, UITextFieldDelegate {
     
     private let idTextField = DefaultTextField(placeholder: "아이디(영문, 숫자 7~20자)")
-    private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let idCheckButton = DefaultButton(type: .system, title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let nextPageButton = DefaultButton(type: .system, title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress1"))
     private let idEnterLabel = UILabel().then {
         $0.text = ""

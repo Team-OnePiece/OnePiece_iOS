@@ -14,8 +14,8 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
     
     private let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
     private let nickNameTextField = DefaultTextField(placeholder: "별명(2~9자 이내 한글)")
-    private let nickNameCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    private let signupButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let nickNameCheckButton = DefaultButton(type: .system, title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let signupButton = DefaultButton(type: .system, title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress4"))
     private let nickNameEnterLabel = UILabel().then {
         $0.text = ""
