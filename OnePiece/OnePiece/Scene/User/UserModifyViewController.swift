@@ -22,7 +22,9 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
     }
     private let nickNameModifyTextField = DefaultTextField(placeholder: "")
-    private let nickNameCheckButton = DefaultButton(type: .system, title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let nickNameCheckButton = DefaultButton(type: .system, title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
+        $0.isEnabled = false
+    }
     private let nickNameEnterLabel = UILabel().then {
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
@@ -107,7 +109,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         guard let nickName = nickNameModifyTextField.text,
               !nickName.isEmpty
         else {
-            nickNameEnterLabel.text = "별명을 확인하세요"
+            self.navigationController?.popViewController(animated: true)
             return
         }
         let provider = MoyaProvider<UserAPI>(plugins: [MoyaLoggerPlugin()])
@@ -157,7 +159,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
                     let alert = DefaultAlert(title: "이미 사용 된 별명입니다.")
                     self.present(alert, animated: true)
                 default:
-                    self.nickNameEnterLabel.text = "별명을 확인해주세요."
+                    self.nickNameEnterLabel.text = "다시 확인해주세요."
                 }
             case .failure(let err):
                 print("\(err.localizedDescription)")
@@ -168,9 +170,11 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         guard let nickNameCheck = nickNameModifyTextField.text,
               !nickNameCheck.isEmpty
         else {
+            nickNameCheckButton.isEnabled = false
             nickNameCheckButton.alpha = 0.8
             return
         }
+        nickNameCheckButton.isEnabled = true
         nickNameCheckButton.alpha  = 1.0
     }
 }
