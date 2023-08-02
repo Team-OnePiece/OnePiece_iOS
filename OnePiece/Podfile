@@ -10,5 +10,6 @@ pod 'SnapKit'
 pod 'Then'
 pod 'Moya'
 pod 'SwiftKeychainWrapper'
+pod 'TagListView'
 
 end

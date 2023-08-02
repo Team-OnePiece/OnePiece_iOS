@@ -6,12 +6,14 @@ PODS:
     - Alamofire (~> 5.0)
   - SnapKit (5.6.0)
   - SwiftKeychainWrapper (4.0.1)
+  - TagListView (1.4.1)
   - Then (3.0.0)
 
 DEPENDENCIES:
   - Moya
   - SnapKit
   - SwiftKeychainWrapper
+  - TagListView
   - Then
 
 SPEC REPOS:
@@ -20,6 +22,7 @@ SPEC REPOS:
     - Moya
     - SnapKit
     - SwiftKeychainWrapper
+    - TagListView
     - Then
 
 SPEC CHECKSUMS:
@@ -27,8 +30,9 @@ SPEC CHECKSUMS:
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
+  TagListView: a1c236d17960a0cf64156725a76ce6d73ebce2be
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 036bbd99243f6fc9cff5b774d91e4d07e1d4cf37
+PODFILE CHECKSUM: fe2ffb05f0d14596d4b32ce89b14f65ea0a8b4c0
 
 COCOAPODS: 1.12.1
