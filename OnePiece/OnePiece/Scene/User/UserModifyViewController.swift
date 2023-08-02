@@ -140,10 +140,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
     @objc private func clickNickNameCheck() {
         guard let nickNameModify = nickNameModifyTextField.text,
               !nickNameModify.isEmpty
-        else {
-            nickNameEnterLabel.text = "별명을 확인하세요"
-            return
-        }
+        else {return}
         let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
         self.present(alert, animated: true)
         nickNameEnterLabel.text = ""
