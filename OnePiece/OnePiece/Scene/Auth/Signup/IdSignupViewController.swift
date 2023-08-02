@@ -13,11 +13,12 @@ import Then
 class IdSignupViewController: UIViewController, UITextFieldDelegate {
     
     private let idTextField = DefaultTextField(placeholder: "아이디(영문, 숫자 7~20자)")
-    private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
+        $0.isEnabled = false
+    }
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress1"))
     private let idEnterLabel = UILabel().then {
-        $0.text = ""
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
@@ -98,10 +99,12 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
         guard let id = idTextField.text,
               !id.isEmpty
         else {
+            idCheckButton.isEnabled = false
             nextPageButton.alpha = 0.8
             idCheckButton.alpha = 0.8
             return
         }
+        idCheckButton.isEnabled = true
         nextPageButton.alpha  = 1.0
         idCheckButton.alpha = 1.0
     }
