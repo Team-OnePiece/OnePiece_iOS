@@ -30,7 +30,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private var eyeButton = UIButton(type: .custom)
     private let loginButton = DefaultButton(title: "로그인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let loginFailLabel = UILabel().then {
-        $0.text = ""
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }

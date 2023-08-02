@@ -24,7 +24,6 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress3"))
     private let schoolInfoEnterLabel = UILabel().then {
-        $0.text = ""
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }

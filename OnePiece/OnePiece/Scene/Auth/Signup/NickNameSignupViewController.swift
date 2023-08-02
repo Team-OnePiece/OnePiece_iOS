@@ -18,7 +18,6 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
     private let signupButton = DefaultButton(title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress4"))
     private let nickNameEnterLabel = UILabel().then {
-        $0.text = ""
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
