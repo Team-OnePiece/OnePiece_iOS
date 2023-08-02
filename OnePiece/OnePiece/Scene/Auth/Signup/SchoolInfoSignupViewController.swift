@@ -24,7 +24,6 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress3"))
     private let schoolInfoEnterLabel = UILabel().then {
-        $0.text = ""
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
@@ -117,6 +116,7 @@ extension SchoolInfoSignupViewController {
             schoolInfoEnterLabel.text = "다시 확인하세요."
             return
         }
+<<<<<<< HEAD
         userInfo.grade = Int(schoolGrade)
         userInfo.classNumber = Int(schoolClass)
         userInfo.number = Int(schoolNumber)
@@ -128,6 +128,36 @@ extension SchoolInfoSignupViewController {
         signupBackbutton.setTitleTextAttributes([
             .font: UIFont(name: "Orbit-Regular", size: 16)
         ], for: .normal)
+=======
+        let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.studentInfo(grade: Int(schoolGrade)!, classNumber: Int(schoolClass)!, number: Int(schoolNumber)!)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    userInfo.grade = Int(schoolGrade)
+                    userInfo.classNumber = Int(schoolClass)
+                    userInfo.number = Int(schoolNumber)
+                    self.schoolInfoEnterLabel.text = ""
+                    self.navigationController?.pushViewController(NickNameSignupViewController(), animated: true)
+                    let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+                    self.navigationItem.backBarButtonItem = signupBackbutton
+                    self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+                    signupBackbutton.setTitleTextAttributes([
+                        .font: UIFont(name: "Orbit-Regular", size: 16)
+                    ], for: .normal)
+                case 409:
+                    self.schoolInfoEnterLabel.text = "다시 확인하세요."
+                default:
+                    self.schoolInfoEnterLabel.text = "다시 확인하세요."
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+            }
+        }
+        
+>>>>>>> student-info
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {

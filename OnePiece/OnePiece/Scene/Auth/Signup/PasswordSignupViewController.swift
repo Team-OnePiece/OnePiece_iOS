@@ -12,7 +12,6 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
     private let progressImage = UIImageView(image: UIImage(named: "progress2"))
     private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let passwordEnterLabel = UILabel().then {
-        $0.text = ""
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
@@ -89,6 +88,16 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
         UIView.animate(withDuration: 0.3) {
             self.nextPageButton.transform = .identity
         }
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+                      let isBackSpace = strcmp(char, "\\b")
+                      if isBackSpace == -92 {
+                          return true
+                      }
+                }
+        guard passwordTextField.text!.count < 16 else { return false }
+        return true
     }
 }
 
