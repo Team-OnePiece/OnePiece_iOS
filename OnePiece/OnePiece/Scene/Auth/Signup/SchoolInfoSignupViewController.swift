@@ -116,19 +116,6 @@ extension SchoolInfoSignupViewController {
             schoolInfoEnterLabel.text = "다시 확인하세요."
             return
         }
-<<<<<<< HEAD
-        userInfo.grade = Int(schoolGrade)
-        userInfo.classNumber = Int(schoolClass)
-        userInfo.number = Int(schoolNumber)
-        schoolInfoEnterLabel.text = ""
-        self.navigationController?.pushViewController(NickNameSignupViewController(), animated: true)
-        let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = signupBackbutton
-        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-        signupBackbutton.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
-        ], for: .normal)
-=======
         let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
         provider.request(.studentInfo(grade: Int(schoolGrade)!, classNumber: Int(schoolClass)!, number: Int(schoolNumber)!)) { res in
             switch res {
@@ -156,8 +143,6 @@ extension SchoolInfoSignupViewController {
                 print("\(err.localizedDescription)")
             }
         }
-        
->>>>>>> student-info
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
