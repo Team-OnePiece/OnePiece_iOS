@@ -40,6 +40,14 @@
 			<integer>4</integer>
 		</dict>
 		<key>TagListView.xcscheme</key>
+<<<<<<< HEAD
+=======
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>Then.xcscheme</key>
+>>>>>>> tag-list
 		<dict>
 			<key>isShown</key>
 			<false/>
