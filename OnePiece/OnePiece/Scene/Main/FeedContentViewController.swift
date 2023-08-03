@@ -10,7 +10,7 @@ import SnapKit
 import TagListView
 import Then
 
-class FeedContentViewController: UIViewController, UITextFieldDelegate {
+class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListViewDelegate {
     private var count = 0
     private let cellIdentifier = "cellId"
     private var dataSource:[String] = []
@@ -98,8 +98,30 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
             $0.height.equalTo(38)
         }
     }
-    private func tagSetting() {
-        
+    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        tagListView.removeTagView(tagView)
+    }
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        if tagView.titleLabel?.text == "+" {
+            tagListView.addTag("fjsdkl")
+            tagView.enableRemoveButton = false
+            tagView.paddingX = 10
+        }
+    }
+    func tagSetting() {
+        tagListView.textFont = UIFont(name: "Orbit-Regular", size: 18)!
+        tagListView.alignment = .left
+        tagListView.borderWidth = 2
+        tagListView.borderColor = UIColor(named: "mainColor-2")
+        tagListView.tagBackgroundColor = .white
+        tagListView.textColor = UIColor(named: "gray-700")!
+        tagListView.marginX = 4
+        tagListView.marginY = 8
+        tagListView.paddingX = 30
+        tagListView.enableRemoveButton = true
+        tagListView.removeIconLineColor = UIColor(named: "gray-700")!
+        tagListView.removeButtonIconSize = 6
+        tagListView.addTag("+")
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         placeTextField.resignFirstResponder()
