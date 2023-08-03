@@ -81,7 +81,6 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         groupButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
-//            $0.left.right.equalToSuperview().inset(125)
         }
         mainLabel.snp.makeConstraints {
             $0.top.equalTo(mainLogoImage.snp.bottom).offset(31)
@@ -134,10 +133,14 @@ extension MainViewController: UIImagePickerControllerDelegate {
             self.moveView(targetView: FeedContentViewController(), title: "피드 작성")
         }
     }
-    @objc func clickSetting() {
+    func popupAlert() {
         let alert = ContentAlert()
-        alert.modalPresentationStyle = .overFullScreen
-        self.navigationController?.pushViewController(alert, animated: true)
+        let navigationController = UINavigationController(rootViewController: alert)
+        navigationController.modalPresentationStyle = .overFullScreen
+        present(navigationController, animated: true, completion: nil)
+    }
+    @objc func clickSetting() {
+        popupAlert()
     }
 }
 

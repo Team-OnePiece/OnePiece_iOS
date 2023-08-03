@@ -1,10 +1,3 @@
-//
-//  alert.swift
-//  OnePiece
-//
-//  Created by 조영준 on 2023/07/19.
-//
-
 import UIKit
 import SnapKit
 import Then
@@ -35,6 +28,9 @@ class ContentAlert: UIViewController {
         modifyButton.addTarget(self, action: #selector(clickModify), for: .touchUpInside)
         deleteButton.addTarget(self, action: #selector(clickDelete), for: .touchUpInside)
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.dismiss(animated: true)
+    }
     override func viewDidLayoutSubviews() {
         layout()
     }
@@ -61,9 +57,14 @@ class ContentAlert: UIViewController {
         }
     }
     @objc func clickModify() {
-//        self.navigationController?.pushViewController(FeedModifyViewController(), animated: true)
-//        self.dismiss(animated: true)
         self.navigationController?.pushViewController(FeedModifyViewController(), animated: true)
+        let feedModify = UIBarButtonItem(title: "피드 수정", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = feedModify
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+        feedModify.setTitleTextAttributes([
+            .font: UIFont(name: "Orbit-Regular", size: 16)
+        ], for: .normal)
+
     }
     @objc func clickDelete() {
         self.dismiss(animated: true)
