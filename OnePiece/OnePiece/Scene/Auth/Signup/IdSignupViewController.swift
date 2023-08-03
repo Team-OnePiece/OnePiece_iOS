@@ -13,10 +13,9 @@ import Then
 class IdSignupViewController: UIViewController, UITextFieldDelegate {
     
     private let idTextField = DefaultTextField(placeholder: "아이디(영문, 숫자 7~20자)")
-    private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
+    private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
         $0.isEnabled = false
     }
-    private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress1"))
     private let idEnterLabel = UILabel().then {
         $0.textColor = .red
@@ -28,7 +27,6 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
         idTextField.delegate = self
         idTextField.returnKeyType = .done
         nextPageButton.addTarget(self, action: #selector(clickNextePage), for: .touchUpInside)
-        idCheckButton.addTarget(self, action: #selector(idCheck), for: .touchUpInside)
         idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         setupKeyboardObservers()
     }
@@ -43,7 +41,6 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
         [
             progressImage,
             idTextField,
-            idCheckButton,
             idEnterLabel,
             nextPageButton
         ].forEach({view.addSubview($0)})
@@ -57,13 +54,7 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
         }
         idTextField.snp.makeConstraints {
             $0.top.equalTo(progressImage.snp.bottom).offset(44)
-            $0.left.equalToSuperview().inset(25)
-            $0.right.equalToSuperview().inset(105)
-        }
-        idCheckButton.snp.makeConstraints {
-            $0.top.equalTo(progressImage.snp.bottom).offset(44)
-            $0.left.equalTo(idTextField.snp.right).offset(8)
-            $0.right.equalToSuperview().inset(25)
+            $0.left.right.equalToSuperview().inset(25)
         }
         idEnterLabel.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom).offset(8)
@@ -99,14 +90,12 @@ class IdSignupViewController: UIViewController, UITextFieldDelegate {
         guard let id = idTextField.text,
               !id.isEmpty
         else {
-            idCheckButton.isEnabled = false
+            nextPageButton.isEnabled = false
             nextPageButton.alpha = 0.8
-            idCheckButton.alpha = 0.8
             return
         }
-        idCheckButton.isEnabled = true
+        nextPageButton.isEnabled = true
         nextPageButton.alpha  = 1.0
-        idCheckButton.alpha = 1.0
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
@@ -125,21 +114,26 @@ extension IdSignupViewController {
         idTextField.resignFirstResponder()
         return true
     }
-    @objc private func idCheck() {
+    @objc private func clickNextePage() {
+        let userInfo = UserInfo.shared
         guard let id = idTextField.text,
               !id.isEmpty
-        else {
-            idEnterLabel.text = "아이디를 확인하세요."
-            return
-        }
-        let provider  = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
+        else {return}
+        let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
         provider.request(.idDuplicate(id: id)) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
                 case 200:
-                    let alert = DefaultAlert(title: "사용 가능한 아이디입니다.")
-                    self.present(alert, animated: true)
+                    userInfo.accountId = id
+                    self.idEnterLabel.text = ""
+                    self.navigationController?.pushViewController(PasswordSignupViewController(), animated: true)
+                    let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+                    self.navigationItem.backBarButtonItem = signupBackbutton
+                    self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+                    signupBackbutton.setTitleTextAttributes([
+                        .font: UIFont(name: "Orbit-Regular", size: 16)
+                    ], for: .normal)
                 case 409:
                     let alert = DefaultAlert(title: "이미 사용 된 아이디입니다.")
                     self.present(alert, animated: true)
@@ -150,23 +144,5 @@ extension IdSignupViewController {
                 print("\(err.localizedDescription)")
             }
         }
-    }
-    @objc private func clickNextePage() {
-        let userInfo = UserInfo.shared
-        guard let id = idTextField.text,
-              !id.isEmpty
-        else {
-            idEnterLabel.text = "아이디를 확인하세요."
-            return
-        }
-        userInfo.accountId = id
-        idEnterLabel.text = ""
-        self.navigationController?.pushViewController(PasswordSignupViewController(), animated: true)
-        let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = signupBackbutton
-        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-        signupBackbutton.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
-        ], for: .normal)
     }
 }

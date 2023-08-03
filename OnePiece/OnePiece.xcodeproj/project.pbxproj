@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21A2C3DFA2ACB9E5B9D24B6D /* Pods_OnePiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638D3C46E2943A0EBB5CEBE8 /* Pods_OnePiece.framework */; };
+		8808321D2A7BF9E3000B10A2 /* Pods_OnePiece.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638D3C46E2943A0EBB5CEBE8 /* Pods_OnePiece.framework */; };
 		880A42A92A4E70D40073DDDC /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 880A42A72A4E70D40073DDDC /* OFL.txt */; };
 		880A42AA2A4E70D40073DDDC /* Orbit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 880A42A82A4E70D40073DDDC /* Orbit-Regular.ttf */; };
 		880A42B42A5167E30073DDDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A42B32A5167E30073DDDC /* MainViewController.swift */; };
@@ -75,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21A2C3DFA2ACB9E5B9D24B6D /* Pods_OnePiece.framework in Frameworks */,
+				8808321D2A7BF9E3000B10A2 /* Pods_OnePiece.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,12 +565,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8836BP5ACL;
+				ENABLE_BITCODE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnePiece/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -593,12 +595,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8836BP5ACL;
+				ENABLE_BITCODE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnePiece/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
