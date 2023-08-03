@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import TagListView
 import Then
 
 class FeedContentViewController: UIViewController, UITextFieldDelegate {
@@ -40,12 +41,16 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
         $0.layer.borderWidth = 2
     }
+    let tagListView = TagListView().then {
+        $0.backgroundColor = .red
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         finishFeedWirte()
         placeTextField.delegate = self
         placeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        tagSetting()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -58,6 +63,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
         [
             placeTextField,
             explainLabel,
+            tagListView,
             groupChoiceLabel,
             groupChoiceButton
         ].forEach({view.addSubview($0)})
@@ -76,8 +82,13 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
             $0.top.equalTo(placeTextField.snp.bottom).offset(24)
             $0.left.equalToSuperview().inset(25)
         }
+        tagListView.snp.makeConstraints {
+            $0.top.equalTo(explainLabel.snp.bottom).offset(6)
+            $0.height.equalTo(200)
+            $0.left.right.equalToSuperview().inset(25)
+        }
         groupChoiceLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(300)
+            $0.top.equalToSuperview().inset(600)
             $0.left.equalToSuperview().inset(25)
         }
         groupChoiceButton.snp.makeConstraints {
@@ -86,6 +97,9 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate {
             $0.right.equalToSuperview().inset(165)
             $0.height.equalTo(38)
         }
+    }
+    private func tagSetting() {
+        
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         placeTextField.resignFirstResponder()
