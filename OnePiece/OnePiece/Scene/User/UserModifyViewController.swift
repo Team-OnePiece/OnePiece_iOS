@@ -1,15 +1,10 @@
-//
-//  MyPage.swift
-//  OnePiece
-//
-//  Created by 조영준 on 2023/07/11.
-//
-
 import UIKit
 import SnapKit
 import Then
+import Moya
 
 class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigationControllerDelegate {
+    private var selectImageURL: String = ""
     private let profileBackground = UIImageView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 50
@@ -26,10 +21,11 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         $0.setTitleColor(UIColor(named: "gray-800"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
     }
-    private let idModifyTextField = DefaultTextField(placeholder: "핫걸")
-    private let idCheckButton = DefaultButton(title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
-    private let idEnterLabel = UILabel().then {
-        $0.text = ""
+    private let nickNameModifyTextField = DefaultTextField(placeholder: "")
+    private let nickNameCheckButton = DefaultButton(type: .system, title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
+        $0.isEnabled = false
+    }
+    private let nickNameEnterLabel = UILabel().then {
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
@@ -37,10 +33,10 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         super.viewDidLoad()
         view.backgroundColor = .white
         profileModifyButton.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
-        idCheckButton.addTarget(self, action: #selector(clickIdCheck), for: .touchUpInside)
+        nickNameCheckButton.addTarget(self, action: #selector(clickNickNameCheck), for: .touchUpInside)
         finishModify()
-        idModifyTextField.delegate = self
-        idModifyTextField.addTarget(self, action: #selector(textFieldDidChange(_ :)), for: .allEditingEvents)
+        nickNameModifyTextField.delegate = self
+        nickNameModifyTextField.addTarget(self, action: #selector(textFieldDidChange(_ :)), for: .allEditingEvents)
     }
     override func viewWillLayoutSubviews() {
         layout()
@@ -49,9 +45,9 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         [
             profileBackground,
             profileModifyButton,
-            idModifyTextField,
-            idCheckButton,
-            idEnterLabel
+            nickNameModifyTextField,
+            nickNameCheckButton,
+            nickNameEnterLabel
         ].forEach({view.addSubview($0)})
         profileBackground.addSubview(profileImage)
         
@@ -68,18 +64,18 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
             $0.top.equalTo(profileBackground.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
         }
-        idModifyTextField.snp.makeConstraints {
+        nickNameModifyTextField.snp.makeConstraints {
             $0.top.equalTo(profileModifyButton.snp.bottom).offset(60)
             $0.left.equalToSuperview().inset(25)
             $0.right.equalToSuperview().inset(109)
         }
-        idCheckButton.snp.makeConstraints {
+        nickNameCheckButton.snp.makeConstraints {
             $0.top.equalTo(profileModifyButton.snp.bottom).offset(60)
-            $0.left.equalTo(idModifyTextField.snp.right).offset(4)
+            $0.left.equalTo(nickNameModifyTextField.snp.right).offset(4)
             $0.right.equalToSuperview().inset(25)
         }
-        idEnterLabel.snp.makeConstraints {
-            $0.top.equalTo(idModifyTextField.snp.bottom).offset(8)
+        nickNameEnterLabel.snp.makeConstraints {
+            $0.top.equalTo(nickNameModifyTextField.snp.bottom).offset(8)
             $0.left.equalToSuperview().inset(28)
         }
     }
@@ -110,7 +106,29 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         }
     }
     @objc private func clickMoveUserPage() {
-        self.navigationController?.popViewController(animated: true)
+        guard let nickName = nickNameModifyTextField.text,
+              !nickName.isEmpty
+        else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        let provider = MoyaProvider<UserAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.userInfoUpdate(userInfo: nickName)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    let alert = DefaultAlert(title: "별명이 변경되었습니다.")
+                    self.present(alert, animated: true)
+                    self.navigationController?.popViewController(animated: true)
+                default:
+                    self.nickNameEnterLabel.text = "별명을 확인하세요"
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+            }
+        }
     }
     @objc private func clickProfileModifyButton() {
         let picker = UIImagePickerController()
@@ -119,24 +137,41 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         picker.delegate = self
         self.present(picker, animated: true)
     }
-    @objc private func clickIdCheck() {
-        guard let idModify = idModifyTextField.text,
-              !idModify.isEmpty
-        else {
-            idEnterLabel.text = "별명을 입력하세요."
-            return
-        }
+    @objc private func clickNickNameCheck() {
+        guard let nickNameModify = nickNameModifyTextField.text,
+              !nickNameModify.isEmpty
+        else {return}
         let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
         self.present(alert, animated: true)
-        idEnterLabel.text = ""
+        nickNameEnterLabel.text = ""
+        let provider  = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.nickNameDuplicate(nickName: nickNameModify)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
+                    self.present(alert, animated: true)
+                case 409:
+                    let alert = DefaultAlert(title: "이미 사용 된 별명입니다.")
+                    self.present(alert, animated: true)
+                default:
+                    self.nickNameEnterLabel.text = "다시 확인해주세요."
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+            }
+        }
     }
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard let idCheck = idModifyTextField.text,
-              !idCheck.isEmpty
+        guard let nickNameCheck = nickNameModifyTextField.text,
+              !nickNameCheck.isEmpty
         else {
-            idCheckButton.alpha = 0.8
+            nickNameCheckButton.isEnabled = false
+            nickNameCheckButton.alpha = 0.8
             return
         }
-        idCheckButton.alpha  = 1.0
+        nickNameCheckButton.isEnabled = true
+        nickNameCheckButton.alpha  = 1.0
     }
 }

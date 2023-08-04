@@ -33,7 +33,12 @@
 		888D49932A6C2E6600124F93 /* FeedModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D49922A6C2E6500124F93 /* FeedModifyViewController.swift */; };
 		888D49C02A6F891D00124F93 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D49BF2A6F891D00124F93 /* UserInfo.swift */; };
 		88B8906F2A67A39400BDFD55 /* ContentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8906E2A67A39400BDFD55 /* ContentAlert.swift */; };
+<<<<<<< HEAD
 		88BFF9F42A793CE10016D816 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BFF9F32A793CE10016D816 /* Header.swift */; };
+=======
+		88BFF9EB2A77F27A0016D816 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BFF9EA2A77F27A0016D816 /* Header.swift */; };
+		88BFF9ED2A77F5880016D816 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BFF9EC2A77F5880016D816 /* UserAPI.swift */; };
+>>>>>>> user-duplicate
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +70,12 @@
 		888D49922A6C2E6500124F93 /* FeedModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModifyViewController.swift; sourceTree = "<group>"; };
 		888D49BF2A6F891D00124F93 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		88B8906E2A67A39400BDFD55 /* ContentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAlert.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		88BFF9F32A793CE10016D816 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+=======
+		88BFF9EA2A77F27A0016D816 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		88BFF9EC2A77F5880016D816 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+>>>>>>> user-duplicate
 		A1B02E6DA75B3D95E03B89B7 /* Pods-OnePiece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.release.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.release.xcconfig"; sourceTree = "<group>"; };
 		F32A90BC03FB9EDFE738B3DB /* Pods-OnePiece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePiece.debug.xcconfig"; path = "Target Support Files/Pods-OnePiece/Pods-OnePiece.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,6 +174,7 @@
 				888D492D2A69739200124F93 /* Header */,
 				880A43772A5AF0AB0073DDDC /* Plugin */,
 				880A437A2A5AF1D50073DDDC /* Auth */,
+				88BFF9EE2A7907890016D816 /* User */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -266,7 +277,11 @@
 		888D492D2A69739200124F93 /* Header */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				88BFF9F32A793CE10016D816 /* Header.swift */,
+=======
+				88BFF9EA2A77F27A0016D816 /* Header.swift */,
+>>>>>>> user-duplicate
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -285,6 +300,14 @@
 				888D49BF2A6F891D00124F93 /* UserInfo.swift */,
 			);
 			path = UserSignup;
+			sourceTree = "<group>";
+		};
+		88BFF9EE2A7907890016D816 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				88BFF9EC2A77F5880016D816 /* UserAPI.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,11 +442,16 @@
 				880A43362A5827EA0073DDDC /* AuthAPI.swift in Sources */,
 				880A43382A582C580073DDDC /* DefaultButton.swift in Sources */,
 				880A43E42A5D4ACF0073DDDC /* SchoolInfoSignupViewController.swift in Sources */,
+<<<<<<< HEAD
 				88BFF9F42A793CE10016D816 /* Header.swift in Sources */,
+=======
+				88BFF9EB2A77F27A0016D816 /* Header.swift in Sources */,
+>>>>>>> user-duplicate
 				880A42CD2A56E2110073DDDC /* FeedContentViewController.swift in Sources */,
 				885160E82A3C54860029A414 /* SceneDelegate.swift in Sources */,
 				88B8906F2A67A39400BDFD55 /* ContentAlert.swift in Sources */,
 				888D49C02A6F891D00124F93 /* UserInfo.swift in Sources */,
+				88BFF9ED2A77F5880016D816 /* UserAPI.swift in Sources */,
 				880A42B42A5167E30073DDDC /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

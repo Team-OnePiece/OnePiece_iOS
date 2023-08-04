@@ -35,6 +35,6 @@ extension UserAPI: TargetType {
     }
     
     var headers: [String : String]? {
-        return Header.tokenIsEmpty.header()
+        return Header.accessToken.header()
     }
 }

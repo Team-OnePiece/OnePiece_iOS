@@ -27,7 +27,7 @@ class UserViewController: UIViewController {
         $0.font = UIFont(name: "Orbit-Regular", size: 20)
         $0.textColor = UIColor(named: "gray-800")
     }
-    private let modifyButton = DefaultButton(title: "수정하기", backgroundColor: .white, titleColor: UIColor(named: "gray-700")!).then {
+    private let modifyButton = DefaultButton(type: .system, title: "수정하기", backgroundColor: .white, titleColor: UIColor(named: "gray-700")!).then {
         $0.layer.borderWidth = 0.5
         $0.layer.borderColor = UIColor(named: "gray-400")?.cgColor
     }

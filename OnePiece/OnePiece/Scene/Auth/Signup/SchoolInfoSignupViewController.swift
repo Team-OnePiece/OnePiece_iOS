@@ -21,7 +21,7 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
     private let gradeTextField = DefaultTextField(placeholder: "학년")
     private let classTextField = DefaultTextField(placeholder: "반")
     private let numberTextField = DefaultTextField(placeholder: "번호")
-    private let nextPageButton = DefaultButton(title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let nextPageButton = DefaultButton(type: .system, title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
     private let progressImage = UIImageView(image: UIImage(named: "progress3"))
     private let schoolInfoEnterLabel = UILabel().then {
         $0.textColor = .red
