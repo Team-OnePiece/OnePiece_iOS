@@ -90,6 +90,25 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    private func getImage(source image: UIImage) -> Void {
+        let provider = MoyaProvider<ImageAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.uploadImage(data: image.jpegData(compressionQuality: 0.1) ?? Data())) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    print("성공")
+                default:
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+                print(err.localizedDescription)
+                //둘 다 가능한지 보기
+            }
+        }
+        
+    }
 }
 
 extension UserModifyViewController: UIImagePickerControllerDelegate {
@@ -99,10 +118,13 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
-            let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-            self.profileBackground.image = img
+           guard let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {return}
+            self.profileBackground.image = pickedImage
             self.profileImage.isHidden = true
             self.profileBackground.layer.borderWidth = 0
+            self.dismiss(animated: true, completion: {
+                self.getImage(source: pickedImage)
+                   })
         }
     }
     @objc private func clickMoveUserPage() {

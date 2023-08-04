@@ -39,6 +39,7 @@
 		880832AB2A7D01FF000B10A2 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832AA2A7D01FF000B10A2 /* Header.swift */; };
 		880832AD2A7D0207000B10A2 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */; };
 		880832B02A7D03BE000B10A2 /* TagListView in Frameworks */ = {isa = PBXBuildFile; productRef = 880832AF2A7D03BE000B10A2 /* TagListView */; };
+		880832B32A7D2ABA000B10A2 /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832B22A7D2ABA000B10A2 /* ImageAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		880832A82A7D01F8000B10A2 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		880832AA2A7D01FF000B10A2 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
+		880832B22A7D2ABA000B10A2 /* ImageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				8808329F2A7D01C5000B10A2 /* Header */,
 				880832A02A7D01CD000B10A2 /* Plugin */,
 				8808329E2A7D01BF000B10A2 /* User */,
+				880832B12A7D2AA6000B10A2 /* Image */,
 				880832A72A7D01EE000B10A2 /* UserSignup */,
 			);
 			path = Service;
@@ -285,6 +288,14 @@
 			path = UserSignup;
 			sourceTree = "<group>";
 		};
+		880832B12A7D2AA6000B10A2 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				880832B22A7D2ABA000B10A2 /* ImageAPI.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -385,6 +396,7 @@
 				8808328F2A7D0036000B10A2 /* UserViewController.swift in Sources */,
 				880832892A7CFF63000B10A2 /* SchoolInfoViewController.swift in Sources */,
 				880832912A7D0047000B10A2 /* MainViewController.swift in Sources */,
+				880832B32A7D2ABA000B10A2 /* ImageAPI.swift in Sources */,
 				880832A62A7D01E4000B10A2 /* UserAPI.swift in Sources */,
 				8808328B2A7D0010000B10A2 /* UserModifyViewController.swift in Sources */,
 				880832A42A7D01DF000B10A2 /* AuthAPI.swift in Sources */,
