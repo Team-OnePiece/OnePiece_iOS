@@ -7,14 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E8C81D105E09E6DC9CEBA8D /* Pods_OnePieceiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78CB0FE592A0F970A4A9A0C8 /* Pods_OnePieceiOS.framework */; };
 		8808324D2A7CFC1E000B10A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808324C2A7CFC1E000B10A2 /* AppDelegate.swift */; };
 		8808324F2A7CFC1E000B10A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808324E2A7CFC1E000B10A2 /* SceneDelegate.swift */; };
 		880832562A7CFC1F000B10A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 880832552A7CFC1F000B10A2 /* Assets.xcassets */; };
 		880832592A7CFC1F000B10A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 880832572A7CFC1F000B10A2 /* LaunchScreen.storyboard */; };
-		880832622A7CFCA3000B10A2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 880832612A7CFCA3000B10A2 /* SnapKit */; };
-		880832652A7CFCAC000B10A2 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 880832642A7CFCAC000B10A2 /* Then */; };
-		880832682A7CFCC4000B10A2 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 880832672A7CFCC4000B10A2 /* Moya */; };
-		8808326B2A7CFD16000B10A2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 8808326A2A7CFD16000B10A2 /* SwiftKeychainWrapper */; };
 		880832712A7CFDC3000B10A2 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832702A7CFDC3000B10A2 /* DefaultButton.swift */; };
 		880832732A7CFE27000B10A2 /* ContentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832722A7CFE27000B10A2 /* ContentAlert.swift */; };
 		880832752A7CFE49000B10A2 /* DefaultAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832742A7CFE49000B10A2 /* DefaultAlert.swift */; };
@@ -38,10 +35,11 @@
 		880832A92A7D01F8000B10A2 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832A82A7D01F8000B10A2 /* UserInfo.swift */; };
 		880832AB2A7D01FF000B10A2 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832AA2A7D01FF000B10A2 /* Header.swift */; };
 		880832AD2A7D0207000B10A2 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */; };
-		880832B02A7D03BE000B10A2 /* TagListView in Frameworks */ = {isa = PBXBuildFile; productRef = 880832AF2A7D03BE000B10A2 /* TagListView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49977B21F68D12928257524A /* Pods-OnePieceiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePieceiOS.debug.xcconfig"; path = "Target Support Files/Pods-OnePieceiOS/Pods-OnePieceiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		78CB0FE592A0F970A4A9A0C8 /* Pods_OnePieceiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePieceiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		880832492A7CFC1E000B10A2 /* OnePieceiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePieceiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8808324C2A7CFC1E000B10A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8808324E2A7CFC1E000B10A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +69,7 @@
 		880832A82A7D01F8000B10A2 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		880832AA2A7D01FF000B10A2 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
+		BC9629BA97069CBE73474D46 /* Pods-OnePieceiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePieceiOS.release.xcconfig"; path = "Target Support Files/Pods-OnePieceiOS/Pods-OnePieceiOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				880832622A7CFCA3000B10A2 /* SnapKit in Frameworks */,
-				880832652A7CFCAC000B10A2 /* Then in Frameworks */,
-				8808326B2A7CFD16000B10A2 /* SwiftKeychainWrapper in Frameworks */,
-				880832682A7CFCC4000B10A2 /* Moya in Frameworks */,
-				880832B02A7D03BE000B10A2 /* TagListView in Frameworks */,
+				4E8C81D105E09E6DC9CEBA8D /* Pods_OnePieceiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +89,8 @@
 			children = (
 				8808324B2A7CFC1E000B10A2 /* OnePieceiOS */,
 				8808324A2A7CFC1E000B10A2 /* Products */,
+				BE769549C35CFA3966EE19DB /* Pods */,
+				DD64F2F4F8293A1A0FE2E482 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,6 +282,23 @@
 			path = UserSignup;
 			sourceTree = "<group>";
 		};
+		BE769549C35CFA3966EE19DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				49977B21F68D12928257524A /* Pods-OnePieceiOS.debug.xcconfig */,
+				BC9629BA97069CBE73474D46 /* Pods-OnePieceiOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DD64F2F4F8293A1A0FE2E482 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				78CB0FE592A0F970A4A9A0C8 /* Pods_OnePieceiOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,22 +306,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8808325D2A7CFC1F000B10A2 /* Build configuration list for PBXNativeTarget "OnePieceiOS" */;
 			buildPhases = (
+				6258534E4BB691354D56DB60 /* [CP] Check Pods Manifest.lock */,
 				880832452A7CFC1E000B10A2 /* Sources */,
 				880832462A7CFC1E000B10A2 /* Frameworks */,
 				880832472A7CFC1E000B10A2 /* Resources */,
+				DB43200D41956264628531C4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = OnePieceiOS;
-			packageProductDependencies = (
-				880832612A7CFCA3000B10A2 /* SnapKit */,
-				880832642A7CFCAC000B10A2 /* Then */,
-				880832672A7CFCC4000B10A2 /* Moya */,
-				8808326A2A7CFD16000B10A2 /* SwiftKeychainWrapper */,
-				880832AF2A7D03BE000B10A2 /* TagListView */,
-			);
 			productName = OnePieceiOS;
 			productReference = 880832492A7CFC1E000B10A2 /* OnePieceiOS.app */;
 			productType = "com.apple.product-type.application";
@@ -336,13 +345,6 @@
 				Base,
 			);
 			mainGroup = 880832402A7CFC1E000B10A2;
-			packageReferences = (
-				880832602A7CFCA3000B10A2 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				880832632A7CFCAC000B10A2 /* XCRemoteSwiftPackageReference "Then" */,
-				880832662A7CFCC3000B10A2 /* XCRemoteSwiftPackageReference "Moya" */,
-				880832692A7CFD16000B10A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
-				880832AE2A7D03BE000B10A2 /* XCRemoteSwiftPackageReference "TagListView" */,
-			);
 			productRefGroup = 8808324A2A7CFC1E000B10A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -365,6 +367,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6258534E4BB691354D56DB60 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OnePieceiOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB43200D41956264628531C4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnePieceiOS/Pods-OnePieceiOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnePieceiOS/Pods-OnePieceiOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OnePieceiOS/Pods-OnePieceiOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		880832452A7CFC1E000B10A2 /* Sources */ = {
@@ -527,6 +571,7 @@
 		};
 		8808325E2A7CFC1F000B10A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49977B21F68D12928257524A /* Pods-OnePieceiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -554,6 +599,7 @@
 		};
 		8808325F2A7CFC1F000B10A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC9629BA97069CBE73474D46 /* Pods-OnePieceiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -601,77 +647,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		880832602A7CFCA3000B10A2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-		880832632A7CFCAC000B10A2 /* XCRemoteSwiftPackageReference "Then" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/devxoul/Then";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-		880832662A7CFCC3000B10A2 /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.0;
-			};
-		};
-		880832692A7CFD16000B10A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		880832AE2A7D03BE000B10A2 /* XCRemoteSwiftPackageReference "TagListView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ElaWorkshop/TagListView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		880832612A7CFCA3000B10A2 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 880832602A7CFCA3000B10A2 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		880832642A7CFCAC000B10A2 /* Then */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 880832632A7CFCAC000B10A2 /* XCRemoteSwiftPackageReference "Then" */;
-			productName = Then;
-		};
-		880832672A7CFCC4000B10A2 /* Moya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 880832662A7CFCC3000B10A2 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
-		};
-		8808326A2A7CFD16000B10A2 /* SwiftKeychainWrapper */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 880832692A7CFD16000B10A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
-			productName = SwiftKeychainWrapper;
-		};
-		880832AF2A7D03BE000B10A2 /* TagListView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 880832AE2A7D03BE000B10A2 /* XCRemoteSwiftPackageReference "TagListView" */;
-			productName = TagListView;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 880832412A7CFC1E000B10A2 /* Project object */;
 }

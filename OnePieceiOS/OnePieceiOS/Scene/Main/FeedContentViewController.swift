@@ -1,10 +1,3 @@
-//
-//  FeedContentPage.swift
-//  OnePiece
-//
-//  Created by 조영준 on 2023/07/06.
-//
-
 import UIKit
 import SnapKit
 import TagListView
@@ -28,6 +21,9 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         $0.textColor = UIColor(named: "gray-500")
         $0.font = UIFont(name: "Orbit-Regular", size: 10)
     }
+    let textttt = UITextField().then {
+        
+    }
     private let groupChoiceLabel = UILabel().then {
         $0.text = "어느 그룹에 업로드 하시겠습니까?"
         $0.textColor = UIColor(named: "gray-900")
@@ -41,6 +37,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
         $0.layer.borderWidth = 2
     }
+
     let tagListView = TagListView().then {
         $0.backgroundColor = .red
     }
@@ -103,9 +100,8 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     }
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         if tagView.titleLabel?.text == "+" {
-            tagListView.addTag("fjsdkl")
+            tagListView.addTag("\(placeTextField.text ?? "")")
             tagView.enableRemoveButton = false
-            tagView.paddingX = 10
         }
     }
     func tagSetting() {
@@ -117,7 +113,10 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         tagListView.textColor = UIColor(named: "gray-700")!
         tagListView.marginX = 4
         tagListView.marginY = 8
-        tagListView.paddingX = 30
+        tagListView.delegate = self
+        tagListView.paddingX = 24
+        tagListView.paddingY = 11
+        tagListView.cornerRadius = 20
         tagListView.enableRemoveButton = true
         tagListView.removeIconLineColor = UIColor(named: "gray-700")!
         tagListView.removeButtonIconSize = 6
