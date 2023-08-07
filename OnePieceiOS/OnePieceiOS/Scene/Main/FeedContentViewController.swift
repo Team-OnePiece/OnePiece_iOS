@@ -70,7 +70,9 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         view.backgroundColor = .white
         finishFeedWirte()
         placeTextField.delegate = self
-        placeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        placeTextField.addTarget(self, action: #selector(placeTextFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+        tagTextField.delegate = self
+        tagAddButton.addTarget(self, action: #selector(clickAddTag), for: .touchUpInside)
         tagSetting()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -98,8 +100,8 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             $0.left.right.equalToSuperview().inset(25)
         }
         placeTextFieldTextLengthLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(7)
-            $0.right.equalToSuperview().inset(10)
+            $0.bottom.equalToSuperview().inset(10)
+            $0.right.equalToSuperview().inset(21)
         }
         explainLabel.snp.makeConstraints {
             $0.top.equalTo(placeTextField.snp.bottom).offset(24)
@@ -133,13 +135,6 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         tagListView.removeTagView(tagView)
     }
-    
-//    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
-//        if tagView.titleLabel?.text == "+" {
-//            tagListView.addTag("\(placeTextField.text ?? "")")
-//            tagView.enableRemoveButton = false
-//        }
-//    }
     func tagSetting() {
         tagListView.textFont = UIFont(name: "Orbit-Regular", size: 18)!
         tagListView.alignment = .left
@@ -156,14 +151,16 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         tagListView.enableRemoveButton = true
         tagListView.removeIconLineColor = UIColor(named: "gray-700")!
         tagListView.removeButtonIconSize = 6
-//        tagListView.addTag("+")
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         placeTextField.resignFirstResponder()
         return true
     }
-    @objc private func textFieldDidChange(_ textField: UITextField) {
+    @objc private func placeTextFieldDidChange(_ textField: UITextField) {
         placeTextFieldTextLengthLabel.text = "\(String(placeTextField.text!.count))/10"
+    }
+    @objc private func clickAddTag() {
+        tagListView.addTag("\(tagTextField.text!)")
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
             if let char = string.cString(using: String.Encoding.utf8) {
@@ -172,7 +169,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
                     return true
                 }
             }
-            guard placeTextField.text!.count < 10 else { return false }
+        guard placeTextField.text!.count < 10 else { return false }
             return true
         }
     private func finishFeedWirte() {
