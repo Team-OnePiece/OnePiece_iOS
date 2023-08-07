@@ -10,6 +10,8 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     private let placeTextField = DefaultTextField(placeholder: "위치를 입력하세요").then {
         $0.textAlignment = .center
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.layer.borderWidth = 2
+        $0.layer.cornerRadius = 24
     }
     private let explainLabel = UILabel().then {
         $0.text = "태그는 최대 6개, 최대 10자까지 작성 가능합니다."
@@ -20,9 +22,6 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         $0.text = "0/10"
         $0.textColor = UIColor(named: "gray-500")
         $0.font = UIFont(name: "Orbit-Regular", size: 10)
-    }
-    let textttt = UITextField().then {
-        
     }
     private let groupChoiceLabel = UILabel().then {
         $0.text = "어느 그룹에 업로드 하시겠습니까?"
@@ -37,7 +36,32 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
         $0.layer.borderWidth = 2
     }
-
+    private let tagTextField = UITextField().then {
+        $0.backgroundColor = .white
+        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.layer.borderWidth = 2
+        $0.layer.cornerRadius = 20
+        let spacerView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: 0))
+        $0.leftView = spacerView
+        $0.leftViewMode = .always
+        $0.rightView = spacerView
+        $0.rightViewMode = .always
+        $0.autocorrectionType = .no
+        $0.autocapitalizationType = .none
+        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.attributedPlaceholder = NSAttributedString(
+            string: "태그를 입력하세요.",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor(named: "gray-600")!,
+                NSAttributedString.Key.font: UIFont(name: "Orbit-Regular", size: 16)!
+            ]
+        )
+    }
+    private let tagAddButton = UIButton(type: .system).then {
+        $0.setTitle("+", for: .normal)
+        $0.setTitleColor(UIColor(named: "gray-700"), for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 32)
+    }
     let tagListView = TagListView().then {
         $0.backgroundColor = .red
     }
@@ -62,9 +86,11 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             explainLabel,
             tagListView,
             groupChoiceLabel,
-            groupChoiceButton
+            groupChoiceButton,
+            tagTextField
         ].forEach({view.addSubview($0)})
         placeTextField.addSubview(placeTextFieldTextLengthLabel)
+        tagTextField.addSubview(tagAddButton)
     }
     private func makeConstraints() {
         placeTextField.snp.makeConstraints {
@@ -79,8 +105,17 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             $0.top.equalTo(placeTextField.snp.bottom).offset(24)
             $0.left.equalToSuperview().inset(25)
         }
+        tagTextField.snp.makeConstraints {
+            $0.height.equalTo(40)
+            $0.top.equalTo(explainLabel.snp.bottom).offset(8)
+            $0.left.right.equalToSuperview().inset(25)
+        }
+        tagAddButton.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(10)
+            $0.right.equalToSuperview().inset(10)
+        }
         tagListView.snp.makeConstraints {
-            $0.top.equalTo(explainLabel.snp.bottom).offset(6)
+            $0.top.equalTo(tagTextField.snp.bottom).offset(6)
             $0.height.equalTo(200)
             $0.left.right.equalToSuperview().inset(25)
         }
@@ -98,12 +133,13 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         tagListView.removeTagView(tagView)
     }
-    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        if tagView.titleLabel?.text == "+" {
-            tagListView.addTag("\(placeTextField.text ?? "")")
-            tagView.enableRemoveButton = false
-        }
-    }
+    
+//    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+//        if tagView.titleLabel?.text == "+" {
+//            tagListView.addTag("\(placeTextField.text ?? "")")
+//            tagView.enableRemoveButton = false
+//        }
+//    }
     func tagSetting() {
         tagListView.textFont = UIFont(name: "Orbit-Regular", size: 18)!
         tagListView.alignment = .left
@@ -114,13 +150,13 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         tagListView.marginX = 4
         tagListView.marginY = 8
         tagListView.delegate = self
-        tagListView.paddingX = 24
+        tagListView.paddingX = 13
         tagListView.paddingY = 11
         tagListView.cornerRadius = 20
         tagListView.enableRemoveButton = true
         tagListView.removeIconLineColor = UIColor(named: "gray-700")!
         tagListView.removeButtonIconSize = 6
-        tagListView.addTag("+")
+//        tagListView.addTag("+")
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         placeTextField.resignFirstResponder()
@@ -144,7 +180,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         self.navigationItem.rightBarButtonItem = finishButton
         finishButton.tintColor = UIColor(named: "gray-800")
         finishButton.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
+            .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
     @objc private func finishFeed() {
