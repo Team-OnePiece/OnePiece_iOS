@@ -22,9 +22,6 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
     }
     private let nickNameModifyTextField = DefaultTextField(placeholder: "")
-    private let nickNameCheckButton = DefaultButton(type: .system, title: "중복확인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
-        $0.isEnabled = false
-    }
     private let nickNameEnterLabel = UILabel().then {
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
@@ -33,10 +30,8 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         super.viewDidLoad()
         view.backgroundColor = .white
         profileModifyButton.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
-        nickNameCheckButton.addTarget(self, action: #selector(clickNickNameCheck), for: .touchUpInside)
         finishModify()
         nickNameModifyTextField.delegate = self
-        nickNameModifyTextField.addTarget(self, action: #selector(textFieldDidChange(_ :)), for: .allEditingEvents)
     }
     override func viewWillLayoutSubviews() {
         layout()
@@ -46,7 +41,6 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
             profileBackground,
             profileModifyButton,
             nickNameModifyTextField,
-            nickNameCheckButton,
             nickNameEnterLabel
         ].forEach({view.addSubview($0)})
         profileBackground.addSubview(profileImage)
@@ -66,13 +60,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         }
         nickNameModifyTextField.snp.makeConstraints {
             $0.top.equalTo(profileModifyButton.snp.bottom).offset(60)
-            $0.left.equalToSuperview().inset(25)
-            $0.right.equalToSuperview().inset(109)
-        }
-        nickNameCheckButton.snp.makeConstraints {
-            $0.top.equalTo(profileModifyButton.snp.bottom).offset(60)
-            $0.left.equalTo(nickNameModifyTextField.snp.right).offset(4)
-            $0.right.equalToSuperview().inset(25)
+            $0.left.right.equalToSuperview().inset(25)
         }
         nickNameEnterLabel.snp.makeConstraints {
             $0.top.equalTo(nickNameModifyTextField.snp.bottom).offset(8)
@@ -84,7 +72,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         self.navigationItem.rightBarButtonItem = finishButton
         finishButton.tintColor = UIColor(named: "gray-800")
         finishButton.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
+            .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -126,12 +114,33 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         }
     }
     @objc private func clickMoveUserPage() {
-        guard let nickName = nickNameModifyTextField.text,
-              !nickName.isEmpty
+        guard let nickname = nickNameModifyTextField.text,
+              !nickname.isEmpty
         else {
-            self.navigationController?.popViewController(animated: true)
+            nickNameEnterLabel.text = "별명을 입력하세요."
             return
         }
+        let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.nickNameDuplicate(nickName: nickname)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    self.nicknameModify()
+                case 409:
+                    self.nickNameEnterLabel.text = "이미 사용 된 별명입니다."
+                default:
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    private func nicknameModify() {
+        guard let nickName = nickNameModifyTextField.text,
+              !nickName.isEmpty
+        else {return}
         let provider = MoyaProvider<UserAPI>(plugins: [MoyaLoggerPlugin()])
         provider.request(.userInfoUpdate(userInfo: nickName)) { res in
             switch res {
@@ -156,42 +165,5 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         picker.allowsEditing = true
         picker.delegate = self
         self.present(picker, animated: true)
-    }
-    @objc private func clickNickNameCheck() {
-        guard let nickNameModify = nickNameModifyTextField.text,
-              !nickNameModify.isEmpty
-        else {return}
-        let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
-        self.present(alert, animated: true)
-        nickNameEnterLabel.text = ""
-        let provider  = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
-        provider.request(.nickNameDuplicate(nickName: nickNameModify)) { res in
-            switch res {
-            case .success(let result):
-                switch result.statusCode {
-                case 200:
-                    let alert = DefaultAlert(title: "사용 가능한 별명입니다.")
-                    self.present(alert, animated: true)
-                case 409:
-                    let alert = DefaultAlert(title: "이미 사용 된 별명입니다.")
-                    self.present(alert, animated: true)
-                default:
-                    self.nickNameEnterLabel.text = "다시 확인해주세요."
-                }
-            case .failure(let err):
-                print("\(err.localizedDescription)")
-            }
-        }
-    }
-    @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard let nickNameCheck = nickNameModifyTextField.text,
-              !nickNameCheck.isEmpty
-        else {
-            nickNameCheckButton.isEnabled = false
-            nickNameCheckButton.alpha = 0.8
-            return
-        }
-        nickNameCheckButton.isEnabled = true
-        nickNameCheckButton.alpha  = 1.0
     }
 }
