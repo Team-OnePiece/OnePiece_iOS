@@ -124,7 +124,7 @@ extension SchoolInfoSignupViewController {
                     self.navigationItem.backBarButtonItem = signupBackbutton
                     self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
                     signupBackbutton.setTitleTextAttributes([
-                        .font: UIFont(name: "Orbit-Regular", size: 16)
+                        .font: UIFont(name: "Orbit-Regular", size: 16)!
                     ], for: .normal)
                 case 409:
                     self.schoolInfoEnterLabel.text = "다시 확인하세요."

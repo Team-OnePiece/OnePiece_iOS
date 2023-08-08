@@ -125,11 +125,10 @@ extension IdSignupViewController {
                     self.navigationItem.backBarButtonItem = signupBackbutton
                     self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
                     signupBackbutton.setTitleTextAttributes([
-                        .font: UIFont(name: "Orbit-Regular", size: 16)
+                        .font: UIFont(name: "Orbit-Regular", size: 16)!
                     ], for: .normal)
                 case 409:
-                    let alert = DefaultAlert(title: "이미 사용 된 아이디입니다.")
-                    self.present(alert, animated: true)
+                    self.idEnterLabel.text = "이미 사용 된 아이디입니다."
                 default:
                     self.idEnterLabel.text = "아이디를 확인해주세요."
                 }

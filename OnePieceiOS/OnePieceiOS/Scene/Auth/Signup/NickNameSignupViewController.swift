@@ -103,22 +103,22 @@ extension NickNameSignupViewController {
         guard let nickName = nickNameTextField.text,
               !nickName.isEmpty
         else {return}
-        userInfo.nickName = nickName
         provider.request(.signup(UserInfo.shared)) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
                 case 200:
+                    userInfo.nickName = nickName
                     self.nickNameEnterLabel.text = "별명을 확인하세요."
                     self.navigationController?.pushViewController(MainViewController(), animated: true)
                     let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
                     self.navigationItem.backBarButtonItem = signupBackbutton
                     self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
                     signupBackbutton.setTitleTextAttributes([
-                        .font: UIFont(name: "Orbit-Regular", size: 16)
+                        .font: UIFont(name: "Orbit-Regular", size: 16)!
                     ], for: .normal)
                 case 409:
-                    self.nickNameEnterLabel.text = "별명을 확인하세요."
+                    self.nickNameEnterLabel.text = "이미 사용 된 별명입니다."
                 default:
                     self.nickNameEnterLabel.text = "별명을 확인하세요."
                     print(result.statusCode)
