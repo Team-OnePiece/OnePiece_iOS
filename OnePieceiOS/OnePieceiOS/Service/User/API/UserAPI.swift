@@ -3,17 +3,21 @@ import Moya
 
 enum UserAPI {
     case userInfoUpdate(userInfo: String)
+    case userInfoLoad
 }
 
 extension UserAPI: TargetType {
     var baseURL: URL {
-        return URL(string: "http://54.180.94.103:8080")!
+//        return URL(string: "http://54.180.94.103:8080")!
+        return URL(string: "http://localhost:8080")!
     }
     
     var path: String {
         switch self {
         case .userInfoUpdate:
             return "/user/update"
+        case .userInfoLoad:
+            return "/user/info"
         }
     }
     
@@ -21,6 +25,8 @@ extension UserAPI: TargetType {
         switch self {
         case .userInfoUpdate:
             return .patch
+        case .userInfoLoad:
+            return .get
         }
     }
     
@@ -31,6 +37,8 @@ extension UserAPI: TargetType {
                 parameters: [
                     "nickname": nickName
                 ], encoding: JSONEncoding.default)
+        case .userInfoLoad:
+            return .requestPlain
         }
     }
     
