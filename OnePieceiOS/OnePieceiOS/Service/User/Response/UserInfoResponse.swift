@@ -2,10 +2,10 @@ import Foundation
 
 struct UserInfoResponse: Decodable {
     let nickname: String
-    let userImage: String
+    let profileImageURL: String
     
     enum CodingKeys: String, CodingKey {
         case nickname = "nickname"
-        case userImage = "profile_image_url"
+        case profileImageURL = "profile_image_url"
     }
 }

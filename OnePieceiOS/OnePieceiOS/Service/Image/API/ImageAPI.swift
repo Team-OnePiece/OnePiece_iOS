@@ -7,7 +7,7 @@ enum ImageAPI {
 
 extension ImageAPI: TargetType {
     var baseURL: URL {
-        return URL(string: "http://54.180.94.103:8080")!
+        return URL(string: "http://localhost:8080")!
     }
     
     var path: String {
@@ -27,7 +27,7 @@ extension ImageAPI: TargetType {
                     provider: .data(data),
                     name: "image",
                     fileName: "image.jpg",
-                    mimeType: "image/jpeg"
+                    mimeType: "image/jpg"
                 )
             )
             return .uploadMultipart(multiData)
