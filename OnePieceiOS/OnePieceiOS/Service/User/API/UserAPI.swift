@@ -3,6 +3,7 @@ import Moya
 
 enum UserAPI {
     case userInfoUpdate(userInfo: String)
+    case userProfileload
 }
 
 extension UserAPI: TargetType {
@@ -14,6 +15,8 @@ extension UserAPI: TargetType {
         switch self {
         case .userInfoUpdate:
             return "/user/update"
+        case .userProfileload:
+            return "/user/info"
         }
     }
     
@@ -21,6 +24,8 @@ extension UserAPI: TargetType {
         switch self {
         case .userInfoUpdate:
             return .patch
+        case .userProfileload:
+            return .get
         }
     }
     
@@ -31,6 +36,8 @@ extension UserAPI: TargetType {
                 parameters: [
                     "nickname": nickName
                 ], encoding: JSONEncoding.default)
+        case .userProfileload:
+            return .requestPlain
         }
     }
     
