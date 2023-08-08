@@ -77,8 +77,9 @@ class UserViewController: UIViewController {
                             self.imageURL = data.profileImageURL
                             self.messageLabel.text = "\(data.nickname)님,\n오늘은\n어떤 하루를 보냈나요?"
                             let url = URL(string: self.imageURL)
-                            self.profileImage.kf.setImage(with: url, placeholder: UIImage(named: "profileImage"))
+                            self.profileBackground.kf.setImage(with: url, placeholder: UIImage(named: "profileImage"))
                             self.profileBackground.layer.borderWidth = 0
+                            self.profileImage.isHidden = true
                         }
                     } else {
                         print("fail")
@@ -98,7 +99,7 @@ class UserViewController: UIViewController {
         self.navigationItem.backBarButtonItem = myPageBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
         myPageBackbutton.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
+            .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
 }

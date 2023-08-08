@@ -40,6 +40,8 @@
 		880832AD2A7D0207000B10A2 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */; };
 		880832B02A7D03BE000B10A2 /* TagListView in Frameworks */ = {isa = PBXBuildFile; productRef = 880832AF2A7D03BE000B10A2 /* TagListView */; };
 		880832B32A7D2ABA000B10A2 /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832B22A7D2ABA000B10A2 /* ImageAPI.swift */; };
+		880F29A12A813FE40039E17A /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F29A02A813FE40039E17A /* UserInfoResponse.swift */; };
+		880F29A82A8212DC0039E17A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 880F29A72A8212DC0039E17A /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +75,7 @@
 		880832AA2A7D01FF000B10A2 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		880832B22A7D2ABA000B10A2 /* ImageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
+		880F29A02A813FE40039E17A /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				880F29A82A8212DC0039E17A /* Kingfisher in Frameworks */,
 				880832622A7CFCA3000B10A2 /* SnapKit in Frameworks */,
 				880832652A7CFCAC000B10A2 /* Then in Frameworks */,
 				8808326B2A7CFD16000B10A2 /* SwiftKeychainWrapper in Frameworks */,
@@ -259,7 +263,8 @@
 		8808329E2A7D01BF000B10A2 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				880832A52A7D01E4000B10A2 /* UserAPI.swift */,
+				880F299E2A813F8B0039E17A /* API */,
+				880F299F2A813F960039E17A /* Response */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -291,9 +296,33 @@
 		880832B12A7D2AA6000B10A2 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				880832B22A7D2ABA000B10A2 /* ImageAPI.swift */,
+				880F299A2A8127870039E17A /* API */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		880F299A2A8127870039E17A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				880832B22A7D2ABA000B10A2 /* ImageAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		880F299E2A813F8B0039E17A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				880832A52A7D01E4000B10A2 /* UserAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		880F299F2A813F960039E17A /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				880F29A02A813FE40039E17A /* UserInfoResponse.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +347,7 @@
 				880832672A7CFCC4000B10A2 /* Moya */,
 				8808326A2A7CFD16000B10A2 /* SwiftKeychainWrapper */,
 				880832AF2A7D03BE000B10A2 /* TagListView */,
+				880F29A72A8212DC0039E17A /* Kingfisher */,
 			);
 			productName = OnePieceiOS;
 			productReference = 880832492A7CFC1E000B10A2 /* OnePieceiOS.app */;
@@ -353,6 +383,7 @@
 				880832662A7CFCC3000B10A2 /* XCRemoteSwiftPackageReference "Moya" */,
 				880832692A7CFD16000B10A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				880832AE2A7D03BE000B10A2 /* XCRemoteSwiftPackageReference "TagListView" */,
+				880F29A62A8212DC0039E17A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 8808324A2A7CFC1E000B10A2 /* Products */;
 			projectDirPath = "";
@@ -395,6 +426,7 @@
 				880832732A7CFE27000B10A2 /* ContentAlert.swift in Sources */,
 				8808328F2A7D0036000B10A2 /* UserViewController.swift in Sources */,
 				880832892A7CFF63000B10A2 /* SchoolInfoViewController.swift in Sources */,
+				880F29A12A813FE40039E17A /* UserInfoResponse.swift in Sources */,
 				880832912A7D0047000B10A2 /* MainViewController.swift in Sources */,
 				880832B32A7D2ABA000B10A2 /* ImageAPI.swift in Sources */,
 				880832A62A7D01E4000B10A2 /* UserAPI.swift in Sources */,
@@ -655,6 +687,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		880F29A62A8212DC0039E17A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -682,6 +722,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 880832AE2A7D03BE000B10A2 /* XCRemoteSwiftPackageReference "TagListView" */;
 			productName = TagListView;
+		};
+		880F29A72A8212DC0039E17A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 880F29A62A8212DC0039E17A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
