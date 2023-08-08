@@ -14,7 +14,7 @@ class UserViewController: UIViewController {
         $0.layer.borderWidth = 1
         $0.clipsToBounds = true
     }
-    private var profileImage = UIImageView().then {
+    private let profileImage = UIImageView().then {
         $0.image = UIImage(named: "profile")
     }
     private let messageLabel = UILabel().then {

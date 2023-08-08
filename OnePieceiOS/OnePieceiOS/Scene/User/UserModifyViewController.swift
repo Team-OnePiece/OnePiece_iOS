@@ -102,9 +102,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
                     print(result.statusCode)
                 }
             case .failure(let err):
-                print("\(err.localizedDescription)")
                 print(err.localizedDescription)
-                //둘 다 가능한지 보기
             }
         }
         
