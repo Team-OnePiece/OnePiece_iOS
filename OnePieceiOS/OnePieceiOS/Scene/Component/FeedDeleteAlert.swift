@@ -42,9 +42,9 @@ class FeedDeleteAlert: UIViewController {
         deleteButton.addTarget(self, action: #selector(clickDeleteFeed), for: .touchUpInside)
     }
     override func viewWillLayoutSubviews() {
-        setup()
+        layout()
     }
-    private func setup() {
+    private func layout() {
         view.addSubview(background)
         [
             deleteLabel,

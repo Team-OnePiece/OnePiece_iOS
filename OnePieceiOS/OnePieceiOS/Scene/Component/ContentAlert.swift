@@ -57,16 +57,23 @@ class ContentAlert: UIViewController {
         }
     }
     @objc func clickModify() {
-        self.navigationController?.pushViewController(FeedModifyViewController(), animated: true)
-        let feedModify = UIBarButtonItem(title: "피드 수정", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = feedModify
-        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-        feedModify.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
-        ], for: .normal)
-
+        //dismiss후에 push가 되게하는 법 찾아보기
+            self.navigationController?.pushViewController(FeedModifyViewController(), animated: true)
+            let feedModify = UIBarButtonItem(title: "피드 수정", style: .plain, target: nil, action: nil)
+            self.navigationItem.backBarButtonItem = feedModify
+            self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+            feedModify.setTitleTextAttributes([
+                .font: UIFont(name: "Orbit-Regular", size: 16)!
+            ], for: .normal)
     }
     @objc func clickDelete() {
-        self.dismiss(animated: true)
+        guard let pvc = self.presentingViewController else {return}
+        self.dismiss(animated: true) {
+            let alert = FeedDeleteAlert()
+            let navigationController = UINavigationController(rootViewController: alert)
+            navigationController.modalPresentationStyle = .overFullScreen
+            pvc.present(navigationController, animated: true, completion: nil)
+            
+        }
     }
 }
