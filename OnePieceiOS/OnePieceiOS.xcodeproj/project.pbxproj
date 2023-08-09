@@ -42,6 +42,7 @@
 		880832B32A7D2ABA000B10A2 /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832B22A7D2ABA000B10A2 /* ImageAPI.swift */; };
 		880F29A12A813FE40039E17A /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F29A02A813FE40039E17A /* UserInfoResponse.swift */; };
 		880F29A82A8212DC0039E17A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 880F29A72A8212DC0039E17A /* Kingfisher */; };
+		88D346422A83D9FD00E416EB /* FeedDeleteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D346412A83D9FD00E416EB /* FeedDeleteAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		880832B22A7D2ABA000B10A2 /* ImageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
 		880F29A02A813FE40039E17A /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
+		88D346412A83D9FD00E416EB /* FeedDeleteAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDeleteAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				880832722A7CFE27000B10A2 /* ContentAlert.swift */,
 				880832742A7CFE49000B10A2 /* DefaultAlert.swift */,
 				880832762A7CFE59000B10A2 /* DefaultTextField.swift */,
+				88D346412A83D9FD00E416EB /* FeedDeleteAlert.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				880832752A7CFE49000B10A2 /* DefaultAlert.swift in Sources */,
 				880832952A7D0058000B10A2 /* FeedContentViewController.swift in Sources */,
 				880832732A7CFE27000B10A2 /* ContentAlert.swift in Sources */,
+				88D346422A83D9FD00E416EB /* FeedDeleteAlert.swift in Sources */,
 				8808328F2A7D0036000B10A2 /* UserViewController.swift in Sources */,
 				880832892A7CFF63000B10A2 /* SchoolInfoViewController.swift in Sources */,
 				880F29A12A813FE40039E17A /* UserInfoResponse.swift in Sources */,

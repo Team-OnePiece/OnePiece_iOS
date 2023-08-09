@@ -67,7 +67,7 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate {
         self.navigationItem.rightBarButtonItem = finishButotn
         finishButotn.tintColor = UIColor(named: "gray-800")
         finishButotn.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
+            .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
     @objc private func clickFinishFeedModify() {
