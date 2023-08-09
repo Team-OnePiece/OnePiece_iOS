@@ -112,7 +112,7 @@ extension SchoolInfoSignupViewController {
             return
         }
         let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
-        provider.request(.studentInfo(grade: Int(schoolGrade)!, classNumber: Int(schoolClass)!, number: Int(schoolNumber)!)) { res in
+        provider.request(.studentInfoDuplicate(grade: Int(schoolGrade)!, classNumber: Int(schoolClass)!, number: Int(schoolNumber)!)) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
