@@ -81,6 +81,11 @@ extension AuthAPI: TargetType {
     }
     
     var headers: [String : String]? {
-        return Header.tokenIsEmpty.header()
+        switch self {
+        case .login:
+            return Header.accessToken.header()
+        default:
+            return Header.tokenIsEmpty.header()
+        }
     }
 }
