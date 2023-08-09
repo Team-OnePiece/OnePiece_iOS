@@ -52,7 +52,7 @@ extension AuthAPI: TargetType {
                 parameters: [
                     "account_id": UserInfo.shared, //(아이디는 1~20자 영문 대 소문자, 숫자 사용하세요)
                     "password": UserInfo.shared,
-                    "pasword_valid": UserInfo.shared,
+                    "password_valid": UserInfo.shared,
                     "nickname": UserInfo.shared,
                     "grade": UserInfo.shared,  // (범위 1 ~ 3)
                     "class_number": UserInfo.shared,   // (범위 1 ~ 4)
