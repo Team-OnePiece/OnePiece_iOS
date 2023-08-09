@@ -103,20 +103,32 @@ extension NickNameSignupViewController {
         guard let nickName = nickNameTextField.text,
               !nickName.isEmpty
         else {return}
-        provider.request(.signup(UserInfo.shared)) { res in
+        provider.request(.nickNameDuplicate(nickName: nickName)) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
                 case 200:
                     userInfo.nickName = nickName
-                    self.nickNameEnterLabel.text = "별명을 확인하세요."
-                    self.navigationController?.pushViewController(MainViewController(), animated: true)
-                    let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-                    self.navigationItem.backBarButtonItem = signupBackbutton
-                    self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-                    signupBackbutton.setTitleTextAttributes([
-                        .font: UIFont(name: "Orbit-Regular", size: 16)!
-                    ], for: .normal)
+                    self.provider.request(.signup(UserInfo.shared)) { res in
+                        switch res {
+                        case .success(let result):
+                            switch result.statusCode {
+                            case 200:
+                                print("성공")
+                                self.navigationController?.pushViewController(MainViewController(), animated: true)
+                                let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+                                self.navigationItem.backBarButtonItem = signupBackbutton
+                                self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+                                signupBackbutton.setTitleTextAttributes([
+                                    .font: UIFont(name: "Orbit-Regular", size: 16)!
+                                ], for: .normal)
+                            default:
+                                print(result.statusCode)
+                            }
+                        case .failure(let err):
+                            print(err.localizedDescription)
+                        }
+                    }
                 case 409:
                     self.nickNameEnterLabel.text = "이미 사용 된 별명입니다."
                 default:
@@ -124,7 +136,7 @@ extension NickNameSignupViewController {
                     print(result.statusCode)
                 }
             case .failure(let err):
-                self.nickNameEnterLabel.text = "별명을 확인하세요."
+                self.nickNameEnterLabel.text = "회원가입에 실패하였습니다."
                 print("\(err.localizedDescription)")
             }
         }
