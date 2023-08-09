@@ -7,15 +7,9 @@ import Kingfisher
 class UserViewController: UIViewController {
     
     private var imageURL: String = ""
-    private let profileBackground = UIImageView().then {
-        $0.backgroundColor = .white
+    private let profileBackground = UIImageView(image: UIImage(named: "profile")).then {
         $0.layer.cornerRadius = 50
-        $0.layer.borderColor = UIColor(named: "gray-500")?.cgColor
-        $0.layer.borderWidth = 1
         $0.clipsToBounds = true
-    }
-    private let profileImage = UIImageView().then {
-        $0.image = UIImage(named: "profile")
     }
     private let messageLabel = UILabel().then {
         $0.text = "00님,\n오늘은\n어떤 하루를 보냈나요?"
@@ -45,19 +39,14 @@ class UserViewController: UIViewController {
             messageLabel,
             modifyButton
         ].forEach({view.addSubview($0)})
-        profileBackground.addSubview(profileImage)
         
         profileBackground.snp.makeConstraints {
             $0.top.equalToSuperview().inset(152)
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(100)
         }
-        profileImage.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(60)
-        }
         messageLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImage.snp.bottom).offset(45)
+            $0.top.equalTo(profileBackground.snp.bottom).offset(45)
             $0.centerX.equalToSuperview()
         }
         modifyButton.snp.makeConstraints {
@@ -78,8 +67,6 @@ class UserViewController: UIViewController {
                             self.messageLabel.text = "\(data.nickname)님,\n오늘은\n어떤 하루를 보냈나요?"
                             let url = URL(string: self.imageURL)
                             self.profileBackground.kf.setImage(with: url, placeholder: UIImage(named: "profileImage"))
-                            self.profileBackground.layer.borderWidth = 0
-                            self.profileImage.isHidden = true
                         }
                     } else {
                         print("fail")

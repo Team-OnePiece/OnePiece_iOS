@@ -4,17 +4,10 @@ import Then
 import Moya
 
 class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigationControllerDelegate {
-    private var selectImageURL: String = ""
-    private let profileBackground = UIImageView().then {
-        $0.backgroundColor = .white
+    private var imageURL: String = ""
+    private let profileBackground = UIImageView(image: UIImage(named: "profile")).then {
         $0.layer.cornerRadius = 50
-        $0.layer.borderColor = UIColor(named: "gray-500")?.cgColor
-        $0.layer.borderWidth = 1
         $0.clipsToBounds = true
-    }
-    private let profileImage = UIImageView().then {
-        $0.image = UIImage(named: "profile")
-        $0.backgroundColor = .white
     }
     private let profileModifyButton = UIButton(type: .system).then {
         $0.setTitle("수정하기", for: .normal)
@@ -33,6 +26,9 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         finishModify()
         nickNameModifyTextField.delegate = self
     }
+    override func viewWillAppear(_ animated: Bool) {
+        loadImage()
+    }
     override func viewWillLayoutSubviews() {
         layout()
     }
@@ -43,16 +39,11 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
             nickNameModifyTextField,
             nickNameEnterLabel
         ].forEach({view.addSubview($0)})
-        profileBackground.addSubview(profileImage)
         
         profileBackground.snp.makeConstraints {
             $0.top.equalToSuperview().inset(152)
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(100)
-        }
-        profileImage.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(60)
         }
         profileModifyButton.snp.makeConstraints {
             $0.top.equalTo(profileBackground.snp.bottom).offset(10)
@@ -106,18 +97,40 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
         picker.dismiss(animated: true) {
            guard let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {return}
             self.profileBackground.image = pickedImage
-            self.profileImage.isHidden = true
-            self.profileBackground.layer.borderWidth = 0
             self.dismiss(animated: true, completion: {
                 self.getImage(source: pickedImage)
                    })
+        }
+    }
+    func loadImage() {
+        let provider = MoyaProvider<UserAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.userInfoLoad) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    if let data = try? JSONDecoder().decode(UserInfoResponse.self, from: result.data) {
+                        DispatchQueue.main.async {
+                            self.imageURL = data.profileImageURL
+                            let url = URL(string: self.imageURL)
+                            self.profileBackground.kf.setImage(with: url, placeholder: UIImage(named: "profile"))
+                        }
+                    } else {
+                        print("fail")
+                    }
+                default:
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
         }
     }
     @objc private func clickMoveUserPage() {
         guard let nickname = nickNameModifyTextField.text,
               !nickname.isEmpty
         else {
-            nickNameEnterLabel.text = "별명을 입력하세요."
+            self.navigationController?.popViewController(animated: true)
             return
         }
         let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
