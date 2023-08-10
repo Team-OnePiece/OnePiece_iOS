@@ -112,11 +112,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
     }
 
     @objc private func clickFeedPlus() {
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
-        picker.delegate = self
-        self.present(picker, animated: true)
+        self.moveView(targetView: FeedContentViewController(), title: "피드 작성")
     }
     
     @objc private func clickMyPage() {
@@ -124,15 +120,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
     }
 }
 
-extension MainViewController: UIImagePickerControllerDelegate {
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true) {}
-    }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true) {
-            self.moveView(targetView: FeedContentViewController(), title: "피드 작성")
-        }
-    }
+extension MainViewController {
     func popupAlert() {
         let alert = ContentAlert()
         let navigationController = UINavigationController(rootViewController: alert)

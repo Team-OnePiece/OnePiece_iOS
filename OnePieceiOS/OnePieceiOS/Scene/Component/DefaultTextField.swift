@@ -46,7 +46,7 @@ class DefaultTextField: UITextField {
             string: placeholderText,
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor(named: "gray-600")!,
-                NSAttributedString.Key.font: UIFont(name: "Orbit-Regular", size: 16) as Any
+                NSAttributedString.Key.font: UIFont(name: "Orbit-Regular", size: 16)!
             ]
         )
     }

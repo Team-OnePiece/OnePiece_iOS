@@ -59,6 +59,11 @@ class CustomCell: UITableViewCell {
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 8)
     }
+    private let tagStackView = UIStackView().then {
+        $0.alignment = .leading
+        $0.spacing = 4
+        $0.backgroundColor = .blue
+    }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
@@ -79,7 +84,8 @@ class CustomCell: UITableViewCell {
             feedImageView,
             likeButton,
             countLikeLabel,
-            placeLabel
+            placeLabel,
+            tagStackView
         ].forEach({contentView.addSubview($0)})
     }
     private func makeConstraints() {
@@ -120,6 +126,12 @@ class CustomCell: UITableViewCell {
         placeLabel.snp.makeConstraints {
             $0.top.equalTo(countLikeLabel.snp.bottom).offset(7)
             $0.left.equalToSuperview().inset(12)
+        }
+        tagStackView.snp.makeConstraints {
+            $0.top.equalTo(feedImageView.snp.bottom).offset(16)
+            $0.bottom.equalToSuperview().inset(8)
+            $0.left.equalTo(placeLabel.snp.right).offset(22)
+            $0.right.equalToSuperview().inset(22)
         }
     }
     @objc private func clickLike() {

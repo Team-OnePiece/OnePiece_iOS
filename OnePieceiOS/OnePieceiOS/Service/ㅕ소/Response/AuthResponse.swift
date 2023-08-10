@@ -9,4 +9,3 @@ struct AuthResponse: Codable {
         case expiredAt = "expired_at"
     }
 }
-//서버에서 보내주는 body랑 맞추기
