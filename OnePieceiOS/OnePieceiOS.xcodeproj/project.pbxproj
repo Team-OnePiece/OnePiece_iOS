@@ -35,6 +35,8 @@
 		880832A92A7D01F8000B10A2 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832A82A7D01F8000B10A2 /* UserInfo.swift */; };
 		880832AB2A7D01FF000B10A2 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832AA2A7D01FF000B10A2 /* Header.swift */; };
 		880832AD2A7D0207000B10A2 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */; };
+		88D346482A84A61900E416EB /* TagAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D346472A84A61900E416EB /* TagAPI.swift */; };
+		88D3464B2A85222100E416EB /* TagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D3464A2A85222100E416EB /* TagResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		880832A82A7D01F8000B10A2 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		880832AA2A7D01FF000B10A2 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
+		88D346472A84A61900E416EB /* TagAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAPI.swift; sourceTree = "<group>"; };
+		88D3464A2A85222100E416EB /* TagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagResponse.swift; sourceTree = "<group>"; };
 		BC9629BA97069CBE73474D46 /* Pods-OnePieceiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePieceiOS.release.xcconfig"; path = "Target Support Files/Pods-OnePieceiOS/Pods-OnePieceiOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +120,7 @@
 		8808326C2A7CFD23000B10A2 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				88D346432A84A5D400E416EB /* Feed */,
 				8808329B2A7D017E000B10A2 /* Auth */,
 				8808329F2A7D01C5000B10A2 /* Header */,
 				880832A02A7D01CD000B10A2 /* Plugin */,
@@ -282,6 +287,39 @@
 			path = UserSignup;
 			sourceTree = "<group>";
 		};
+		88D346432A84A5D400E416EB /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				88D346442A84A5E300E416EB /* Tag */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		88D346442A84A5E300E416EB /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				88D346452A84A5FA00E416EB /* API */,
+				88D346492A85221000E416EB /* Response */,
+			);
+			path = Tag;
+			sourceTree = "<group>";
+		};
+		88D346452A84A5FA00E416EB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				88D346472A84A61900E416EB /* TagAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		88D346492A85221000E416EB /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				88D3464A2A85222100E416EB /* TagResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		BE769549C35CFA3966EE19DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,8 +464,10 @@
 				880832752A7CFE49000B10A2 /* DefaultAlert.swift in Sources */,
 				880832952A7D0058000B10A2 /* FeedContentViewController.swift in Sources */,
 				880832732A7CFE27000B10A2 /* ContentAlert.swift in Sources */,
+				88D3464B2A85222100E416EB /* TagResponse.swift in Sources */,
 				8808328F2A7D0036000B10A2 /* UserViewController.swift in Sources */,
 				880832892A7CFF63000B10A2 /* SchoolInfoViewController.swift in Sources */,
+				88D346482A84A61900E416EB /* TagAPI.swift in Sources */,
 				880832912A7D0047000B10A2 /* MainViewController.swift in Sources */,
 				880832A62A7D01E4000B10A2 /* UserAPI.swift in Sources */,
 				8808328B2A7D0010000B10A2 /* UserModifyViewController.swift in Sources */,
