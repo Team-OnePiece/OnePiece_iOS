@@ -95,11 +95,11 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
-           guard let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {return}
+            guard let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {return}
             self.profileBackground.image = pickedImage
             self.dismiss(animated: true, completion: {
                 self.getImage(source: pickedImage)
-                   })
+            })
         }
     }
     func loadImage() {

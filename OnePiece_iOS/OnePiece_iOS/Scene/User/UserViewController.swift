@@ -66,7 +66,7 @@ class UserViewController: UIViewController {
                             self.imageURL = data.profileImageURL
                             self.messageLabel.text = "\(data.nickname)님,\n오늘은\n어떤 하루를 보냈나요?"
                             let url = URL(string: self.imageURL)
-                            self.profileBackground.kf.setImage(with: url, placeholder: UIImage(named: "profileImage"))
+                            self.profileBackground.kf.setImage(with: url, placeholder: UIImage(named: "profile"))
                         }
                     } else {
                         print("fail")
