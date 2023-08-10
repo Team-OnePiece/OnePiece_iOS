@@ -2,8 +2,10 @@ import UIKit
 import SnapKit
 import TagListView
 import Then
+import Moya
 
 class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    let provider = MoyaProvider<TagAPI>(plugins: [MoyaLoggerPlugin()])
     private var count = 0
     private let cellIdentifier = "cellId"
     private var dataSource:[String] = []
@@ -52,9 +54,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     private let tagListView = TagListView().then {
         $0.backgroundColor = .red
     }
-    private let imageView = UIImageView().then {
-        $0.backgroundColor = .gray
-    }
+    private let imageView = UIImageView(image: UIImage(named: "baseImage"))
     private let imageChoiceIcon = UIImageView(image: UIImage(named: "feedImageIcon"))
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,7 +137,25 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         }
     }
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        tagListView.removeTagView(tagView)
+        let tagId = Int(tagView.tag)
+        provider.request(.deleteTag(tagId: tagId)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 204:
+                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
+                        self.tagListView.removeTagView(tagView)
+                    } else {
+                        print("실패")
+                    }
+                default:
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+   
     }
     func tagSetting() {
         tagListView.textFont = UIFont(name: "Orbit-Regular", size: 18)!
@@ -164,7 +182,21 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         placeTextFieldTextLengthLabel.text = "\(String(placeTextField.text!.count))/10"
     }
     @objc private func clickAddTag() {
-        tagListView.addTag("\(tagTextField.text!)")
+        guard let tag = tagTextField.text,
+              !tag.isEmpty else {return}
+        provider.request(.addTag(tag: tag)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 201:
+                    self.tagListView.addTag(tag)
+                default:
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
             if let char = string.cString(using: String.Encoding.utf8) {
