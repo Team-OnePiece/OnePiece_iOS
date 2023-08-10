@@ -7,6 +7,7 @@ import Moya
 class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     let provider = MoyaProvider<TagAPI>(plugins: [MoyaLoggerPlugin()])
     private var count = 0
+    private var arr:[Int] = []
     private let cellIdentifier = "cellId"
     private var dataSource:[String] = []
     private let placeTextField = DefaultTextField(placeholder: "위치를 입력하세요").then {
@@ -137,17 +138,12 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         }
     }
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        let tagId = Int(tagView.tag)
-        provider.request(.deleteTag(tagId: tagId)) { res in
+        provider.request(.deleteTag(tagId: 1)) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
                 case 204:
-                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
                         self.tagListView.removeTagView(tagView)
-                    } else {
-                        print("실패")
-                    }
                 default:
                     print(result.statusCode)
                 }
@@ -189,7 +185,12 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             case .success(let result):
                 switch result.statusCode {
                 case 201:
-                    self.tagListView.addTag(tag)
+                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
+                        self.tagListView.addTag(tag)
+                        self.arr.append(data.Id)
+                    } else {
+                        print("실패")
+                    }
                 default:
                     print(result.statusCode)
                 }

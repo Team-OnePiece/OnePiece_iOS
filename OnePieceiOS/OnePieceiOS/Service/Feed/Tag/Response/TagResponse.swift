@@ -1,9 +1,9 @@
 import Foundation
 
 struct TagResponse: Codable {
-    let tagId: Int
+    let Id: Int
     
     enum CodingKeys: String, CodingKey {
-        case tagId = "tag_id"
+        case Id = "tag_id"
     }
 }
