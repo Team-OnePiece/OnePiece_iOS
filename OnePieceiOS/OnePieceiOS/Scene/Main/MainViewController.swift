@@ -107,7 +107,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         self.navigationItem.backBarButtonItem = toMoveView
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
         toMoveView.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
+            .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
 

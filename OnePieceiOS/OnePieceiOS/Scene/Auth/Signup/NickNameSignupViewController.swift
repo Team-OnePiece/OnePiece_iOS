@@ -20,7 +20,7 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = .white
         nickNameTextField.returnKeyType = .done
         nickNameTextField.delegate = self
-        signupButton.addTarget(self, action: #selector(clickMainPage), for: .touchUpInside)
+        signupButton.addTarget(self, action: #selector(clickMoveMainPage), for: .touchUpInside)
         nickNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         setupKeyboardObservers()
     }
@@ -98,34 +98,50 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
 
 extension NickNameSignupViewController {
     
-    @objc private func clickMainPage() {
+    @objc private func clickMoveMainPage() {
         let userInfo = UserInfo.shared
         guard let nickName = nickNameTextField.text,
               !nickName.isEmpty
         else {return}
-        userInfo.nickName = nickName
-        provider.request(.signup(UserInfo.shared)) { res in
+        provider.request(.nickNameDuplicate(nickName: nickName)) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
                 case 200:
-                    self.nickNameEnterLabel.text = "별명을 확인하세요."
-                    self.navigationController?.pushViewController(MainViewController(), animated: true)
-                    let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
-                    self.navigationItem.backBarButtonItem = signupBackbutton
-                    self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-                    signupBackbutton.setTitleTextAttributes([
-                        .font: UIFont(name: "Orbit-Regular", size: 16)
-                    ], for: .normal)
+                    print("중복확인 성공")
+                    userInfo.nickName = nickName
+                    self.signup()
                 case 409:
-                    self.nickNameEnterLabel.text = "별명을 확인하세요."
+                    self.nickNameEnterLabel.text = "이미 사용 된 별명입니다."
                 default:
                     self.nickNameEnterLabel.text = "별명을 확인하세요."
                     print(result.statusCode)
                 }
             case .failure(let err):
-                self.nickNameEnterLabel.text = "별명을 확인하세요."
+                self.nickNameEnterLabel.text = "회원가입에 실패하였습니다."
                 print("\(err.localizedDescription)")
+            }
+        }
+    }
+   private func signup() {
+        provider.request(.signup(UserInfo.shared)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    print("회원가입 성공")
+                    self.navigationController?.pushViewController(LoginViewController(), animated: true)
+                    let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
+                    self.navigationItem.backBarButtonItem = signupBackbutton
+                    self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+                    signupBackbutton.setTitleTextAttributes([
+                        .font: UIFont(name: "Orbit-Regular", size: 16)!
+                    ], for: .normal)
+                default:
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
             }
         }
     }

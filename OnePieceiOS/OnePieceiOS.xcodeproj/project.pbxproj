@@ -37,6 +37,12 @@
 		880832AD2A7D0207000B10A2 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832AC2A7D0207000B10A2 /* MoyaLoggerPlugin.swift */; };
 		88D346482A84A61900E416EB /* TagAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D346472A84A61900E416EB /* TagAPI.swift */; };
 		88D3464B2A85222100E416EB /* TagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D3464A2A85222100E416EB /* TagResponse.swift */; };
+
+		880832B02A7D03BE000B10A2 /* TagListView in Frameworks */ = {isa = PBXBuildFile; productRef = 880832AF2A7D03BE000B10A2 /* TagListView */; };
+		880832B32A7D2ABA000B10A2 /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880832B22A7D2ABA000B10A2 /* ImageAPI.swift */; };
+		880F29A12A813FE40039E17A /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F29A02A813FE40039E17A /* UserInfoResponse.swift */; };
+		880F29A82A8212DC0039E17A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 880F29A72A8212DC0039E17A /* Kingfisher */; };
+		88D346422A83D9FD00E416EB /* FeedDeleteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D346412A83D9FD00E416EB /* FeedDeleteAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +80,9 @@
 		88D346472A84A61900E416EB /* TagAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAPI.swift; sourceTree = "<group>"; };
 		88D3464A2A85222100E416EB /* TagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagResponse.swift; sourceTree = "<group>"; };
 		BC9629BA97069CBE73474D46 /* Pods-OnePieceiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePieceiOS.release.xcconfig"; path = "Target Support Files/Pods-OnePieceiOS/Pods-OnePieceiOS.release.xcconfig"; sourceTree = "<group>"; };
+		880832B22A7D2ABA000B10A2 /* ImageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
+		880F29A02A813FE40039E17A /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
+		88D346412A83D9FD00E416EB /* FeedDeleteAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDeleteAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +91,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E8C81D105E09E6DC9CEBA8D /* Pods_OnePieceiOS.framework in Frameworks */,
+				880F29A82A8212DC0039E17A /* Kingfisher in Frameworks */,
+				880832622A7CFCA3000B10A2 /* SnapKit in Frameworks */,
+				880832652A7CFCAC000B10A2 /* Then in Frameworks */,
+				8808326B2A7CFD16000B10A2 /* SwiftKeychainWrapper in Frameworks */,
+				880832682A7CFCC4000B10A2 /* Moya in Frameworks */,
+				880832B02A7D03BE000B10A2 /* TagListView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +140,7 @@
 				8808329F2A7D01C5000B10A2 /* Header */,
 				880832A02A7D01CD000B10A2 /* Plugin */,
 				8808329E2A7D01BF000B10A2 /* User */,
+				880832B12A7D2AA6000B10A2 /* Image */,
 				880832A72A7D01EE000B10A2 /* UserSignup */,
 			);
 			path = Service;
@@ -149,6 +165,7 @@
 				880832722A7CFE27000B10A2 /* ContentAlert.swift */,
 				880832742A7CFE49000B10A2 /* DefaultAlert.swift */,
 				880832762A7CFE59000B10A2 /* DefaultTextField.swift */,
+				88D346412A83D9FD00E416EB /* FeedDeleteAlert.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -258,7 +275,8 @@
 		8808329E2A7D01BF000B10A2 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				880832A52A7D01E4000B10A2 /* UserAPI.swift */,
+				880F299E2A813F8B0039E17A /* API */,
+				880F299F2A813F960039E17A /* Response */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -287,6 +305,7 @@
 			path = UserSignup;
 			sourceTree = "<group>";
 		};
+
 		88D346432A84A5D400E416EB /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,18 +327,48 @@
 			isa = PBXGroup;
 			children = (
 				88D346472A84A61900E416EB /* TagAPI.swift */,
+
+		880832B12A7D2AA6000B10A2 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				880F299A2A8127870039E17A /* API */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		880F299A2A8127870039E17A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				880832B22A7D2ABA000B10A2 /* ImageAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
 		};
+		880F299E2A813F8B0039E17A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				880832A52A7D01E4000B10A2 /* UserAPI.swift */,
+
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+
 		88D346492A85221000E416EB /* Response */ = {
 			isa = PBXGroup;
 			children = (
 				88D3464A2A85222100E416EB /* TagResponse.swift */,
+
+		880F299F2A813F960039E17A /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				880F29A02A813FE40039E17A /* UserInfoResponse.swift */,
+
 			);
 			path = Response;
 			sourceTree = "<group>";
 		};
+
 		BE769549C35CFA3966EE19DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +386,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -355,6 +405,16 @@
 			dependencies = (
 			);
 			name = OnePieceiOS;
+
+			packageProductDependencies = (
+				880832612A7CFCA3000B10A2 /* SnapKit */,
+				880832642A7CFCAC000B10A2 /* Then */,
+				880832672A7CFCC4000B10A2 /* Moya */,
+				8808326A2A7CFD16000B10A2 /* SwiftKeychainWrapper */,
+				880832AF2A7D03BE000B10A2 /* TagListView */,
+				880F29A72A8212DC0039E17A /* Kingfisher */,
+			);
+
 			productName = OnePieceiOS;
 			productReference = 880832492A7CFC1E000B10A2 /* OnePieceiOS.app */;
 			productType = "com.apple.product-type.application";
@@ -383,6 +443,16 @@
 				Base,
 			);
 			mainGroup = 880832402A7CFC1E000B10A2;
+
+			packageReferences = (
+				880832602A7CFCA3000B10A2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				880832632A7CFCAC000B10A2 /* XCRemoteSwiftPackageReference "Then" */,
+				880832662A7CFCC3000B10A2 /* XCRemoteSwiftPackageReference "Moya" */,
+				880832692A7CFD16000B10A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				880832AE2A7D03BE000B10A2 /* XCRemoteSwiftPackageReference "TagListView" */,
+				880F29A62A8212DC0039E17A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
+
 			productRefGroup = 8808324A2A7CFC1E000B10A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -464,11 +534,19 @@
 				880832752A7CFE49000B10A2 /* DefaultAlert.swift in Sources */,
 				880832952A7D0058000B10A2 /* FeedContentViewController.swift in Sources */,
 				880832732A7CFE27000B10A2 /* ContentAlert.swift in Sources */,
+
 				88D3464B2A85222100E416EB /* TagResponse.swift in Sources */,
 				8808328F2A7D0036000B10A2 /* UserViewController.swift in Sources */,
 				880832892A7CFF63000B10A2 /* SchoolInfoViewController.swift in Sources */,
 				88D346482A84A61900E416EB /* TagAPI.swift in Sources */,
+
+				88D346422A83D9FD00E416EB /* FeedDeleteAlert.swift in Sources */,
+				8808328F2A7D0036000B10A2 /* UserViewController.swift in Sources */,
+				880832892A7CFF63000B10A2 /* SchoolInfoViewController.swift in Sources */,
+				880F29A12A813FE40039E17A /* UserInfoResponse.swift in Sources */,
+
 				880832912A7D0047000B10A2 /* MainViewController.swift in Sources */,
+				880832B32A7D2ABA000B10A2 /* ImageAPI.swift in Sources */,
 				880832A62A7D01E4000B10A2 /* UserAPI.swift in Sources */,
 				8808328B2A7D0010000B10A2 /* UserModifyViewController.swift in Sources */,
 				880832A42A7D01DF000B10A2 /* AuthAPI.swift in Sources */,
@@ -687,6 +765,91 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		880832602A7CFCA3000B10A2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		880832632A7CFCAC000B10A2 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		880832662A7CFCC3000B10A2 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+		880832692A7CFD16000B10A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		880832AE2A7D03BE000B10A2 /* XCRemoteSwiftPackageReference "TagListView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ElaWorkshop/TagListView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		880F29A62A8212DC0039E17A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		880832612A7CFCA3000B10A2 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 880832602A7CFCA3000B10A2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		880832642A7CFCAC000B10A2 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 880832632A7CFCAC000B10A2 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		880832672A7CFCC4000B10A2 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 880832662A7CFCC3000B10A2 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		8808326A2A7CFD16000B10A2 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 880832692A7CFD16000B10A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+		880832AF2A7D03BE000B10A2 /* TagListView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 880832AE2A7D03BE000B10A2 /* XCRemoteSwiftPackageReference "TagListView" */;
+			productName = TagListView;
+		};
+		880F29A72A8212DC0039E17A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 880F29A62A8212DC0039E17A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
+
 	};
 	rootObject = 880832412A7CFC1E000B10A2 /* Project object */;
 }

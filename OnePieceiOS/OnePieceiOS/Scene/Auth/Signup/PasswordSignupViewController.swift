@@ -10,7 +10,9 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
     private var eyeButton = UIButton(type: .custom)
     private var checkEyeButton = UIButton(type: .custom)
     private let progressImage = UIImageView(image: UIImage(named: "progress2"))
-    private let nextPageButton = DefaultButton(type: .system, title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let nextPageButton = DefaultButton(type: .system, title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
+        $0.isEnabled = false
+    }
     private let passwordEnterLabel = UILabel().then {
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
@@ -144,9 +146,11 @@ extension PasswordSignupViewController {
               let passwordCheck = passwordCheckTextField.text,
               !(password.isEmpty || passwordCheck.isEmpty) && password == passwordCheck
         else {
+            nextPageButton.isEnabled = false
             nextPageButton.alpha = 0.8
             return
         }
+        nextPageButton.isEnabled = true
         nextPageButton.alpha  = 1.0
     }
     @objc private func clickNextPage() {
@@ -155,10 +159,7 @@ extension PasswordSignupViewController {
               let passwordCheck = passwordCheckTextField.text,
 
               !(password.isEmpty || passwordCheck.isEmpty)
-        else {
-            passwordEnterLabel.text = "비밀번호를 확인하세요."
-            return
-        }
+        else {return}
         userInfo.password = password
         userInfo.passwordValid = passwordCheck
         passwordEnterLabel.text = ""
@@ -167,7 +168,7 @@ extension PasswordSignupViewController {
         self.navigationItem.backBarButtonItem = signupBackbutton
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
         signupBackbutton.setTitleTextAttributes([
-            .font: UIFont(name: "Orbit-Regular", size: 16)
+            .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
 }

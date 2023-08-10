@@ -67,7 +67,7 @@ class CustomCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
-        likeButton.addTarget(self, action: #selector(clikcLike), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(clickLike), for: .touchUpInside)
         addSubviews()
         makeConstraints()
     }
@@ -134,7 +134,7 @@ class CustomCell: UITableViewCell {
             $0.right.equalToSuperview().inset(22)
         }
     }
-    @objc private func clikcLike() {
+    @objc private func clickLike() {
         isLiked.toggle()
         likeButton.isSelected = isLiked
         if likeButton.isSelected == true {
