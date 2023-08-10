@@ -108,7 +108,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
             switch res {
             case .success(let result):
                 switch result.statusCode {
-                case 200:
+                case 201:
                     if let data = try? JSONDecoder().decode(UserInfoResponse.self, from: result.data) {
                         DispatchQueue.main.async {
                             self.imageURL = data.profileImageURL
