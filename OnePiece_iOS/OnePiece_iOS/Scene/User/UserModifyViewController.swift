@@ -25,11 +25,10 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         profileModifyButton.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
         finishModify()
         nickNameModifyTextField.delegate = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
         loadImage()
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        loadImage()
-//    }
     override func viewWillLayoutSubviews() {
         layout()
     }
