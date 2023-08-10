@@ -212,7 +212,7 @@
 			children = (
 				88194AE22A85451200743445 /* UserSignup */,
 				88194AE42A85451200743445 /* Plugin */,
-				88194AE62A85451200743445 /* ㅕ소 */,
+				88194AE62A85451200743445 /* Auth */,
 				88194AEB2A85451200743445 /* User */,
 				88194AF02A85451200743445 /* Image */,
 				88194AF32A85451200743445 /* Feed */,
@@ -237,13 +237,13 @@
 			path = Plugin;
 			sourceTree = "<group>";
 		};
-		88194AE62A85451200743445 /* ㅕ소 */ = {
+		88194AE62A85451200743445 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				88194AE72A85451200743445 /* Response */,
 				88194AE92A85451200743445 /* API */,
 			);
-			path = "ㅕ소";
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		88194AE72A85451200743445 /* Response */ = {
