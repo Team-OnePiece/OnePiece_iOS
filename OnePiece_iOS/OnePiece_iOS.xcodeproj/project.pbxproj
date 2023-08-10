@@ -183,8 +183,8 @@
 		88194AC82A85450600743445 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				88194AC92A85450600743445 /* UserModifyViewController.swift */,
 				88194ACA2A85450600743445 /* UserViewController.swift */,
+				88194AC92A85450600743445 /* UserModifyViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";

@@ -25,10 +25,11 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         profileModifyButton.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
         finishModify()
         nickNameModifyTextField.delegate = self
-    }
-    override func viewWillAppear(_ animated: Bool) {
         loadImage()
     }
+//    override func viewWillAppear(_ animated: Bool) {
+//        loadImage()
+//    }
     override func viewWillLayoutSubviews() {
         layout()
     }
@@ -108,7 +109,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
             switch res {
             case .success(let result):
                 switch result.statusCode {
-                case 201:
+                case 200:
                     if let data = try? JSONDecoder().decode(UserInfoResponse.self, from: result.data) {
                         DispatchQueue.main.async {
                             self.imageURL = data.profileImageURL
