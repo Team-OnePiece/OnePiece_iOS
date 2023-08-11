@@ -14,7 +14,21 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         $0.setTitleColor(UIColor(named: "gray-800"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
     }
-    private let nickNameModifyTextField = DefaultTextField(placeholder: "")
+    private let nickNameModifyTextField = UITextField().then {
+        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.autocapitalizationType = .none
+        $0.autocorrectionType = .no
+        $0.isSecureTextEntry = false
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 8
+        let spacerView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
+        $0.leftView = spacerView
+        $0.rightView = spacerView
+        $0.leftViewMode = .always
+        $0.rightViewMode = .always
+        $0.layer.borderColor = UIColor(named: "gray-400")?.cgColor
+        $0.layer.borderWidth = 0.5
+    }
     private let nickNameEnterLabel = UILabel().then {
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
@@ -52,6 +66,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         nickNameModifyTextField.snp.makeConstraints {
             $0.top.equalTo(profileModifyButton.snp.bottom).offset(60)
             $0.left.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
         }
         nickNameEnterLabel.snp.makeConstraints {
             $0.top.equalTo(nickNameModifyTextField.snp.bottom).offset(8)
@@ -114,6 +129,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
                             self.imageURL = data.profileImageURL
                             let url = URL(string: self.imageURL)
                             self.profileBackground.kf.setImage(with: url, placeholder: UIImage(named: "profile"))
+                            self.nickNameModifyTextField.placeholder = "\(data.nickname)"
                         }
                     } else {
                         print("fail")
