@@ -45,6 +45,8 @@
 		88194B1F2A85461C00743445 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 88194B1E2A85461C00743445 /* SnapKit */; };
 		88194B222A85462600743445 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 88194B212A85462600743445 /* Then */; };
 		88194B252A85463B00743445 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 88194B242A85463B00743445 /* Moya */; };
+		88194B272A85765400743445 /* TagCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B262A85765400743445 /* TagCollectionVIewCell.swift */; };
+		88194B292A8614EF00743445 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B282A8614EF00743445 /* GroupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,8 @@
 		88194B012A85451200743445 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88194B022A85451200743445 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88194B032A85451200743445 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		88194B262A85765400743445 /* TagCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionVIewCell.swift; sourceTree = "<group>"; };
+		88194B282A8614EF00743445 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,11 +135,11 @@
 		88194AB92A85450600743445 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				88194ABA2A85450600743445 /* Auth */,
 				88194AC22A85450600743445 /* Component */,
+				88194ABA2A85450600743445 /* Auth */,
+				88194ACD2A85450600743445 /* Main */,
 				88194AC82A85450600743445 /* User */,
 				88194ACB2A85450600743445 /* Cell */,
-				88194ACD2A85450600743445 /* Main */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -143,8 +147,8 @@
 		88194ABA2A85450600743445 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				88194ABB2A85450600743445 /* Signup */,
 				88194AC02A85450600743445 /* Login */,
+				88194ABB2A85450600743445 /* Signup */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -176,6 +180,7 @@
 				88194AC52A85450600743445 /* DefaultTextField.swift */,
 				88194AC62A85450600743445 /* ContentAlert.swift */,
 				88194AC72A85450600743445 /* DefaultButton.swift */,
+				88194B282A8614EF00743445 /* GroupViewController.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				88194ACC2A85450600743445 /* CustomCell.swift */,
+				88194B262A85765400743445 /* TagCollectionVIewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -200,9 +206,9 @@
 		88194ACD2A85450600743445 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				88194ACE2A85450600743445 /* FeedModifyViewController.swift */,
 				88194ACF2A85450600743445 /* MainViewController.swift */,
 				88194AD02A85450600743445 /* FeedContentViewController.swift */,
+				88194ACE2A85450600743445 /* FeedModifyViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -240,8 +246,8 @@
 		88194AE62A85451200743445 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				88194AE72A85451200743445 /* Response */,
 				88194AE92A85451200743445 /* API */,
+				88194AE72A85451200743445 /* Response */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -314,8 +320,8 @@
 		88194AF42A85451200743445 /* Tag */ = {
 			isa = PBXGroup;
 			children = (
-				88194AF52A85451200743445 /* Response */,
 				88194AF72A85451200743445 /* API */,
+				88194AF52A85451200743445 /* Response */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -477,10 +483,12 @@
 				88194AD52A85450600743445 /* LoginViewController.swift in Sources */,
 				88194B0A2A85451300743445 /* ImageAPI.swift in Sources */,
 				88194AD42A85450600743445 /* NickNameSignupViewController.swift in Sources */,
+				88194B292A8614EF00743445 /* GroupViewController.swift in Sources */,
 				88194B0B2A85451300743445 /* TagResponse.swift in Sources */,
 				88194ADF2A85450600743445 /* MainViewController.swift in Sources */,
 				88194B092A85451300743445 /* UserAPI.swift in Sources */,
 				88194ADB2A85450600743445 /* UserModifyViewController.swift in Sources */,
+				88194B272A85765400743445 /* TagCollectionVIewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

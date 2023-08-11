@@ -25,10 +25,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.font = UIFont(name: "Orbit-Regular", size: 24)
         $0.textColor = UIColor(named: "gray-700")
     }
-    private let idTextField = DefaultTextField(placeholder: "아이디")
-    private let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true)
+    private let idTextField = DefaultTextField(placeholder: "아이디").then {
+        $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+    }
+    private let passwordTextField = DefaultTextField(placeholder: "비밀번호", isSecure: true).then {
+        $0.returnKeyType = .done
+        $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+    }
     private var eyeButton = UIButton(type: .custom)
-    private let loginButton = DefaultButton(type: .system, title: "로그인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!)
+    private let loginButton = DefaultButton(type: .system, title: "로그인", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
+        $0.addTarget(self, action: #selector(clickLogin), for: .touchUpInside)
+    }
     private let loginFailLabel = UILabel().then {
         $0.textColor = .red
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
@@ -43,18 +50,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.setTitle("회원가입", for: .normal)
         $0.setTitleColor(UIColor.red, for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 14)
+        $0.addTarget(self, action: #selector(moveSignupView), for: .touchUpInside)
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         idTextField.delegate = self
         passwordTextField.delegate = self
-        loginButton.addTarget(self, action: #selector(clickLogin), for: .touchUpInside)
-        signupButton.addTarget(self, action: #selector(moveSignupView), for: .touchUpInside)
         showPasswordButton()
-        passwordTextField.returnKeyType = .done
-        idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
-        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         setupKeyboardObservers()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -90,10 +94,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         idTextField.snp.makeConstraints {
             $0.top.equalTo(mainTitleLabel.snp.bottom).offset(18)
             $0.left.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
         }
         passwordTextField.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom).offset(10)
             $0.left.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
         }
         loginFailLabel.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(8)

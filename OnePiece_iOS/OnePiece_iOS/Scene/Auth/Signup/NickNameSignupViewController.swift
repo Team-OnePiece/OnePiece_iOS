@@ -6,9 +6,13 @@ import Then
 class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
     
     private let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
-    private let nickNameTextField = DefaultTextField(placeholder: "별명(2~9자 이내 한글)")
+    private let nickNameTextField = DefaultTextField(placeholder: "별명(2~9자 이내 한글)").then {
+        $0.returnKeyType = .done
+        $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+    }
     private let signupButton = DefaultButton(type: .system, title: "회원가입", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
         $0.isEnabled = false
+        $0.addTarget(self, action: #selector(clickMoveMainPage), for: .touchUpInside)
     }
     private let progressImage = UIImageView(image: UIImage(named: "progress4"))
     private let nickNameEnterLabel = UILabel().then {
@@ -18,10 +22,7 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        nickNameTextField.returnKeyType = .done
         nickNameTextField.delegate = self
-        signupButton.addTarget(self, action: #selector(clickMoveMainPage), for: .touchUpInside)
-        nickNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         setupKeyboardObservers()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -49,6 +50,7 @@ class NickNameSignupViewController: UIViewController, UITextFieldDelegate {
         nickNameTextField.snp.makeConstraints {
             $0.top.equalTo(progressImage.snp.bottom).offset(44)
             $0.left.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
         }
         nickNameEnterLabel.snp.makeConstraints {
             $0.top.equalTo(nickNameTextField.snp.bottom).offset(8)

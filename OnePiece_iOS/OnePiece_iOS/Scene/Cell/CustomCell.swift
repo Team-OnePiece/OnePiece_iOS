@@ -49,6 +49,7 @@ class CustomCell: UITableViewCell {
     private var likeButton = UIButton(type: .custom).then {
         $0.setImage(UIImage(named: "dontLike"), for: .normal)
         $0.setImage(UIImage(named: "likeIcon"), for: .selected)
+        $0.addTarget(self, action: #selector(clickLike), for: .touchUpInside)
     }
     private var countLikeLabel = UILabel().then {
         $0.text = "0"
@@ -74,11 +75,10 @@ class CustomCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
-        likeButton.addTarget(self, action: #selector(clickLike), for: .touchUpInside)
-        addSubviews()
-        makeConstraints()
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
+        addSubviews()
+        makeConstraints()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

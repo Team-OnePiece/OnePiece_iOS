@@ -25,37 +25,31 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         $0.setTitleColor(UIColor(named: "gray-500"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 20)
     }
-    private let buttonAction = UIAction(title: "가보자고", handler: {_ in})
-    private let Action = UIAction(title: "신기하네", handler: {_ in})
-    private func clickPopup() {
-        groupButton.menu = UIMenu(title: "ㅅㅂ", identifier: nil, options: .displayInline, children: [buttonAction, Action])
-    }
     private let myPageButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "setting"), for: .normal)
         $0.tintColor = UIColor(named: "settingColor")
+        $0.addTarget(self, action: #selector(clickMyPage), for: .touchUpInside)
     }
     private let tableView = UITableView().then {
         $0.backgroundColor = .white
         $0.showsVerticalScrollIndicator = false
+        $0.rowHeight = 408
+        $0.register(CustomCell.self, forCellReuseIdentifier: "CellId")
+        $0.separatorStyle = .none
     }
     private let feedPlusButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "feedPlusIcon"), for: .normal)
         $0.backgroundColor = UIColor(named: "mainColor-1")
         $0.tintColor = UIColor(named: "gray-200")
         $0.layer.cornerRadius = 40
+        $0.addTarget(self, action: #selector(clickFeedPlus), for: .touchUpInside)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        tableView.rowHeight = 408
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .none
         navigationItem.hidesBackButton = true
-        tableView.register(CustomCell.self, forCellReuseIdentifier: "CellId")
-        feedPlusButton.addTarget(self, action: #selector(clickFeedPlus), for: .touchUpInside)
-        myPageButton.addTarget(self, action: #selector(clickMyPage), for: .touchUpInside)
-        clickPopup()
     }
     override func viewWillLayoutSubviews() {
         addSubViews()
@@ -139,7 +133,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! CustomCell
-        
         cell.feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
         return cell
     }

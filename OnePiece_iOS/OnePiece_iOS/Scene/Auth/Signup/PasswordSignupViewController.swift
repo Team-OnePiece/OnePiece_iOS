@@ -5,13 +5,20 @@ import Then
 
 class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
     
-    private let passwordTextField = DefaultTextField(placeholder: "비밀번호(16자이내 영문,숫자,특수문자)", isSecure: true)
-    private let passwordCheckTextField = DefaultTextField(placeholder: "비밀번호 확인", isSecure: true)
+    private let passwordTextField = DefaultTextField(placeholder: "비밀번호(16자이내 영문,숫자,특수문자)", isSecure: true).then {
+        $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+    }
+    private let passwordCheckTextField = DefaultTextField(placeholder: "비밀번호 확인", isSecure: true).then {
+        $0.returnKeyType = .done
+        $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+
+    }
     private var eyeButton = UIButton(type: .custom)
     private var checkEyeButton = UIButton(type: .custom)
     private let progressImage = UIImageView(image: UIImage(named: "progress2"))
     private let nextPageButton = DefaultButton(type: .system, title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
         $0.isEnabled = false
+        $0.addTarget(self, action: #selector(clickNextPage), for: .touchUpInside)
     }
     private let passwordEnterLabel = UILabel().then {
         $0.textColor = .red
@@ -22,10 +29,6 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = .white
         passwordTextField.delegate = self
         passwordCheckTextField.delegate = self
-        passwordCheckTextField.returnKeyType = .done
-        nextPageButton.addTarget(self, action: #selector(clickNextPage), for: .touchUpInside)
-        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
-        passwordCheckTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         showPasswordButton()
         showPasswordCheckButton()
         setupKeyboardObservers()
@@ -56,6 +59,7 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.snp.makeConstraints {
             $0.top.equalTo(progressImage.snp.bottom).offset(48)
             $0.left.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
         }
         passwordCheckTextField.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(24)

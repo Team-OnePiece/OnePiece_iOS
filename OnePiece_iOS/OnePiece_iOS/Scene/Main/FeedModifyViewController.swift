@@ -9,6 +9,7 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate {
     private let placeTextField = DefaultTextField(placeholder: "위치를 입력하세요").then {
         $0.textAlignment = .center
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
     }
     private let explainLabel = UILabel().then {
         $0.text = "태그는 최대 6개, 최대 10자까지 작성 가능합니다."
@@ -24,7 +25,6 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         view.backgroundColor = .white
         placeTextField.delegate = self
-        placeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         finishFeedModify()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,6 +45,7 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate {
         placeTextField.snp.makeConstraints {
             $0.top.equalToSuperview().inset(143)
             $0.left.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
         }
         placeTextFieldTextLengthLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(7)

@@ -21,11 +21,11 @@ class UserViewController: UIViewController {
     private let modifyButton = DefaultButton(type: .system, title: "수정하기", backgroundColor: .white, titleColor: UIColor(named: "gray-700")!).then {
         $0.layer.borderWidth = 0.5
         $0.layer.borderColor = UIColor(named: "gray-400")?.cgColor
+        $0.addTarget(self, action: #selector(clickModifyPage), for: .touchUpInside)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        modifyButton.addTarget(self, action: #selector(clickModifyPage), for: .touchUpInside)
     }
     override func viewWillAppear(_ animated: Bool) {
         loadImage()

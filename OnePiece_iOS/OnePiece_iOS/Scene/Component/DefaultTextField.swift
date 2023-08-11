@@ -33,13 +33,7 @@ class DefaultTextField: UITextField {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        makeConstraints()
         fieldSetting()
-    }
-    private func makeConstraints() {
-        self.snp.makeConstraints {
-            $0.height.equalTo(48)
-        }
     }
     private func fieldSetting() {
         self.attributedPlaceholder = NSAttributedString(

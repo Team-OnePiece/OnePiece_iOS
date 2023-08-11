@@ -7,14 +7,12 @@ import Moya
 class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     let provider = MoyaProvider<TagAPI>(plugins: [MoyaLoggerPlugin()])
     private var count = 0
-    private var arr:[Int] = []
-    private let cellIdentifier = "cellId"
-    private var dataSource:[String] = []
     private let placeTextField = DefaultTextField(placeholder: "위치를 입력하세요").then {
         $0.textAlignment = .center
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
         $0.layer.borderWidth = 2
         $0.layer.cornerRadius = 24
+        $0.addTarget(self, action: #selector(placeTextFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
     }
     private let explainLabel = UILabel().then {
         $0.text = "태그는 최대 6개, 최대 5자까지 작성 가능합니다."
@@ -26,31 +24,16 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         $0.textColor = UIColor(named: "gray-500")
         $0.font = UIFont(name: "Orbit-Regular", size: 10)
     }
-    private let tagTextField = UITextField().then {
-        $0.backgroundColor = .white
+    private let tagTextField = DefaultTextField(placeholder: "태그를 입력하세요").then {
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
         $0.layer.borderWidth = 2
         $0.layer.cornerRadius = 20
-        let spacerView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: 0))
-        $0.leftView = spacerView
-        $0.leftViewMode = .always
-        $0.rightView = spacerView
-        $0.rightViewMode = .always
-        $0.autocorrectionType = .no
-        $0.autocapitalizationType = .none
-        $0.font = UIFont.systemFont(ofSize: 16)
-        $0.attributedPlaceholder = NSAttributedString(
-            string: "태그를 입력하세요.",
-            attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor(named: "gray-600")!,
-                NSAttributedString.Key.font: UIFont(name: "Orbit-Regular", size: 16)!
-            ]
-        )
     }
     private let tagAddButton = UIButton(type: .system).then {
         $0.setTitle("+", for: .normal)
         $0.setTitleColor(UIColor(named: "gray-700"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 32)
+        $0.addTarget(self, action: #selector(clickAddTag), for: .touchUpInside)
     }
     private let tagListView = TagListView().then {
         $0.backgroundColor = .red
@@ -62,9 +45,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         view.backgroundColor = .white
         finishFeedWirte()
         placeTextField.delegate = self
-        placeTextField.addTarget(self, action: #selector(placeTextFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
         tagTextField.delegate = self
-        tagAddButton.addTarget(self, action: #selector(clickAddTag), for: .touchUpInside)
         tagSetting()
         clickImageView()
     }
@@ -103,6 +84,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         placeTextField.snp.makeConstraints {
             $0.top.equalToSuperview().inset(143)
             $0.left.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
         }
         placeTextFieldTextLengthLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(10)
@@ -137,13 +119,14 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             $0.width.height.equalTo(20)
         }
     }
+    private var id: Int = 0
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        provider.request(.deleteTag(tagId: 1)) { res in
+        provider.request(.deleteTag(tagId: self.id)) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
                 case 204:
-                        self.tagListView.removeTagView(tagView)
+                    self.tagListView.removeTagView(tagView)
                 default:
                     print(result.statusCode)
                 }
@@ -151,7 +134,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
                 print(err.localizedDescription)
             }
         }
-   
+        
     }
     func tagSetting() {
         tagListView.textFont = UIFont(name: "Orbit-Regular", size: 18)!
@@ -185,12 +168,11 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             case .success(let result):
                 switch result.statusCode {
                 case 201:
-                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
-                        self.tagListView.addTag(tag)
-                        self.arr.append(data.Id)
-                    } else {
-                        print("실패")
-                    }
+//                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
+                    self.tagListView.addTag(tag)
+//                    } else {
+//                        print("실패")
+//                    }
                 default:
                     print(result.statusCode)
                 }

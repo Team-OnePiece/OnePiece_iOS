@@ -13,6 +13,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
         $0.setTitle("수정하기", for: .normal)
         $0.setTitleColor(UIColor(named: "gray-800"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
+        $0.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
     }
     private let nickNameModifyTextField = UITextField().then {
         $0.font = UIFont.systemFont(ofSize: 16)
@@ -36,9 +37,8 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        profileModifyButton.addTarget(self, action: #selector(clickProfileModifyButton), for: .touchUpInside)
-        finishModify()
         nickNameModifyTextField.delegate = self
+        finishModify()
     }
     override func viewWillAppear(_ animated: Bool) {
         loadImage()

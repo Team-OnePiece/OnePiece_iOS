@@ -11,11 +11,22 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
         $0.backgroundColor = .clear
         $0.spacing = 5
     }
-    private let gradeTextField = DefaultTextField(placeholder: "학년")
-    private let classTextField = DefaultTextField(placeholder: "반")
-    private let numberTextField = DefaultTextField(placeholder: "번호")
+    private let gradeTextField = DefaultTextField(placeholder: "학년").then {
+        $0.keyboardType = .numberPad
+        $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+    }
+    private let classTextField = DefaultTextField(placeholder: "반").then {
+        $0.keyboardType = .numberPad
+        $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+    }
+    private let numberTextField = DefaultTextField(placeholder: "번호").then {
+        $0.returnKeyType = .done
+        $0.keyboardType = .numberPad
+        $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
+    }
     private let nextPageButton = DefaultButton(type: .system, title: "다음", backgroundColor: UIColor(named: "mainColor-1")!, titleColor: UIColor(named: "gray-000")!).then {
         $0.isEnabled = false
+        $0.addTarget(self, action: #selector(clickNextPage), for: .touchUpInside)
     }
     private let progressImage = UIImageView(image: UIImage(named: "progress3"))
     private let schoolInfoEnterLabel = UILabel().then {
@@ -25,17 +36,9 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        numberTextField.returnKeyType = .done
-        gradeTextField.keyboardType = .numberPad
-        classTextField.keyboardType = .numberPad
-        numberTextField.keyboardType = .numberPad
         gradeTextField.delegate = self
         classTextField.delegate = self
         numberTextField.delegate = self
-        gradeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
-        classTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
-        numberTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
-        nextPageButton.addTarget(self, action: #selector(clickNextPage), for: .touchUpInside)
         setupKeyboardObservers()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -61,6 +64,15 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
             $0.width.equalTo(340)
             $0.height.equalTo(35)
         }
+        gradeTextField.snp.makeConstraints {
+            $0.height.equalTo(48)
+        }
+        classTextField.snp.makeConstraints {
+            $0.height.equalTo(48)
+        }
+        numberTextField.snp.makeConstraints  {
+            $0.height.equalTo(48)
+        }
         stackView.snp.makeConstraints {
             $0.top.equalTo(progressImage.snp.bottom).offset(43)
             $0.left.right.equalToSuperview().inset(25)
@@ -75,13 +87,13 @@ class SchoolInfoSignupViewController: UIViewController, UITextFieldDelegate {
         }
     }
     private func setupKeyboardObservers() {
-          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-      }
-      private func removeKeyboardObservers() {
-          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-          NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-      }
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    private func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
