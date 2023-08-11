@@ -128,7 +128,7 @@ extension NickNameSignupViewController {
             switch res {
             case .success(let result):
                 switch result.statusCode {
-                case 200:
+                case 201:
                     print("회원가입 성공")
                     self.navigationController?.pushViewController(LoginViewController(), animated: true)
                     let signupBackbutton = UIBarButtonItem(title: "회원가입", style: .plain, target: nil, action: nil)
