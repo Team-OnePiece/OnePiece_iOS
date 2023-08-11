@@ -32,7 +32,7 @@ class CustomCell: UITableViewCell {
     private let dateLabel = UILabel().then {
         $0.text = "2023-02-28"
         $0.textColor = UIColor(named: "gray-800")
-        $0.font = UIFont(name: "Orbit-Regular", size: 12)
+        $0.font = UIFont(name: "Orbit-Regular", size: 10)
     }
     let feedSettingButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "feedSetting"), for: .normal)
@@ -55,21 +55,30 @@ class CustomCell: UITableViewCell {
         $0.font = UIFont(name: "Orbit-Regular", size: 16)
     }
     private let placeLabel = UILabel().then {
-        $0.text = "몰라임마"
+        $0.text = "몰라dfdssdf임마"
         $0.textColor = UIColor(named: "gray-800")
-        $0.font = UIFont(name: "Orbit-Regular", size: 8)
+        $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
-    private let tagStackView = UIStackView().then {
-        $0.alignment = .leading
-        $0.spacing = 4
-        $0.backgroundColor = .blue
-    }
+    private let tagCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.backgroundColor = .white
+        collectionView.register(TagCollectionVIewCell.self, forCellWithReuseIdentifier: "TagCell")
+        return collectionView
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
         likeButton.addTarget(self, action: #selector(clickLike), for: .touchUpInside)
         addSubviews()
         makeConstraints()
+        tagCollectionView.delegate = self
+        tagCollectionView.dataSource = self
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -85,7 +94,7 @@ class CustomCell: UITableViewCell {
             likeButton,
             countLikeLabel,
             placeLabel,
-            tagStackView
+            tagCollectionView
         ].forEach({contentView.addSubview($0)})
     }
     private func makeConstraints() {
@@ -127,7 +136,7 @@ class CustomCell: UITableViewCell {
             $0.top.equalTo(countLikeLabel.snp.bottom).offset(7)
             $0.left.equalToSuperview().inset(12)
         }
-        tagStackView.snp.makeConstraints {
+        tagCollectionView.snp.makeConstraints {
             $0.top.equalTo(feedImageView.snp.bottom).offset(16)
             $0.bottom.equalToSuperview().inset(8)
             $0.left.equalTo(placeLabel.snp.right).offset(22)
@@ -144,5 +153,28 @@ class CustomCell: UITableViewCell {
             likeCount -= 1
             countLikeLabel.text = String(likeCount)
         }
+    }
+}
+
+extension CustomCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCollectionVIewCell
+        cell.tagLabel.text = "fdjls"
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let widthCell = 50
+        let heightCell = 20
+        return CGSize(width: widthCell, height: heightCell)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
     }
 }
