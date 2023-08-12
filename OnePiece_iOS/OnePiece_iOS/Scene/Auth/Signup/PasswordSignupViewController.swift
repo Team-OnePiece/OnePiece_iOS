@@ -64,6 +64,7 @@ class PasswordSignupViewController: UIViewController, UITextFieldDelegate {
         passwordCheckTextField.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(24)
             $0.left.right.equalToSuperview().inset(25)
+            $0.height.equalTo(48)
         }
         passwordEnterLabel.snp.makeConstraints {
             $0.top.equalTo(passwordCheckTextField.snp.bottom).offset(8)

@@ -12,24 +12,24 @@ import Then
 class CustomCell: UITableViewCell {
 
     static let cellId = "CellId"
-    private var likeCount = 0
-    private let profileImage = UIImageView().then {
+    var likeCount = 0
+    let profileImage = UIImageView().then {
         $0.image = UIImage(named: "feedImage")
         $0.layer.cornerRadius = 15
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
-    private let userNameLabel = UILabel().then {
+    let userNameLabel = UILabel().then {
         $0.text = "멋진여성"
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
-    private let userSchoolNumberLabel = UILabel().then {
+    let userSchoolNumberLabel = UILabel().then {
         $0.text = "1401"
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 8)
     }
-    private let dateLabel = UILabel().then {
+    let dateLabel = UILabel().then {
         $0.text = "2023-02-28"
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 10)
@@ -38,29 +38,29 @@ class CustomCell: UITableViewCell {
         $0.setImage(UIImage(named: "feedSetting"), for: .normal)
         $0.tintColor = UIColor(named: "gray-800")
     }
-    private let feedImageView = UIImageView().then {
+    let feedImageView = UIImageView().then {
         $0.image = UIImage(named: "feedImage")
         $0.layer.cornerRadius = 8
         $0.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
     }
-    private var isLiked = false
-    private var likeButton = UIButton(type: .custom).then {
+    var isLiked = false
+    var likeButton = UIButton(type: .custom).then {
         $0.setImage(UIImage(named: "dontLike"), for: .normal)
         $0.setImage(UIImage(named: "likeIcon"), for: .selected)
         $0.addTarget(self, action: #selector(clickLike), for: .touchUpInside)
     }
-    private var countLikeLabel = UILabel().then {
+    var countLikeLabel = UILabel().then {
         $0.text = "0"
         $0.font = UIFont(name: "Orbit-Regular", size: 16)
     }
-    private let placeLabel = UILabel().then {
+    let placeLabel = UILabel().then {
         $0.text = "몰라dfdssdf임마"
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
-    private let tagCollectionView: UICollectionView = {
+    let tagCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -83,7 +83,7 @@ class CustomCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    private func addSubviews() {
+    func addSubviews() {
         [
             profileImage,
             userNameLabel,
@@ -97,7 +97,7 @@ class CustomCell: UITableViewCell {
             tagCollectionView
         ].forEach({contentView.addSubview($0)})
     }
-    private func makeConstraints() {
+    func makeConstraints() {
         profileImage.snp.makeConstraints {
             $0.top.equalToSuperview().inset(5)
             $0.left.equalToSuperview().inset(10)
@@ -143,7 +143,7 @@ class CustomCell: UITableViewCell {
             $0.right.equalToSuperview().inset(22)
         }
     }
-    @objc private func clickLike() {
+    @objc func clickLike() {
         isLiked.toggle()
         likeButton.isSelected = isLiked
         if likeButton.isSelected == true {

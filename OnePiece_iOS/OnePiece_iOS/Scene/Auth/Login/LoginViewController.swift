@@ -208,7 +208,6 @@ extension LoginViewController {
                     } else {
                         self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
                         print("auth json decode fail")
-                        print(result.statusCode)
                     }
                 default:
                     self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."

@@ -63,8 +63,8 @@ class UserViewController: UIViewController {
                 case 200:
                     if let data = try? JSONDecoder().decode(UserInfoResponse.self, from: result.data) {
                         DispatchQueue.main.async {
-                            self.imageURL = data.profileImageURL
                             self.messageLabel.text = "\(data.nickname)님,\n오늘은\n어떤 하루를 보냈나요?"
+                            self.imageURL = data.profileImageURL
                             let url = URL(string: self.imageURL)
                             self.profileBackground.kf.setImage(with: url, placeholder: UIImage(named: "profile"))
                         }
