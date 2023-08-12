@@ -90,7 +90,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
             switch res {
             case .success(let result):
                 switch result.statusCode {
-                case 200:
+                case 201:
                     print("성공")
                 default:
                     print(result.statusCode)
@@ -123,7 +123,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
             switch res {
             case .success(let result):
                 switch result.statusCode {
-                case 201:
+                case 200:
                     if let data = try? JSONDecoder().decode(UserInfoResponse.self, from: result.data) {
                         DispatchQueue.main.async {
                             self.imageURL = data.profileImageURL
