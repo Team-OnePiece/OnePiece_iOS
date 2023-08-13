@@ -15,17 +15,18 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
     
     private var profileURL: String = ""
     private var feedURL: String = ""
-//    private var cellArr: [String] =  []
-    var feedList: [CouponModel] = [] {
-           didSet {
-               [
-//                   addCouponImageView,
-//                   emptyCouponTextField
-                mainLogoImage
-               ].forEach({ $0.isHidden = !feedList.isEmpty })
-               tableView.reloadData()
-           }
-       }
+    private var feedList: [FeedModel] = [] {
+        didSet {
+            tableView.reloadData()
+            refreshControl.endRefreshing()
+        }
+    }
+    private let refreshControl = UIRefreshControl()
+    private let feedEmptyLabel = UILabel().then {
+        $0.text = "게시물을 작성해보세요"
+        $0.textColor = .black
+        $0.font = UIFont(name: "Orbit-Regular", size: 30)
+    }
     private let mainLogoImage = UIImageView().then {
         $0.image = UIImage(named: "mainLogo")
     }
@@ -71,14 +72,19 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         tableView.dataSource = self
         navigationItem.hidesBackButton = true
         clickGroup()
+        tableView.refreshControl = refreshControl
+        tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
     }
     override func viewWillLayoutSubviews() {
         addSubViews()
         makeConstraints()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        loadFeed()
+    }
     private func addSubViews() {
         [
+            feedEmptyLabel,
             mainLogoImage,
             groupStackView,
             mainLabel,
@@ -89,6 +95,9 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         [groupChoiceIcon, groupLabel].forEach({groupStackView.addArrangedSubview($0)})
     }
     private func makeConstraints() {
+        feedEmptyLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
         mainLogoImage.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.left.equalToSuperview().inset(20)
@@ -121,6 +130,42 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
             $0.width.height.equalTo(80)
         }
     }
+    func loadFeed() {
+        let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.loadFeed) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    if let data = try? JSONDecoder().decode(FeedResponse.self, from: result.data) {
+                        DispatchQueue.main.async {
+                            self.feedList = data.map {
+                                .init(
+                                    id: $0.id,
+                                    nickname: $0.nickname,
+                                    profileImage: $0.feedProfileImageurl,
+                                    grade: $0.grade,
+                                    classnumber: $0.classnumber,
+                                    number: $0.number,
+                                    feedImage: $0.feedImageurl,
+                                    place: $0.place,
+                                    feedDate: $0.feedDate
+                                )
+                            }
+                            self.feedList.sort(by: { $0.id > $1.id })
+                        }
+                    } else {
+                        print("실패")
+                    }
+                default:
+                    print("실패")
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+            }
+        }
+    }
     private func moveView(targetView: UIViewController, title: String) {
         self.navigationController?.pushViewController(targetView, animated: true)
         let toMoveView = UIBarButtonItem(title: title, style: .plain, target: nil, action: nil)
@@ -148,6 +193,9 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         group.modalTransitionStyle = .crossDissolve
         self.present(group, animated: true)
     }
+    @objc func pullToRefresh() {
+          loadFeed()
+      }
 }
 
 extension MainViewController {
@@ -164,47 +212,24 @@ extension MainViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return feedList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! CustomCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellId") as? CustomCell else {return UITableViewCell()}
         cell.feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
-            let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
-            provider.request(.loadFeed) { res in
-                switch res {
-                case .success(let result):
-                    switch result.statusCode {
-                    case 200:
-                        if let data = try? JSONDecoder().decode(FeedResponse.self, from: result.data) {
-                            DispatchQueue.main.async {
-                                self.profileURL = data.feedProfileImageurl
-                                let profileImageURL = URL(string: self.profileURL)
-                                cell.profileImage.kf.setImage(with: profileImageURL, placeholder: UIImage(named: "profile"))
-                                cell.userNameLabel.text = "\(data.nickname)"
-                                if data.number < 10 {
-                                    cell.userSchoolNumberLabel.text = "\(data.grade)\( data.classnumber)0\(data.number)"
-                                } else {
-                                    cell.userSchoolNumberLabel.text = "\(data.grade)\(data.classnumber)\(data.number)"
-                                }
-                                cell.placeLabel.text = "\(data.place)"
-                                cell.dateLabel.text = "\(data.feedDate)"
-                                self.feedURL = data.feedImageurl
-                                let feedImageURL = URL(string: self.feedURL)
-                                cell.feedImageView.kf.setImage(with: feedImageURL, placeholder: UIImage(named: "profile"))
-                                print("\(data.id)")
-                            }
-                        } else {
-                            print("실패dd")
-                        }
-                    default:
-                        print("실패")
-                        print(result.statusCode)
-                    }
-                case .failure(let err):
-                    print(err.localizedDescription)
-                }
-            }
+        cell.cellSetter(
+            id: feedList[indexPath.row].id,
+            nickname: feedList[indexPath.row].nickname,
+            place: feedList[indexPath.row].place,
+            profileImage: feedList[indexPath.row].profileImage,
+            feedImage: feedList[indexPath.row].feedImage,
+            feedDate: feedList[indexPath.row].feedDate,
+            grade: "\(feedList[indexPath.row].grade)",
+            classnumber: "\(feedList[indexPath.row].classnumber)",
+            number: "\(feedList[indexPath.row].number)"
+        )
+        cell.selectionStyle = .none
         return cell
     }
 }

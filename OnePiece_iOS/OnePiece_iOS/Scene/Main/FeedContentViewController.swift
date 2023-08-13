@@ -43,7 +43,6 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        finishFeedWirte()
         placeTextField.delegate = self
         tagTextField.delegate = self
         tagSetting()
@@ -55,6 +54,9 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     override func viewWillLayoutSubviews() {
         addSubViews()
         makeConstraints()
+    }
+    override func viewDidLayoutSubviews() {
+        finishFeedWirte()
     }
     func clickImageView() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchToPickPhoto))
@@ -119,7 +121,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             $0.width.height.equalTo(20)
         }
     }
-    private var id: Int = 0
+//    private var id: Int = 0
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         provider.request(.deleteTag(tagId: self.id)) { res in
             switch res {
@@ -177,7 +179,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
                     print(result.statusCode)
                 }
             case .failure(let err):
-                print(err.localizedDescription)
+                print("\(err.localizedDescription)")
             }
         }
     }
@@ -199,9 +201,35 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
+    private var id: Int = 0
+//    private var completion: () -> Void = {}
     @objc private func finishFeed() {
-        self.navigationController?.popViewController(animated: true)
-        //여기서 서버통신~
+        let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
+        guard let place = placeTextField.text,
+              let image = imageView.image,
+              !place.isEmpty else {return}
+        provider.request(.createFeed(data: image.jpegData(compressionQuality: 0.1) ?? Data(), place: place)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 201:
+                    if let data = try? JSONDecoder().decode(CreateFeedResponse.self, from: result.data) {
+                        print("성공")
+                        self.id = data.boardId
+                        print(self.id)
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                default:
+                    print("실패")
+                    print(result.statusCode)
+                    let alert = DefaultAlert(title: "게시물 등록에 실패하였습니다.")
+                    self.present(alert, animated: true)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+
     }
 }
 

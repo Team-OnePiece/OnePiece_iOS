@@ -47,6 +47,9 @@
 		88194B252A85463B00743445 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 88194B242A85463B00743445 /* Moya */; };
 		88194B272A85765400743445 /* TagCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B262A85765400743445 /* TagCollectionVIewCell.swift */; };
 		88194B292A8614EF00743445 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B282A8614EF00743445 /* GroupViewController.swift */; };
+		88194B2F2A87BC9600743445 /* FeedAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B2E2A87BC9600743445 /* FeedAPI.swift */; };
+		88194B312A87C2C900743445 /* FeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B302A87C2C900743445 /* FeedResponse.swift */; };
+		88194B362A88B72000743445 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B352A88B72000743445 /* FeedModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +89,9 @@
 		88194B032A85451200743445 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		88194B262A85765400743445 /* TagCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionVIewCell.swift; sourceTree = "<group>"; };
 		88194B282A8614EF00743445 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		88194B2E2A87BC9600743445 /* FeedAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAPI.swift; sourceTree = "<group>"; };
+		88194B302A87C2C900743445 /* FeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResponse.swift; sourceTree = "<group>"; };
+		88194B352A88B72000743445 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,8 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				88194ABC2A85450600743445 /* IdSignupViewController.swift */,
-				88194ABD2A85450600743445 /* SchoolInfoViewController.swift */,
 				88194ABE2A85450600743445 /* PasswordSignupViewController.swift */,
+				88194ABD2A85450600743445 /* SchoolInfoViewController.swift */,
 				88194ABF2A85450600743445 /* NickNameSignupViewController.swift */,
 			);
 			path = Signup;
@@ -175,10 +181,10 @@
 		88194AC22A85450600743445 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				88194AC32A85450600743445 /* FeedDeleteAlert.swift */,
 				88194AC42A85450600743445 /* DefaultAlert.swift */,
 				88194AC52A85450600743445 /* DefaultTextField.swift */,
 				88194AC62A85450600743445 /* ContentAlert.swift */,
+				88194AC32A85450600743445 /* FeedDeleteAlert.swift */,
 				88194AC72A85450600743445 /* DefaultButton.swift */,
 				88194B282A8614EF00743445 /* GroupViewController.swift */,
 			);
@@ -197,7 +203,6 @@
 		88194ACB2A85450600743445 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				88194ACC2A85450600743445 /* CustomCell.swift */,
 				88194B262A85765400743445 /* TagCollectionVIewCell.swift */,
 			);
 			path = Cell;
@@ -206,7 +211,9 @@
 		88194ACD2A85450600743445 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				88194ACF2A85450600743445 /* MainViewController.swift */,
+				88194B332A88B6FF00743445 /* Model */,
+				88194B322A88B6FB00743445 /* View */,
+				88194B342A88B70700743445 /* ViewController */,
 				88194AD02A85450600743445 /* FeedContentViewController.swift */,
 				88194ACE2A85450600743445 /* FeedModifyViewController.swift */,
 			);
@@ -217,11 +224,11 @@
 			isa = PBXGroup;
 			children = (
 				88194AE22A85451200743445 /* UserSignup */,
-				88194AE42A85451200743445 /* Plugin */,
 				88194AE62A85451200743445 /* Auth */,
 				88194AEB2A85451200743445 /* User */,
 				88194AF02A85451200743445 /* Image */,
 				88194AF32A85451200743445 /* Feed */,
+				88194AE42A85451200743445 /* Plugin */,
 				88194AF92A85451200743445 /* Header */,
 			);
 			path = Service;
@@ -271,8 +278,8 @@
 		88194AEB2A85451200743445 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				88194AEC2A85451200743445 /* Response */,
 				88194AEE2A85451200743445 /* API */,
+				88194AEC2A85451200743445 /* Response */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -312,6 +319,7 @@
 		88194AF32A85451200743445 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				88194B2B2A87BBE800743445 /* Feed */,
 				88194AF42A85451200743445 /* Tag */,
 			);
 			path = Feed;
@@ -369,6 +377,55 @@
 				88194AFE2A85451200743445 /* Orbit-Regular.ttf */,
 			);
 			path = Orbit;
+			sourceTree = "<group>";
+		};
+		88194B2B2A87BBE800743445 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				88194B2C2A87BC4900743445 /* API */,
+				88194B2D2A87BC5900743445 /* Response */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		88194B2C2A87BC4900743445 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				88194B2E2A87BC9600743445 /* FeedAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		88194B2D2A87BC5900743445 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				88194B302A87C2C900743445 /* FeedResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		88194B322A88B6FB00743445 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88194ACC2A85450600743445 /* CustomCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88194B332A88B6FF00743445 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88194B352A88B72000743445 /* FeedModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88194B342A88B70700743445 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				88194ACF2A85450600743445 /* MainViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,11 +526,14 @@
 				88194ADD2A85450600743445 /* CustomCell.swift in Sources */,
 				88194B072A85451300743445 /* AuthAPI.swift in Sources */,
 				88194B0C2A85451300743445 /* TagAPI.swift in Sources */,
+				88194B362A88B72000743445 /* FeedModel.swift in Sources */,
 				88194AD92A85450600743445 /* ContentAlert.swift in Sources */,
 				88194B062A85451300743445 /* AuthResponse.swift in Sources */,
 				88194B042A85451300743445 /* UserInfo.swift in Sources */,
 				88194ADE2A85450600743445 /* FeedModifyViewController.swift in Sources */,
+				88194B2F2A87BC9600743445 /* FeedAPI.swift in Sources */,
 				88194AD82A85450600743445 /* DefaultTextField.swift in Sources */,
+				88194B312A87C2C900743445 /* FeedResponse.swift in Sources */,
 				88194AE02A85450600743445 /* FeedContentViewController.swift in Sources */,
 				88194B0D2A85451300743445 /* Header.swift in Sources */,
 				88194AD12A85450600743445 /* IdSignupViewController.swift in Sources */,

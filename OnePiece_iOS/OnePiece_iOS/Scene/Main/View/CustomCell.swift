@@ -8,11 +8,13 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
 
 class CustomCell: UITableViewCell {
 
     static let cellId = "CellId"
     var likeCount = 0
+    var id: Int = 0
     let profileImage = UIImageView().then {
         $0.image = UIImage(named: "feedImage")
         $0.layer.cornerRadius = 15
@@ -24,8 +26,18 @@ class CustomCell: UITableViewCell {
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
-    let userSchoolNumberLabel = UILabel().then {
-        $0.text = "1401"
+    let gradeLabel = UILabel().then {
+        $0.text = "1"
+        $0.textColor = UIColor(named: "gray-800")
+        $0.font = UIFont(name: "Orbit-Regular", size: 8)
+    }
+    let classnumberLabel = UILabel().then {
+        $0.text = "4"
+        $0.textColor = UIColor(named: "gray-800")
+        $0.font = UIFont(name: "Orbit-Regular", size: 8)
+    }
+    let numberLabel = UILabel().then {
+        $0.text = "01"
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 8)
     }
@@ -71,23 +83,25 @@ class CustomCell: UITableViewCell {
         collectionView.register(TagCollectionVIewCell.self, forCellWithReuseIdentifier: "TagCell")
         return collectionView
     }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .white
+    override func awakeFromNib() {
+           super.awakeFromNib()
+       }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.backgroundColor = .white
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
         addSubviews()
         makeConstraints()
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     func addSubviews() {
         [
             profileImage,
             userNameLabel,
-            userSchoolNumberLabel,
+            gradeLabel,
+            classnumberLabel,
+            numberLabel,
             dateLabel,
             feedSettingButton,
             feedImageView,
@@ -107,9 +121,17 @@ class CustomCell: UITableViewCell {
             $0.top.equalToSuperview().inset(6)
             $0.left.equalTo(profileImage.snp.right).offset(3)
         }
-        userSchoolNumberLabel.snp.makeConstraints {
+        gradeLabel.snp.makeConstraints {
             $0.top.equalTo(userNameLabel.snp.bottom)
-            $0.left.equalTo(profileImage.snp.right).offset(11)
+            $0.left.equalTo(profileImage.snp.right).offset(3)
+        }
+        classnumberLabel.snp.makeConstraints {
+            $0.top.equalTo(userNameLabel.snp.bottom)
+            $0.left.equalTo(gradeLabel.snp.right)
+        }
+        numberLabel.snp.makeConstraints {
+            $0.top.equalTo(userNameLabel.snp.bottom)
+            $0.left.equalTo(classnumberLabel.snp.right)
         }
         dateLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)
@@ -133,13 +155,13 @@ class CustomCell: UITableViewCell {
             $0.left.equalTo(likeButton.snp.right).offset(8)
         }
         placeLabel.snp.makeConstraints {
-            $0.top.equalTo(countLikeLabel.snp.bottom).offset(7)
+            $0.top.equalTo(countLikeLabel.snp.bottom).offset(3)
             $0.left.equalToSuperview().inset(12)
         }
         tagCollectionView.snp.makeConstraints {
             $0.top.equalTo(feedImageView.snp.bottom).offset(16)
             $0.bottom.equalToSuperview().inset(8)
-            $0.left.equalTo(placeLabel.snp.right).offset(22)
+            $0.left.equalToSuperview().inset(120)
             $0.right.equalToSuperview().inset(22)
         }
     }
@@ -153,6 +175,27 @@ class CustomCell: UITableViewCell {
             likeCount -= 1
             countLikeLabel.text = String(likeCount)
         }
+    }
+    public func cellSetter(
+        id: Int,
+        nickname: String,
+        place: String,
+        profileImage: String,
+        feedImage: String,
+        feedDate: String,
+        grade: String,
+        classnumber: String,
+        number: String
+    ) {
+        self.id = id
+        self.userNameLabel.text = nickname
+        self.placeLabel.text = place
+        self.dateLabel.text = feedDate
+        self.feedImageView.kf.setImage(with: URL(string: feedImage))
+        self.profileImage.kf.setImage(with: URL(string: profileImage), placeholder: UIImage(named: "profile"))
+        self.gradeLabel.text = String(grade)
+        self.classnumberLabel.text = String(classnumber)
+        self.numberLabel.text = String(number)
     }
 }
 
