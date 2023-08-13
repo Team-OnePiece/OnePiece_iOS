@@ -8,10 +8,24 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
+import Kingfisher
 
 class MainViewController: UIViewController, UINavigationControllerDelegate {
     
-    private var cellArr: [String] =  []
+    private var profileURL: String = ""
+    private var feedURL: String = ""
+//    private var cellArr: [String] =  []
+    var feedList: [CouponModel] = [] {
+           didSet {
+               [
+//                   addCouponImageView,
+//                   emptyCouponTextField
+                mainLogoImage
+               ].forEach({ $0.isHidden = !feedList.isEmpty })
+               tableView.reloadData()
+           }
+       }
     private let mainLogoImage = UIImageView().then {
         $0.image = UIImage(named: "mainLogo")
     }
@@ -20,11 +34,17 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         $0.font = UIFont(name: "Orbit-Regular", size: 14)
         $0.textColor = UIColor(named: "gray-800")
     }
-    private let groupButton = UIButton(type: .system).then {
-        $0.setTitle("2023", for: .normal)
-        $0.setTitleColor(UIColor(named: "gray-500"), for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 20)
+    private let groupStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.backgroundColor = .clear
+        $0.spacing = 10
     }
+    private let groupLabel = UILabel().then {
+        $0.text = "1학년"
+        $0.textColor = UIColor(named: "gray-500")
+        $0.font = UIFont(name: "Orbit-Regular", size: 20)
+    }
+    private let groupChoiceIcon = UIImageView(image: UIImage(named: "groupIcon"))
     private let myPageButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "setting"), for: .normal)
         $0.tintColor = UIColor(named: "settingColor")
@@ -50,6 +70,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         navigationItem.hidesBackButton = true
+        clickGroup()
     }
     override func viewWillLayoutSubviews() {
         addSubViews()
@@ -59,12 +80,13 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
     private func addSubViews() {
         [
             mainLogoImage,
-            groupButton,
+            groupStackView,
             mainLabel,
             myPageButton,
             tableView,
             feedPlusButton
         ].forEach({view.addSubview($0)})
+        [groupChoiceIcon, groupLabel].forEach({groupStackView.addArrangedSubview($0)})
     }
     private func makeConstraints() {
         mainLogoImage.snp.makeConstraints {
@@ -72,9 +94,13 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
             $0.left.equalToSuperview().inset(20)
             $0.width.height.equalTo(35)
         }
-        groupButton.snp.makeConstraints {
+        groupStackView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
+        }
+        groupChoiceIcon.snp.makeConstraints {
+            $0.width.equalTo(12)
+            $0.height.equalTo(12)
         }
         mainLabel.snp.makeConstraints {
             $0.top.equalTo(mainLogoImage.snp.bottom).offset(31)
@@ -104,13 +130,23 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
             .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
-
+    private func clickGroup() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickPopupGroupAlert))
+        groupStackView.addGestureRecognizer(tapGesture)
+        groupStackView.isUserInteractionEnabled = true
+    }
     @objc private func clickFeedPlus() {
         self.moveView(targetView: FeedContentViewController(), title: "피드 작성")
     }
     
     @objc private func clickMyPage() {
-        moveView(targetView: UserViewController(), title: "마이페이지")
+        self.moveView(targetView: UserViewController(), title: "마이페이지")
+    }
+    @objc private func clickPopupGroupAlert() {
+        let group = GroupViewController()
+        group.modalPresentationStyle = .overFullScreen
+        group.modalTransitionStyle = .crossDissolve
+        self.present(group, animated: true)
     }
 }
 
@@ -119,7 +155,7 @@ extension MainViewController {
         let alert = ContentAlert()
         let navigationController = UINavigationController(rootViewController: alert)
         navigationController.modalPresentationStyle = .overFullScreen
-        present(navigationController, animated: true, completion: nil)
+        self.present(navigationController, animated: true, completion: nil)
     }
     @objc func clickSetting() {
         popupAlert()
@@ -134,6 +170,41 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! CustomCell
         cell.feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
+            let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
+            provider.request(.loadFeed) { res in
+                switch res {
+                case .success(let result):
+                    switch result.statusCode {
+                    case 200:
+                        if let data = try? JSONDecoder().decode(FeedResponse.self, from: result.data) {
+                            DispatchQueue.main.async {
+                                self.profileURL = data.feedProfileImageurl
+                                let profileImageURL = URL(string: self.profileURL)
+                                cell.profileImage.kf.setImage(with: profileImageURL, placeholder: UIImage(named: "profile"))
+                                cell.userNameLabel.text = "\(data.nickname)"
+                                if data.number < 10 {
+                                    cell.userSchoolNumberLabel.text = "\(data.grade)\( data.classnumber)0\(data.number)"
+                                } else {
+                                    cell.userSchoolNumberLabel.text = "\(data.grade)\(data.classnumber)\(data.number)"
+                                }
+                                cell.placeLabel.text = "\(data.place)"
+                                cell.dateLabel.text = "\(data.feedDate)"
+                                self.feedURL = data.feedImageurl
+                                let feedImageURL = URL(string: self.feedURL)
+                                cell.feedImageView.kf.setImage(with: feedImageURL, placeholder: UIImage(named: "profile"))
+                                print("\(data.id)")
+                            }
+                        } else {
+                            print("실패dd")
+                        }
+                    default:
+                        print("실패")
+                        print(result.statusCode)
+                    }
+                case .failure(let err):
+                    print(err.localizedDescription)
+                }
+            }
         return cell
     }
 }
