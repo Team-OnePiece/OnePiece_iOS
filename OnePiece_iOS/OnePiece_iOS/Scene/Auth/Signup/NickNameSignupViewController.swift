@@ -145,7 +145,7 @@ extension NickNameSignupViewController {
                     print(result.statusCode)
                 }
             case .failure(let err):
-                print(err.localizedDescription)
+                print("\(err.localizedDescription)")
             }
         }
     }

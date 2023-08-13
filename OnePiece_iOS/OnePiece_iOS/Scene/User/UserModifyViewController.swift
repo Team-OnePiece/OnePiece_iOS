@@ -96,7 +96,7 @@ class UserModifyViewController: UIViewController,UITextFieldDelegate, UINavigati
                     print(result.statusCode)
                 }
             case .failure(let err):
-                print(err.localizedDescription)
+                print("\(err.localizedDescription)")
             }
         }
         
@@ -119,7 +119,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
     }
     func loadImage() {
         let provider = MoyaProvider<UserAPI>(plugins: [MoyaLoggerPlugin()])
-        provider.request(.userInfoLoad) { res in
+        provider.request(.loadUserInfo) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
@@ -138,7 +138,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
                     print(result.statusCode)
                 }
             case .failure(let err):
-                print(err.localizedDescription)
+                print("\(err.localizedDescription)")
             }
         }
     }
@@ -162,7 +162,7 @@ extension UserModifyViewController: UIImagePickerControllerDelegate {
                     print(result.statusCode)
                 }
             case .failure(let err):
-                print(err.localizedDescription)
+                print("\(err.localizedDescription)")
             }
         }
     }

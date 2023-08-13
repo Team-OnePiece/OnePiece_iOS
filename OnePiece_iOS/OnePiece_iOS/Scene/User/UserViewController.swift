@@ -56,7 +56,7 @@ class UserViewController: UIViewController {
     }
     func loadImage() {
         let provider = MoyaProvider<UserAPI>(plugins: [MoyaLoggerPlugin()])
-        provider.request(.userInfoLoad) { res in
+        provider.request(.loadUserInfo) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
@@ -75,7 +75,7 @@ class UserViewController: UIViewController {
                     print(result.statusCode)
                 }
             case .failure(let err):
-                print(err.localizedDescription)
+                print("\(err.localizedDescription)")
             }
         }
     }

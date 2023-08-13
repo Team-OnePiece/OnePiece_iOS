@@ -4,11 +4,12 @@ import Moya
 enum TagAPI {
     case addTag(tag: String)
     case deleteTag(tagId: Int)
+//    case loadTag(
 }
 
 extension TagAPI: TargetType {
     var baseURL: URL {
-//        return URL(string: "http://54.180.94.103:8080")
+//        return URL(string: "http://54.180.94.103:8080")!
         return URL(string: "http://localhost:8080")!
     }
     
