@@ -1,12 +1,12 @@
 import Foundation
 
-struct FeedResponse: Codable {
+struct FeedResponseElement: Codable {
     let id: Int
     let place: String
     let feedImageurl: String
     let feedDate: String
-    let feedProfileImageurl: String
     let nickname: String
+    let feedProfileImageurl: String
     let grade: Int
     let classnumber: Int
     let number: Int
@@ -19,3 +19,4 @@ struct FeedResponse: Codable {
         case classnumber = "class_number"
     }
 }
+typealias FeedResponse = [FeedResponseElement]
