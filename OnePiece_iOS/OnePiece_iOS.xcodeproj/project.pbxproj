@@ -51,6 +51,8 @@
 		88194B312A87C2C900743445 /* FeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B302A87C2C900743445 /* FeedResponse.swift */; };
 		88194B362A88B72000743445 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B352A88B72000743445 /* FeedModel.swift */; };
 		888C296C2A89EF3E00E75C0D /* CreateFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C296B2A89EF3E00E75C0D /* CreateFeedResponse.swift */; };
+		888C29702A8A183D00E75C0D /* GroupAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C296F2A8A183D00E75C0D /* GroupAPI.swift */; };
+		888C29742A8A185600E75C0D /* GroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C29732A8A185600E75C0D /* GroupResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		88194B352A88B72000743445 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		88194B792A89562700743445 /* OnePiece_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePiece_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		888C296B2A89EF3E00E75C0D /* CreateFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFeedResponse.swift; sourceTree = "<group>"; };
+		888C296F2A8A183D00E75C0D /* GroupAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAPI.swift; sourceTree = "<group>"; };
+		888C29732A8A185600E75C0D /* GroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +224,7 @@
 				88194AE62A85451200743445 /* Auth */,
 				88194AEB2A85451200743445 /* User */,
 				88194AF02A85451200743445 /* Image */,
+				888C296E2A8A182B00E75C0D /* Group */,
 				88194AF32A85451200743445 /* Feed */,
 				88194AE42A85451200743445 /* Plugin */,
 				88194AF92A85451200743445 /* Header */,
@@ -431,6 +436,31 @@
 			path = Feed;
 			sourceTree = "<group>";
 		};
+		888C296E2A8A182B00E75C0D /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				888C29712A8A184300E75C0D /* API */,
+				888C29722A8A184700E75C0D /* Response */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		888C29712A8A184300E75C0D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				888C296F2A8A183D00E75C0D /* GroupAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		888C29722A8A184700E75C0D /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				888C29732A8A185600E75C0D /* GroupResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -548,6 +578,8 @@
 				88194B0A2A85451300743445 /* ImageAPI.swift in Sources */,
 				88194AD42A85450600743445 /* NickNameSignupViewController.swift in Sources */,
 				88194B292A8614EF00743445 /* GroupViewController.swift in Sources */,
+				888C29702A8A183D00E75C0D /* GroupAPI.swift in Sources */,
+				888C29742A8A185600E75C0D /* GroupResponse.swift in Sources */,
 				88194B0B2A85451300743445 /* TagResponse.swift in Sources */,
 				88194ADF2A85450600743445 /* MainViewController.swift in Sources */,
 				88194B092A85451300743445 /* UserAPI.swift in Sources */,
