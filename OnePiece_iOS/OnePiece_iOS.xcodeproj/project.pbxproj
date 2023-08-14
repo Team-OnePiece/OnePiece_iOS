@@ -50,10 +50,10 @@
 		88194B2F2A87BC9600743445 /* FeedAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B2E2A87BC9600743445 /* FeedAPI.swift */; };
 		88194B312A87C2C900743445 /* FeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B302A87C2C900743445 /* FeedResponse.swift */; };
 		88194B362A88B72000743445 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B352A88B72000743445 /* FeedModel.swift */; };
+		888C296C2A89EF3E00E75C0D /* CreateFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C296B2A89EF3E00E75C0D /* CreateFeedResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		88194AA22A8544F300743445 /* OnePiece_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePiece_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88194AB32A8544F400743445 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88194ABC2A85450600743445 /* IdSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdSignupViewController.swift; sourceTree = "<group>"; };
 		88194ABD2A85450600743445 /* SchoolInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolInfoViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +92,8 @@
 		88194B2E2A87BC9600743445 /* FeedAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAPI.swift; sourceTree = "<group>"; };
 		88194B302A87C2C900743445 /* FeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResponse.swift; sourceTree = "<group>"; };
 		88194B352A88B72000743445 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		88194B792A89562700743445 /* OnePiece_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePiece_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		888C296B2A89EF3E00E75C0D /* CreateFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFeedResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,16 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				88194AA42A8544F300743445 /* OnePiece_iOS */,
-				88194AA32A8544F300743445 /* Products */,
+				88194B792A89562700743445 /* OnePiece_iOS.app */,
 			);
-			sourceTree = "<group>";
-		};
-		88194AA32A8544F300743445 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				88194AA22A8544F300743445 /* OnePiece_iOS.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		88194AA42A8544F300743445 /* OnePiece_iOS */ = {
@@ -144,6 +138,7 @@
 				88194AC22A85450600743445 /* Component */,
 				88194ABA2A85450600743445 /* Auth */,
 				88194ACD2A85450600743445 /* Main */,
+				888C296D2A89F02300E75C0D /* Feed */,
 				88194AC82A85450600743445 /* User */,
 				88194ACB2A85450600743445 /* Cell */,
 			);
@@ -214,8 +209,6 @@
 				88194B332A88B6FF00743445 /* Model */,
 				88194B322A88B6FB00743445 /* View */,
 				88194B342A88B70700743445 /* ViewController */,
-				88194AD02A85450600743445 /* FeedContentViewController.swift */,
-				88194ACE2A85450600743445 /* FeedModifyViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -400,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				88194B302A87C2C900743445 /* FeedResponse.swift */,
+				888C296B2A89EF3E00E75C0D /* CreateFeedResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -428,6 +422,15 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		888C296D2A89F02300E75C0D /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				88194AD02A85450600743445 /* FeedContentViewController.swift */,
+				88194ACE2A85450600743445 /* FeedModifyViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -453,7 +456,7 @@
 				88194B242A85463B00743445 /* Moya */,
 			);
 			productName = OnePiece_iOS;
-			productReference = 88194AA22A8544F300743445 /* OnePiece_iOS.app */;
+			productReference = 88194B792A89562700743445 /* OnePiece_iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -488,7 +491,7 @@
 				88194B202A85462600743445 /* XCRemoteSwiftPackageReference "Then" */,
 				88194B232A85463B00743445 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
-			productRefGroup = 88194AA32A8544F300743445 /* Products */;
+			productRefGroup = 88194A992A8544F300743445;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -524,6 +527,7 @@
 				88194AD72A85450600743445 /* DefaultAlert.swift in Sources */,
 				88194AD32A85450600743445 /* PasswordSignupViewController.swift in Sources */,
 				88194ADD2A85450600743445 /* CustomCell.swift in Sources */,
+				888C296C2A89EF3E00E75C0D /* CreateFeedResponse.swift in Sources */,
 				88194B072A85451300743445 /* AuthAPI.swift in Sources */,
 				88194B0C2A85451300743445 /* TagAPI.swift in Sources */,
 				88194B362A88B72000743445 /* FeedModel.swift in Sources */,
@@ -685,11 +689,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8836BP5ACL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnePiece_iOS/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -699,8 +705,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "project.OnePiece-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = project.OnePieceiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -712,11 +719,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8836BP5ACL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnePiece_iOS/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -726,8 +735,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "project.OnePiece-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = project.OnePieceiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -202,23 +202,23 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         ], for: .normal)
     }
     private var idd: Int = 0
-//    private var completion: () -> Void = {}
+    private var completion: () -> Void = {}
+
+
     @objc private func finishFeed() {
-        let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
+        
         guard let place = placeTextField.text,
               let image = imageView.image,
               !place.isEmpty else {return}
+        let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
         provider.request(.createFeed(data: image.jpegData(compressionQuality: 0.1) ?? Data(), place: place)) { res in
             switch res {
             case .success(let result):
                 switch result.statusCode {
                 case 201:
-                    if let data = try? JSONDecoder().decode(CreateFeedResponse.self, from: result.data) {
+                    DispatchQueue.main.async {
                         print("성공")
-                        print(data.feedId)
                         self.navigationController?.popViewController(animated: true)
-                    } else {
-                        print("연결 실패")
                     }
                 default:
                     print("실패")

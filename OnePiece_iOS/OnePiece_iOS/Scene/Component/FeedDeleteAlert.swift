@@ -1,9 +1,10 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 
 class FeedDeleteAlert: UIViewController {
-
+    
     private let background = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 16
@@ -87,11 +88,38 @@ class FeedDeleteAlert: UIViewController {
             $0.right.equalToSuperview().inset(58)
         }
     }
+    private var completion: () -> Void = {}
+    private var id: Int = 0
+    init(id: Int, completion: @escaping () -> Void) {
+           super.init(nibName: nil, bundle: nil)
+           self.id = id
+           self.completion = completion
+           self.modalPresentationStyle = .overFullScreen
+           
+       }
+       required init?(coder: NSCoder) {
+           fatalError("init(coder:) has not been implemented")
+       }
+
     @objc private func clickCancelDeleteFeed() {
         self.dismiss(animated: true)
     }
-    @objc private func clickDeleteFeed() {
+    @objc func clickDeleteFeed() {
         self.dismiss(animated: true)
-        //서버통신~
+        let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.deleteFeed(feedId: self.id)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    self.completion()
+                    print("성공")
+                default:
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+            }
+        }
     }
 }

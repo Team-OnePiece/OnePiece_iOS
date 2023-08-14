@@ -1,10 +1,3 @@
-//
-//  MainPage.swift
-//  OnePiece
-//
-//  Created by 조영준 on 2023/07/02.
-//
-
 import UIKit
 import SnapKit
 import Then
@@ -53,7 +46,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
     }
     private let tableView = UITableView().then {
         $0.backgroundColor = .white
-        $0.showsVerticalScrollIndicator = false
+        $0.showsVerticalScrollIndicator = true
         $0.rowHeight = 408
         $0.register(CustomCell.self, forCellReuseIdentifier: "CellId")
         $0.separatorStyle = .none
@@ -194,20 +187,21 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         self.present(group, animated: true)
     }
     @objc func pullToRefresh() {
-          loadFeed()
-      }
-}
-
-extension MainViewController {
-    func popupAlert() {
-        let alert = ContentAlert()
-        let navigationController = UINavigationController(rootViewController: alert)
-        navigationController.modalPresentationStyle = .overFullScreen
-        self.present(navigationController, animated: true, completion: nil)
+        loadFeed()
     }
-    @objc func clickSetting() {
-        popupAlert()
-    }
+//    @objc func clickSetting() {
+//        popup()
+//    }
+//    func popup() {
+//        let alert = ContentAlert(deleteAction: { let deleteModal = FeedDeleteAlert(id: self.feedList[IndexPath().row].id, completion: {
+//            self.feedList.remove(at: IndexPath().row)
+//            self.tableView.reloadData()
+//        })
+//            self.present(deleteModal, animated: false)})
+//        let navigationController = UINavigationController(rootViewController: alert)
+//        navigationController.modalPresentationStyle = .overFullScreen
+//        self.present(navigationController, animated: true, completion: nil)
+//    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -217,7 +211,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellId") as? CustomCell else {return UITableViewCell()}
-        cell.feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
+//        cell.feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
         cell.cellSetter(
             id: feedList[indexPath.row].id,
             nickname: feedList[indexPath.row].nickname,
@@ -232,5 +226,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let alert = ContentAlert(deleteAction: { let deleteModal = FeedDeleteAlert(id: self.feedList[indexPath.row].id, completion: {
+                self.feedList.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            })
+                self.present(deleteModal, animated: false)})
+            let navigationController = UINavigationController(rootViewController: alert)
+            navigationController.modalPresentationStyle = .overFullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
 }
 
