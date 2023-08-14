@@ -226,6 +226,7 @@
 				88194AF02A85451200743445 /* Image */,
 				888C296E2A8A182B00E75C0D /* Group */,
 				88194AF32A85451200743445 /* Feed */,
+				88194AF42A85451200743445 /* Tag */,
 				88194AE42A85451200743445 /* Plugin */,
 				88194AF92A85451200743445 /* Header */,
 			);
@@ -318,7 +319,6 @@
 			isa = PBXGroup;
 			children = (
 				88194B2B2A87BBE800743445 /* Feed */,
-				88194AF42A85451200743445 /* Tag */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
