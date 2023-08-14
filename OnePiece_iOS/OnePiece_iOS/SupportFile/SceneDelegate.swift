@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  OnePieceiOS
-//
-//  Created by 조영준 on 2023/08/04.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

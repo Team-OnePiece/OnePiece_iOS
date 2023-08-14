@@ -123,20 +123,20 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     }
 //    private var id: Int = 0
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        provider.request(.deleteTag(tagId: self.id)) { res in
-            switch res {
-            case .success(let result):
-                switch result.statusCode {
-                case 204:
-                    self.tagListView.removeTagView(tagView)
-                default:
-                    print(result.statusCode)
-                }
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
-        
+//        provider.request(.deleteTag(tagId: self.id)) { res in
+//            switch res {
+//            case .success(let result):
+//                switch result.statusCode {
+//                case 204:
+//                    self.tagListView.removeTagView(tagView)
+//                default:
+//                    print(result.statusCode)
+//                }
+//            case .failure(let err):
+//                print(err.localizedDescription)
+//            }
+//        }
+//        
     }
     func tagSetting() {
         tagListView.textFont = UIFont(name: "Orbit-Regular", size: 18)!
@@ -201,7 +201,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
-    private var id: Int = 0
+    private var idd: Int = 0
 //    private var completion: () -> Void = {}
     @objc private func finishFeed() {
         let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
@@ -215,9 +215,10 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
                 case 201:
                     if let data = try? JSONDecoder().decode(CreateFeedResponse.self, from: result.data) {
                         print("성공")
-                        self.id = data.boardId
-                        print(self.id)
+                        print(data.feedId)
                         self.navigationController?.popViewController(animated: true)
+                    } else {
+                        print("연결 실패")
                     }
                 default:
                     print("실패")
