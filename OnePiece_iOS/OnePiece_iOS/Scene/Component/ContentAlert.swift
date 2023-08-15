@@ -6,6 +6,7 @@ import Moya
 class ContentAlert: UIViewController {
     
     private var deleteAction: () -> Void = {}
+    private var modifyAction: () -> Void = {}
     let modifyButton = UIButton(type: .system).then {
         $0.setTitle("수정하기", for: .normal)
         $0.setTitleColor(UIColor(named: "gray-500"), for: .normal)
@@ -59,32 +60,22 @@ class ContentAlert: UIViewController {
             $0.left.right.equalToSuperview().inset(163)
         }
     }
-    @objc func clickModify() {
-        //dismiss후에 push가 되게하는 법 찾아보기
-            self.navigationController?.pushViewController(FeedModifyViewController(), animated: true)
-            let feedModify = UIBarButtonItem(title: "피드 수정", style: .plain, target: nil, action: nil)
-            self.navigationItem.backBarButtonItem = feedModify
-            self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-            feedModify.setTitleTextAttributes([
-                .font: UIFont(name: "Orbit-Regular", size: 16)!
-            ], for: .normal)
-    }
     init(
-//            useAction: @escaping () -> Void,
-//            giftAction: @escaping () -> Void,
+            modifyAction: @escaping () -> Void,
             deleteAction: @escaping () -> Void
         ) {
             super.init(nibName: nil, bundle: nil)
-//            self.useAction = useAction
-//            self.giftAction = giftActionm
+            self.modifyAction = modifyAction
             self.deleteAction = deleteAction
-//            useButton.addTarget(self, action: #selector(useButtonClick), for: .touchUpInside)
-//            giftButton.addTarget(self, action: #selector(giftButtonClick), for: .touchUpInside)
+            modifyButton.addTarget(self, action: #selector(clickModify), for: .touchUpInside)
             deleteButton.addTarget(self, action: #selector(clickDelete), for: .touchUpInside)
         }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    @objc func clickModify() {
+        self.dismiss(animated: true, completion: { self.modifyAction() })
     }
     @objc func clickDelete() {
         self.dismiss(animated: false, completion: { self.deleteAction() })

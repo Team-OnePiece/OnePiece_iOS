@@ -4,6 +4,7 @@ import Moya
 enum FeedAPI {
     case createFeed(data: Data, place: String)
     case deleteFeed(feedId: Int)
+    case modifyFeed(data: Data, place: String, feedId: Int)
     case loadFeed
     
 }
@@ -21,8 +22,10 @@ extension FeedAPI: TargetType {
             return "/feed"
         case .deleteFeed(let feedId):
             return "/feed/\(feedId)"
+        case .modifyFeed(_, _, let feedId):
+            return "/feed/\(feedId)"
         case .loadFeed:
-            return "/feed/all"
+            return "/feed"
         }
     }
     
@@ -32,6 +35,8 @@ extension FeedAPI: TargetType {
             return .post
         case .deleteFeed:
             return .delete
+        case .modifyFeed:
+            return .patch
         case .loadFeed:
             return .get
         }
@@ -50,9 +55,18 @@ extension FeedAPI: TargetType {
                 )
             )
             return .uploadCompositeMultipart(multipart, urlParameters: ["place": place])
-        case .deleteFeed:
-            return .requestPlain
-        case .loadFeed:
+        case .modifyFeed(data: let data, let place, _):
+            var multipart: [MultipartFormData] = []
+            multipart.append(
+                .init(
+                    provider: .data(data),
+                    name: "image",
+                    fileName: "image.jpg",
+                    mimeType: "imgae.jpg"
+                )
+            )
+            return .uploadCompositeMultipart(multipart, urlParameters: ["place": place])
+        default:
             return .requestPlain
         }
     }

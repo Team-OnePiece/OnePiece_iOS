@@ -1,8 +1,9 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 
-class FeedModifyViewController: UIViewController, UITextFieldDelegate {
+class FeedModifyViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     private var count = 0
     private let cellIdentifier = "cellId"
     private var dataSource:[String] = []
@@ -11,21 +12,19 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate {
         $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
         $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.allEditingEvents)
     }
-    private let explainLabel = UILabel().then {
-        $0.text = "태그는 최대 6개, 최대 10자까지 작성 가능합니다."
-        $0.textColor = .red
-        $0.font = UIFont(name: "Orbit-Regular", size: 12)
-    }
     private let placeTextFieldTextLengthLabel = UILabel().then {
         $0.text = "0/10"
         $0.textColor = UIColor(named: "gray-500")
         $0.font = UIFont(name: "Orbit-Regular", size: 10)
     }
+    private let imageView = UIImageView(image: UIImage(named: "baseImage"))
+    private let imageChoiceIcon = UIImageView(image: UIImage(named: "feedImageIcon"))
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         placeTextField.delegate = self
         finishFeedModify()
+        clickImageView()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -37,9 +36,10 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate {
     private func addSubViews() {
         [
             placeTextField,
-            explainLabel
+            imageView
         ].forEach({view.addSubview($0)})
         placeTextField.addSubview(placeTextFieldTextLengthLabel)
+        imageView.addSubview(imageChoiceIcon)
     }
     private func makeConstraints() {
         placeTextField.snp.makeConstraints {
@@ -51,9 +51,15 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate {
             $0.bottom.equalToSuperview().inset(7)
             $0.right.equalToSuperview().inset(10)
         }
-        explainLabel.snp.makeConstraints {
-            $0.top.equalTo(placeTextField.snp.bottom).offset(24)
+        imageView.snp.makeConstraints {
+            $0.top.equalTo(placeTextField.snp.bottom).offset(20)
             $0.left.equalToSuperview().inset(25)
+            $0.width.height.equalTo(100)
+            //레이아웃은 추후에 수정할 예정
+        }
+        imageChoiceIcon.snp.makeConstraints {
+            $0.bottom.left.equalToSuperview().inset(3)
+            $0.width.height.equalTo(20)
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -71,9 +77,53 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate {
             .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
+    private var completion: () -> Void = {}
+    private var id: Int = 0
+    init(id: Int, completion: @escaping () -> Void) {
+           super.init(nibName: nil, bundle: nil)
+           self.id = id
+           self.completion = completion
+           self.modalPresentationStyle = .overFullScreen
+           
+       }
+       required init?(coder: NSCoder) {
+           fatalError("init(coder:) has not been implemented")
+       }
+
+    func clickImageView() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchToPickPhoto))
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
+    }
+    @objc func touchToPickPhoto() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = self
+        self.present(picker, animated: true)
+    }
     @objc private func clickFinishFeedModify() {
-        self.navigationController?.popViewController(animated: true)
-        //여기서 서버통신
+        guard let place = placeTextField.text,
+              let image = imageView.image,
+              !place.isEmpty else {return}
+        let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.modifyFeed(data: image.jpegData(compressionQuality: 0.1) ?? Data(), place: place, feedId: self.id)) { res in
+            switch res {
+            case .success(let result):
+                switch result.statusCode {
+                case 200:
+                    print("성공")
+                    self.navigationController?.popViewController(animated: true)
+                default:
+                    print("실패")
+                    let alert = DefaultAlert(title: "게시물 수정에 실패하였습니다.")
+                    self.present(alert, animated: true)
+                    print(result.statusCode)
+                }
+            case .failure(let err):
+                print("\(err.localizedDescription)")
+            }
+        }
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
             if let char = string.cString(using: String.Encoding.utf8) {
@@ -86,4 +136,14 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate {
             return true
         }
 }
-
+extension FeedModifyViewController {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true) {}
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true) {
+            let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+            self.imageView.image = img
+        }
+    }
+}
