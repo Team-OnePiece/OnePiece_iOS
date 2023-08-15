@@ -30,17 +30,18 @@ class FeedDeleteAlert: UIViewController {
         $0.setTitle("취소", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
+        $0.addTarget(self, action: #selector(clickCancelDeleteFeed), for: .touchUpInside)
     }
     private let deleteButton = UIButton(type: .system).then {
         $0.setTitle("삭제", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 16)
+        $0.addTarget(self, action: #selector(clickDeleteFeed), for: .touchUpInside)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
-        cancelButton.addTarget(self, action: #selector(clickCancelDeleteFeed), for: .touchUpInside)
-        deleteButton.addTarget(self, action: #selector(clickDeleteFeed), for: .touchUpInside)
+
     }
     override func viewWillLayoutSubviews() {
         layout()
@@ -111,7 +112,7 @@ class FeedDeleteAlert: UIViewController {
             switch res {
             case .success(let result):
                 switch result.statusCode {
-                case 200:
+                case 204:
                     self.completion()
                     print("성공")
                 default:

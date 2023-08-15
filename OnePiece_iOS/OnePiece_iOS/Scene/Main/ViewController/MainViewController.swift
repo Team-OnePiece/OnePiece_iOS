@@ -226,15 +226,28 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let alert = ContentAlert(deleteAction: { let deleteModal = FeedDeleteAlert(id: self.feedList[indexPath.row].id, completion: {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alert = ContentAlert(
+            modifyAction: { let modifyModal = FeedModifyViewController(id: self.feedList[indexPath.row].id, completion: {
+//                self.feedList[indexPath.row].place
+                self.tableView.reloadData()
+            })
+                self.navigationController?.pushViewController(modifyModal, animated: true)
+                let feedModify = UIBarButtonItem(title: "피드 수정", style: .plain, target: nil, action: nil)
+                self.navigationItem.backBarButtonItem = feedModify
+                self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+                feedModify.setTitleTextAttributes([
+                    .font: UIFont(name: "Orbit-Regular", size: 16)!
+                ], for: .normal)
+            },
+            deleteAction: { let deleteModal = FeedDeleteAlert(id: self.feedList[indexPath.row].id, completion: {
                 self.feedList.remove(at: indexPath.row)
                 self.tableView.reloadData()
             })
                 self.present(deleteModal, animated: false)})
-            let navigationController = UINavigationController(rootViewController: alert)
-            navigationController.modalPresentationStyle = .overFullScreen
-            self.present(navigationController, animated: true, completion: nil)
-        }
+        let navigationController = UINavigationController(rootViewController: alert)
+        navigationController.modalPresentationStyle = .overFullScreen
+        self.present(navigationController, animated: true, completion: nil)
+    }
 }
 

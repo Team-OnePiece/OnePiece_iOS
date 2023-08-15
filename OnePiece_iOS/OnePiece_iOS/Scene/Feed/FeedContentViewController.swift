@@ -121,22 +121,22 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             $0.width.height.equalTo(20)
         }
     }
-//    private var id: Int = 0
+    //    private var id: Int = 0
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-//        provider.request(.deleteTag(tagId: self.id)) { res in
-//            switch res {
-//            case .success(let result):
-//                switch result.statusCode {
-//                case 204:
-//                    self.tagListView.removeTagView(tagView)
-//                default:
-//                    print(result.statusCode)
-//                }
-//            case .failure(let err):
-//                print(err.localizedDescription)
-//            }
-//        }
-//        
+        //        provider.request(.deleteTag(tagId: self.id)) { res in
+        //            switch res {
+        //            case .success(let result):
+        //                switch result.statusCode {
+        //                case 204:
+        //                    self.tagListView.removeTagView(tagView)
+        //                default:
+        //                    print(result.statusCode)
+        //                }
+        //            case .failure(let err):
+        //                print(err.localizedDescription)
+        //            }
+        //        }
+        //
     }
     func tagSetting() {
         tagListView.textFont = UIFont(name: "Orbit-Regular", size: 18)!
@@ -170,11 +170,11 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             case .success(let result):
                 switch result.statusCode {
                 case 201:
-//                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
+                    //                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
                     self.tagListView.addTag(tag)
-//                    } else {
-//                        print("실패")
-//                    }
+                    //                    } else {
+                    //                        print("실패")
+                    //                    }
                 default:
                     print(result.statusCode)
                 }
@@ -184,15 +184,15 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         }
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            if let char = string.cString(using: String.Encoding.utf8) {
-                let isBackSpace = strcmp(char, "\\b")
-                if isBackSpace == -92 {
-                    return true
-                }
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
             }
-        guard placeTextField.text!.count < 10 else { return false }
-            return true
         }
+        guard placeTextField.text!.count < 10 else { return false }
+        return true
+    }
     private func finishFeedWirte() {
         let finishButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(finishFeed))
         self.navigationItem.rightBarButtonItem = finishButton
@@ -201,12 +201,11 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
-    private var idd: Int = 0
+    private var id: Int = 0
     private var completion: () -> Void = {}
-
-
+    
+    
     @objc private func finishFeed() {
-        
         guard let place = placeTextField.text,
               let image = imageView.image,
               !place.isEmpty else {return}
@@ -230,7 +229,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
                 print(err.localizedDescription)
             }
         }
-
+        
     }
 }
 

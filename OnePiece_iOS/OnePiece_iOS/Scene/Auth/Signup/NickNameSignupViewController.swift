@@ -125,7 +125,7 @@ extension NickNameSignupViewController {
             }
         }
     }
-   private func signup() {
+    private func signup() {
         provider.request(.signup(UserInfo.shared)) { res in
             switch res {
             case .success(let result):
