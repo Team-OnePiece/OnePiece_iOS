@@ -8,10 +8,11 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 import Kingfisher
 
 class CustomCell: UITableViewCell {
-
+    
     static let cellId = "CellId"
     var likeCount = 0
     var id: Int = 0
@@ -49,6 +50,7 @@ class CustomCell: UITableViewCell {
     let feedSettingButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "feedSetting"), for: .normal)
         $0.tintColor = UIColor(named: "gray-800")
+        $0.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
     }
     let feedImageView = UIImageView().then {
         $0.image = UIImage(named: "feedImage")
@@ -68,7 +70,6 @@ class CustomCell: UITableViewCell {
         $0.font = UIFont(name: "Orbit-Regular", size: 16)
     }
     let placeLabel = UILabel().then {
-        $0.text = "몰라dfdssdf임마"
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
@@ -84,8 +85,8 @@ class CustomCell: UITableViewCell {
         return collectionView
     }()
     override func awakeFromNib() {
-           super.awakeFromNib()
-       }
+        super.awakeFromNib()
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
         self.backgroundColor = .white
@@ -169,13 +170,19 @@ class CustomCell: UITableViewCell {
         isLiked.toggle()
         likeButton.isSelected = isLiked
         if likeButton.isSelected == true {
-            likeCount += 1
+            AddlikeAction?()
             countLikeLabel.text = String(likeCount)
         } else if likeButton.isSelected == false {
-            likeCount -= 1
+            deleteLikeAction?()
             countLikeLabel.text = String(likeCount)
         }
     }
+    @objc func clickSetting() {
+        moveSettingView?()
+    }
+    var AddlikeAction: (() -> Void)?
+    var deleteLikeAction: (() -> Void)?
+    var moveSettingView: (() -> Void)?
     public func cellSetter(
         id: Int,
         nickname: String,
@@ -197,12 +204,14 @@ class CustomCell: UITableViewCell {
         self.classnumberLabel.text = String(classnumber)
         self.numberLabel.text = String(number)
     }
+    let tagList: [TagModel] = []
 }
+
 
 extension CustomCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCollectionVIewCell
-        cell.tagLabel.text = "fdjls"
+//        cell.tagLabel.text = cell.
         return cell
     }
     
@@ -218,6 +227,6 @@ extension CustomCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         return 4
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return tagList.count
     }
 }
