@@ -17,7 +17,7 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate, UIImagePi
         $0.textColor = UIColor(named: "gray-500")
         $0.font = UIFont(name: "Orbit-Regular", size: 10)
     }
-    private let imageView = UIImageView(image: UIImage(named: "baseImage"))
+    private let imageView = UIImageView()
     private let photoImage = UIImageView(image: UIImage(named: "baseImage"))
     private let imageChoiceIcon = UIImageView(image: UIImage(named: "feedImageIcon"))
     override func viewDidLoad() {
