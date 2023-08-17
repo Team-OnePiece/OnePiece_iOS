@@ -177,28 +177,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
             }
         }
     }
-    
-//    @objc func clickSetting() {
-//        popup()
-//    }
-//    func popup() {
-//        let alert = ContentAlert(deleteAction: { let deleteModal = FeedDeleteAlert(id: self.feedList[IndexPath().row].id, completion: {
-//            self.feedList.remove(at: IndexPath().row)
-//            self.tableView.reloadData()
-//        })
-//            self.present(deleteModal, animated: false)})
-//        let navigationController = UINavigationController(rootViewController: alert)
-//        navigationController.modalPresentationStyle = .overFullScreen
-//        self.present(navigationController, animated: true, completion: nil)
-//    }
-    var data: Data = Data()
-}
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return feedList.count
-    }
-    
     func clickAddLike(indexPath: IndexPath) {
         let selectedFeed = feedList[indexPath.row] // 예시: feedList는 피드 배열
         let feedId = selectedFeed.id
@@ -223,11 +202,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
     }
+    var data: Data = Data()
+}
 
-
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return feedList.count
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellId") as? CustomCell else {return UITableViewCell()}
-        //                cell.feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
         cell.AddlikeAction = { [weak self] in
             if let data = try? JSONDecoder().decode(AddStarResponse.self, from: self!.data) {
                 self?.clickAddLike(indexPath: indexPath)
@@ -254,29 +237,29 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 number: "\(feedList[indexPath.row].number)"
             )
             cell.selectionStyle = .none
+        cell.moveSettingView = {
+                let alert = ContentAlert(
+                    modifyAction: { let modifyModal = FeedModifyViewController(id: self.feedList[indexPath.row].id, completion: {
+                        self.tableView.reloadData()
+                    })
+                        self.navigationController?.pushViewController(modifyModal, animated: true)
+                        let feedModify = UIBarButtonItem(title: "피드 수정", style: .plain, target: nil, action: nil)
+                        self.navigationItem.backBarButtonItem = feedModify
+                        self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
+                        feedModify.setTitleTextAttributes([
+                            .font: UIFont(name: "Orbit-Regular", size: 16)!
+                        ], for: .normal)
+                    },
+                    deleteAction: { let deleteModal = FeedDeleteAlert(id: self.feedList[indexPath.row].id, completion: {
+                        self.feedList.remove(at: indexPath.row)
+                        self.tableView.reloadData()
+                    })
+                        self.present(deleteModal, animated: false)})
+                let navigationController = UINavigationController(rootViewController: alert)
+                navigationController.modalPresentationStyle = .overFullScreen
+                self.present(navigationController, animated: true, completion: nil)
+        }
             return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = ContentAlert(
-            modifyAction: { let modifyModal = FeedModifyViewController(id: self.feedList[indexPath.row].id, completion: {
-                self.tableView.reloadData()
-            })
-                self.navigationController?.pushViewController(modifyModal, animated: true)
-                let feedModify = UIBarButtonItem(title: "피드 수정", style: .plain, target: nil, action: nil)
-                self.navigationItem.backBarButtonItem = feedModify
-                self.navigationItem.backBarButtonItem?.tintColor = UIColor(named: "gray-800")
-                feedModify.setTitleTextAttributes([
-                    .font: UIFont(name: "Orbit-Regular", size: 16)!
-                ], for: .normal)
-            },
-            deleteAction: { let deleteModal = FeedDeleteAlert(id: self.feedList[indexPath.row].id, completion: {
-                self.feedList.remove(at: indexPath.row)
-                self.tableView.reloadData()
-            })
-                self.present(deleteModal, animated: false)})
-        let navigationController = UINavigationController(rootViewController: alert)
-        navigationController.modalPresentationStyle = .overFullScreen
-        self.present(navigationController, animated: true, completion: nil)
     }
 }
 
