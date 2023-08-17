@@ -28,17 +28,11 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         $0.font = UIFont(name: "Orbit-Regular", size: 14)
         $0.textColor = UIColor(named: "gray-800")
     }
-    private let groupStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.backgroundColor = .clear
-        $0.spacing = 10
+    private let homeLabel = UILabel().then {
+        $0.text = "홈"
+        $0.textColor = .black
+        $0.font = UIFont(name: "Orbit-Regular", size: 16)
     }
-    private let groupLabel = UILabel().then {
-        $0.text = "1학년"
-        $0.textColor = UIColor(named: "gray-500")
-        $0.font = UIFont(name: "Orbit-Regular", size: 20)
-    }
-    private let groupChoiceIcon = UIImageView(image: UIImage(named: "groupIcon"))
     private let myPageButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "setting"), for: .normal)
         $0.tintColor = UIColor(named: "settingColor")
@@ -64,7 +58,6 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         navigationItem.hidesBackButton = true
-        clickGroup()
         tableView.refreshControl = refreshControl
         tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
     }
@@ -79,13 +72,12 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         [
             feedEmptyLabel,
             mainLogoImage,
-            groupStackView,
+            homeLabel,
             mainLabel,
             myPageButton,
             tableView,
             feedPlusButton
         ].forEach({view.addSubview($0)})
-        [groupChoiceIcon, groupLabel].forEach({groupStackView.addArrangedSubview($0)})
     }
     private func makeConstraints() {
         feedEmptyLabel.snp.makeConstraints {
@@ -96,13 +88,9 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
             $0.left.equalToSuperview().inset(20)
             $0.width.height.equalTo(35)
         }
-        groupStackView.snp.makeConstraints {
+        homeLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
-        }
-        groupChoiceIcon.snp.makeConstraints {
-            $0.width.equalTo(12)
-            $0.height.equalTo(12)
         }
         mainLabel.snp.makeConstraints {
             $0.top.equalTo(mainLogoImage.snp.bottom).offset(31)
@@ -168,11 +156,6 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
             .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
-    private func clickGroup() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickPopupGroupAlert))
-        groupStackView.addGestureRecognizer(tapGesture)
-        groupStackView.isUserInteractionEnabled = true
-    }
     @objc private func clickFeedPlus() {
         self.moveView(targetView: FeedContentViewController(), title: "피드 작성")
     }
@@ -180,15 +163,21 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
     @objc private func clickMyPage() {
         self.moveView(targetView: UserViewController(), title: "마이페이지")
     }
-    @objc private func clickPopupGroupAlert() {
-        let group = GroupViewController()
-        group.modalPresentationStyle = .overFullScreen
-        group.modalTransitionStyle = .crossDissolve
-        self.present(group, animated: true)
-    }
     @objc func pullToRefresh() {
         loadFeed()
     }
+    func likeFeed(feedId: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        let provider = MoyaProvider<StarAPI>(plugins: [MoyaLoggerPlugin()])
+        provider.request(.addStar(feedId: feedId)) { result in
+            switch result {
+            case .success:
+                completion(.success(())) // 좋아요 요청 성공
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
 //    @objc func clickSetting() {
 //        popup()
 //    }
@@ -202,6 +191,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
 //        navigationController.modalPresentationStyle = .overFullScreen
 //        self.present(navigationController, animated: true, completion: nil)
 //    }
+    var data: Data = Data()
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -209,27 +199,66 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return feedList.count
     }
     
+    func clickAddLike(indexPath: IndexPath) {
+        let selectedFeed = feedList[indexPath.row] // 예시: feedList는 피드 배열
+        let feedId = selectedFeed.id
+            likeFeed(feedId: feedId) { result in
+                switch result {
+                case .success:
+                    print("성공")
+                case .failure(let error):
+                    print("Failed to like feed: \(error)")
+                }
+            }
+    }
+    func clickDeleteLike(indexPath: IndexPath) {
+        let selectedFeed = feedList[indexPath.row] // 예시: feedList는 피드 배열
+        let feedId = selectedFeed.id
+            likeFeed(feedId: feedId) { result in
+                switch result {
+                case .success:
+                    print("성공")
+                case .failure(let error):
+                    print("Failed to like feed: \(error)")
+                }
+            }
+    }
+
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellId") as? CustomCell else {return UITableViewCell()}
-//        cell.feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
-        cell.cellSetter(
-            id: feedList[indexPath.row].id,
-            nickname: feedList[indexPath.row].nickname,
-            place: feedList[indexPath.row].place,
-            profileImage: feedList[indexPath.row].profileImage,
-            feedImage: feedList[indexPath.row].feedImage,
-            feedDate: feedList[indexPath.row].feedDate,
-            grade: "\(feedList[indexPath.row].grade)",
-            classnumber: "\(feedList[indexPath.row].classnumber)",
-            number: "\(feedList[indexPath.row].number)"
-        )
-        cell.selectionStyle = .none
-        return cell
+        //                cell.feedSettingButton.addTarget(self, action: #selector(clickSetting), for: .touchUpInside)
+        cell.AddlikeAction = { [weak self] in
+            if let data = try? JSONDecoder().decode(AddStarResponse.self, from: self!.data) {
+                self?.clickAddLike(indexPath: indexPath)
+                cell.likeCount = data.starCount
+                cell.countLikeLabel.text = String(cell.likeCount)
+            }
+        }
+        cell.deleteLikeAction = { [weak self] in
+            if let data = try? JSONDecoder().decode(DeleteStarResponse.self, from: self!.data) {
+                self?.clickDeleteLike(indexPath: indexPath)
+                cell.likeCount = data.starCount
+                cell.countLikeLabel.text = String(cell.likeCount)
+            }
+        }
+            cell.cellSetter(
+                id: feedList[indexPath.row].id,
+                nickname: feedList[indexPath.row].nickname,
+                place: feedList[indexPath.row].place,
+                profileImage: feedList[indexPath.row].profileImage,
+                feedImage: feedList[indexPath.row].feedImage,
+                feedDate: feedList[indexPath.row].feedDate,
+                grade: "\(feedList[indexPath.row].grade)",
+                classnumber: "\(feedList[indexPath.row].classnumber)",
+                number: "\(feedList[indexPath.row].number)"
+            )
+            cell.selectionStyle = .none
+            return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = ContentAlert(
             modifyAction: { let modifyModal = FeedModifyViewController(id: self.feedList[indexPath.row].id, completion: {
-//                self.feedList[indexPath.row].place
                 self.tableView.reloadData()
             })
                 self.navigationController?.pushViewController(modifyModal, animated: true)
