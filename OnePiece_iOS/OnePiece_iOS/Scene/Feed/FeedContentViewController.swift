@@ -38,7 +38,8 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     private let tagListView = TagListView().then {
         $0.backgroundColor = .red
     }
-    private let imageView = UIImageView(image: UIImage(named: "baseImage"))
+    private let imageView = UIImageView()
+    private let photoImage = UIImageView(image: UIImage(named: "baseImage"))
     private let imageChoiceIcon = UIImageView(image: UIImage(named: "feedImageIcon"))
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +82,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         placeTextField.addSubview(placeTextFieldTextLengthLabel)
         tagTextField.addSubview(tagAddButton)
         imageView.addSubview(imageChoiceIcon)
+        imageView.addSubview(photoImage)
     }
     private func makeConstraints() {
         placeTextField.snp.makeConstraints {
@@ -115,6 +117,9 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             $0.left.equalToSuperview().inset(25)
             $0.width.height.equalTo(100)
             //레이아웃은 추후에 수정할 예정
+        }
+        photoImage.snp.makeConstraints {
+            $0.width.height.equalTo(100)
         }
         imageChoiceIcon.snp.makeConstraints {
             $0.bottom.left.equalToSuperview().inset(3)
@@ -208,7 +213,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     @objc private func finishFeed() {
         guard let place = placeTextField.text,
               let image = imageView.image,
-              !place.isEmpty else {return}
+              !place.isEmpty || image == nil else {return}
         let provider = MoyaProvider<FeedAPI>(plugins: [MoyaLoggerPlugin()])
         provider.request(.createFeed(data: image.jpegData(compressionQuality: 0.1) ?? Data(), place: place)) { res in
             switch res {
@@ -241,6 +246,8 @@ extension FeedContentViewController {
         picker.dismiss(animated: true) {
             let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
             self.imageView.image = img
+            self.photoImage.isHidden = true
+            self.imageChoiceIcon.isHidden = true
         }
     }
 }
