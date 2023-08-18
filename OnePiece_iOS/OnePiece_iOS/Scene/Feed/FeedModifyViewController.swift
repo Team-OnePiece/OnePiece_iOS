@@ -4,6 +4,8 @@ import Then
 import Moya
 
 class FeedModifyViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    private var completion: () -> Void = {}
+    private var id: Int = 0
     private var count = 0
     private let cellIdentifier = "cellId"
     private var dataSource:[String] = []
@@ -74,6 +76,26 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate, UIImagePi
     @objc private func textFieldDidChange(_ textField: UITextField) {
         placeTextFieldTextLengthLabel.text = "\(String(placeTextField.text!.count))/10"
     }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        guard placeTextField.text!.count < 10 else { return false }
+        return true
+    }
+    init(id: Int, completion: @escaping () -> Void) {
+        super.init(nibName: nil, bundle: nil)
+        self.id = id
+        self.completion = completion
+        self.modalPresentationStyle = .overFullScreen
+        
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     private func finishFeedModify() {
         let finishButotn = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(clickFinishFeedModify))
         self.navigationItem.rightBarButtonItem = finishButotn
@@ -81,31 +103,6 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate, UIImagePi
         finishButotn.setTitleTextAttributes([
             .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
-    }
-    private var completion: () -> Void = {}
-    private var id: Int = 0
-    init(id: Int, completion: @escaping () -> Void) {
-           super.init(nibName: nil, bundle: nil)
-           self.id = id
-           self.completion = completion
-           self.modalPresentationStyle = .overFullScreen
-           
-       }
-       required init?(coder: NSCoder) {
-           fatalError("init(coder:) has not been implemented")
-       }
-
-    func clickImageView() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchToPickPhoto))
-        imageView.addGestureRecognizer(tapGesture)
-        imageView.isUserInteractionEnabled = true
-    }
-    @objc func touchToPickPhoto() {
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
-        picker.delegate = self
-        self.present(picker, animated: true)
     }
     @objc private func clickFinishFeedModify() {
         guard let place = placeTextField.text,
@@ -130,16 +127,6 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate, UIImagePi
             }
         }
     }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            if let char = string.cString(using: String.Encoding.utf8) {
-                let isBackSpace = strcmp(char, "\\b")
-                if isBackSpace == -92 {
-                    return true
-                }
-            }
-            guard placeTextField.text!.count < 10 else { return false }
-            return true
-        }
 }
 extension FeedModifyViewController {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -152,5 +139,17 @@ extension FeedModifyViewController {
             self.photoImage.isHidden = true
             self.imageChoiceIcon.isHidden = true
         }
+    }
+    func clickImageView() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchToPickPhoto))
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
+    }
+    @objc func touchToPickPhoto() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = self
+        self.present(picker, animated: true)
     }
 }

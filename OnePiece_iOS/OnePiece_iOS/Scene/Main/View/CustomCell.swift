@@ -211,7 +211,6 @@ class CustomCell: UITableViewCell {
 extension CustomCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCollectionVIewCell
-//        cell.tagLabel.text = cell.
         return cell
     }
     

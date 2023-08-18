@@ -159,7 +159,6 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
     @objc private func clickFeedPlus() {
         self.moveView(targetView: FeedContentViewController(), title: "피드 작성")
     }
-    
     @objc private func clickMyPage() {
         self.moveView(targetView: UserViewController(), title: "마이페이지")
     }

@@ -33,7 +33,7 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         $0.setTitle("+", for: .normal)
         $0.setTitleColor(UIColor(named: "gray-700"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 32)
-        $0.addTarget(self, action: #selector(clickAddTag), for: .touchUpInside)
+//        $0.addTarget(self, action: #selector(clickAddTag), for: .touchUpInside)
     }
     private let tagListView = TagListView().then {
         $0.backgroundColor = .red
@@ -126,6 +126,13 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             $0.width.height.equalTo(20)
         }
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        placeTextField.resignFirstResponder()
+        return true
+    }
+    @objc private func placeTextFieldDidChange(_ textField: UITextField) {
+        placeTextFieldTextLengthLabel.text = "\(String(placeTextField.text!.count))/10"
+    }
     //    private var id: Int = 0
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         //        provider.request(.deleteTag(tagId: self.id)) { res in
@@ -160,34 +167,28 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         tagListView.removeIconLineColor = UIColor(named: "gray-700")!
         tagListView.removeButtonIconSize = 6
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        placeTextField.resignFirstResponder()
-        return true
-    }
-    @objc private func placeTextFieldDidChange(_ textField: UITextField) {
-        placeTextFieldTextLengthLabel.text = "\(String(placeTextField.text!.count))/10"
-    }
-    @objc private func clickAddTag() {
-        guard let tag = tagTextField.text,
-              !tag.isEmpty else {return}
-        provider.request(.addTag(tag: tag)) { res in
-            switch res {
-            case .success(let result):
-                switch result.statusCode {
-                case 201:
-                    //                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
-                    self.tagListView.addTag(tag)
-                    //                    } else {
-                    //                        print("실패")
-                    //                    }
-                default:
-                    print(result.statusCode)
-                }
-            case .failure(let err):
-                print("\(err.localizedDescription)")
-            }
-        }
-    }
+    
+//    @objc private func clickAddTag() {
+//        guard let tag = tagTextField.text,
+//              !tag.isEmpty else {return}
+//        provider.request(.addTag(tag: tag, feedId: )) { res in
+//            switch res {
+//            case .success(let result):
+//                switch result.statusCode {
+//                case 201:
+//                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
+//                        self.tagListView.addTag(tag)
+//                    } else {
+//                        print("실패")
+//                    }
+//                default:
+//                    print(result.statusCode)
+//                }
+//            case .failure(let err):
+//                print("\(err.localizedDescription)")
+//            }
+//        }
+//    }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
@@ -198,6 +199,9 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         guard placeTextField.text!.count < 10 else { return false }
         return true
     }
+    private var id: Int = 0
+    private var completion: () -> Void = {}
+    
     private func finishFeedWirte() {
         let finishButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(finishFeed))
         self.navigationItem.rightBarButtonItem = finishButton
@@ -206,10 +210,6 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
             .font: UIFont(name: "Orbit-Regular", size: 16)!
         ], for: .normal)
     }
-    private var id: Int = 0
-    private var completion: () -> Void = {}
-    
-    
     @objc private func finishFeed() {
         guard let place = placeTextField.text,
               let image = imageView.image,
@@ -234,7 +234,6 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
                 print(err.localizedDescription)
             }
         }
-        
     }
 }
 

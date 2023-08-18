@@ -46,10 +46,13 @@
 		88194B222A85462600743445 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 88194B212A85462600743445 /* Then */; };
 		88194B252A85463B00743445 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 88194B242A85463B00743445 /* Moya */; };
 		88194B272A85765400743445 /* TagCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B262A85765400743445 /* TagCollectionVIewCell.swift */; };
-		88194B292A8614EF00743445 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B282A8614EF00743445 /* GroupViewController.swift */; };
 		88194B2F2A87BC9600743445 /* FeedAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B2E2A87BC9600743445 /* FeedAPI.swift */; };
 		88194B312A87C2C900743445 /* FeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B302A87C2C900743445 /* FeedResponse.swift */; };
 		88194B362A88B72000743445 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88194B352A88B72000743445 /* FeedModel.swift */; };
+		8869BABA2A8BD5C7001C9F6C /* StarAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869BAB92A8BD5C7001C9F6C /* StarAPI.swift */; };
+		8869BABE2A8BD5DF001C9F6C /* AddStarResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869BABD2A8BD5DF001C9F6C /* AddStarResponse.swift */; };
+		8869BAC02A8E3AFA001C9F6C /* DeleteStarResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869BABF2A8E3AFA001C9F6C /* DeleteStarResponse.swift */; };
+		8869BAC32A8E5853001C9F6C /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869BAC22A8E5853001C9F6C /* TagModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,11 +90,14 @@
 		88194B022A85451200743445 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88194B032A85451200743445 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		88194B262A85765400743445 /* TagCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionVIewCell.swift; sourceTree = "<group>"; };
-		88194B282A8614EF00743445 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		88194B2E2A87BC9600743445 /* FeedAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAPI.swift; sourceTree = "<group>"; };
 		88194B302A87C2C900743445 /* FeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResponse.swift; sourceTree = "<group>"; };
 		88194B352A88B72000743445 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		88194B792A89562700743445 /* OnePiece_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePiece_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8869BAB92A8BD5C7001C9F6C /* StarAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarAPI.swift; sourceTree = "<group>"; };
+		8869BABD2A8BD5DF001C9F6C /* AddStarResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStarResponse.swift; sourceTree = "<group>"; };
+		8869BABF2A8E3AFA001C9F6C /* DeleteStarResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteStarResponse.swift; sourceTree = "<group>"; };
+		8869BAC22A8E5853001C9F6C /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +185,6 @@
 				88194AC62A85450600743445 /* ContentAlert.swift */,
 				88194AC32A85450600743445 /* FeedDeleteAlert.swift */,
 				88194AC72A85450600743445 /* DefaultButton.swift */,
-				88194B282A8614EF00743445 /* GroupViewController.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 		88194ACB2A85450600743445 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				8869BAC12A8E5848001C9F6C /* Model */,
 				88194B262A85765400743445 /* TagCollectionVIewCell.swift */,
 			);
 			path = Cell;
@@ -219,6 +225,7 @@
 				88194AEB2A85451200743445 /* User */,
 				88194AF02A85451200743445 /* Image */,
 				88194AF32A85451200743445 /* Feed */,
+				8869BAB82A8BD5B7001C9F6C /* Star */,
 				88194AF42A85451200743445 /* Tag */,
 				88194AE42A85451200743445 /* Plugin */,
 				88194AF92A85451200743445 /* Header */,
@@ -419,6 +426,40 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		8869BAB82A8BD5B7001C9F6C /* Star */ = {
+			isa = PBXGroup;
+			children = (
+				8869BABB2A8BD5CA001C9F6C /* API */,
+				8869BABC2A8BD5CE001C9F6C /* Response */,
+			);
+			path = Star;
+			sourceTree = "<group>";
+		};
+		8869BABB2A8BD5CA001C9F6C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8869BAB92A8BD5C7001C9F6C /* StarAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		8869BABC2A8BD5CE001C9F6C /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				8869BABD2A8BD5DF001C9F6C /* AddStarResponse.swift */,
+				8869BABF2A8E3AFA001C9F6C /* DeleteStarResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		8869BAC12A8E5848001C9F6C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8869BAC22A8E5853001C9F6C /* TagModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		888C296D2A89F02300E75C0D /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,6 +560,7 @@
 				88194AD62A85450600743445 /* FeedDeleteAlert.swift in Sources */,
 				88194ADC2A85450600743445 /* UserViewController.swift in Sources */,
 				88194B132A85451300743445 /* SceneDelegate.swift in Sources */,
+				8869BAC02A8E3AFA001C9F6C /* DeleteStarResponse.swift in Sources */,
 				88194B082A85451300743445 /* UserInfoResponse.swift in Sources */,
 				88194ADA2A85450600743445 /* DefaultButton.swift in Sources */,
 				88194AD72A85450600743445 /* DefaultAlert.swift in Sources */,
@@ -530,8 +572,10 @@
 				88194AD92A85450600743445 /* ContentAlert.swift in Sources */,
 				88194B062A85451300743445 /* AuthResponse.swift in Sources */,
 				88194B042A85451300743445 /* UserInfo.swift in Sources */,
+				8869BABA2A8BD5C7001C9F6C /* StarAPI.swift in Sources */,
 				88194ADE2A85450600743445 /* FeedModifyViewController.swift in Sources */,
 				88194B2F2A87BC9600743445 /* FeedAPI.swift in Sources */,
+				8869BAC32A8E5853001C9F6C /* TagModel.swift in Sources */,
 				88194AD82A85450600743445 /* DefaultTextField.swift in Sources */,
 				88194B312A87C2C900743445 /* FeedResponse.swift in Sources */,
 				88194AE02A85450600743445 /* FeedContentViewController.swift in Sources */,
@@ -543,7 +587,7 @@
 				88194AD52A85450600743445 /* LoginViewController.swift in Sources */,
 				88194B0A2A85451300743445 /* ImageAPI.swift in Sources */,
 				88194AD42A85450600743445 /* NickNameSignupViewController.swift in Sources */,
-				88194B292A8614EF00743445 /* GroupViewController.swift in Sources */,
+				8869BABE2A8BD5DF001C9F6C /* AddStarResponse.swift in Sources */,
 				88194B0B2A85451300743445 /* TagResponse.swift in Sources */,
 				88194ADF2A85450600743445 /* MainViewController.swift in Sources */,
 				88194B092A85451300743445 /* UserAPI.swift in Sources */,
