@@ -4,7 +4,6 @@ import Moya
 enum TagAPI {
     case addTag(tag: String, feedId: Int)
     case deleteTag(tagId: Int)
-//    case loadTag(
 }
 
 extension TagAPI: TargetType {

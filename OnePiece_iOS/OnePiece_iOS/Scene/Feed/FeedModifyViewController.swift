@@ -56,10 +56,9 @@ class FeedModifyViewController: UIViewController, UITextFieldDelegate, UIImagePi
             $0.right.equalToSuperview().inset(10)
         }
         imageView.snp.makeConstraints {
-            $0.top.equalTo(placeTextField.snp.bottom).offset(20)
+            $0.top.equalTo(placeTextField.snp.bottom).offset(60)
             $0.left.equalToSuperview().inset(25)
             $0.width.height.equalTo(100)
-            //레이아웃은 추후에 수정할 예정
         }
         photoImage.snp.makeConstraints {
             $0.width.height.equalTo(100)

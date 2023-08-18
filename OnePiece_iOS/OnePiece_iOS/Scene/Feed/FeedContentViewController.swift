@@ -33,10 +33,10 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         $0.setTitle("+", for: .normal)
         $0.setTitleColor(UIColor(named: "gray-700"), for: .normal)
         $0.titleLabel?.font = UIFont(name: "Orbit-Regular", size: 32)
-//        $0.addTarget(self, action: #selector(clickAddTag), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(clickAddTag), for: .touchUpInside)
     }
     private let tagListView = TagListView().then {
-        $0.backgroundColor = .red
+        $0.backgroundColor = .white
     }
     private let imageView = UIImageView()
     private let photoImage = UIImageView(image: UIImage(named: "baseImage"))
@@ -109,14 +109,13 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         }
         tagListView.snp.makeConstraints {
             $0.top.equalTo(tagTextField.snp.bottom).offset(6)
-            $0.height.equalTo(200)
+            $0.height.equalTo(100)
             $0.left.right.equalToSuperview().inset(25)
         }
         imageView.snp.makeConstraints {
             $0.top.equalTo(tagListView.snp.bottom).offset(20)
             $0.left.equalToSuperview().inset(25)
             $0.width.height.equalTo(100)
-            //레이아웃은 추후에 수정할 예정
         }
         photoImage.snp.makeConstraints {
             $0.width.height.equalTo(100)
@@ -150,45 +149,16 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         tagListView.removeIconLineColor = UIColor(named: "gray-700")!
         tagListView.removeButtonIconSize = 6
     }
-    //    private var id: Int = 0
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        //        provider.request(.deleteTag(tagId: self.id)) { res in
-        //            switch res {
-        //            case .success(let result):
-        //                switch result.statusCode {
-        //                case 204:
-        //                    self.tagListView.removeTagView(tagView)
-        //                default:
-        //                    print(result.statusCode)
-        //                }
-        //            case .failure(let err):
-        //                print(err.localizedDescription)
-        //            }
-        //        }
-        //
+        self.tagListView.removeTagView(tagView)
     }
     
-//    @objc private func clickAddTag() {
-//        guard let tag = tagTextField.text,
-//              !tag.isEmpty else {return}
-//        provider.request(.addTag(tag: tag, feedId: )) { res in
-//            switch res {
-//            case .success(let result):
-//                switch result.statusCode {
-//                case 201:
-//                    if let data = try? JSONDecoder().decode(TagResponse.self, from: result.data) {
-//                        self.tagListView.addTag(tag)
-//                    } else {
-//                        print("실패")
-//                    }
-//                default:
-//                    print(result.statusCode)
-//                }
-//            case .failure(let err):
-//                print("\(err.localizedDescription)")
-//            }
-//        }
-//    }
+    @objc private func clickAddTag() {
+         let tag = tagTextField.text!
+        self.tagListView.addTag(tag)
+        tagTextField.text = ""
+                   
+    }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")

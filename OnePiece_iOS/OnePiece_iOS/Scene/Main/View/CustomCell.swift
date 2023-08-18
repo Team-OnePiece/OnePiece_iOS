@@ -1,10 +1,3 @@
-//
-//  CustomCell.swift
-//  OnePiece
-//
-//  Created by 조영준 on 2023/07/06.
-//
-
 import UIKit
 import SnapKit
 import Then
@@ -73,6 +66,66 @@ class CustomCell: UITableViewCell {
         $0.textColor = UIColor(named: "gray-800")
         $0.font = UIFont(name: "Orbit-Regular", size: 12)
     }
+    let tagLabel1 = UILabel().then {
+        $0.text = "대덕"
+        $0.textColor = UIColor(named: "gray-700")
+        $0.backgroundColor = .white
+        $0.font = UIFont(name: "Orbit-Regular", size: 9)
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.layer.borderWidth = 1
+        $0.textAlignment = .center
+    }
+    let tagLabel2 = UILabel().then {
+        $0.text = "소프트웨어"
+        $0.textColor = UIColor(named: "gray-700")
+        $0.backgroundColor = .white
+        $0.font = UIFont(name: "Orbit-Regular", size: 9)
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.layer.borderWidth = 1
+        $0.textAlignment = .center
+    }
+    let tagLabel3 = UILabel().then {
+        $0.text = "마이스터고"
+        $0.textColor = UIColor(named: "gray-700")
+        $0.backgroundColor = .white
+        $0.font = UIFont(name: "Orbit-Regular", size: 9)
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.layer.borderWidth = 1
+        $0.textAlignment = .center
+    }
+    let tagLabel4 = UILabel().then {
+        $0.text = "파이팅"
+        $0.textColor = UIColor(named: "gray-700")
+        $0.backgroundColor = .white
+        $0.font = UIFont(name: "Orbit-Regular", size: 9)
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.layer.borderWidth = 1
+        $0.textAlignment = .center
+    }
+    let tagLabel5 = UILabel().then {
+        $0.text = "ㅎㅎ"
+        $0.textColor = UIColor(named: "gray-700")
+        $0.backgroundColor = .white
+        $0.font = UIFont(name: "Orbit-Regular", size: 9)
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.layer.borderWidth = 1
+        $0.textAlignment = .center
+    }
+    let tagLabel6 = UILabel().then {
+        $0.text = "ㅎㅎㅎ"
+        $0.textColor = UIColor(named: "gray-700")
+        $0.backgroundColor = .white
+        $0.font = UIFont(name: "Orbit-Regular", size: 9)
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = UIColor(named: "mainColor-2")?.cgColor
+        $0.layer.borderWidth = 1
+        $0.textAlignment = .center
+    }
     let tagCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -109,7 +162,13 @@ class CustomCell: UITableViewCell {
             likeButton,
             countLikeLabel,
             placeLabel,
-            tagCollectionView
+            tagCollectionView,
+            tagLabel1,
+            tagLabel2,
+            tagLabel3,
+            tagLabel4,
+            tagLabel5,
+            tagLabel6
         ].forEach({contentView.addSubview($0)})
     }
     func makeConstraints() {
@@ -165,15 +224,39 @@ class CustomCell: UITableViewCell {
             $0.left.equalToSuperview().inset(120)
             $0.right.equalToSuperview().inset(22)
         }
+        tagLabel1.snp.makeConstraints {
+            $0.top.equalTo(feedImageView.snp.bottom).offset(16)
+            $0.height.equalTo(20)
+            $0.width.equalTo(40)
+            $0.left.equalTo(placeLabel.snp.right).offset(40)
+        }
+        tagLabel2.snp.makeConstraints {
+            $0.top.equalTo(feedImageView.snp.bottom).offset(16)
+            $0.height.equalTo(20)
+            $0.width.equalTo(70)
+            $0.left.equalTo(tagLabel1.snp.right).offset(4)
+        }
+        tagLabel3.snp.makeConstraints {
+            $0.top.equalTo(feedImageView.snp.bottom).offset(16)
+            $0.height.equalTo(20)
+            $0.width.equalTo(70)
+            $0.left.equalTo(tagLabel2.snp.right).offset(4)
+        }
+        tagLabel4.snp.makeConstraints {
+            $0.top.equalTo(tagLabel1.snp.bottom).offset(4)
+            $0.height.equalTo(20)
+            $0.width.equalTo(40)
+            $0.left.equalTo(placeLabel.snp.right).offset(40)
+        }
     }
     @objc func clickLike() {
         isLiked.toggle()
         likeButton.isSelected = isLiked
         if likeButton.isSelected == true {
-            AddlikeAction?()
+            likeCount += 1
             countLikeLabel.text = String(likeCount)
         } else if likeButton.isSelected == false {
-            deleteLikeAction?()
+            likeCount -= 1
             countLikeLabel.text = String(likeCount)
         }
     }
@@ -204,7 +287,6 @@ class CustomCell: UITableViewCell {
         self.classnumberLabel.text = String(classnumber)
         self.numberLabel.text = String(number)
     }
-    let tagList: [TagModel] = []
 }
 
 
@@ -226,6 +308,6 @@ extension CustomCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         return 4
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tagList.count
+        return 0
     }
 }
