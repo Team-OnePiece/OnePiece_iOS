@@ -2,7 +2,7 @@ import Foundation
 import Moya
 
 enum TagAPI {
-    case addTag(tag: String)
+    case addTag(tag: String, feedId: Int)
     case deleteTag(tagId: Int)
 //    case loadTag(
 }
@@ -15,10 +15,10 @@ extension TagAPI: TargetType {
     
     var path: String {
         switch self {
-        case .addTag:
-            return "/tag"
+        case .addTag(_, let feedId):
+            return "/tag/\(feedId)"
         case .deleteTag(let tagId):
-            return "/tag/remove/\(tagId)"
+            return "/tag/\(tagId)"
         }
     }
     
@@ -33,7 +33,7 @@ extension TagAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .addTag(let tag):
+        case .addTag(let tag, _):
             return .requestParameters(
                 parameters: [
                     "tag": tag

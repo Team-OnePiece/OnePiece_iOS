@@ -133,23 +133,6 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
     @objc private func placeTextFieldDidChange(_ textField: UITextField) {
         placeTextFieldTextLengthLabel.text = "\(String(placeTextField.text!.count))/10"
     }
-    //    private var id: Int = 0
-    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        //        provider.request(.deleteTag(tagId: self.id)) { res in
-        //            switch res {
-        //            case .success(let result):
-        //                switch result.statusCode {
-        //                case 204:
-        //                    self.tagListView.removeTagView(tagView)
-        //                default:
-        //                    print(result.statusCode)
-        //                }
-        //            case .failure(let err):
-        //                print(err.localizedDescription)
-        //            }
-        //        }
-        //
-    }
     func tagSetting() {
         tagListView.textFont = UIFont(name: "Orbit-Regular", size: 18)!
         tagListView.alignment = .left
@@ -166,6 +149,23 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         tagListView.enableRemoveButton = true
         tagListView.removeIconLineColor = UIColor(named: "gray-700")!
         tagListView.removeButtonIconSize = 6
+    }
+    //    private var id: Int = 0
+    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        //        provider.request(.deleteTag(tagId: self.id)) { res in
+        //            switch res {
+        //            case .success(let result):
+        //                switch result.statusCode {
+        //                case 204:
+        //                    self.tagListView.removeTagView(tagView)
+        //                default:
+        //                    print(result.statusCode)
+        //                }
+        //            case .failure(let err):
+        //                print(err.localizedDescription)
+        //            }
+        //        }
+        //
     }
     
 //    @objc private func clickAddTag() {
@@ -199,8 +199,6 @@ class FeedContentViewController: UIViewController, UITextFieldDelegate, TagListV
         guard placeTextField.text!.count < 10 else { return false }
         return true
     }
-    private var id: Int = 0
-    private var completion: () -> Void = {}
     
     private func finishFeedWirte() {
         let finishButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(finishFeed))

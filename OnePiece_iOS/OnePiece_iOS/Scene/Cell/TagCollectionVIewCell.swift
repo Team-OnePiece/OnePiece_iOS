@@ -14,6 +14,11 @@ class TagCollectionVIewCell: UICollectionViewCell {
         $0.layer.borderWidth = 1
         $0.textAlignment = .center
     }
+    func tagSetter(
+        tagList: String
+    ) {
+        self.tagLabel.text = tagList
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

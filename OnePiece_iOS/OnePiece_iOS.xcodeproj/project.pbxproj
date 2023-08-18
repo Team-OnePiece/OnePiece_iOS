@@ -52,7 +52,6 @@
 		8869BABA2A8BD5C7001C9F6C /* StarAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869BAB92A8BD5C7001C9F6C /* StarAPI.swift */; };
 		8869BABE2A8BD5DF001C9F6C /* AddStarResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869BABD2A8BD5DF001C9F6C /* AddStarResponse.swift */; };
 		8869BAC02A8E3AFA001C9F6C /* DeleteStarResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869BABF2A8E3AFA001C9F6C /* DeleteStarResponse.swift */; };
-		8869BAC32A8E5853001C9F6C /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869BAC22A8E5853001C9F6C /* TagModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,7 +96,6 @@
 		8869BAB92A8BD5C7001C9F6C /* StarAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarAPI.swift; sourceTree = "<group>"; };
 		8869BABD2A8BD5DF001C9F6C /* AddStarResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStarResponse.swift; sourceTree = "<group>"; };
 		8869BABF2A8E3AFA001C9F6C /* DeleteStarResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteStarResponse.swift; sourceTree = "<group>"; };
-		8869BAC22A8E5853001C9F6C /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,7 +199,6 @@
 		88194ACB2A85450600743445 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				8869BAC12A8E5848001C9F6C /* Model */,
 				88194B262A85765400743445 /* TagCollectionVIewCell.swift */,
 			);
 			path = Cell;
@@ -452,14 +449,6 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
-		8869BAC12A8E5848001C9F6C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8869BAC22A8E5853001C9F6C /* TagModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		888C296D2A89F02300E75C0D /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -575,7 +564,6 @@
 				8869BABA2A8BD5C7001C9F6C /* StarAPI.swift in Sources */,
 				88194ADE2A85450600743445 /* FeedModifyViewController.swift in Sources */,
 				88194B2F2A87BC9600743445 /* FeedAPI.swift in Sources */,
-				8869BAC32A8E5853001C9F6C /* TagModel.swift in Sources */,
 				88194AD82A85450600743445 /* DefaultTextField.swift in Sources */,
 				88194B312A87C2C900743445 /* FeedResponse.swift in Sources */,
 				88194AE02A85450600743445 /* FeedContentViewController.swift in Sources */,

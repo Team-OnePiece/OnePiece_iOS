@@ -5,6 +5,8 @@ import Moya
 
 class FeedDeleteAlert: UIViewController {
     
+    private var completion: () -> Void = {}
+    private var id: Int = 0
     private let background = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 16
@@ -41,7 +43,7 @@ class FeedDeleteAlert: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
-
+        
     }
     override func viewWillLayoutSubviews() {
         layout()
@@ -89,18 +91,15 @@ class FeedDeleteAlert: UIViewController {
             $0.right.equalToSuperview().inset(58)
         }
     }
-    private var completion: () -> Void = {}
-    private var id: Int = 0
     init(id: Int, completion: @escaping () -> Void) {
-           super.init(nibName: nil, bundle: nil)
-           self.id = id
-           self.completion = completion
-           self.modalPresentationStyle = .overFullScreen
-           
-       }
-       required init?(coder: NSCoder) {
-           fatalError("init(coder:) has not been implemented")
-       }
+        super.init(nibName: nil, bundle: nil)
+        self.id = id
+        self.completion = completion
+        self.modalPresentationStyle = .overFullScreen
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     @objc private func clickCancelDeleteFeed() {
         self.dismiss(animated: true)
     }
