@@ -190,8 +190,6 @@ extension LoginViewController {
               !(id.isEmpty || password.isEmpty)
         else {
             self.loginFailLabel.text = "아이디 또는 비밀번호를 확인하세요."
-            self.moveView(targetView: MainViewController(), title: "")
-            //프젝완성되면 없앨 코드
             return
         }
         let provider = MoyaProvider<AuthAPI>(plugins: [MoyaLoggerPlugin()])
