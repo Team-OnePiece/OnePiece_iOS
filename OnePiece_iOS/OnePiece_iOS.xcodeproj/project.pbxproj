@@ -452,7 +452,6 @@
 				88194B002A85451200743445 /* LaunchScreen.storyboard */,
 				88194B022A85451200743445 /* AppDelegate.swift */,
 				88194B032A85451200743445 /* SceneDelegate.swift */,
-				88194AE12A85451200743445 /* Service */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -460,6 +459,7 @@
 		88B30DFB2A932A150009CCB9 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				88194AE12A85451200743445 /* Service */,
 				88194AC22A85450600743445 /* Component */,
 				88194AB92A85450600743445 /* Scene */,
 			);
