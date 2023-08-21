@@ -126,9 +126,8 @@
 		88194AA42A8544F300743445 /* OnePiece_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				88194AE12A85451200743445 /* Service */,
-				88194AB92A85450600743445 /* Scene */,
-				88194AFB2A85451200743445 /* SupportFile */,
+				88B30DFA2A9329F00009CCB9 /* Resources */,
+				88B30DFB2A932A150009CCB9 /* Sources */,
 				88194AB32A8544F400743445 /* Info.plist */,
 			);
 			path = OnePiece_iOS;
@@ -137,7 +136,6 @@
 		88194AB92A85450600743445 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				88194AC22A85450600743445 /* Component */,
 				88194ABA2A85450600743445 /* Auth */,
 				88194ACD2A85450600743445 /* Main */,
 				888C296D2A89F02300E75C0D /* Feed */,
@@ -353,18 +351,6 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
-		88194AFB2A85451200743445 /* SupportFile */ = {
-			isa = PBXGroup;
-			children = (
-				88194AFC2A85451200743445 /* Orbit */,
-				88194AFF2A85451200743445 /* Assets.xcassets */,
-				88194B002A85451200743445 /* LaunchScreen.storyboard */,
-				88194B022A85451200743445 /* AppDelegate.swift */,
-				88194B032A85451200743445 /* SceneDelegate.swift */,
-			);
-			path = SupportFile;
-			sourceTree = "<group>";
-		};
 		88194AFC2A85451200743445 /* Orbit */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +442,28 @@
 				88194ACE2A85450600743445 /* FeedModifyViewController.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		88B30DFA2A9329F00009CCB9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				88194AFC2A85451200743445 /* Orbit */,
+				88194AFF2A85451200743445 /* Assets.xcassets */,
+				88194B002A85451200743445 /* LaunchScreen.storyboard */,
+				88194B022A85451200743445 /* AppDelegate.swift */,
+				88194B032A85451200743445 /* SceneDelegate.swift */,
+				88194AE12A85451200743445 /* Service */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		88B30DFB2A932A150009CCB9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				88194AC22A85450600743445 /* Component */,
+				88194AB92A85450600743445 /* Scene */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
